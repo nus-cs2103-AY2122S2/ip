@@ -16,7 +16,7 @@ A Graphical User Interface (GUI) has also been added which mimics a chatbot you 
 - [Command Summary](#command-summary)
 - [References](#references)
 
-##Quick Start
+## Quick Start
 1. Ensure that you have Java `11` or above installed on your Computer.
 2. Download the latest `main.jar` from [here](https://github.com/Decaxical/ip/releases).
 3. Copy the file to the folder you want to use as the *home folder* for Duke.
@@ -33,21 +33,21 @@ A Graphical User Interface (GUI) has also been added which mimics a chatbot you 
 ---
 ### Adding a task:
 Duke supports 3 types of tasks: `todo`, `deadline` and `event`
-###Adding a todo task: `todo`
+### Adding a todo task: `todo`
 Adds a task that has no date and time parameters.
 
 Format: `todo TASK_NAME`
 
 Example: `todo return book`
 
-###Adding a deadline task: `deadline`
+### Adding a deadline task: `deadline`
 Adds a task that needs to be done before a specific date/time.
 
 Format: `deadline TASK_NAME /by DD/MM/YYYY HH:MM`
 
 Example: `deadline submit project /by 22/02/2022 22:22`
 
-###Adding an event task: `event`
+### Adding an event task: `event`
 Adds a task that starts at a specific date/time.
 
 Format: `event TASK_NAME /at DD/MM/YYYY HH:MM`
@@ -55,21 +55,21 @@ Format: `event TASK_NAME /at DD/MM/YYYY HH:MM`
 Example: `event volleyball training /at 24/02/2022 21:00`
 
 ---
-###Listing all tasks: `list`
+### Listing all tasks: `list`
 
 Shows a numbered list of all tasks in the task list.
 
 Format: `list`
 
 ---
-###Sorting all tasks by time: `sort`
+### Sorting all tasks by time: `sort`
 
 Separates all tasks by type before sorting them by time. Upcoming tasks are displayed first.
 
 Format: `sort`
 
 ---
-###Finding tasks by keyword: `find`
+### Finding tasks by keyword: `find`
 Find tasks whose name contains the keyword supplied.
 
 Format: `find KEYWORD`
@@ -77,7 +77,7 @@ Format: `find KEYWORD`
 Example: `find meeting`
 
 ---
-###Marking a task as done: `mark`
+### Marking a task as done: `mark`
 Marks task at given index as done.
 
 Format: `mark INDEX`
@@ -85,7 +85,7 @@ Format: `mark INDEX`
 Example: `mark 4`
 
 ---
-###Unmarking a task: `unmark`
+### Unmarking a task: `unmark`
 Unmarks task at given index.
 
 Format: `unmark INDEX`
@@ -93,7 +93,7 @@ Format: `unmark INDEX`
 Example: `unmark 4`
 
 ---
-###Deleting a task: `delete`
+### Deleting a task: `delete`
 Deletes task at given index.
 
 Format: `delete INDEX`
@@ -101,7 +101,7 @@ Format: `delete INDEX`
 Example: `delete 3`
 
 ---
-###Exiting the program: `bye`
+### Exiting the program: `bye`
 
 Exits the program.
 

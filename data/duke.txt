@@ -1,4 +1,0 @@
-D|0|another ip|2012-03-19 15:36
-D|0|buy basketballs|2010-02-28 10:10
-T|0|cs homework
-T|0|research chatbots
