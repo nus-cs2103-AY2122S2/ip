@@ -47,7 +47,7 @@ Example:`event Ron's Birthday /at 5/2/2022 1330`
 
 Adds a new deadline with `deadline_name` and the corresponding date-time to the task list.
 
-Example:`deadline Pay my taxes /at 21/11/2022 0800`
+Example:`deadline Pay my taxes /by 21/11/2022 0800`
 
 ## Manage Your Existing Tasks
 Athena also contains many useful features to manage the tasks that you've added.
