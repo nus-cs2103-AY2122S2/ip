@@ -1,4 +1,3 @@
-
 public class DeadlineTask extends Task{
     private String date;
 
@@ -10,5 +9,10 @@ public class DeadlineTask extends Task{
     @Override
     public String toString() {
         return "[D]"+super.toString() + "(by: " + this.date + ")";
+    }
+
+    @Override
+    public String toFileString(){
+        return "D" + super.toFileString() + " | " + this.date;
     }
 }

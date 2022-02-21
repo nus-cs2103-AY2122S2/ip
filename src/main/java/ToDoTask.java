@@ -8,4 +8,11 @@ public class ToDoTask extends Task{
         return "[T]"+super.toString();
     }
 
+
+    // T | 1 | read book
+    @Override
+    public String toFileString(){
+        return "T" + super.toFileString();
+    }
+
 }

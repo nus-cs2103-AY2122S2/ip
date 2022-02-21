@@ -28,4 +28,9 @@ abstract public class Task {
     public String toString() {
         return "[" + ((isCompleted)?"X":" ") + "] " + description;
     }
+
+    // T | 1 | read book
+    public String toFileString(){
+        return " | "+((isCompleted)?"1 | ":"0 | ") + description;
+    }
 }

@@ -1,8 +1,9 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static class DukeMessage{
+    public static class DukeMessage {
         public final static String welcomeMsg = "Hello! I am Duke\nWhat can I do for you?";
         public final static String horizontalLine = "________________________________";
         public final static String byeMsg = "Bye! hope to see you again soon!";
@@ -13,16 +14,20 @@ public class Duke {
         public final static String completedTaskMsg = "Task has been marked as completed.";
         public final static String notCompletedTaskMsg = "Task has been marked as not completed.";
 
-        public static String getCompleteMessage(boolean isCompleted){
-            return (isCompleted)?completedTaskMsg:notCompletedTaskMsg;
+        public static String getTaskInListMsg(Task task, int numTask) {
+            return addedTaskMsg + "\t" + task + "\nNow you have " + numTask + " tasks in the list";
         }
 
-        public static String getDeleteTaskInListMsg(Task task, int numTask){
+        public static String getCompleteMessage(boolean isCompleted) {
+            return (isCompleted) ? completedTaskMsg : notCompletedTaskMsg;
+        }
+
+        public static String getDeleteTaskInListMsg(Task task, int numTask) {
             return deleteMsg + "\t" + task + "\nNow you have " + numTask + " tasks in the list";
         }
     }
 
-    public static class DukeCommand{
+    public static class DukeCommand {
         public final static String bye = "bye";
         public final static String todo = "todo";
         public final static String event = "event";
@@ -58,73 +63,71 @@ public class Duke {
         return new EventTask(description, false, dateStr);
     }
 
-    public static Task processDeadline(String command)  {
+    public static Task processDeadline(String command) {
         String taskStr = command.substring(DukeCommand.deadline.length());
         taskStr = taskStr.trim();
         String[] taskInfo = taskStr.split("/by");
         String description = taskInfo[0].trim();
         String dateStr = taskInfo[1].trim();
-        return new DeadlineTask(description,false, dateStr);
+        return new DeadlineTask(description, false, dateStr);
     }
 
-    public static boolean checkIfNumber(String numStr){
-        try{
+    public static boolean checkIfNumber(String numStr) {
+        try {
             Integer.parseInt(numStr);
             return true;
-        }
-        catch(Exception e){
-            printMessage(numStr+" is not a number!");
+        } catch (Exception e) {
+            printMessage(numStr + " is not a number!");
             return false;
         }
     }
-    public static int getExistingIndex(String findStrIndex, ArrayList<Task> taskList){
-        if(taskList.size() == 0){
+
+    public static int getExistingIndex(String findStrIndex, ArrayList<Task> taskList) {
+        if (taskList.size() == 0) {
             printMessage("Task list is empty!");
             return -1;
         }
 
-        if(!checkIfNumber(findStrIndex)){
+        if (!checkIfNumber(findStrIndex)) {
             return -1;
         }
 
-        int findIndex = Integer.parseInt(findStrIndex)-1;
-        if(findIndex >= 0 && findIndex < taskList.size()){
+        int findIndex = Integer.parseInt(findStrIndex) - 1;
+        if (findIndex >= 0 && findIndex < taskList.size()) {
             return findIndex;
-        }
-        else{
+        } else {
             printMessage("Invalid task number selected!");
             return -1;
         }
     }
 
-    public static boolean processDelete(String delStrIndex, ArrayList<Task> taskList){
+    public static boolean processDelete(String delStrIndex, ArrayList<Task> taskList) {
         int delIndex = getExistingIndex(delStrIndex, taskList);
-        if(delIndex != -1) {
+        if (delIndex != -1) {
             Task deleteTask = taskList.get(delIndex);
             taskList.remove(delIndex);
             printMessage(DukeMessage.getDeleteTaskInListMsg(deleteTask, taskList.size()));
             return true;
-        }
-        else{
+        } else {
             printMessage("Fail to delete Task!");
             return false;
         }
     }
 
-    public static void processPrintList(ArrayList<Task> taskList){
+    public static void processPrintList(ArrayList<Task> taskList) {
         printMessage(DukeMessage.listMsg);
         for (int i = 0; i < taskList.size(); i++) {
             Task currentTask = taskList.get(i);
-            System.out.println((i + 1) +". " + currentTask);
+            System.out.println((i + 1) + ". " + currentTask);
         }
     }
 
-    public static boolean processMarkingTask(String taskIndexStr, ArrayList<Task> taskList, boolean isCompleted){
+    public static boolean processMarkingTask(String taskIndexStr, ArrayList<Task> taskList, boolean isCompleted) {
         taskList.get(Integer.parseInt(taskIndexStr) - 1).setCompleted(isCompleted);
         System.out.println(DukeMessage.horizontalLine);
         for (int i = 0; i < taskList.size(); i++) {
             Task currentTask = taskList.get(i);
-            if (i == (Integer.parseInt(taskIndexStr) - 1)){
+            if (i == (Integer.parseInt(taskIndexStr) - 1)) {
                 System.out.println((i + 1) + ". " + currentTask);
             }
         }
@@ -132,53 +135,119 @@ public class Duke {
         return true;
     }
 
+    public static void loadTaskListFromFile(ArrayList<Task> taskList) {
+        File f = new File("data/duke.txt");
+        try {
+            //FileReader fr = new FileReader(f);
+            Scanner scanFile = new Scanner(f);
+            while (scanFile.hasNext()) {
+                String lineData = scanFile.nextLine();
+                String[] taskData = lineData.split("\\|");
+                String taskType = taskData[0].trim();
+                boolean isCompleted = taskData[1].trim().equals("1");
+                String desc = taskData[2].trim();
+                String dt = taskData[3].trim();
+                Task newTask = null;
+                switch (taskType) {
+                    case "T":
+                        newTask = new ToDoTask(desc, isCompleted);
+                        break;
+                    case "D":
+                        newTask = new DeadlineTask(desc, isCompleted, dt);
+                        break;
+                    case "E":
+                        newTask = new EventTask(desc, isCompleted, dt);
+                        break;
+                }
+                if (newTask != null) {
+                    taskList.add(newTask);
+                }
+                //System.out.println(lineData);
+            }
+        } catch (FileNotFoundException e) {
+            // do nothing, no file no load
+        }
+    }
+
+    public static void saveTaskToFile(ArrayList<Task> taskList) {
+        // [project_root]/data/duke.txt
+        //        T | 1 | read book
+        //        D | 0 | return book | June 6th
+        //        E | 0 | project meeting | Aug 6th 2-4pm
+        //        T | 1 | join sports club
+        File f = new File("data/duke.txt");
+        try {
+            if (!f.exists()) {
+                // create data folder if not exist
+                f.getParentFile().mkdirs();
+                // create duke.txt
+                f.createNewFile();
+            }
+
+            FileWriter fw = new FileWriter(f);
+            for (Task t : taskList) {
+                fw.write(t.toFileString() + "\n");
+            }
+
+            fw.close();
+        } catch (SecurityException se) {
+            printMessage(se.getMessage());
+        } catch (IOException e) {
+            printMessage("Unable to save to filepath data/duke.txt");
+        }
+    }
+
     public static void main(String[] args) {
-        ArrayList<Task> taskList = new ArrayList();
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        loadTaskListFromFile(taskList);
+        // Load task List
         Scanner input = new Scanner(System.in);
         String userinput = "";
         Task newTask = null;
-        printMessage(DukeMessage.welcomeMsg);
-        while(true) {
+        while (true) {
+            printMessage(DukeMessage.welcomeMsg);
             userinput = input.nextLine();
             newTask = null;
+            boolean requiredSaveToFile = false;
             if (userinput.equals(DukeCommand.bye)) {
                 printMessage(DukeMessage.byeMsg);
                 break;
-            }
-            else if (userinput.startsWith(DukeCommand.todo)){
+            } else if (userinput.startsWith(DukeCommand.todo)) {
                 newTask = processTodo(userinput);
                 //taskList.add(newTask);
-            }
-            else if (userinput.startsWith(DukeCommand.deadline)){
+            } else if (userinput.startsWith(DukeCommand.deadline)) {
                 newTask = processDeadline(userinput);
-            }
-            else if (userinput.startsWith(DukeCommand.event)){
+            } else if (userinput.startsWith(DukeCommand.event)) {
                 newTask = processEvent(userinput);
-            }
-            else if (userinput.equals(DukeCommand.list)) {
+            } else if (userinput.equals(DukeCommand.list)) {
                 processPrintList(taskList);
-                System.out.println(DukeMessage.horizontalLine);
-            }
-            else if (userinput.startsWith(DukeCommand.delete)){
+            } else if (userinput.startsWith(DukeCommand.delete)) {
                 String taskStr = userinput.substring(DukeCommand.delete.length());
                 taskStr = taskStr.trim();
-                processDelete(taskStr, taskList);
-            }
-            else if (userinput.startsWith(DukeCommand.mark)){
+                requiredSaveToFile = processDelete(taskStr, taskList);
+            } else if (userinput.startsWith(DukeCommand.mark)) {
                 String taskStr = userinput.substring(DukeCommand.mark.length());
                 taskStr = taskStr.trim();
-                processMarkingTask(taskStr, taskList, true);
-            }
-            else if (userinput.startsWith(DukeCommand.unmark)) {
+                requiredSaveToFile = processMarkingTask(taskStr, taskList, true);
+            } else if (userinput.startsWith(DukeCommand.unmark)) {
                 String taskStr = userinput.substring(DukeCommand.unmark.length());
                 taskStr = taskStr.trim();
-                processMarkingTask(taskStr, taskList, false);
-            }
-            else {
+                requiredSaveToFile = processMarkingTask(taskStr, taskList, false);
+            } else {
                 printMessage(DukeMessage.invalidCommandMsg);
             }
-        }
 
-        input.close();
+            if (newTask != null) {
+                taskList.add(newTask);
+                printMessage(DukeMessage.getTaskInListMsg(newTask, taskList.size()));
+                requiredSaveToFile = true;
+            }
+
+            if (requiredSaveToFile) {
+                saveTaskToFile(taskList);
+            }
+
+            input.close();
+        }
     }
 }
