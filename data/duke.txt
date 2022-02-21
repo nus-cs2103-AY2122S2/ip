@@ -1,0 +1,4 @@
+[T][X] CS2103 IP Weekly Task
+[E][ ] CS2103 Meeting 2022-02-20 19:00
+[D][X] CS2105 Assignment 1 2022-02-20 23:59
+[T][ ] get enough sleep
