@@ -79,7 +79,6 @@ Output:
 Got it. I've added this task:
   [D][ ] submit assignment (by: February 20 2022)
 Now you have 1 tasks in the list.
-
 ```
 
 ### Add an Event Task
@@ -199,7 +198,8 @@ Example:
 `bye`
 
 Output:<br>
-```Bye. Hope to see you again soon!<br>
+```
+Bye. Hope to see you again soon!<br>
 Let your heart ablaze!
 ```
 
