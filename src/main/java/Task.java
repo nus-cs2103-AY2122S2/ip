@@ -26,6 +26,7 @@ abstract public class Task {
 
     @Override
     public String toString() {
+        // [X] study
         return "[" + ((isCompleted)?"X":" ") + "] " + description;
     }
 

@@ -1,12 +1,8 @@
-<<<<<<< HEAD
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-=======
->>>>>>> branch-Level-7
 public class DeadlineTask extends Task{
     LocalDateTime byDate;
-
     private final static DateTimeFormatter fm = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
     public DeadlineTask(String description, boolean isCompleted, LocalDateTime byDate){
         super(description, isCompleted);
@@ -28,6 +24,6 @@ public class DeadlineTask extends Task{
 
     @Override
     public String toFileString(){
-        return "D" + super.toFileString() + " | " + this.date;
+        return "D" + super.toFileString() + " | " + byDate.format(Duke.DukeCommand.dtFormat);
     }
 }

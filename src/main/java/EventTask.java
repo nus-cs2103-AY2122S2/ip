@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class EventTask extends Task{
     private LocalDateTime atStartDT;
     private LocalDateTime atEndDT;
@@ -30,13 +33,11 @@ public class EventTask extends Task{
         return "[E]"+super.toString() + "(at: " + atStartDT.format(dtFm) + " to " + atEndDT.format(dtFm) + ")";
     }
 
-<<<<<<< HEAD
-=======
     //E | 0 | project meeting | Aug 6th 2-4pm
     @Override
     public String toFileString(){
 
-        return "E" + super.toFileString() + " | "  + this.dateStr + " | ";
+        return "E" + super.toFileString() + " | " + atStartDT.format(Duke.DukeCommand.dtFormat) + " | " +
+                atEndDT.format(Duke.DukeCommand.dtFormat);
     }
->>>>>>> branch-Level-7
 }
