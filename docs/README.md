@@ -22,7 +22,7 @@ A Graphical User Interface have been added. This project is build upon the `Duke
 
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `apollo.jar` from [here](https://github.com/j4ck990/ip/releases).
-3. Copy the file to the folder you want to use as the home folder for your AddressBook. 
+3. Copy the file to the folder you want to use as the home folder for your Apollo. 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    ![](https://j4ck990.github.io/ip/Ui.png)
 5. Type the command in the command box and press `Enter` on your keyboard or click `Send` to execute it.
