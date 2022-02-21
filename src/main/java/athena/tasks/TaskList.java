@@ -14,12 +14,19 @@ public class TaskList {
     private final ArrayList<Task> tasks;
     private boolean wasModified;
 
+    /**
+     * Constructs a new TaskList object.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
         wasModified = false;
     }
 
-    // Known bug - code will break if user input includes |
+    /**
+     * Reconstructs a TaskList object from the given save data.
+     *
+     * @param taskListSaveFormat Save data of the task list.
+     */
     public TaskList(List<String> taskListSaveFormat) {
         this();
         assert taskListSaveFormat.size() > 0;
@@ -64,29 +71,60 @@ public class TaskList {
         return wasModified;
     }
 
-    // Returns the task number of the added task
-    public int addTodo(String description) {
-        tasks.add(new Todo(description));
+    /**
+     * Adds a new todo to the TaskList and returns the task number of the newly added yodo.
+     *
+     * @param name Name of the todo.
+     * @return Task number of the newly added todo.
+     */
+    public int addTodo(String name) {
+        tasks.add(new Todo(name));
         wasModified = true;
         return getNumberOfTasks();
     }
 
-    public int addEvent(String description, LocalDateTime eventDate) {
-        tasks.add(new Event(description, eventDate));
+    /**
+     * Adds a new event to the TaskList and returns the task number of the newly added event.
+     *
+     * @param name Name of the event.
+     * @param eventDate Date and time of the event.
+     * @return Task number of the newly added event.
+     */
+    public int addEvent(String name, LocalDateTime eventDate) {
+        tasks.add(new Event(name, eventDate));
         wasModified = true;
         return getNumberOfTasks();
     }
 
+    /**
+     * Adds a new deadline to the TaskList and returns the task number of the newly added deadline.
+     *
+     * @param name Name of the deadline.
+     * @param dueDate Date and time of the deadline.
+     * @return Task number of the newly added deadline.
+     */
+    public int addDeadline(String name, LocalDateTime dueDate) {
+        tasks.add(new Deadline(name, dueDate));
+        wasModified = true;
+        return getNumberOfTasks();
+    }
+
+    /**
+     * Returns true if the given task number is valid for the current task list.
+     *
+     * @param taskNumber Task number to check validity for.
+     * @return True if the given task number is valid for this task list.
+     */
     public boolean isValidTaskNumber(int taskNumber) {
         return (taskNumber >= 1 && taskNumber <= getNumberOfTasks());
     }
 
-    public int addDeadline(String description, LocalDateTime dueDate) {
-        tasks.add(new Deadline(description, dueDate));
-        wasModified = true;
-        return getNumberOfTasks();
-    }
-
+    /**
+     * Marks the task with the corresponding task number as done. Assumes task number
+     * is valid.
+     *
+     * @param taskNumber Task number of the task to mark as done.
+     */
     public void setTaskAsDone(int taskNumber) {
         assert isValidTaskNumber(taskNumber);
         Task task = tasks.get(taskNumber - 1);
@@ -94,6 +132,12 @@ public class TaskList {
         wasModified = true;
     }
 
+    /**
+     * Marks the task with the corresponding task number as not done.
+     * Assumes task number is valid.
+     *
+     * @param taskNumber Task number of the task to mark as not done.
+     */
     public void setTaskAsNotDone(int taskNumber) {
         assert isValidTaskNumber(taskNumber);
         Task task = tasks.get(taskNumber - 1);
@@ -101,16 +145,34 @@ public class TaskList {
         wasModified = true;
     }
 
+    /**
+     * Deletes the task corresponding to the given task number. Assumes
+     * the task number given is valid.
+     *
+     * @param taskNumber Task number of the task to be deleted.
+     */
     public void deleteTask(int taskNumber) {
         assert isValidTaskNumber(taskNumber);
         tasks.remove(taskNumber - 1);
         wasModified = true;
     }
 
+    /**
+     * Returns the number of tasks in the task list.
+     *
+     * @return The number of tasks in the task list.
+     */
     public int getNumberOfTasks() {
         return tasks.size();
     }
 
+    /**
+     * Gets the task with the given task number in string format. Assumes
+     * a valid task number.
+     *
+     * @param taskNumber Task number of the task to be returned in string format.
+     * @return Desired task in string format.
+     */
     public String getTaskString(int taskNumber) {
         assert isValidTaskNumber(taskNumber);
         return tasks.get(taskNumber - 1).toString();

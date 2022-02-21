@@ -46,6 +46,13 @@ public class Athena extends Application {
         }
     }
 
+    /**
+     * Passes a given user instruction to Athena, executes it, and returns the response.
+     *
+     * @param input Single instruction telling Athena to do something.
+     * @return Response from running the given instruction.
+     * @throws InputException If the user input is invalid.
+     */
     public String getResponse(String input) throws InputException {
         String response = "";
         Command command = Parser.getCommand(input);
@@ -70,10 +77,20 @@ public class Athena extends Application {
         }
     }
 
+    /**
+     * Returns false if Athena has shutdown, and true otherwise.
+     *
+     * @return False if Athena has shutdown, and true otherwise.
+     */
     public boolean getIsActive() {
         return isActive;
     }
 
+    /**
+     * Main entry into the program. Starts Athena in GUI mode.
+     *
+     * @param stage The top-level container for the GUI.
+     */
     @Override
     public void start(Stage stage) {
         try {

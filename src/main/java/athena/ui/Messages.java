@@ -43,7 +43,6 @@ public class Messages {
         return getMultiLineString(outputs);
     }
 
-
     public static String getRemindersFoundInRangeDialog(TaskList taskList, List<Integer> taskNumbers,
             LocalDate startDate, LocalDate endDate) {
         assert taskNumbers.size() > 0;
