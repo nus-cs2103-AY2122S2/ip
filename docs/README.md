@@ -31,9 +31,11 @@ Event comes with 'at' ♪ , deadline comes with 'by' ♫
 - Note that both description and date can't be empty
 - Date should follow this format: "yyyy-MM-dd"
   - See below section for an actual example
+
 #### Example of usage:
 `event Jason's birthday party /at 2021-02-22` <br/>
 `deadline CS2103T Tp /by 2021-04-21`
+
 #### Expected outcome:
 ```
 As an IstjBot, I will add this task right now. 
@@ -52,6 +54,7 @@ You can view all the tasks you have created with `list` command.
 `list tasks`
 - Why `list tasks`, not just `list`?
   - You will know more when you see our note features...
+
 #### Example of usage:
 `list tasks`
 #### Expected outcome:
@@ -70,6 +73,7 @@ try un-marking them as well! IstjBot supports both features.
 `unmark <TASK INDEX>`
 - The index refers to the index number shown in the displayed task list.
 - The index must be a positive integer 1, 2, 3, …
+
 #### Example of usage:
 `mark 1` <br/>
 `unmark 1`
@@ -92,6 +96,7 @@ Why so easy? Because... it is an IstjBot.
 - The index must be a positive integer 1, 2, 3, …
 - Why `delete task`, not just `delete`? 
   - Again, You will know more later...
+
 #### Example of usage:
 `delete task 1`
 #### Expected outcome:
@@ -110,6 +115,7 @@ Pretty neat, huh?
 `date <DATE>`
 - Date should follow this format: "yyyy-MM-dd"
   - See below section for an actual example
+
 #### Example of usage:
 `find CS2103T` <br/>
 `date 2021-04-21`
@@ -134,6 +140,7 @@ Wow, what a nice extension...
 `delete note 1`
 - The index refers to the index number shown in the displayed note list.
 - The index must be a positive integer 1, 2, 3, …
+
 #### Example of usage:
 `note ask midterm date to Prof` <br/>
 `list notes` <br/>
