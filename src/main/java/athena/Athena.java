@@ -46,17 +46,13 @@ public class Athena extends Application {
         }
     }
 
-    public String getResponse(String input) {
+    public String getResponse(String input) throws InputException {
         String response = "";
-        try {
-            Command command = Parser.getCommand(input);
-            response = command.execute(taskList);
-            assert !response.isEmpty();
-            if (command instanceof ShutdownCommand) {
-                isActive = false;
-            }
-        } catch (InputException e) { // return error message instead
-            return e.getMessage();
+        Command command = Parser.getCommand(input);
+        response = command.execute(taskList);
+        assert !response.isEmpty();
+        if (command instanceof ShutdownCommand) {
+            isActive = false;
         }
 
         try {

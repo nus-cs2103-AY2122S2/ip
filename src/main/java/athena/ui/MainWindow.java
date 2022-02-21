@@ -3,6 +3,7 @@ package athena.ui;
 import java.io.IOException;
 
 import athena.Athena;
+import athena.exceptions.InputException;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,15 +61,19 @@ public class MainWindow extends Stage {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Athena's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container. Clears the user input after processing if no input errors were encountered.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = athena.getResponse(input);
         displayUserDialog(input);
-        displayAthenaDialog(response);
-        userInput.clear();
+        try {
+            String response = athena.getResponse(input);
+            displayAthenaDialog(response);
+            userInput.clear();
+        } catch (InputException e) {
+            displayAthenaError(e.getMessage());
+        }
         if (!athena.getIsActive()) {
             shutdown();
         }
@@ -80,6 +85,10 @@ public class MainWindow extends Stage {
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished(event -> close());
         delay.play();
+    }
+
+    private void displayAthenaError(String errorMessage) {
+        dialogContainer.getChildren().add(DialogBox.getAthenaError(errorMessage, athenaImage));
     }
 
     private void displayAthenaDialog(String dialog) {
