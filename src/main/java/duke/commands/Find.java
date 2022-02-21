@@ -23,20 +23,23 @@ public class Find {
      * 
      * @param tasks
      */
-    private void printResults(ArrayList<Task> tasks) {
-        System.out.println(LINE_BREAK);
-        System.out.println(" " + FIND_INTRO);
+    private String printResults(ArrayList<Task> tasks) {
+        String res = "";
+        res += LINE_BREAK + "\n";
+        res += " " + FIND_INTRO + "\n";
+
         int internalCounter = 1;
         // iterate through the list
         for (Task task : tasks) {
             if (task != null) {
-                System.out.println(" " + internalCounter + ". " + task);
+                res += " " + internalCounter + ". " + task + "\n";
                 ++internalCounter;
             } else {
                 break;
             }
         }
-        System.out.println(LINE_BREAK);
+        res += LINE_BREAK;
+        return res;
     }
 
     /**
@@ -44,8 +47,9 @@ public class Find {
      * 
      * @param keyword input word to search for
      * @param tasks   ArrayList that we will search through for matching keywords
+     * @return
      */
-    public void findRelevantTasks(String keyword, ArrayList<Task> tasks) {
+    public String findRelevantTasks(String keyword, ArrayList<Task> tasks) {
 
         // result arrayList
         ArrayList<Task> result = new ArrayList<Task>();
@@ -57,6 +61,6 @@ public class Find {
             }
         }
         // method to print the matching results
-        printResults(result);
+        return printResults(result);
     }
 }

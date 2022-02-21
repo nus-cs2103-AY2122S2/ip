@@ -27,6 +27,7 @@ public class Parser {
     public static String UNMARK_MESSAGE = "No probs bro, unmarked already!";
 
     // is this the most updated task arrayList?
+    // yes, right from the start, should include all from duke.txt
     private TaskList tasks;
 
     /**
@@ -45,7 +46,6 @@ public class Parser {
     public boolean isDate(String date) {
         try {
             LocalDate.parse(date);
-            System.out.println("we have a real date");
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -65,6 +65,8 @@ public class Parser {
 
         int counter = 0;
 
+        String res = "";
+
         if (command[0].equals("bye")) {
             String filePath = "data/duke.txt";
             // this will update the duke.txt file
@@ -73,19 +75,17 @@ public class Parser {
             return "bye";
         } else if (command[0].equals("list")) {
 
-            System.out.println(LINE_BREAK);
-            System.out.println(" " + LINE_INTRO);
             int internalCounter = 1;
             // iterate through the list
             for (Task task : tasks.getTasks()) {
                 if (task != null) {
-                    System.out.println(" " + internalCounter + ". " + task);
+                    res += " " + internalCounter + ". " + task + "\n";
                     ++internalCounter;
                 } else {
                     break;
                 }
             }
-            return "list";
+            return res;
         } else if (command[0].equals("mark")) {
 
             int number = Integer.parseInt(command[1]) - 1;
@@ -94,11 +94,15 @@ public class Parser {
             boolean currState = currTask.getIsDone();
             currTask.setDone(!currState);
 
-            System.out.println(LINE_BREAK);
-            System.out.println(" " + MARK_MESSAGE);
-            System.out.println(" [X] " + currTask.getDescription());
+            // System.out.println(LINE_BREAK);
+            // System.out.println(" " + MARK_MESSAGE);
+            // System.out.println(" [X] " + currTask.getDescription());
 
-            return "mark";
+            res += LINE_BREAK + "\n";
+            res += " " + MARK_MESSAGE + "\n";
+            res += " [X] " + currTask.getDescription() + "\n";
+
+            return res;
         } else if (command[0].equals("unmark")) {
             int number = Integer.parseInt(command[1]) - 1;
             // Task currTask = list[number];
@@ -106,20 +110,24 @@ public class Parser {
             boolean currState = currTask.getIsDone();
             currTask.setDone(!currState);
 
-            System.out.println(LINE_BREAK);
-            System.out.println(" " + UNMARK_MESSAGE);
-            System.out.println(" [ ] " + currTask.getDescription());
-            return "unmark";
+            // System.out.println(LINE_BREAK);
+            // System.out.println(" " + UNMARK_MESSAGE);
+            // System.out.println(" [ ] " + currTask.getDescription());
+
+            res += LINE_BREAK + "\n";
+            res += " " + UNMARK_MESSAGE;
+            res += " [ ] " + currTask.getDescription();
+
+            return res;
         } else if (command[0].equals("deadline")) {
             // deadline make some cups /by the day after
             if (command.length == 1) {
                 DukeException e = new DukeException("bro why la");
-                System.err.println(e.getMessage());
+                // System.err.println(e.getMessage());
+                return res += e.getMessage();
             } else {
                 String[] deadlineInput = input.split("/by");
                 String deadline = deadlineInput[1];
-                System.out.println("deadline we got : " + deadline);
-
                 String left = deadlineInput[0];
                 String description = left.substring(9, left.length() - 1);
                 // create a new deadline
@@ -127,40 +135,53 @@ public class Parser {
                 // checking for date validity
                 if (isDate(deadline)) {
 
-                    System.out.println("its a date ");
-
                     Task newTask = new Deadlines(description, LocalDate.parse(deadline));
                     tasks.addToTasks(newTask);
                     // adding to the array
                     ++counter;
-                    System.out.println(LINE_BREAK);
-                    System.out
-                            .println("Got it. I added this deadline already bro: \n" + " " + newTask.toString() + "\n");
-                    System.out.println("Now you have " + counter + " tasks in the list. \n");
+                    // System.out.println(LINE_BREAK);
+                    // System.out
+                    // .println("Got it. I added this deadline already bro: \n" + " " +
+                    // newTask.toString() + "\n");
+                    // System.out.println("Now you have " + counter + " tasks in the list. \n");
+
+                    res += LINE_BREAK + "\n";
+                    res += "Got it. I added this deadline already bro: \n" + " " + newTask.toString() + "\n";
+                    res += "Now you have " + counter + " tasks in the list. \n";
+
+                    return res;
                 } else {
-
-                    System.out.println("its not a date");
-
                     // pass normally
                     Task newTask = new Deadlines(description, deadline);
                     tasks.addToTasks(newTask);
                     // adding to the array
                     ++counter;
-                    System.out.println(LINE_BREAK);
-                    System.out
-                            .println("Got it. I added this deadline already bro: \n" + " " + newTask.toString() + "\n");
-                    System.out.println("Now you have " + counter + " tasks in the list. \n");
+                    // System.out.println(LINE_BREAK);
+                    // System.out
+                    // .println("Got it. I added this deadline already bro: \n" + " " +
+                    // newTask.toString() + "\n");
+                    // System.out.println("Now you have " + counter + " tasks in the list. \n");
+
+                    res += LINE_BREAK + "\n";
+                    res += "Got it. I added this deadline already bro: \n" + " " + newTask.toString() + "\n";
+                    res += "Now you have " + counter + " tasks in the list. \n";
+
+                    return res;
                 }
             }
-
-            return "deadline";
         } else if (command[0].equals("event")) {
 
             // event project meeting /at Mon 2-4pm
             if (command.length == 1) {
                 DukeException e = new DukeException("OOPS!!! The description of an event cannot be empty.");
-                System.out.println(LINE_BREAK);
-                System.out.println(e.getMessage());
+                // System.out.println(LINE_BREAK);
+                // System.out.println(e.getMessage());
+
+                res += "OOPS!!! The description of an event cannot be empty." + "\n";
+                res += LINE_BREAK + "\n";
+                res += e.getMessage();
+
+                return res;
             } else {
                 String[] deadlineInput = input.split("/at");
                 String deadline = deadlineInput[1];
@@ -174,39 +195,56 @@ public class Parser {
                     tasks.addToTasks(newTask);
                     // adding to the array
                     ++counter;
-                    System.out.println(LINE_BREAK);
-                    System.out.println("Got it. I added this event already bro: \n" + " " +
-                            newTask.toString() + "\n");
-                    System.out.println("Now you have " + counter + " tasks in the list. \n");
+                    // System.out.println(LINE_BREAK);
+                    // System.out.println("Got it. I added this event already bro: \n" + " " +
+                    // newTask.toString() + "\n");
+                    // System.out.println("Now you have " + counter + " tasks in the list. \n");
+
+                    res += LINE_BREAK + "\n";
+                    res += "Got it. I added this event already bro: \n" + " " +
+                            newTask.toString() + "\n";
+                    res += "Now you have " + counter + " tasks in the list. \n";
+
+                    return res;
                 } else {
                     // pass normally
                     Task newTask = new Events(description, deadline);
                     tasks.addToTasks(newTask);
                     // adding to the array
                     ++counter;
-                    System.out.println(LINE_BREAK);
-                    System.out.println("Got it. I added this event already bro: \n" + " " +
-                            newTask.toString() + "\n");
-                    System.out.println("Now you have " + counter + " tasks in the list. \n");
+                    // System.out.println(LINE_BREAK);
+                    // System.out.println("Got it. I added this event already bro: \n" + " " +
+                    // newTask.toString() + "\n");
+                    // System.out.println("Now you have " + counter + " tasks in the list. \n");
+
+                    res += LINE_BREAK + "\n";
+                    res += "Got it. I added this event already bro: \n" + " " +
+                            newTask.toString() + "\n";
+                    res += "Now you have " + counter + " tasks in the list. \n";
+
+                    return res;
                 }
             }
-
-            return "event";
         } else if (command[0].equals("todo")) {
             // here we declare the new task to be added (todos)
             if (command.length == 1) {
                 DukeException e = new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                System.out.println(LINE_BREAK);
-                System.out.println(e.getMessage());
+                // System.out.println(LINE_BREAK);
+                // System.out.println(e.getMessage());
+                res += LINE_BREAK + "\n";
+                res += e.getMessage();
+                return res;
             } else {
 
                 Task t = new ToDos(input);
                 tasks.addToTasks(t);
-                System.out.println(LINE_BREAK);
-                System.out.println(" ok added alr bro: " + input);
+                // System.out.println(LINE_BREAK);
+                // System.out.println(" ok added alr bro: " + input);
                 ++counter;
+                res += LINE_BREAK + "\n";
+                res += " ok added alr bro: " + input;
+                return res;
             }
-            return "todo";
         } else if (command[0].equals("delete")) {
             // deleting a task
             // find the index to be deleted
@@ -215,21 +253,22 @@ public class Parser {
             Task beingDeleted = tasks.getTasks().get(number);
             // deleting operation
             tasks.deleteFromTasks(number);
-            System.out.println("Noted. I've removed this task: ");
-            System.out.println(" " + beingDeleted);
-            System.out.println("Now you have " + tasks.getTasks().size() + " in the list.");
-            return "delete";
+
+            res += "Noted. I've removed this task: " + "\n";
+            res += " " + beingDeleted + "\n";
+            res += "Now you have " + tasks.getTasks().size() + " in the list.";
+
+            return res;
         } else if (command[0].equals("find")) {
             // keyword
             String keyword = command[1];
             Find find = new Find();
-            find.findRelevantTasks(keyword, tasks.getTasks());
+            return find.findRelevantTasks(keyword, tasks.getTasks());
 
-            return "find";
         } else {
             DukeException e = new DukeException("Tak faham banggg, speak in my language la bayi....");
-            System.out.println(e.getMessage());
-            return "error";
+            res += e.getMessage();
+            return res;
         }
     }
 

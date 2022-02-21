@@ -42,8 +42,6 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
 
-        // File file = new File("data/duke.txt");
-        // return Storage.readFile();
         try {
             File file = new File(filePath);
             if (file.exists()) {
@@ -112,9 +110,7 @@ public class Storage {
      * @param addText  text we want to add to the file
      */
     private static void writeToFile(String filePath, String addText) throws IOException {
-        System.out.println("inside writoto file");
         FileWriter fw = new FileWriter(filePath);
-        System.out.println("the text to add : " + addText);
         fw.write(addText);
         fw.close();
     }
@@ -187,7 +183,6 @@ public class Storage {
             String addText = "";
 
             if (task.substring(1, 2).equals("T")) {
-                System.out.println(" just came across a todo");
                 addText = "todo/" + (item.getIsDone() ? "marked" : "unmarked") + "/" + item.getDescription() + "\n";
             } else if (task.substring(1, 2).equals("E")) {
                 Events e = (Events) item;
