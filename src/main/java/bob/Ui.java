@@ -14,7 +14,7 @@ public class Ui {
         return Ui.printLine()
                 + "Hello! I'm Bob!\n" + "Loading saved entries...\n"
                 + "What can I do for you?\n"
-                + "Type \"command\" to see a list of commands.\n"
+                + "Type \"commands\" to see a list of commands.\n"
                 + Ui.printLine();
     }
 

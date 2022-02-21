@@ -52,7 +52,7 @@ public class Parser {
                 response = archive(tasks);
                 tasksIsDiff = true;
                 break;
-            case "command":
+            case "commands":
                 response = getCommands();
                 break;
             default:

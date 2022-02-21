@@ -23,8 +23,8 @@ public class MainWindow extends AnchorPane {
 
     private Bob bob;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image bobImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/bob.png"));
+    private final Image bobImage = new Image(this.getClass().getResourceAsStream("/images/bob.jpg"));
 
     /**
      * Used by JavaFX to initialize the MainWindow.
