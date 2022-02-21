@@ -21,7 +21,7 @@
 
 ## Features
 
-> :grey_exclamation: **Notes about the command format:**
+> **Notes about the command format:**
 > - Words surrounded with angled brackets such as `<TODO_NAME>` are the parameters to be supplied by the user. The brackets themselves are not part of the command input.
 > - All datetime inputs are to be formatted as `yyyy-MM-dd HHmm`, e.g. `2022-12-31 2359`.
 > - Extraneous parameters for commands that do not take in parameters (such as `list`, `exit`) will be ignored.
