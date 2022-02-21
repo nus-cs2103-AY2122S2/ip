@@ -23,6 +23,8 @@ public class Parser {
                 return new ExitCommand();
             case "list":
                 return new ListCommand();
+            case "help":
+                return new HelpCommand();
             default:
                 throw new InvalidInputException("The description of this command cannot be empty.");
             }
@@ -110,7 +112,8 @@ public class Parser {
     public static boolean isValidCommand(String command) {
         return (command.equals("bye") || command.equals("list") || command.equals("find")
                 || command.equals("delete") || command.equals("mark") || command.equals("unmark")
-                || command.equals("todo") || command.equals("deadline") || command.equals("event"));
+                || command.equals("todo") || command.equals("deadline") || command.equals("event")
+                || command.equals("help"));
     }
 
 }
