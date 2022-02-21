@@ -31,6 +31,7 @@ Bob is a personal desktop task manager.
 | Delete    | `delete [INDEX]`                    |
 | Archive   | `archive`                           |
 
+![Sample run](https://justinekoh.github.io/ip/Ui.png)
 ---
 
 ## Features
