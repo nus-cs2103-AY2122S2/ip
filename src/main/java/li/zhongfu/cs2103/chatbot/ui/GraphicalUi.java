@@ -29,6 +29,9 @@ public class GraphicalUi extends Application {
             Scene scene = new Scene(bp);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setAndInitDuke(duke);
+            stage.setMinWidth(230);
+            stage.setMinHeight(400);
+            stage.setTitle("Duke");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
