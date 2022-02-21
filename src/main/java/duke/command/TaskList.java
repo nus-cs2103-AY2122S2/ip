@@ -66,7 +66,7 @@ public class TaskList {
     public String unmarkItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
         int index = Integer.parseInt(command[1]);
         taskArray.get(index - 1).setUnchecked();
-        return String.valueOf("OK, I've marked this task as not done yet:\n" + taskArray.get(index - 1));
+        return "OK, I've marked this task as not done yet:\n" + taskArray.get(index - 1);
     }
 
     /**
@@ -81,7 +81,7 @@ public class TaskList {
         Task task = taskArray.remove(index - 1);
         String result = "Noted, I've removed this task from the list: " + task + "\n";
         result += String.format("You have %d tasks left\n", taskArray.size());
-        return String.valueOf(result);
+        return result;
     }
 
 
@@ -103,7 +103,10 @@ public class TaskList {
         return "added: " + event.toString() + "\n";
     }
 
-
+    /**
+     * Gets the number of tasks.
+     * @return int Representing the number of tasks
+     */
     public int getSize() {
         return taskArray.size();
     }
@@ -131,6 +134,17 @@ public class TaskList {
             System.out.print(result);
             System.out.println("__________________________________");
         }
+    }
+
+    public String setPriority(int index, String priority) throws DukeException, IndexOutOfBoundsException {
+        if (priority.equals("low") || priority.equals("medium") || priority.equals("high")) {
+            taskArray.get(index).setPriority(priority);
+        } else {
+            throw new DukeException("Wrong values");
+        }
+        String result = "Noted. I have set this task as " + priority + " priority:\n";
+        result += taskArray.get(index).toString();
+        return result;
     }
 
 }

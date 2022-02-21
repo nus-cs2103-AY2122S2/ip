@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.DukeException;
 
 import java.time.LocalDate;
@@ -46,6 +47,8 @@ public class Parser {
             case ("find"):
                 taskList.findItem(command[1]);
                 break;
+            case ("priority"):
+                return parseSetPriority(command[1], taskList);
             default:
                 throw new DukeException("Sorry I don't understand that command");
             }
@@ -94,6 +97,21 @@ public class Parser {
         }
         result.append(String.format("You have %d tasks in your list\n", taskList.getSize()));
         return String.valueOf(result);
+    }
+
+    private static String parseSetPriority(String command, TaskList taskList) throws DukeException{
+        String result;
+        try {
+            int index = Integer.parseInt(command.split(" ")[0]);
+            String priority = command.split(" ")[1];
+            result = taskList.setPriority(index - 1, priority);
+        } catch (IndexOutOfBoundsException | NumberFormatException | DukeException e) {
+            System.out.println(command);
+            System.out.println(e.getMessage());
+            throw new DukeException("Please use this format: priority <index> <priority>"
+                    + "\nPriority options: low, medium, high");
+        }
+        return result;
     }
 
 

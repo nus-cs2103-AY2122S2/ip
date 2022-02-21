@@ -7,10 +7,17 @@ package duke.task;
  * @author Jian Rong
  */
 public abstract class Task {
+    protected enum Priority {
+        LOW,
+        MEDIUM,
+        HIGH
+    }
+    protected Priority priority;
     protected String title;
 
     public Task(String title) {
         this.title = title;
+        this.priority = Priority.LOW;
     }
 
     boolean isChecked = false;
@@ -37,4 +44,19 @@ public abstract class Task {
     public boolean titleContains(String term) {
         return title.contains(term);
     }
+
+    public void setPriority(String priority) {
+        switch (priority) {
+        case ("low"):
+            this.priority = Priority.LOW;
+            break;
+        case ("medium"):
+            this.priority = Priority.MEDIUM;
+            break;
+        case ("high"):
+            this.priority = Priority.HIGH;
+            break;
+        }
+    }
+
 }

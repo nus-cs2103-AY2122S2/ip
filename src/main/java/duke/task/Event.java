@@ -33,11 +33,24 @@ public class Event extends Task {
         int day = date.getDayOfMonth();
         Month month = date.getMonth();
         int year = date.getYear();
-        if (this.isChecked) {
-            return String.format("[D][X] %s (at: %d %s %d %s)", title, day, month, year, time);
-        } else {
-            return String.format("[D][ ] %s (at: %d %s %d %s)", title, day, month, year, time);
+        String result = "";
+        switch (this.priority) {
+            case LOW:
+                result = "[L]";
+                break;
+            case MEDIUM:
+                result = "[M]";
+                break;
+            case HIGH:
+                result = "[H]";
+                break;
         }
+        if (this.isChecked) {
+            result += "[D][X]";
+        } else {
+            result += "[D][ ]";
+        }
+        return (result + String.format(" %s (at: %d %s %d %s)", title, day, month, year, time));
     }
 
 }

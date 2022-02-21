@@ -35,10 +35,23 @@ public class Deadline extends Task {
         int day = date.getDayOfMonth();
         Month month = date.getMonth();
         int year = date.getYear();
-        if (this.isChecked) {
-            return String.format("[D][X] %s (by: %d %s %d %s)", title, day, month, year, time);
-        } else {
-            return String.format("[D][ ] %s (by: %d %s %d %s)", title, day, month, year, time);
+        String result = "";
+        switch (this.priority) {
+            case LOW:
+                result += "[L]";
+                break;
+            case MEDIUM:
+                result += "[M]";
+                break;
+            case HIGH:
+                result += "[H]";
+                break;
         }
+        if (this.isChecked) {
+            result += "[D][X]";
+        } else {
+            result += "[D][ ]";
+        }
+        return result + String.format(" %s (by: %d %s %d %s)", title, day, month, year, time);
     }
 }

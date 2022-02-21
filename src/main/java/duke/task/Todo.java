@@ -20,11 +20,25 @@ public class Todo extends Task {
      * @return The summary of the Todo.
      */
     public String toString() {
-        if (this.isChecked) {
-            return "[T][X] " + this.title;
-        } else {
-            return "[T][ ] " + this.title;
+        String result = "";
+        switch (this.priority) {
+            case LOW:
+                result = "[L]";
+                break;
+            case MEDIUM:
+                result = "[M]";
+                break;
+            case HIGH:
+                result = "[H]";
+                break;
         }
+        if (this.isChecked) {
+            result += "[T][X] ";
+        } else {
+            result += "[T][ ] ";
+        }
+
+        return (result + this.title);
     }
 
 }
