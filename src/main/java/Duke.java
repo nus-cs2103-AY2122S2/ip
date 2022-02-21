@@ -204,7 +204,7 @@ public class Duke {
         Scanner input = new Scanner(System.in);
         String userinput = "";
         Task newTask = null;
-        while (true) {
+        while(true) {
             printMessage(DukeMessage.welcomeMsg);
             userinput = input.nextLine();
             newTask = null;
@@ -212,42 +212,51 @@ public class Duke {
             if (userinput.equals(DukeCommand.bye)) {
                 printMessage(DukeMessage.byeMsg);
                 break;
-            } else if (userinput.startsWith(DukeCommand.todo)) {
+            }
+            else if (userinput.startsWith(DukeCommand.todo)){
                 newTask = processTodo(userinput);
                 //taskList.add(newTask);
-            } else if (userinput.startsWith(DukeCommand.deadline)) {
+            }
+            else if (userinput.startsWith(DukeCommand.deadline)){
                 newTask = processDeadline(userinput);
-            } else if (userinput.startsWith(DukeCommand.event)) {
+            }
+            else if (userinput.startsWith(DukeCommand.event)){
                 newTask = processEvent(userinput);
-            } else if (userinput.equals(DukeCommand.list)) {
+            }
+            else if (userinput.equals(DukeCommand.list)) {
                 processPrintList(taskList);
-            } else if (userinput.startsWith(DukeCommand.delete)) {
+            }
+            else if (userinput.startsWith(DukeCommand.delete)){
                 String taskStr = userinput.substring(DukeCommand.delete.length());
                 taskStr = taskStr.trim();
                 requiredSaveToFile = processDelete(taskStr, taskList);
-            } else if (userinput.startsWith(DukeCommand.mark)) {
+            }
+            else if (userinput.startsWith(DukeCommand.mark)){
                 String taskStr = userinput.substring(DukeCommand.mark.length());
                 taskStr = taskStr.trim();
                 requiredSaveToFile = processMarkingTask(taskStr, taskList, true);
-            } else if (userinput.startsWith(DukeCommand.unmark)) {
+            }
+            else if (userinput.startsWith(DukeCommand.unmark)) {
                 String taskStr = userinput.substring(DukeCommand.unmark.length());
                 taskStr = taskStr.trim();
                 requiredSaveToFile = processMarkingTask(taskStr, taskList, false);
-            } else {
+            }
+            else {
                 printMessage(DukeMessage.invalidCommandMsg);
             }
 
-            if (newTask != null) {
+            if(newTask != null){
                 taskList.add(newTask);
                 printMessage(DukeMessage.getTaskInListMsg(newTask, taskList.size()));
                 requiredSaveToFile = true;
             }
 
-            if (requiredSaveToFile) {
+            if(requiredSaveToFile){
                 saveTaskToFile(taskList);
             }
-
-            input.close();
         }
+
+        input.close();
+        // Save task list
     }
 }
