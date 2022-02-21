@@ -29,7 +29,10 @@ public class Duke {
     public String doHandler(String input) throws Exception {
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
+        assert i <= tasks.length() && i >= 1 : "index of item should be within scope of tasklist";
+      
         tasks.get(i).markComplete();
+        assert tasks.get(i).getStatusIcon().equals("X") : "task should be marked done";
 
         storage.save(tasks);
         return Ui.showUpdateMessage();
@@ -46,7 +49,10 @@ public class Duke {
     public String undoHandler(String input) throws Exception {
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
+        assert i <= tasks.length() && i >= 1 : "index of item should be within scope of tasklist";
+      
         tasks.get(i).markIncomplete();
+        assert tasks.get(i).getStatusIcon().equals(" ") : "task should be marked incomplete";
 
         storage.save(tasks);
         return Ui.showUpdateMessage();
@@ -61,9 +67,10 @@ public class Duke {
      * data to the file at filePath
      */
     public String deleteHandler(String input) throws Exception {
-        int k = Integer.parseInt(input.replaceAll("[^0-9]",
+        int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
-        tasks.remove(k);
+        assert i <= tasks.length() && i >= 1 : "index of item should be within scope of tasklist";
+        tasks.remove(i);
 
         storage.save(tasks);
         return Ui.showDeleteMessage(tasks);
