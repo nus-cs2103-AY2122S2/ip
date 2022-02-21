@@ -52,6 +52,8 @@ public class Gui {
 
             stage.setScene(scene);
             stage.setTitle(STAGE_TITLE);
+            stage.setMinWidth(360);
+            stage.setMinHeight(360);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
