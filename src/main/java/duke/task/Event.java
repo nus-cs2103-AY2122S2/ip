@@ -1,6 +1,6 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     /**
      * Constructs event.
@@ -16,7 +16,7 @@ public class Event extends Task {
      * @param isMarked Indicates whether task is marked/done.
      * @param date Event date
      */
-    public Event(String description, boolean status, LocalDate date) {
+    public Event(String description, boolean status, LocalDateTime date) {
         super(description, status);
         this.date = date;
     }
@@ -26,7 +26,7 @@ public class Event extends Task {
      * @param description Task description.
      * @param date Event date
      */
-    public Event(String description, LocalDate date) {
+    public Event(String description, LocalDateTime date) {
         this(description, false, date);
     }
 
@@ -35,9 +35,22 @@ public class Event extends Task {
      * @return Event as a string
      */
     public String toString() {
+        String status = super.isMarked() ? "X" : " ";
         return String.format("[E][%s] %s (at: %s)",
-                super.isMarked(),
+                status,
                 super.getDescription(),
-                DateTimeFormatter.ofPattern("MMM d yyyy"));
+                date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")));
     }
+
+    /**
+     * Returns string representation of a event.
+     * @return Event as a string
+     */
+    public String toDataString() {
+        return String.format("E,%s,%s,%s",
+                isMarked(),
+                super.getDescription(),
+                date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+    }
+
 }

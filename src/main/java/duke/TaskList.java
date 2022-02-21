@@ -12,7 +12,16 @@ public class TaskList {
     }
 
     public TaskList() {
+        this(new ArrayList<Task>());
+    }
 
+    /**
+     * Gets task at index n.
+     *
+     * @param n Specified index to fetch.
+     */
+    public Task get(int n) {
+        return tasks.get(n);
     }
 
     /**
@@ -76,8 +85,21 @@ public class TaskList {
         String string = "";
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            String status = task.isMarked() ? "X" : " ";
-            string += String.format("%d. %s", i, task.toString());
+            string += String.format("%d. %s\n", i, task.toString());
+        }
+        return string;
+    }
+
+    /**
+     * Returns string representation of list for storage.
+     *
+     * @return Data of all tasks.
+     */
+    public String toDataString() {
+        String string = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            string += String.format("%s\n", task.toDataString());
         }
         return string;
     }

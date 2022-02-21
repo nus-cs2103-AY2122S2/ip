@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.ContactList;
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -25,9 +27,16 @@ public class DeleteCommand extends Command {
      * @param tasks List to add task to.
      * @param ui Interface to display results to.
      * @param storage File storage of tasks.
+     * @param contacts List of contacts.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.deleteTask(taskNumber);
+    public String execute(TaskList tasks, Ui ui, Storage storage, ContactList contacts) {
+        try {
+            tasks.deleteTask(taskNumber);
+            storage.save(tasks);
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
+        return ui.showTaskDeleted();
     }
 
 }

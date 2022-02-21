@@ -1,0 +1,19 @@
+.root{
+    -fx-font-size: 12pt;
+    -fx-font-family: "Sans Serif";
+    -fx-background: #d5d5d5;
+}
+
+.chat-bubble {
+    -fx-background-color: #fff;
+    -fx-background-radius: 10px;
+    -fx-padding: 1em;
+}
+
+.chat-picture {
+    -fx-background-color: #fff;
+}
+
+.chat-picture-box {
+    -fx-padding: 0 .5em 0 .5em;
+}

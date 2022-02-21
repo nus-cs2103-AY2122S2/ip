@@ -1,11 +1,15 @@
 package duke;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import duke.command.AddCommand;
+import duke.command.AddContactCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
+import duke.command.DeleteContactCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
@@ -46,6 +50,12 @@ public class Parser {
             return parseUnmarkCommand(fullCommand);
         } else if (command.equals("bye")) {
             return parseExitCommand();
+        } else if (command.equals("find")) {
+            return parseFindCommand(fullCommand);
+        } else if (command.equals("addContact")) {
+            return parseAddContactCommand(fullCommand);
+        } else if (command.equals("deleteContact")) {
+            return parseDeleteContactCommand(fullCommand);
         } else {
             throw new DukeException("I don't recognize that command.");
         }
@@ -59,8 +69,10 @@ public class Parser {
      */
     private static Command parseAddDeadlineCommand(String fullCommand) {
         String dataString = fullCommand.replaceFirst("deadline ", "");
-        String[] data = dataString.split("/by ");
-        Task task = new Deadline(data[0], LocalDate.parse(data[1]));
+        String[] data = dataString.split(" /by ");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(data[1], dateFormatter);
+        Task task = new Deadline(data[0], dateTime);
         return new AddCommand(task);
     }
 
@@ -72,8 +84,10 @@ public class Parser {
      */
     private static Command parseAddEventCommand(String fullCommand) {
         String dataString = fullCommand.replaceFirst("event ", "");
-        String[] data = dataString.split("/at ");
-        Task task = new Event(data[0], LocalDate.parse(data[1]));
+        String[] data = dataString.split(" /at ");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(data[1], dateTimeFormatter);
+        Task task = new Event(data[0], dateTime);
         return new AddCommand(task);
     }
 
@@ -140,6 +154,17 @@ public class Parser {
     }
 
     /**
+     * Parses find command.
+     *
+     * @param fullCommand String to parse.
+     * @return FindCommand instance.
+     */
+    private static Command parseFindCommand(String fullCommand) {
+        String dataString = fullCommand.replaceFirst("find ", "");
+        return new FindCommand(dataString);
+    }
+
+    /**
      * Parses exit command.
      *
      * @param fullCommand String to parse.
@@ -147,6 +172,33 @@ public class Parser {
      */
     private static Command parseExitCommand() {
         return new ExitCommand();
+    }
+
+    /**
+     * Parses delete contact command.
+     *
+     * @param fullCommand String to parse.
+     * @return DeleteContactCommand instance.
+     */
+    private static Command parseDeleteContactCommand(String fullCommand) {
+        String dataString = fullCommand.replaceFirst("deleteContact ", "");
+        int taskNumber = Integer.parseInt(dataString);
+        return new DeleteContactCommand(taskNumber);
+    }
+
+    /**
+     * Parses add contact command.
+     *
+     * @param fullCommand String to parse.
+     * @return AddContactCommand instance.
+     */
+    private static Command parseAddContactCommand(String fullCommand) {
+        String dataString = fullCommand.replaceFirst("addContact ", "");
+        String[] dataArr = dataString.split(" ");
+        String name = dataArr[0];
+        String telegram = dataArr[1];
+        Contact contact = new Contact(name, telegram);
+        return new AddContactCommand(contact);
     }
 
 }

@@ -1,27 +1,26 @@
 package duke.command;
 
+import duke.Contact;
 import duke.ContactList;
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.task.Task;
 
 /**
- * Adds a task to the task list.
+ * Adds a contact to the contact list.
  */
-public class AddCommand extends Command {
+public class AddContactCommand extends Command {
 
-    private Task task;
+    private Contact contact;
 
     /**
      * Constructs AddCommand.
      *
-     * @param task Task to add to the list.
+     * @param contact Contact to add to the list.
      */
-    public AddCommand(Task task) {
+    public AddContactCommand(Contact contact) {
         super();
-        this.task = task;
+        this.contact = contact;
     }
 
     /**
@@ -33,13 +32,8 @@ public class AddCommand extends Command {
      * @param contacts List of contacts.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage, ContactList contacts) {
-        try {
-            tasks.addTask(task);
-            storage.save(tasks);
-            return ui.showTaskAdded(task);
-        } catch (DukeException e) {
-            return ui.showError(e.getMessage());
-        }
+        contacts.add(contact);
+        return ui.showContactAdded(contact);
     }
 
 }

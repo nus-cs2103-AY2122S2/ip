@@ -27,7 +27,18 @@ public class Todo extends Task {
      * @return Todo as a string
      */
     public String toString() {
-        return String.format("[T][%s] %s", super.isMarked(), super.getDescription());
+        String status = super.isMarked() ? "X" : " ";
+        return String.format("[T][%s] %s", status, super.getDescription());
+    }
+
+    /**
+     * Returns string representation of a todo.
+     * @return Todo as a string
+     */
+    public String toDataString() {
+        return String.format("T,%s,%s",
+                isMarked(),
+                super.getDescription());
     }
 
 }
