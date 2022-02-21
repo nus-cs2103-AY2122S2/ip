@@ -14,9 +14,11 @@ public class Parser {
         int lengthOfFullCommand = fullCommand.length();
         int lengthOfFirstWord = firstWordOfCommand.length();
 
-        if (firstWordOfCommand.length() == 0 || !isValidCommand(firstWordOfCommand)) {
+        boolean isEmptyString = firstWordOfCommand.length() == 0;
+        boolean isSingleWord = lengthOfFirstWord == lengthOfFullCommand;
+        if (isEmptyString || !isValidCommand(firstWordOfCommand)) {
             throw new InvalidInputException("Please enter a valid task with a description.");
-        } else if (lengthOfFirstWord == lengthOfFullCommand) {
+        } else if (isSingleWord) {
             switch (firstWordOfCommand) {
             case "bye":
                 return new ExitCommand();
