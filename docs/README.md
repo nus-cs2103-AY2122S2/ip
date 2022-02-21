@@ -199,7 +199,7 @@ Example:
 
 Output:<br>
 ```
-Bye. Hope to see you again soon!<br>
+Bye. Hope to see you again soon!
 Let your heart ablaze!
 ```
 
@@ -233,7 +233,7 @@ Output:
       
       10. reminder <int:num> <String:id>: Get the list of tasks that are due before a time range
       
-      Note: id can be in `days`, `weeks` or `months`
+      Note: id can be in "days", "weeks" or "months"
       
       10. bye: Terminate the program
 ```
