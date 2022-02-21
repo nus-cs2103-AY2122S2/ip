@@ -61,9 +61,10 @@ public class TaskList {
     public void event(String desc, String at, ArrayList<Task> list) {
         Ui.lineTwo();
         System.out.println("New task added:");
-        Task t1 = new Event(desc, at);
-        list.add(t1);
-        System.out.println(t1);
+        String[] date = Parser.splitSpace(at);
+        Task t2 = new Event(desc, LocalDate.parse(date[1]));
+        list.add(t2);
+        System.out.println(t2);
         System.out.println("You have " + list.size() + " tasks left now! ^_^");
         Ui.lineTwo();
     }

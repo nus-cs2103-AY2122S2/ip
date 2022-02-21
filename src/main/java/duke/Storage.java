@@ -34,7 +34,7 @@ public class Storage {
                     fileInput = "[D][" + deadL.getStatusIcon() + "]/" + deadL.description + "/" + deadL.when;
                 } else {
                     Event eve = (Event) ele;
-                    fileInput = "[E][" + eve.getStatusIcon() + "]/" + eve.description + "/" + eve.at;
+                    fileInput = "[E][" + eve.getStatusIcon() + "]/" + eve.description + "/" + eve.when;
                 }
                 writer.write(fileInput + "\n");
                 writer.flush();
@@ -64,7 +64,7 @@ public class Storage {
                 t = new ToDo(tSplit[1]);
                 break;
             case "[E":
-                t = new Event(tSplit[1], tSplit[2]);
+                t = new Event(tSplit[1], LocalDate.parse(tSplit[2]));
                 break;
             case "[D":
                 t = new Deadline(tSplit[1], LocalDate.parse(tSplit[2]));

@@ -48,29 +48,32 @@ class ToDo extends Task {
  * Event class that inherits from the Task class.
  */
 class Event extends Task {
-    String at;
-
-    public Event(String desc, String b) {
-        super(desc);
-        at = b;
-    }
-    public String toString() {
-        return "[E]" + super.toString() + " (" + at + ")";
-    }
-}
-
-/**
- * Deadline class that inherits from the Task class.
- */
-class Deadline extends Task {
     LocalDate when;
 
-    public Deadline(String desc, LocalDate date) {
+    public Event(String desc, LocalDate date) {
         super(desc);
         when = date;
     }
+
     public String toString() {
-        return "[D]" + super.toString() + " (" +
+        return "[E]" + super.toString() + " (at: " +
                 when.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
+
+    /**
+     * Deadline class that inherits from the Task class.
+     */
+    class Deadline extends Task {
+        LocalDate when;
+
+        public Deadline(String desc, LocalDate date) {
+            super(desc);
+            when = date;
+        }
+
+        public String toString() {
+            return "[D]" + super.toString() + " (by: " +
+                    when.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        }
+    }
