@@ -144,10 +144,9 @@ public class Siri extends Application {
                 isExit = c.isExit();
             } catch (InvalidInputException e) {
                 ui.showError(e.getMessage());
-            } finally {
-                return ui.toString();
             }
         }
+        return ui.toString();
     }
 
 }
