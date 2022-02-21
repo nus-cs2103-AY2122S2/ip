@@ -128,10 +128,6 @@ public class Duke extends Application {
                     DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
             tasks = new TaskList();
         }
-        // System.out.println(ui.greeting);
-        // Label duketext = new Label("Whats this supposed to be");
-        // dialogContainer.getChildren().addAll(
-        // DialogBox.getDukeDialog(duketext, new ImageView(duke)));
     }
 
     /**
