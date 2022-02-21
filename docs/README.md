@@ -1,7 +1,5 @@
 # User Guide
 
-***
-
 ## About Calcifer
 
 ![](../src/main/resources/images/DaDuke.png)
