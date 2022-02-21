@@ -148,7 +148,7 @@ public class Ui {
     /**
      * Shows user that task has been marked
      * @param task task that is to be marked
-     * @return
+     * @returnstring as acknowledgement of task marked
      */
     public String showMark(Task task) {
         return "Way to go, bud! We can only go up from here! \n" + task;
@@ -158,7 +158,7 @@ public class Ui {
     /**
      * shows user that task has been unmarked
      * @param task task that is to be unmarked
-     * @return
+     * @return string as acknowledgement of task unmarked
      */
     public String showUnmark(Task task) {
         return "Bud?? Were you trying to josh me when you marked it earlier? "
