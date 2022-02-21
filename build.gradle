@@ -45,3 +45,9 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+shadowJar {
+    archiveBaseName = 'duke'
+    archiveVersion = '0.2'
+    archiveClassifier = 'all'
+}
