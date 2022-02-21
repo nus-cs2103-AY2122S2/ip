@@ -1,6 +1,6 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     /**
      * Constructs deadline.
@@ -16,7 +16,7 @@ public class Deadline extends Task {
      * @param isMarked Indicates whether task is marked/done.
      * @param date Deadline date
      */
-    public Deadline(String description, boolean isMarked, LocalDate date) {
+    public Deadline(String description, boolean isMarked, LocalDateTime date) {
         super(description, isMarked);
         this.date = date;
     }
@@ -26,7 +26,7 @@ public class Deadline extends Task {
      * @param description Task description.
      * @param date Deadline date
      */
-    public Deadline(String description, LocalDate date) {
+    public Deadline(String description, LocalDateTime date) {
         this(description, false, date);
     }
 
@@ -39,7 +39,7 @@ public class Deadline extends Task {
         return String.format("[D][%s] %s (by: %s)",
                 status,
                 super.getDescription(),
-                date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")));
     }
 
     /**
@@ -50,7 +50,7 @@ public class Deadline extends Task {
         return String.format("D,%s,%s,%s",
                 isMarked(),
                 super.getDescription(),
-                date.format(DateTimeFormatter.ofPattern("yyyy-mm-dd")));
+                date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
     }
 
 }

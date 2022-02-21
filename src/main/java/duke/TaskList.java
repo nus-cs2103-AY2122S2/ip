@@ -16,6 +16,15 @@ public class TaskList {
     }
 
     /**
+     * Gets task at index n.
+     *
+     * @param n Specified index to fetch.
+     */
+    public Task get(int n) {
+        return tasks.get(n);
+    }
+
+    /**
      * Adds specified task to list.
      *
      * @param task Specified task to add.

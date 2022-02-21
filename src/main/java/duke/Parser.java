@@ -1,6 +1,7 @@
 package duke;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import duke.command.AddCommand;
 import duke.command.AddContactCommand;
@@ -68,8 +69,10 @@ public class Parser {
      */
     private static Command parseAddDeadlineCommand(String fullCommand) {
         String dataString = fullCommand.replaceFirst("deadline ", "");
-        String[] data = dataString.split("/by ");
-        Task task = new Deadline(data[0], LocalDate.parse(data[1]));
+        String[] data = dataString.split(" /by ");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(data[1], dateFormatter);
+        Task task = new Deadline(data[0], dateTime);
         return new AddCommand(task);
     }
 
@@ -81,8 +84,10 @@ public class Parser {
      */
     private static Command parseAddEventCommand(String fullCommand) {
         String dataString = fullCommand.replaceFirst("event ", "");
-        String[] data = dataString.split("/at ");
-        Task task = new Event(data[0], LocalDate.parse(data[1]));
+        String[] data = dataString.split(" /at ");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(data[1], dateTimeFormatter);
+        Task task = new Event(data[0], dateTime);
         return new AddCommand(task);
     }
 
