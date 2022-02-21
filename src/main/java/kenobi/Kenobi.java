@@ -15,10 +15,10 @@ public class Kenobi {
     private static final String GREETING_MSG = "Hello there, my name is Kenobi. How may I serve you?";
 
     private TaskList tasks;
-    private Storage storage;
+    private final Storage storage;
 
     private String response;
-    private Command cmd;
+    private boolean isTerminated;
 
     /**
      * Constructs an instance of Kenobi with the specified save path for storage.
@@ -50,17 +50,17 @@ public class Kenobi {
     }
 
     /**
-     * Runs the main Kenobi program.
-     * The program initializes user input and storage then greets the user.
+     * Executes the command input.
+     * The commands will first be parsed by Parser then executed.
      */
-    public void giveCommand(String input) {
+    public void executeCommand(String input) {
         try {
-            cmd = Parser.parseCommand(input);
-            cmd.setData(tasks);
+            Command cmd = Parser.parseCommand(input);
+            cmd.setData(tasks, storage);
             response = cmd.execute();
 
             if (cmd instanceof ExitCommand) {
-                storage.save(tasks);
+                isTerminated = true;
             }
         } catch (ParseException e) {
             response = e.getMessage();
@@ -71,8 +71,8 @@ public class Kenobi {
         return response;
     }
 
-    public String echo(String input) {
-        return "Kenobi heard: " + input;
+    public boolean isTerminated() {
+        return isTerminated;
     }
 }
 

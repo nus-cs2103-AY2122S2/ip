@@ -142,7 +142,7 @@ public class Parser {
             break;
 
         default:
-            throw new ParseException("I could not interpret the save files");
+            throw new ParseException("Invalid Task type in the save file");
         }
 
         if (taskComponents[1].equals("1")) {

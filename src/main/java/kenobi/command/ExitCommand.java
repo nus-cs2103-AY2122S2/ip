@@ -11,6 +11,8 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute() {
+        storage.save(tasks);
+
         return "Goodbye, old friend";
     }
 }

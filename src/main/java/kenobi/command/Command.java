@@ -1,5 +1,6 @@
 package kenobi.command;
 
+import kenobi.storage.Storage;
 import kenobi.task.TaskList;
 
 /**
@@ -7,6 +8,7 @@ import kenobi.task.TaskList;
  */
 public abstract class Command {
     protected TaskList tasks;
+    protected Storage storage;
 
     /**
      * Executes the command.
@@ -20,7 +22,8 @@ public abstract class Command {
      *
      * @param taskList The TaskList to which the command is to be executed.
      */
-    public void setData(TaskList taskList) {
-        this.tasks = taskList;
+    public void setData(TaskList taskList, Storage storage) {
+        tasks = taskList;
+        this.storage = storage;
     }
 }

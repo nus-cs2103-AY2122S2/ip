@@ -1,5 +1,6 @@
 package kenobi.ui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -37,7 +38,7 @@ public class MainWindow extends AnchorPane {
         kenobi.init();
 
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(kenobi.greet(), kenobiImage)
+                DialogBox.getKenobiDialog(kenobi.greet(), kenobiImage)
         );
     }
 
@@ -54,11 +55,16 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        addDialog(DialogBox.getUserDialog(userInput.getText(), userImage));
-
-        kenobi.giveCommand(userInput.getText());
+        String inputString = userInput.getText();
         userInput.clear();
 
-        addDialog(DialogBox.getDukeDialog(kenobi.getResponse(), kenobiImage));
+        addDialog(DialogBox.getUserDialog(inputString, userImage));
+
+        kenobi.executeCommand(inputString);
+        addDialog(DialogBox.getKenobiDialog(kenobi.getResponse(), kenobiImage));
+
+        if (kenobi.isTerminated()) {
+            Platform.exit();
+        }
     }
 }

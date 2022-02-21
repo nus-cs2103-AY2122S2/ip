@@ -28,4 +28,10 @@ public class KenobiApp extends Application {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void stop() throws Exception {
+        kenobi.executeCommand("bye");
+        super.stop();
+    }
 }
