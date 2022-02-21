@@ -55,7 +55,6 @@ public class IstjBot {
         try {
             Command c = Parser.parse(input);
             isExit = c.isExit();
-            System.out.println(c.execute(texts, ui, storage));
             return c.execute(texts, ui, storage);
         } catch (BotException e) {
             return ui.showError(e.getMessage());
