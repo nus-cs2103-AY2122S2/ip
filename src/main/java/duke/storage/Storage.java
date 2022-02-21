@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -47,8 +45,10 @@ public class Storage {
     public ArrayList<Task> load() throws FileNotFoundException {
         File file = new File(filePath);
         BufferedReader bufferedReader = null;
-        if (!Files.exists(Paths.get(filePath))) {
+        if (!file.exists()) {
             try {
+                File directory = new File(file.getParentFile().getAbsolutePath());
+                directory.mkdirs();
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -146,6 +146,7 @@ public class Storage {
                 }
                 line = bufferedReader.readLine();
             }
+            bufferedReader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -162,6 +163,8 @@ public class Storage {
         BufferedWriter bufferedWriter = null;
         try {
             if (!file.exists()) {
+                File directory = new File(file.getParentFile().getAbsolutePath());
+                directory.mkdirs();
                 file.createNewFile();
             }
             FileWriter fileWriter = new FileWriter(file);
