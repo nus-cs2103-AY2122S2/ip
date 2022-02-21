@@ -6,7 +6,7 @@ import kenobi.parser.ParseException;
 import kenobi.parser.Parser;
 import kenobi.storage.LoadStorageException;
 import kenobi.storage.Storage;
-import kenobi.util.TaskList;
+import kenobi.task.TaskList;
 
 /**ip [run]
  * The Kenobi program implements a chatbot that manages a list of tasks.

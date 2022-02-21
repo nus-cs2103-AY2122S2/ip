@@ -1,6 +1,6 @@
 package kenobi.command;
 
-import kenobi.util.TaskList;
+import kenobi.task.TaskList;
 
 /**
  * The Command class encapsulates the commands that can be done by Kenobi.

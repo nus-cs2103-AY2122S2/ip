@@ -1,6 +1,4 @@
-package kenobi.util;
-
-import kenobi.task.Task;
+package kenobi.task;
 
 import java.util.ArrayList;
 

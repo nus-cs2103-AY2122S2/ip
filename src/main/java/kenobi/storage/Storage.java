@@ -2,7 +2,7 @@ package kenobi.storage;
 
 import kenobi.parser.Parser;
 import kenobi.task.Task;
-import kenobi.util.TaskList;
+import kenobi.task.TaskList;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

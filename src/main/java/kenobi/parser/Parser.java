@@ -3,8 +3,11 @@ package kenobi.parser;
 import kenobi.command.*;
 import kenobi.task.*;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 
 import static java.lang.Integer.parseInt;
 
@@ -94,11 +97,24 @@ public class Parser {
      * @throws ParseException if the date string could not be parsed.
      */
     private static LocalDate parseDate(String str) throws ParseException {
+        String[] dateComponents = str.split("\\s", 2);
+
+        if (dateComponents[0].equals("next")) {
+            return nextDayOfTheWeek(dateComponents[1]);
+        }
+
         try {
             return LocalDate.parse(str);
         } catch (DateTimeParseException e) {
             throw new ParseException("I don't understand that date");
         }
+    }
+
+    private static LocalDate nextDayOfTheWeek(String str) {
+        LocalDate currDate = LocalDate.now();
+        TemporalAdjuster adjuster = TemporalAdjusters.next(DayOfWeek.valueOf(str.toUpperCase()));
+
+        return currDate.with(adjuster);
     }
 
     /**

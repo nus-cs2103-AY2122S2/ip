@@ -1,6 +1,6 @@
 package kenobi.command;
 
-import kenobi.util.TaskList;
+import kenobi.task.TaskList;
 
 /**
  * The FindCommand class encapsulates the command to find a Task to a given TaskList.
