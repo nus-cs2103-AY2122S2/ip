@@ -1,0 +1,4 @@
+[T][ ] clean the house
+[T][ ] make breakfast
+[D][X] finish home /by Feb 22 2022
+[E][X] go to school /at Feb 23 2022

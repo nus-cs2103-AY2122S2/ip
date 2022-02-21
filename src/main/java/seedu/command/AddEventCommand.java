@@ -1,6 +1,7 @@
 package seedu.command;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
@@ -25,6 +26,9 @@ public class AddEventCommand extends Command {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Sorry your event details is in the wrong format, please use: "
                     + "\n [event description] /at [DD-MM-YYYY]");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Sorry your event date is in the wrong format, please use: "
+                    + "\n [DD-MM-YYYY]");
         }
     }
 

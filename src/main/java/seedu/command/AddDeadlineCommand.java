@@ -1,6 +1,7 @@
 package seedu.command;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
@@ -26,6 +27,9 @@ public class AddDeadlineCommand extends Command {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Sorry your deadline details is in the wrong format, please use: "
                     + "\n [deadline description] /by [DD-MM-YYYY]");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Sorry your deadline date is in the wrong format, please use: "
+                    + "\n [DD-MM-YYYY]");
         }
     }
 

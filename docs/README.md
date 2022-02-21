@@ -11,7 +11,6 @@ or need to be completed.</p>
 <p><b>Calcifer</b> operates mainly using CLI user commands, but can be started up using a GUI application 
 to provide a more user-friendly design and interface.</p>
 
-***
 
 ## Features
 
@@ -20,7 +19,7 @@ to provide a more user-friendly design and interface.</p>
 - _**Add** new tasks_   
 - _**Delete** existing tasks_
 - _**List** all existing tasks_
-- _**Mark/Unmark** an existing task_
+- _**Mark/Unmark** existing tasks_
 - _**Find** tasks_
 
 ### Feature: Add
@@ -47,7 +46,6 @@ Any existing task can be marked or unmarked based on the task ID.
 **Finds** all existing tasks that include the specified search keyword.
 
 
-***
 
 ## Usage
 
@@ -67,7 +65,7 @@ What can I help you with today?
 ```
 
 
-### `by` - Displays exit message
+### `bye` - Displays exit message
 
 Displays a standard exit message.
 
@@ -241,7 +239,6 @@ Here are the matching tasks in your list:
 1. [E][] go to movie (at: Feb 21 2022)
 ```
 
-***
 
 ## Image References
 
