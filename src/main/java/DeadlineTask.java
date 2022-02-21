@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+=======
+>>>>>>> branch-Level-7
 public class DeadlineTask extends Task{
     LocalDateTime byDate;
 
@@ -21,5 +24,10 @@ public class DeadlineTask extends Task{
     @Override
     public String toString() {
         return "[D]"+super.toString() + "(by: " + byDate.format(fm) + ")";
+    }
+
+    @Override
+    public String toFileString(){
+        return "D" + super.toFileString() + " | " + this.date;
     }
 }
