@@ -52,6 +52,7 @@ public class Event extends Task {
      *
      * @return String format of event description.
      */
+    @Override
     public String toWrite() {
         return "[E]" + super.toString() + " /at " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }

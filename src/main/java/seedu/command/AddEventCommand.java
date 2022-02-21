@@ -41,6 +41,7 @@ public class AddEventCommand extends Command {
      * @return Display message if the task has been added to the list successfully or if there are event clashes.
      * @throws DukeException  If task list cannot be written back to storage location.
      */
+    @Override
     public String run(TaskList taskList, Storage storage) throws DukeException {
         assert taskList != null : "AddEventCommand->run: Task list cannot be null.";
         assert storage != null : "AddEventCommand->run: Storage cannot be null.";

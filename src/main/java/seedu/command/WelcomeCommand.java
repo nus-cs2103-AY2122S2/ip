@@ -19,6 +19,7 @@ public class WelcomeCommand extends Command {
      * @param storage Storage object to write tasks back to.
      * @return Welcome message to the user.
      */
+    @Override
     public String run(TaskList taskList, Storage storage) {
         assert taskList != null : "WelcomeCommand->run: Tasks list cannot be null.";
         assert storage != null : "WelcomeCommand->run: Storage cannot be null.";

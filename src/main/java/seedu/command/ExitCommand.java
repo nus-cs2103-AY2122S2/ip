@@ -19,6 +19,7 @@ public class ExitCommand extends Command {
      * @param storage Storage object to write tasks back to.
      * @return Goodbye message to the user.
      */
+    @Override
     public String run(TaskList taskList, Storage storage) {
         assert taskList != null : "ExitCommand->run: Task list cannot be null.";
         assert storage != null : "ExitCommand->run: Storage cannot be null.";

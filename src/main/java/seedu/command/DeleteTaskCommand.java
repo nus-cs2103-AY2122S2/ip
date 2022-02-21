@@ -31,6 +31,7 @@ public class DeleteTaskCommand extends Command {
      * @return Display message if the task has been deleted from the list successfully.
      * @throws DukeException  If task list cannot be written back to storage location.
      */
+    @Override
     public String run(TaskList taskList, Storage storage) throws DukeException {
         assert taskList != null : "DeleteTaskCommand->run: Task list cannot be null.";
         assert storage != null : "DeleteTaskCommand->run: Storage cannot be null.";
