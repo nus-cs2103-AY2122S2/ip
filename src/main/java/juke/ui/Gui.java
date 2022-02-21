@@ -3,8 +3,10 @@ package juke.ui;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import juke.Juke;
 import juke.command.Result;
 import juke.ui.controller.MainWindow;
 
@@ -12,8 +14,25 @@ import juke.ui.controller.MainWindow;
  * Manages the graphical user interface using JavaFX.
  */
 public class Gui {
+    private static final String GREET_MESSAGE = "Greetings Executor!";
+    private static final String RESOURCE_LOCATION = "/view/MainWindow.fxml";
+
+    /**
+     * Reference to the Juke instance.
+     */
+    private final Juke juke;
+
     private Scene scene;
     private MainWindow mainWindow;
+
+    /**
+     * Constructor to initialize GUI.
+     *
+     * @param instance Instance of Juke.
+     */
+    public Gui(Juke instance) {
+        this.juke = instance;
+    }
 
     /**
      * Initializes the components of the UI.
@@ -22,11 +41,13 @@ public class Gui {
      */
     public void initializeUiComponents(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainWindow.fxml"));
-            mainWindow = fxmlLoader.load();
-            fxmlLoader.<MainWindow>getController().setGui(this);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(RESOURCE_LOCATION));
+            Parent root = fxmlLoader.load();
 
-            scene = new Scene(mainWindow);
+            scene = new Scene(root);
+
+            mainWindow = fxmlLoader.<MainWindow>getController();
+            mainWindow.setJuke(juke);
 
             stage.setScene(scene);
             stage.show();
@@ -36,27 +57,21 @@ public class Gui {
     }
 
     /**
-     * Returns a formatted string for Juke response.
-     *
-     * @param input Input string.
-     * @return Formatted string.
-     */
-    public String getResponse(String input) {
-        return ">>>>>> " + input;
-    }
-
-    /**
-     * Returns the message associated with a success, or the error message otherwise.
+     * Returns the message associated with a success, or throws the exception associated with the error.
      *
      * @param result Result of a command execution.
      * @return Message.
+     * @throws Exception Exception if it is an error
      */
-    public String getResultMessage(Result result) {
-        try {
-            String[] string = result.getOrThrow();
-            return String.join(System.lineSeparator(), string);
-        } catch (Exception e) {
-            return e.getMessage();
-        }
+    public String getResultMessageOrThrow(Result result) throws Exception {
+        String[] string = result.getOrThrow();
+        return String.join(System.lineSeparator(), string);
+    }
+
+    /**
+     * Prints the welcome message.
+     */
+    public void greet() {
+        mainWindow.addJukeDialog(GREET_MESSAGE);
     }
 }

@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import juke.Juke;
 import juke.exception.JukeEmptyTaskListException;
 import juke.task.Task;
 
@@ -13,14 +14,22 @@ import juke.task.Task;
  */
 public class TaskList implements Iterable<Task> {
     /**
+     * Reference to the Juke instance.
+     */
+    private final Juke juke;
+
+    /**
      * Internal list for tasks.
      */
     private final ArrayList<Task> taskList;
 
     /**
      * Constructor to initialize empty internal list.
+     *
+     * @param instance Instance of Juke.
      */
-    public TaskList() {
+    public TaskList(Juke instance) {
+        this.juke = instance;
         this.taskList = new ArrayList<>();
     }
 
@@ -28,8 +37,10 @@ public class TaskList implements Iterable<Task> {
      * Constructor to initialize internal list with elements of a collection.
      *
      * @param tasks Collection of tasks.
+     * @param instance Instance of juke.
      */
-    public TaskList(Collection<Task> tasks) {
+    public TaskList(Collection<Task> tasks, Juke instance) {
+        this.juke = instance;
         taskList = new ArrayList<>();
         taskList.addAll(tasks);
     }

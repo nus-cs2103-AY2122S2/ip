@@ -89,8 +89,8 @@ public class DateTimeHandler {
      */
     private void initializeFormatters() {
         inputFormatter = DATE_TIME_PATTERNS.stream()
+                // Lambdas seem to create checkstyle errors
                 .reduce(new DateTimeFormatterBuilder().parseCaseInsensitive(),
-                        // Lambdas seem to create checkstyle errors.
                         (builder, str) -> builder.appendOptional(DateTimeFormatter.ofPattern(str)),
                         (builder, other) -> builder.appendOptional(other.toFormatter()))
                 .parseDefaulting(ChronoField.HOUR_OF_DAY, 8)

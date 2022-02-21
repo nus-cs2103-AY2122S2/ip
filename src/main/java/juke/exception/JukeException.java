@@ -20,6 +20,6 @@ public class JukeException extends Exception {
      */
     @Override
     public String getMessage() {
-        return String.format("[ERROR] %s", super.getMessage());
+        return super.getMessage();
     }
 }

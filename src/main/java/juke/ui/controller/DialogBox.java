@@ -17,6 +17,8 @@ import javafx.scene.layout.HBox;
  * Dialog box controller for JavaFX.
  */
 public class DialogBox extends HBox {
+    private static final String RESOURCE_LOCATION = "/view/DialogBox.fxml";
+
     @FXML
     private Label text;
     @FXML
@@ -30,7 +32,7 @@ public class DialogBox extends HBox {
      */
     public DialogBox(String text, Image icon) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(RESOURCE_LOCATION));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -43,10 +45,15 @@ public class DialogBox extends HBox {
     }
 
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        setAlignment(Pos.TOP_LEFT);
+        setStyle("-fx-background-color: #bfb1c1;");
+        ObservableList<Node> tmp = FXCollections.observableArrayList(getChildren());
         FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        getChildren().setAll(tmp);
+    }
+
+    private void setErrorStyle() {
+        setStyle("-fx-background-color: #ed9696;");
     }
 
     /**
@@ -70,6 +77,13 @@ public class DialogBox extends HBox {
     public static DialogBox getJukeDialog(String text, Image icon) {
         var box = new DialogBox(text, icon);
         box.flip();
+        return box;
+    }
+
+    public static DialogBox getErrorDialog(String text, Image icon) {
+        var box = new DialogBox(text, icon);
+        box.flip();
+        box.setErrorStyle();
         return box;
     }
 }

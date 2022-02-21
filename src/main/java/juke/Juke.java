@@ -16,7 +16,7 @@ public class Juke extends Application {
     /**
      * Singleton instance of Juke.
      */
-    private static final Juke INSTANCE = new Juke();
+    private static Juke instance = new Juke();
 
     private TaskList taskList;
     private TextUi textUi;
@@ -32,7 +32,12 @@ public class Juke extends Application {
      * Constructor that initializes the application.
      */
     public Juke() {
-        initializeFields();
+        taskList = new TaskList(this);
+        textUi = new TextUi(this);
+        gui = new Gui(this);
+        storage = new Storage(this);
+        hasExited = false;
+        instance = this;
         CommandHandler.registerCommands();
     }
 
@@ -42,16 +47,16 @@ public class Juke extends Application {
      * @param args Run arguments, unused.
      */
     public static void main(String[] args) {
-        INSTANCE.run();
+        instance.run();
     }
 
     /**
-     * Returns the singleton instance of Juke.
+     * Returns the currently running instance of Juke.
      *
-     * @return Juke.
+     * @return Instance of Juke.
      */
     public static Juke getInstance() {
-        return INSTANCE;
+        return instance;
     }
 
     /**
@@ -62,8 +67,24 @@ public class Juke extends Application {
     @Override
     public void start(Stage stage) {
         Platform.setImplicitExit(true);
-        INSTANCE.getStorage().loadTasks();
+        instance.getStorage().loadTasks();
         gui.initializeUiComponents(stage);
+        gui.greet();
+    }
+
+    /**
+     * Pauses exit by 2 seconds, to see exit message.
+     *
+     * @throws Exception Exception.
+     */
+    @Override
+    public void stop() throws Exception {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        super.stop();
     }
 
     /**
@@ -84,16 +105,25 @@ public class Juke extends Application {
     }
 
     /**
-     * Returns the UI class used to handle inputs and outputs.
+     * Returns the text UI instance used to handle inputs and outputs.
      *
-     * @return Ui.
+     * @return Text UI.
      */
-    public TextUi getUi() {
+    public TextUi getTextUi() {
         return textUi;
     }
 
     /**
-     * Returns the storage class used to handle file storage.
+     * Returns the GUI instance used to handle inputs and outputs.
+     *
+     * @return GUI.
+     */
+    public Gui getGui() {
+        return gui;
+    }
+
+    /**
+     * Returns the storage instance used to handle file storage.
      *
      * @return Storage.
      */
@@ -110,16 +140,5 @@ public class Juke extends Application {
         while (!hasExited) {
             textUi.runUiLoop();
         }
-    }
-
-    /**
-     * Initializes the fields for the constructor.
-     */
-    private void initializeFields() {
-        taskList = new TaskList();
-        textUi = new TextUi();
-        gui = new Gui();
-        storage = new Storage(this);
-        hasExited = false;
     }
 }

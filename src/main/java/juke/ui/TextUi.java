@@ -2,6 +2,7 @@ package juke.ui;
 
 import java.util.Scanner;
 
+import juke.Juke;
 import juke.command.Command;
 import juke.command.CommandHandler;
 import juke.command.Result;
@@ -29,12 +30,20 @@ public class TextUi {
             + "  \\|_____|                  |___|/                          |___|/   \n";
     private static final String GREET_MESSAGE = "Greetings Executor!";
 
+    /**
+     * Reference to the Juke instance.
+     */
+    private final Juke juke;
+
     private Scanner in;
 
     /**
      * Constructor that initializes the scanner for user input.
+     *
+     * @param instance Instance of Juke.
      */
-    public TextUi() {
+    public TextUi(Juke instance) {
+        this.juke = instance;
         this.in = new Scanner(System.in);
     }
 

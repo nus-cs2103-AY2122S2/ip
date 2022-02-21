@@ -2,10 +2,8 @@ package juke.common;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import juke.Juke;
 import juke.exception.JukeException;
@@ -57,13 +55,13 @@ public class Storage {
     private void initializeFile() {
         try {
             if (file.getParentFile().mkdirs()) {
-                juke.getUi().formattedPrint(MKDIRS_MESSAGE);
+                juke.getTextUi().formattedPrint(MKDIRS_MESSAGE);
             }
             if (file.createNewFile()) {
-                juke.getUi().formattedPrint(MISSING_MESSAGE, CREATE_MESSAGE);
+                juke.getTextUi().formattedPrint(MISSING_MESSAGE, CREATE_MESSAGE);
             }
         } catch (IOException | SecurityException e) {
-            juke.getUi().formattedPrint(e.getMessage());
+            juke.getTextUi().formattedPrint(e.getMessage());
         }
     }
 
@@ -73,9 +71,9 @@ public class Storage {
     private void createNewFileForInvalidData() {
         try {
             file.createNewFile();
-            juke.getUi().formattedPrint(FORMAT_ERROR_MESSAGE, CREATE_MESSAGE);
+            juke.getTextUi().formattedPrint(FORMAT_ERROR_MESSAGE, CREATE_MESSAGE);
         } catch (IOException | SecurityException e) {
-            juke.getUi().formattedPrint(e.getMessage());
+            juke.getTextUi().formattedPrint(e.getMessage());
         }
     }
 

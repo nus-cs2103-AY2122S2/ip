@@ -7,10 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import juke.Juke;
 import juke.command.Command;
 import juke.command.CommandHandler;
 import juke.exception.JukeInvalidCommandException;
-import juke.ui.Gui;
 
 /**
  * Main window controller for JavaFX.
@@ -25,7 +25,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Gui gui;
+    /**
+     * Reference to the Juke instance.
+     */
+    private Juke juke;
 
     private Image userImage = new Image(getClass().getResourceAsStream("/images/User.png"));
     private Image jukeImage = new Image(getClass().getResourceAsStream("/images/Juke.png"));
@@ -36,33 +39,45 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Sets the GUI instance.
+     * Sets the Juke instance.
      *
-     * @param gui GUI Instance.
+     * @param instance GUI Instance.
      */
-    public void setGui(Gui gui) {
-        this.gui = gui;
+    public void setJuke(Juke instance) {
+        this.juke = instance;
     }
 
     @FXML
     private void handleUserInput() {
+        assert juke != null;
         String input = userInput.getText();
+        userInput.clear();
         Command cmd = null;
         try {
             cmd = CommandHandler.fetchCommand(input);
         } catch (JukeInvalidCommandException e) {
-            dialogContainer.getChildren().add(
-                DialogBox.getJukeDialog(e.getMessage(), jukeImage));
+            addUserDialog(input);
+            addErrorDialog(e);
         }
         CommandHandler.execute(cmd);
         if (CommandHandler.isCommandNull(cmd)) {
             return;
         }
-        dialogContainer.getChildren()
-                .add(DialogBox.getUserDialog(input, userImage));
-        dialogContainer.getChildren()
-                .add(DialogBox.getJukeDialog(gui.getResultMessage(CommandHandler.fetchResult(cmd)), jukeImage));
-        this.userInput.clear();
+        addUserDialog(input);
+        try {
+            addJukeDialog(juke.getGui().getResultMessageOrThrow(CommandHandler.fetchResult(cmd)));
+        } catch (Exception e) {
+            addErrorDialog(e);
+        }
+    }
+
+    /**
+     * Sends a message on the user's behalf
+     *
+     * @param text Message to send.
+     */
+    public void addUserDialog(String text) {
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(text, userImage));
     }
 
     /**
@@ -71,7 +86,15 @@ public class MainWindow extends AnchorPane {
      * @param text Message to send.
      */
     public void addJukeDialog(String text) {
-        dialogContainer.getChildren().add(
-            DialogBox.getJukeDialog(gui.getResponse(text), jukeImage));
+        dialogContainer.getChildren().add(DialogBox.getJukeDialog(text, jukeImage));
+    }
+
+    /**
+     * Sends an error message on Juke's behalf
+     *
+     * @param exception Exception.
+     */
+    public void addErrorDialog(Exception exception) {
+        dialogContainer.getChildren().add(DialogBox.getErrorDialog(exception.getMessage(), jukeImage));
     }
 }
