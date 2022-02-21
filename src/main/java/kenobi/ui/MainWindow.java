@@ -1,11 +1,9 @@
 package kenobi.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import kenobi.Kenobi;
@@ -21,10 +19,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
 
-    private Kenobi kenobi;
+    private Image kenobiImage = new Image(getClass().getResourceAsStream("/images/kenobi.png"));
+    private Image userImage = new Image(getClass().getResourceAsStream("/images/user.png"));
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Penguin_pp.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Kenobi_pp.png"));
+    private Kenobi kenobi;
 
     @FXML
     public void initialize() {
@@ -33,6 +31,21 @@ public class MainWindow extends AnchorPane {
 
     public void setKenobi(Kenobi k) {
         kenobi = k;
+
+        assert kenobi != null : "Kenobi instance is null";
+
+        kenobi.init();
+
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(kenobi.greet(), kenobiImage)
+        );
+    }
+
+    /**
+     * Adds a dialog box to the scroll pane.
+     */
+    private void addDialog(DialogBox db) {
+        dialogContainer.getChildren().add(db);
     }
 
     /**
@@ -41,15 +54,11 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, new ImageView(userImage)));
+        addDialog(DialogBox.getUserDialog(userInput.getText(), userImage));
 
         kenobi.giveCommand(userInput.getText());
         userInput.clear();
 
-        Label dukeText = new Label(kenobi.getResponse());
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
-        );
+        addDialog(DialogBox.getDukeDialog(kenobi.getResponse(), kenobiImage));
     }
 }

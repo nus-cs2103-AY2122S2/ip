@@ -1,7 +1,7 @@
 package kenobi.parser;
 
 import kenobi.command.*;
-import kenobi.task.Task;
+import kenobi.task.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -19,7 +19,7 @@ public class Parser {
      * @return a Command object encapsulating the parsed command.
      * @throws ParseException if the Parser could not parse the command
      */
-    public static Command parse(String str) throws ParseException {
+    public static Command parseCommand(String str) throws ParseException {
         String[] cmd = str.split("\\s", 2);
         String[] fields;
 
@@ -99,5 +99,40 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new ParseException("I don't understand that date");
         }
+    }
+
+    /**
+     * Parses a string representing a task into a Task object.
+     *
+     * @param taskString The string representing a task.
+     * @return the parsed Task object.
+     * @throws ParseException if the task string could not be parsed.
+     */
+    public static Task parseTask(String taskString) throws ParseException, TaskException {
+        String[] taskComponents = taskString.split(",.,");
+
+        Task t;
+        switch (taskComponents[0]) {
+        case "T":
+            t = new ToDo(taskComponents[2]);
+            break;
+
+        case "D":
+            t = new Deadline(taskComponents[2], LocalDate.parse(taskComponents[3]));
+            break;
+
+        case "E":
+            t = new Event(taskComponents[2], LocalDate.parse(taskComponents[3]));
+            break;
+
+        default:
+            throw new ParseException("I could not interpret the save files");
+        }
+
+        if (taskComponents[1].equals("1")) {
+            t.markAsDone();
+        }
+
+        return t;
     }
 }

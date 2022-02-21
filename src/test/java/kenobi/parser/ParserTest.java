@@ -9,7 +9,7 @@ public class ParserTest {
     @Test
     public void dateFormatException_invalidDateFormat_exceptionThrown() {
         try {
-            assertEquals(0, Parser.parse("deadline homework /by 123123123"));
+            assertEquals(0, Parser.parseCommand("deadline homework /by 123123123"));
             fail();
         } catch (ParseException e) {
             assertEquals("Whoopsie-Daisy :( I don't understand that date", e.getMessage());
@@ -19,7 +19,7 @@ public class ParserTest {
     @Test
     public void incompleteCommand_oneStringCommand_exceptionThrown() {
         try {
-            assertEquals(0, Parser.parse("event"));
+            assertEquals(0, Parser.parseCommand("event"));
             fail();
         } catch (ParseException e) {
             assertEquals("Whoopsie-Daisy :( the command seems to be incomplete", e.getMessage());

@@ -1,0 +1,14 @@
+#bubble{
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-background-color: #3b4252;
+    -fx-padding: 5;
+}
+
+#container{
+    -fx-background-color: "black";
+}
+
+#text{
+    -fx-fill: "white";
+}

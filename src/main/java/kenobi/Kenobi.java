@@ -4,15 +4,18 @@ import kenobi.command.Command;
 import kenobi.command.ExitCommand;
 import kenobi.parser.ParseException;
 import kenobi.parser.Parser;
-import kenobi.util.Storage;
+import kenobi.storage.LoadStorageException;
+import kenobi.storage.Storage;
 import kenobi.util.TaskList;
 
-/**
+/**ip [run]
  * The Kenobi program implements a chatbot that manages a list of tasks.
  */
 public class Kenobi {
-    private final TaskList tasks;
-    private final Storage storage;
+    private static final String GREETING_MSG = "Hello there, my name is Kenobi. How may I serve you?";
+
+    private TaskList tasks;
+    private Storage storage;
 
     private String response;
     private Command cmd;
@@ -24,7 +27,26 @@ public class Kenobi {
      */
     public Kenobi(String savePath) {
         storage = new Storage(savePath);
-        tasks = storage.load();
+    }
+
+    /**
+     * Initializes the instance of Kenobi.
+     */
+    public void init() {
+        try {
+            tasks = storage.load();
+            response = GREETING_MSG;
+        } catch (LoadStorageException e) {
+            response = e.getMessage();
+            tasks = new TaskList();
+        }
+    }
+
+    /**
+     *
+     */
+    public String greet() {
+        return GREETING_MSG;
     }
 
     /**
@@ -33,7 +55,7 @@ public class Kenobi {
      */
     public void giveCommand(String input) {
         try {
-            cmd = Parser.parse(input);
+            cmd = Parser.parseCommand(input);
             cmd.setData(tasks);
             response = cmd.execute();
 

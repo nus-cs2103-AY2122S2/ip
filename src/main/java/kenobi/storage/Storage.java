@@ -1,9 +1,8 @@
-package kenobi.util;
+package kenobi.storage;
 
-import kenobi.parser.ParseException;
 import kenobi.parser.Parser;
 import kenobi.task.Task;
-import kenobi.task.TaskException;
+import kenobi.util.TaskList;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -34,7 +33,7 @@ public class Storage {
      *
      * @return a TaskList containing the tasks from savePath or an empty TaskList if savePath doesn't exist.
      */
-    public TaskList load() {
+    public TaskList load() throws LoadStorageException {
         TaskList tasks = new TaskList();
 
         if (!Files.exists(savePath)) {
@@ -48,13 +47,8 @@ public class Storage {
 
                 tasks.add(nextTask);
             }
-        } catch (IOException e) {
-            loadMsg = e.getMessage();
-        } catch (TaskException e) {
-            loadMsg = e.getMessage();
-            tasks.clear();
-        } catch (ParseException e) {
-            loadMsg = e.getMessage();
+        } catch (Exception e) {
+            throw new LoadStorageException(e.getMessage());
         }
 
         return tasks;
