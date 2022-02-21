@@ -42,7 +42,7 @@ this will add the deadline task of finishing a project and set the deadline as J
 
 ```
 New task added:
-[D][ ] finish project (Jun 10 2022)
+[D][ ] finish project (by: Jun 10 2022)
 ```
 
 ### `event` - add an event task into the task list.
@@ -59,7 +59,7 @@ this will add the event task of going to a party and set the event date as June 
 
 ```
 New task added:
-[E][ ] go party (June 10 2022)
+[E][ ] go party (at: June 10 2022)
 ```
 
 ### `mark` - marks a task as completed
@@ -76,7 +76,7 @@ this will mark the 6th task in the list as complete
 ```
 Good Job! ^_^
 Task number 6 has been marked as done!
-[D][X] finish project (Jun 10 2022)
+[D][X] finish project (by: Jun 10 2022)
 ```
 
 ### `unmark` - marks a task as incompleted
@@ -93,7 +93,7 @@ this will mark the 6th task in the list as incomplete
 ```
 I've unmarked task number 6
 Complete it soon! ^_^
-[D][ ] finish project (Jun 10 2022))
+[D][ ] finish project (by: Jun 10 2022))
 ```
 ### `delete` - delete a task
 
@@ -109,7 +109,7 @@ this will delete the 6th task in the list
 
 ```
 Noted. I've removed this task:
-[D][ ] finish project (Jun 10 2022)
+[D][ ] finish project (by: Jun 10 2022)
 ```
 
 ### `find` - find a task
@@ -127,6 +127,6 @@ this will find all the tasks where the description contains 'run'
 ```
 Here are the matching tasks:
 1. [T][ ] run
-2. [D][ ] run (Jan 2 2007)
-3. [E][ ] run (at 3pm)
+2. [D][ ] run (by: Jan 2 2007)
+3. [E][ ] run (at: Jan 2 2007)
 ```
