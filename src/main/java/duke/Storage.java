@@ -50,6 +50,7 @@ public class Storage {
                         String[] arrOfStr2 = arrOfStr[4].split("\\|", 2);
                         // split within date and time
                         String[] arrOfStr3 = arrOfStr2[1].split(" ", 5);
+                        assert(arrOfStr3[0].equals("")):"Error occurred in parsing";
                         // extracting date from data received
                         LocalDate by = LocalDate.parse(arrOfStr3[1] + " "
                                 + arrOfStr3[2] + " " + arrOfStr3[3], formatter);

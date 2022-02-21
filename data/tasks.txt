@@ -1,4 +1,3 @@
-T | 0 | chicken
-T | 0 | eat chicken
-D | 0 | pray to god to thank him      | 01 Dec 2022 1800
-E | 0 | attend a party  | Mark's place
+T | 0 | eat
+D | 0 | pray | 01 Jul 2022 1800
+E | 0 | Mark's party | your Mom's house
