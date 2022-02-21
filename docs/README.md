@@ -12,8 +12,10 @@ You can download the app [here](https://github.com/B1LLP4RK/ip). Image below sho
     - adds a task to the tasklist
 2. `event {event name} \at {when}`
     - adds a task that starts at a time to the tasklist
+    - time must be specified in YYYY-MM-DD
 3. `deadline {event name} \by {when}`
     - adds a task that is due at a particular time to the tasklist
+    - time must be specified in YYYY-MM-DD
 4. `mark {task number}`/`unmark {task number}`
     - marks/unmarks a task done
 5. `delete {task number}`
@@ -21,7 +23,7 @@ You can download the app [here](https://github.com/B1LLP4RK/ip). Image below sho
 6. `find {keyword}`
     - shows the task containing the keyword, case insensitive
 ## development roadmap
-- [x] enable search using a **keyword**
+- [x] enable search using a **keyword** (`find` command)
 - [ ] enable changing **task orders**
 - [ ] enable setting **priority** to tasks
 - [ ] enable **priority-based ordering**
