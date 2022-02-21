@@ -40,10 +40,10 @@ Deletes a task from the list: **delete**
 Format: delete INDEX_OF_TASK  
 Example: delete 2 
 
-### list
-Listing out all tasks added to Adam.  
+### List
+Listing out all tasks added to Adam: **list**  
 Format: list 
 
-### bye
-Saves tasks to computer   
+### Save
+Saves tasks to computer: **bye**  
 Format: bye 
