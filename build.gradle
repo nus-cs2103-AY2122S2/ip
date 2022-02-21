@@ -63,4 +63,4 @@ run{
     standardInput = System.in
 }
 
-mainClassName ="main.duke.Duke"
+mainClassName ="main.duke.gui.Launcher"
