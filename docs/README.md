@@ -37,13 +37,13 @@ Example: unmark 2
 
 ### Delete
 Deletes a task from the list: **delete**  
-Format: delete INDEX_OF_TASK 
+Format: delete INDEX_OF_TASK  
 Example: delete 2 
 
 ### list
-Listing out all tasks added to Adam. 
+Listing out all tasks added to Adam.  
 Format: list 
 
 ### bye
-Saves tasks to computer 
+Saves tasks to computer   
 Format: bye 
