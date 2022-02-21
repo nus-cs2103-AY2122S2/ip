@@ -4,6 +4,8 @@
 
 Fluffers is a task manager chatbot! She can help you keep track of tasks and whether they have been completed or not.
 
+NOTE: I DO NOT OWN THE IMAGES USED.
+
 ## Quick Start
 
 1. Install Java 11 or higher
