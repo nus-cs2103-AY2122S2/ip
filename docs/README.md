@@ -62,7 +62,7 @@ Example of usage:
 ### `event` - Adds an event task
 
 Creates an event task which has a description, and a start date which is a date and time component.
-See [date and time component](#date-and-time-component) for more information about the date and time component.
+See [date and time component](#date-and-time-component).
 
 Format: `event TASK_NAME -at START_DATE`
 
@@ -165,6 +165,7 @@ Example of usage:
 Edits a task at a given index. The command must contain at least one valid parameter to edit.
 A valid index is a positive integer that starts at 1 and ends at the size of the task list,
 where the value represents its position in the task list.
+The `DATE_TIME` argument follows the date and time formatting. See [date and time component](#date-and-time-component).
 
 Format: `edit INDEX [-d DESCRIPTION] [-t DATE_TIME]`
 
@@ -172,8 +173,8 @@ Example of usage:
 
 - `edit 1 -d Grab dinner` edits the description of the first task.
 - `edit 2 -t 23102022 1400` edits the date and time of the second task.
-- `edit 3 -d Finish readings -t 11032022 1900` edits the description, and the date and time of the third task.
-- `edit 4` invalid as missing parameters.
+- `edit 3 -d Finish readings -t 11/03/2022 19:00` edits the description, and the date and time of the third task.
+- `edit 4` is invalid as it is missing parameters.
 
 ### `bye` - Exits Juke
 
