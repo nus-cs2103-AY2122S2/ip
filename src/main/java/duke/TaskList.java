@@ -85,7 +85,7 @@ public class TaskList {
         String string = "";
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            string += String.format("%d. %s", i, task.toString());
+            string += String.format("%d. %s\n", i, task.toString());
         }
         return string;
     }
