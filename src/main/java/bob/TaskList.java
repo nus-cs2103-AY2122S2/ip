@@ -76,8 +76,8 @@ public class TaskList {
             return Ui.unmark(tasks.get(idx - 1));
 
         case "delete":
-            String str = Ui.delete(tasks.size(), tasks.get(idx - 1));
-            tasks.remove(idx - 1);
+            Task removedTask = tasks.remove(idx - 1);
+            String str = Ui.delete(tasks.size(), removedTask);
             return str;
 
         default:

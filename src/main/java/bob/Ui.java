@@ -48,7 +48,7 @@ public class Ui {
                 + "    7. Unmark INTEGER: marks the entry indexed by INTEGER as not done.\n"
                 + "    8. Find KEYWORD: returns a list of entries that contains KEYWORD.\n"
                 + "    9. Archive: moves all existing entries to another file and clears the current list.\n"
-                + "    10. Command: returns a list of supported commands with descriptions.\n"
+                + "    10. Commands: returns a list of supported commands with descriptions.\n"
                 + Ui.printLine();
     }
 
