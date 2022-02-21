@@ -25,6 +25,10 @@ is pointless if everything you note down disappears right after.
 You can save and reload your data while using Duke, or let Duke load and save
 your data automatically (on startup, and on exit).
 
+### Command history
+
+Look through whatever you've typed in with the up or down key! Wow! So revolutionary.
+
 ## Quick Start
 
 1. Ensure that you have [Java **11** (or newer)](https://adoptium.net/) installed on your computer.
