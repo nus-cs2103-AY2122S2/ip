@@ -117,22 +117,20 @@ public class TaskList {
      * @param term User wants to find tasks with this term
      * @throws DukeException If user gives an empty string as a search term.
      */
-    public void findItem(String term) throws DukeException {
+    public String findItem(String term) throws DukeException {
         StringBuilder result = new StringBuilder();
         if (term.isEmpty()) {
             throw new DukeException("Tell me what you're searching for");
         }
-        System.out.println("__________________________________");
         for (int i = 0; i < taskArray.size(); i++) {
             if (taskArray.get(i).titleContains(term)) {
                 result.append(String.format("%d. " + taskArray.get(i).toString() + "\n", i + 1));
             }
         }
         if (result.length() == 0) {
-            System.out.println("There are no tasks containing that term.");
+            return ("There are no tasks containing that term.");
         } else {
-            System.out.print(result);
-            System.out.println("__________________________________");
+            return String.valueOf(result);
         }
     }
 

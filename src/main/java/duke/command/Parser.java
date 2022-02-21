@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Duke;
+
 import duke.DukeException;
 
 import java.time.LocalDate;
@@ -45,8 +45,7 @@ public class Parser {
             case ("event"):
                 return parseAddItem(command, taskList);
             case ("find"):
-                taskList.findItem(command[1]);
-                break;
+                return taskList.findItem(command[1]);
             case ("priority"):
                 return parseSetPriority(command[1], taskList);
             default:
@@ -57,7 +56,6 @@ public class Parser {
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             return("This index doesn't exist in list");
         }
-        return "";
     }
 
     private static String parseAddItem(String[] command, TaskList taskList) throws DukeException {
