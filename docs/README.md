@@ -12,7 +12,7 @@ Bob is a personal desktop task manager.
 4. Double-click the file to start the app.
 5. Type the command in the command box and press Enter or the `Send` button on the bottom right to execute it.
 6. Type the "Commands" command to see a list of all available commands and what they do!
-7. Refer to the [Features](##Features) below for details of each command.
+7. Refer to the [Features](https://github.com/justinekoh/ip/blob/master/docs/README.md#features) below for details of each command.
 
 ---
 
