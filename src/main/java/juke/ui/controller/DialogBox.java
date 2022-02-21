@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,9 +40,10 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         this.text.setText(text);
         this.icon.setImage(icon);
+        this.text.setMinHeight(Control.USE_PREF_SIZE);
+        this.setMinHeight(this.text.getMinHeight());
     }
 
     private void flip() {
