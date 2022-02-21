@@ -11,6 +11,7 @@ Duke is a desktop chatbot for task management.
     - `list`: List all your tasks.
     - `todo Read book`: Adds a `Read book` todo item to your task list.
     - `mark 1`: Marks the first task as completed.
+    - `medium 1`: Changes the priority of the first task to __MEDIUM__.
     - `delete 1`: Removes the first task from your task list.
     - `bye`: Exits the chatbot.
 6. Refer to [features](#features) for more commands.
