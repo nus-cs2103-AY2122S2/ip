@@ -5,7 +5,6 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Existing file not found, starting fresh...
 <---------------------------------------------------------->
 Hello! I'm Duke, your personal assistant
 What can I do for you?
@@ -13,32 +12,37 @@ What can I do for you?
 
 <---------------------------------------------------------->
 Tasklist:
-
+1. [T][x] borrow book
+2. [D][ ] return book (by: 03 Mar 1999)
+3. [E][x] project meeting at (at: 24 Jan 2022)
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
 Added borrow book, as a Todo Task
 [T][ ] borrow book
-You currently have 1 tasks
+You currently have 4 tasks
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
 Added return book (by: 03 Mar 1999), as a Deadline Task
 [D][ ] return book (by: 03 Mar 1999)
-You currently have 2 tasks
+You currently have 5 tasks
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
 Added project meeting at (at: 24 Jan 2022), as a Event Task
 [E][ ] project meeting at (at: 24 Jan 2022)
-You currently have 3 tasks
+You currently have 6 tasks
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
 Tasklist:
-1. [T][ ] borrow book
+1. [T][x] borrow book
 2. [D][ ] return book (by: 03 Mar 1999)
-3. [E][ ] project meeting at (at: 24 Jan 2022)
+3. [E][x] project meeting at (at: 24 Jan 2022)
+4. [T][ ] borrow book
+5. [D][ ] return book (by: 03 Mar 1999)
+6. [E][ ] project meeting at (at: 24 Jan 2022)
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
@@ -53,9 +57,12 @@ Marked as done:
 
 <---------------------------------------------------------->
 Tasklist:
-1. [T][ ] borrow book
+1. [T][x] borrow book
 2. [D][x] return book (by: 03 Mar 1999)
 3. [E][x] project meeting at (at: 24 Jan 2022)
+4. [T][ ] borrow book
+5. [D][ ] return book (by: 03 Mar 1999)
+6. [E][ ] project meeting at (at: 24 Jan 2022)
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
@@ -73,6 +80,9 @@ Tasklist:
 1. [T][x] borrow book
 2. [D][ ] return book (by: 03 Mar 1999)
 3. [E][x] project meeting at (at: 24 Jan 2022)
+4. [T][ ] borrow book
+5. [D][ ] return book (by: 03 Mar 1999)
+6. [E][ ] project meeting at (at: 24 Jan 2022)
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
