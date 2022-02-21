@@ -43,7 +43,7 @@ list
 todo <TODO_NAME>
 ```
 
-### `event`: Add a Deadline
+### `deadline`: Add a Deadline
 
 - Adds a deadline to the task list with a specified datetime.
 
