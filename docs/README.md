@@ -16,7 +16,7 @@ AnnBot is a **desktop app for managing your tasks**. It's optimized for usage vi
     
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your PC.
-2. Download the latest `ip.jar` from [here](https://github.com/honganhcs/ip/releases).
+2. Download the latest `ann.jar` from [here](https://github.com/honganhcs/ip/releases).
 3. Copy the file to the folder you want to use as the *home folder* for your **AnnBot**.
 4. Double-click the file to start the app. A GUI similar to the below should appear in a few seconds.
 
