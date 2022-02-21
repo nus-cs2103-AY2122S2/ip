@@ -32,11 +32,11 @@ public class DukeStorage {
         String filePath = String.valueOf(path);
 
         // Check if parent and child directory exists else create them
-        File f1 = new File(filePath + "\\" + directory);
+        File f1 = new File(filePath + "/" + directory);
         f1.mkdirs();
 
         // Check if duke.txt exits else create it
-        File f2 = new File(filePath + "\\" + directory + "\\" + fileName);
+        File f2 = new File(filePath + "/" + directory + "/" + fileName);
         f2.createNewFile();
 
         this.filePath = f2;

@@ -24,7 +24,7 @@ public class Duke {
         storage = new DukeStorage();
         ui = new DukeUi();
 
-        String[] arr = filePath.split("\\\\");
+        String[] arr = filePath.split("/");
         try {
             storage.startup(arr[0], arr[1]);
             storage.restore(history);
