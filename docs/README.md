@@ -145,10 +145,3 @@ Disables the input field and send button and exits the program after 3 seconds. 
 **Caution:** If you close the program or window without `bye` command, your changes will not be saved.
 
 Format: `bye`
-
-Expected outcome:
-* Charizard will roar at you and invite you to burn more tasks next time.
-* Charizard will inform you that the app will be closing in 3 seconds, and disable the input and send button.
-
-
-
