@@ -46,8 +46,8 @@ public class Duke extends Application {
         ui = new duke.Ui();
         storage = new duke.Storage(filePath);
         try {
-            //tasks = new TaskList(storage.load());
-            tasks = new duke.TaskList();
+            tasks = storage.load();
+            //tasks = new duke.TaskList();
         } catch (Exception e) {
             ui.showLoadingError();
             tasks = new duke.TaskList();
@@ -62,11 +62,11 @@ public class Duke extends Application {
     public Duke() {
         ui = new duke.Ui();
         try {
-            tasks = new duke.TaskList(storage.load());
+            tasks = storage.load();
             //tasks = new duke.TaskList();
         } catch (Exception e) {
             ui.showLoadingError();
-            tasks = new duke.TaskList(storage.load());
+            tasks = new duke.TaskList();
         }
     }
 

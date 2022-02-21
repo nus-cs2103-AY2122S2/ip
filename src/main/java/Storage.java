@@ -57,12 +57,15 @@ public class Storage {
     public duke.TaskList load() {
         duke.TaskList tasks = new duke.TaskList();
 
-        /*try {
+        try {
             FileReader fr = new FileReader(this.filePath);
             BufferedReader br = new BufferedReader(fr);
             String currLine;
 
             while ((currLine = br.readLine()) != null) {
+                System.out.println(currLine);
+
+
                 int taskInt = currLine.indexOf("[") + 1;
                 char typeOfTask = currLine.charAt(taskInt);
                 int doneInt = taskInt + 3;
@@ -87,11 +90,12 @@ public class Storage {
                     }
                     tasks.add(event);
                 }
+
             }
+
         } catch (IOException e) {
             System.out.println("An error occurred.");
         }
-         */
         return tasks;
     }
 
