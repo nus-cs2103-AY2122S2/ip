@@ -42,7 +42,7 @@ public class Ui {
      * @param unmarkTask the targeted task to unmark
      */
     public String respondUnmark(Task unmarkTask) {
-        return String.format("Nice! I've marked this task as done: \n"
+        return String.format("Nice! I've marked this task as not done: \n"
                 + "    %s\n", unmarkTask);
     }
 
