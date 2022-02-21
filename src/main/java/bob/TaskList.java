@@ -112,8 +112,6 @@ public class TaskList {
 
     /**
      * Returns a string describing the status of the archive command.
-     *
-     * @return A string describing status of archive command.
      */
     public void archive() {
         String folderPath = "./data";

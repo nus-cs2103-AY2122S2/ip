@@ -23,7 +23,7 @@ public class MainWindow extends AnchorPane {
 
     private Bob bob;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/bob.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private final Image bobImage = new Image(this.getClass().getResourceAsStream("/images/bob.jpg"));
 
     /**
