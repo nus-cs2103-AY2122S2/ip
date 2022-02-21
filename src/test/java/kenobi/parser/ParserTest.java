@@ -12,7 +12,7 @@ public class ParserTest {
             assertEquals(0, Parser.parseCommand("deadline homework /by 123123123"));
             fail();
         } catch (ParseException e) {
-            assertEquals("Whoopsie-Daisy :( I don't understand that date", e.getMessage());
+            assertEquals("There were problems in the archives! I don't understand that date", e.getMessage());
         }
     }
 
@@ -22,7 +22,7 @@ public class ParserTest {
             assertEquals(0, Parser.parseCommand("event"));
             fail();
         } catch (ParseException e) {
-            assertEquals("Whoopsie-Daisy :( the command seems to be incomplete", e.getMessage());
+            assertEquals("There were problems in the archives! the command seems to be incomplete", e.getMessage());
         }
     }
 }

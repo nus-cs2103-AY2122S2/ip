@@ -12,7 +12,7 @@ public class ToDoTest {
             new ToDo("");
             fail();
         } catch (TaskException e) {
-            assertEquals("Task name cannot be empty", e.getMessage());
+            assertEquals("Task name cannot be blank", e.getMessage());
         }
     }
 }
