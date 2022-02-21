@@ -14,12 +14,6 @@ public class WelcomeCommand extends Command {
         assert tasksList != null : "WelcomeCommand->run: Tasks list cannot be null.";
         assert storage != null : "WelcomeCommand->run: Storage cannot be null.";
 
-        try {
-            storage.write(tasksList.getTaskList());
-        } catch (IOException e) {
-            return "Something went wrong: " + e.getMessage();
-        }
-
         return "Hello I'm Calcifer.\n What can I help you with today?\n";
     }
 }

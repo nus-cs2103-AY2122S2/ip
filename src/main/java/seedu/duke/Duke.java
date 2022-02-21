@@ -41,11 +41,11 @@ public class Duke {
         assert input != null : "Duke->getResponse: Input string cannot be null.";
 
         String nextInput = input;
-        Command command = new Parser(nextInput).getCommand();
         try {
+            Command command = new Parser(nextInput).getCommand();
             return command.run(tasks, storage);
-        } catch (DukeException error) {
-            return "OOPS!!! " + error.getMessage();
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

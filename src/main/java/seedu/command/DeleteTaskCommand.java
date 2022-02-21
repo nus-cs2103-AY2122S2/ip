@@ -4,14 +4,20 @@ import java.io.IOException;
 
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
+import seedu.exception.DukeException;
 
 public class DeleteTaskCommand extends Command {
     private final int taskId;
 
-    public DeleteTaskCommand(String taskId) {
+    public DeleteTaskCommand(String taskId) throws DukeException{
         assert taskId != null : "DeleteTaskCommand->DeleteTaskCommand: Task ID cannot be null.";
+        assert taskId.length() > 0 : "DeleteTaskCommand->DeleteTaskCommand: Task ID cannot be empty.";
 
-        this.taskId = Integer.valueOf(taskId);
+        try {
+            this.taskId = Integer.valueOf(taskId);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Sorry your task ID is invalid, please try again!");
+        }
     }
 
         /**
@@ -19,7 +25,7 @@ public class DeleteTaskCommand extends Command {
          *
          * @return Output message for GUI.
          */
-    public String run(TaskList tasksList, Storage storage) {
+    public String run(TaskList tasksList, Storage storage) throws DukeException {
         assert tasksList != null : "DeleteTaskCommand->run: Tasks list cannot be null.";
         assert storage != null : "DeleteTaskCommand->run: Storage cannot be null.";
 
@@ -32,7 +38,7 @@ public class DeleteTaskCommand extends Command {
         try {
             storage.write(tasksList.getTaskList());
         } catch (IOException e) {
-            return "Something went wrong: " + e.getMessage();
+            throw new DukeException("Something went wrong when I tried to write your task list back to storage :(");
         }
         return result;
     }

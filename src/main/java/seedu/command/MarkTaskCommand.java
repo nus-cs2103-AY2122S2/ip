@@ -9,10 +9,15 @@ import seedu.duke.TaskList;
 public class MarkTaskCommand extends Command {
     private final int taskId;
 
-    public MarkTaskCommand(String taskId) {
+    public MarkTaskCommand(String taskId) throws DukeException {
         assert taskId != null : "MarkTaskCommand->MarkTaskCommand: Task ID cannot be null.";
+        assert taskId.length() > 0 : "MarkTaskCommand->MarkTaskCommand: Task ID cannot be empty.";
 
-        this.taskId = Integer.valueOf(taskId);
+        try {
+            this.taskId = Integer.valueOf(taskId);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Sorry your task ID is invalid, please try again!");
+        }
     }
 
     public String run(TaskList tasksList, Storage storage) throws DukeException {
@@ -23,7 +28,7 @@ public class MarkTaskCommand extends Command {
         try {
             storage.write(tasksList.getTaskList());
         } catch (IOException e) {
-            return "Something went wrong: " + e.getMessage();
+            throw new DukeException("Something went wrong when I tried to write your task list back to storage :(");
         }
 
         String result = "Nice! I've marked this task as done:\n";

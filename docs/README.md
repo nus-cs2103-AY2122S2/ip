@@ -51,6 +51,36 @@ Any existing task can be marked or unmarked based on the task ID.
 
 ## Usage
 
+### `hi` - Displays welcome message
+
+Displays a standard welcome message.
+
+Example of usage:
+
+`hi`
+
+Expected outcome:
+
+```
+Hello I'm Calcifer.
+What can I help you with today?
+```
+
+
+### `by` - Displays exit message
+
+Displays a standard exit message.
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+```
+Bye. See you later!
+```
+
 ### `todo [todo_description]` - Adds a task of type ToDo
 
 Adds a new `ToDo` task with the specified task description to the existing task list.
@@ -71,7 +101,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-### `event [event_description] /at [event_date]` - Adds a task of type Event
+### `event [event_description] /at [event_date DD-MM-YYYY]` - Adds a task of type Event
 
 Adds a new `Event` task with the specified task description and date to the existing task list.
 The modified task list gets written and saved back to the `taskHistory.txt` file.
@@ -91,7 +121,7 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ```
 
-### `deadline [deadline_description] /by [deadline_date]` - Adds a task of type Deadline
+### `deadline [deadline_description] /by [deadline_date  DD-MM-YYYY]` - Adds a task of type Deadline
 
 Adds a new `Deadline` task with the specified task description and date to the existing task list.
 The modified task list gets written and saved back to the `taskHistory.txt` file.

@@ -9,6 +9,7 @@ public class FindTasksCommand extends Command {
 
     public FindTasksCommand(String keyword) {
         assert keyword != null : "FindTasksCommand->FindTasksCommand: Keyword cannot be null.";
+        assert keyword.length() > 0 : "FindTasksCommand->FindTasksCommand: Keyword cannot be empty.";
 
         this.keyword = keyword;
     }

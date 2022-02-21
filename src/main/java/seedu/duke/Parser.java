@@ -25,7 +25,6 @@ public class Parser {
      */
     public Command getCommand() throws DukeException {
         String commandAction = this.getCommandAction();
-        String commandDetails = this.getCommandDetails();
 
         switch (commandAction) {
         case "hi":
@@ -35,19 +34,19 @@ public class Parser {
         case "list":
             return new ListTasksCommand();
         case "todo":
-            return new AddToDoCommand(commandDetails);
+            return new AddToDoCommand(getCommandDetails());
         case "event":
-            return new AddEventCommand(commandDetails);
+            return new AddEventCommand(getCommandDetails());
         case "deadline":
-            return new AddDeadlineCommand(commandDetails);
+            return new AddDeadlineCommand(getCommandDetails());
         case "mark":
-            return new MarkTaskCommand(commandDetails);
+            return new MarkTaskCommand(getCommandDetails());
         case "unmark":
-            return new UnmarkTaskCommand(commandDetails);
+            return new UnmarkTaskCommand(getCommandDetails());
         case "delete":
-            return new DeleteTaskCommand(commandDetails);
+            return new DeleteTaskCommand(getCommandDetails());
         case "find":
-            return new FindTasksCommand(commandDetails);
+            return new FindTasksCommand(getCommandDetails());
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :(");
         }
@@ -69,11 +68,16 @@ public class Parser {
      *
      * @return Returns a String of the description.
      */
-    public String getCommandDetails() {
+    public String getCommandDetails() throws DukeException{
         try {
-            return inputCommand.split(" ", 2)[1];
+            String commandDetails = inputCommand.split(" ", 2)[1];
+            if (commandDetails.length() == 0) {
+                throw new DukeException("You did not provide any details for the command :( \n Please try again!");
+            } else {
+                return commandDetails;
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
-            return "";
+            throw new DukeException("You did not provide any details for the command :( \n Please try again!");
         }
     }
 }
