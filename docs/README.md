@@ -27,6 +27,7 @@ Duke is a desktop chatbot for task management.
 | `mark INDEX`                     | Marks the task with the given index in the task list as completed.                   | `INDEX`: A positive integer.                                                  |
 | `unmark INDEX`                   | Marks the task with the given index in the task list as uncompleted.                 | `INDEX`: A positive integer.                                                  |
 | `delete INDEX`                   | Removes the task with the given index from the task list.                            | `INDEX`: A positive integer.                                                  |
+| `find KEYWORD`                   | Finds all tasks in the task list which contains the given keyword.                   | `KEYWORD`: A text value.                                                      |
 | `low INDEX`                      | Change the priority of the task with the given index in the task list to __LOW__.    | `INDEX`: A positive integer.                                                  |
 | `medium INDEX`                   | Change the priority of the task with the given index in the task list to __MEDIUM__. | `INDEX`: A positive integer.                                                  |
 | `high INDEX`                     | Change the priority of the task with the given index in the task list to __HIGH__.   | `INDEX`: A positive integer.                                                  |
