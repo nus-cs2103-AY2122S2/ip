@@ -52,10 +52,14 @@ public class MarkCommand implements Command {
         Task taskDone = !taskList.hasFilter()
                 ? markTaskDoneBasedOnAllTasks(taskList)
                 : markTaskDoneBasedOnFilteredTasks(taskList);
+        assert taskDone != null : "Task should not be null";
 
         storage.saveTasksToFile(taskList);
 
-        return ui.taskDoneMessage(taskDone);
+        String response = ui.taskDoneMessage(taskDone);
+        assert !response.equals("") : "Mark response should not be empty";
+
+        return response;
     }
 
     /**

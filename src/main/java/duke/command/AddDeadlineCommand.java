@@ -42,10 +42,14 @@ public class AddDeadlineCommand extends AddCommand {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         Task newDeadlineTask = taskList.addDeadlineTask(super.getTaskDescription(), taskDateTime);
+        assert newDeadlineTask != null : "Task should not be null";
 
         storage.saveTasksToFile(taskList);
 
-        return ui.taskAddedMessage(newDeadlineTask) + System.lineSeparator()
+        String response = ui.taskAddedMessage(newDeadlineTask) + System.lineSeparator()
                 + ui.numOfTasksInListMessage(taskList);
+        assert !response.equals("") : "Add deadline response should not be empty";
+
+        return response;
     }
 }

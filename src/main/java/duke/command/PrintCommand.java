@@ -48,6 +48,8 @@ public class PrintCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        assert !dateStr.equals("") : "Date should not be empty";
+
         if (taskList.getNumOfTasks() == 0) {
             throw new DukeException(ErrorMessage.ERROR_NO_TASKS_IN_LIST.toString());
         }
@@ -63,6 +65,9 @@ public class PrintCommand implements Command {
             throw new DukeException(ErrorMessage.ERROR_NO_TASKS_ON_DATE.toString());
         }
 
-        return ui.tasksOnDateMessage(taskList, dateStr);
+        String response = ui.tasksOnDateMessage(taskList, dateStr);
+        assert !response.equals("") : "Print response should not be empty";
+
+        return response;
     }
 }
