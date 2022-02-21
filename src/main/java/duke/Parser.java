@@ -12,7 +12,7 @@ import duke.task.TaskList;
  * time(s) associated with the task.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 0.1
+ * @version 1.0
  */
 public class Parser {
 
@@ -20,7 +20,7 @@ public class Parser {
      * Extracts the non-command contents of a given input string.
      * Strips the string of leading whitespaces and removes the first word.
      *
-     * @param input  input string
+     * @param input input string
      * @return input consisting of the non-command contents of the input string
      */
     public static String handleInput(String input) {
@@ -65,7 +65,7 @@ public class Parser {
             int index = Integer.parseInt(input);
             input = input.replaceAll(".* ", "");
             if (input.matches("[0-9]+") &&
-                     index <= tasklist.length() && index >= 1) {
+                     index <= tasklist.size() && index >= 1) {
                 return command;
             }
             throw new Exception("You need to specify the task you want to "
@@ -81,6 +81,7 @@ public class Parser {
                 throw new Exception("Oops, you need to format deadline tasks "
                         + "as \"deadline X by Y\" :c");
             }
+
             String lastWord = input.substring(input.lastIndexOf(" ") + 1);
             if (lastWord.equals("by")) {
                 return "";
@@ -91,6 +92,7 @@ public class Parser {
                 throw new Exception("Oops, you need to format event tasks "
                         + "as \"event X at Y\" :c");
             }
+
             String finalWord = input.substring(input.lastIndexOf(" ") + 1);
             if (finalWord.equals("at")) {
                 return "";
@@ -105,6 +107,7 @@ public class Parser {
                 throw new Exception("Oops, you can only search for "
                         + "one keyword at a time :c");
             }
+
             return command;
         default:
             return "";
