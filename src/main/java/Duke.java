@@ -8,14 +8,18 @@ public class Duke {
         public final static String byeMsg = "Bye! hope to see you again soon!";
         public final static String listMsg = "Here are a list of your tasks!";
         public final static String addedTaskMsg = "Got it. I've added this task:\n";
-        public static String getTaskInListMsg(Task newTask, int numTask){
-            return addedTaskMsg + "\t" + newTask + "\nNow you have " + numTask + " tasks in the list";
+        public final static String completedTaskMsg = "Task has been marked as completed.";
+        public final static String notCompletedTaskMsg = "Task has been marked as not completed.";
+        public static String getCompleteMessage(boolean isCompleted){
+            return (isCompleted)?completedTaskMsg:notCompletedTaskMsg;
         }
     }
 
     public static class DukeCommand{
         public final static String bye = "bye";
         public final static String list = "list";
+        public final static String mark = "mark";
+        public final static String unmark = "unmark";
     }
 
 
@@ -40,6 +44,19 @@ public class Duke {
         return new Task(description, false);
     }
 
+    public static boolean processMarkingTask(String taskIndexStr, ArrayList<Task> taskList, boolean isCompleted){
+            taskList.get(Integer.parseInt(taskIndexStr) - 1).setCompleted(isCompleted);
+            System.out.println(DukeMessage.horizontalLine);
+            for (int i = 0; i < taskList.size(); i++) {
+                Task currentTask = taskList.get(i);
+                if (i == (Integer.parseInt(taskIndexStr) - 1)){
+                    System.out.println((i + 1) + ". " + currentTask);
+                }
+            }
+            printMessage(DukeMessage.getCompleteMessage(isCompleted));
+            return true;
+        }
+
     public static void main(String[] args) {
         ArrayList<Task> taskList = new ArrayList();
         Scanner input = new Scanner(System.in);
@@ -47,7 +64,6 @@ public class Duke {
         Task newTask = null;
         printMessage(DukeMessage.welcomeMsg);
         while(true) {
-            //System.out.println(DukeMessage.horizontalLine);
             userinput = input.nextLine();
             newTask = null;
             if (userinput.equals(DukeCommand.bye)) {
@@ -57,6 +73,16 @@ public class Duke {
             else if (userinput.equals(DukeCommand.list)) {
                 processPrintList(taskList);
                 System.out.println(DukeMessage.horizontalLine);
+            }
+            else if (userinput.startsWith(DukeCommand.mark)){
+                String taskStr = userinput.substring(DukeCommand.mark.length());
+                taskStr = taskStr.trim();
+                processMarkingTask(taskStr, taskList, true);
+            }
+            else if (userinput.startsWith(DukeCommand.unmark)) {
+                String taskStr = userinput.substring(DukeCommand.unmark.length());
+                taskStr = taskStr.trim();
+                processMarkingTask(taskStr, taskList, false);
             }
             else if (!userinput.equals(null)){
                 newTask = processAdd(userinput);
