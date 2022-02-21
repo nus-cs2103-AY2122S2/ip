@@ -1,0 +1,34 @@
+list
+todo borrow book
+deadline return book /by 29/1/2022 1300
+event project meeting /at 21/2/1945 0505
+mark 2
+list
+mark 3
+unmark 2
+list
+deadline do homework /by 3/4/2020 2359
+delete 1
+delete 2
+list
+find [D][ ]
+find do homework
+find 1.
+invalidcommand
+
+todo
+deadline
+event
+deadline noby
+event noat
+deadline /by noTaskName
+event /at noTaskName
+deadline name /by
+event name /at
+event name /at 12312313/2323/233 rubbishdate
+mark -15
+mark
+unmark 23
+delete 2323233
+find
+bye
