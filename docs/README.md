@@ -18,7 +18,7 @@ A Graphical User Interface (GUI) has also been added which mimics a chatbot you 
 
 ## Quick Start
 1. Ensure that you have Java `11` or above installed on your Computer.
-2. Download the latest `main.jar` from [here](https://github.com/Decaxical/ip/releases).
+2. Download the latest `duke.jar` from [here](https://github.com/Decaxical/ip/releases).
 3. Copy the file to the folder you want to use as the *home folder* for Duke.
 4. Double-click the file to start the app.
 5. Type the command in the command box and press `Enter` key or click the `Send` button to execute it.
