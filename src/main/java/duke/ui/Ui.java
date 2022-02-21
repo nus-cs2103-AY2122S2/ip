@@ -10,17 +10,17 @@ import duke.task.TaskList;
  * A class that handles the interactions with the user.
  */
 public class Ui {
-    public static final String SMILEY_EMOJI = "\u2282(  \u0361\u2022  \u035c  \u2022\u0361  )\u2283";
+    public static final String EMOJI_FACE = "\u2282(  \u0361\u2022  \u035c  \u2022\u0361  )\u2283";
 
     public static final String GREET_NEW_USER_MESSAGE = "Hello! I'm Duke, your Personal Assistant ChatBot. "
-            + SMILEY_EMOJI
+            + EMOJI_FACE
             + System.lineSeparator()
             + "Nice to meet you! ^_^"
             + System.lineSeparator()
             + "What can I do for you?";
 
     public static final String GREET_OLD_USER_MESSAGE = "Hello! I'm Duke, your Personal Assistant ChatBot. "
-            + SMILEY_EMOJI
+            + EMOJI_FACE
             + System.lineSeparator()
             + "Welcome back! ^_^"
             + System.lineSeparator()
@@ -28,7 +28,7 @@ public class Ui {
 
     public static final String EXIT_MESSAGE = "Bye. Hope to see you again soon! ^_^"
             + System.lineSeparator()
-            + "The program will exit in 10 seconds!";
+            + "The program will exit in 10 seconds.";
 
     /**
      * Constructor to initialize an instance of Ui class.

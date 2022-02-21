@@ -24,25 +24,25 @@ public class Parser {
     private static final String DATE_COMMAND_FOR_PRINT = "/on";
 
     /**
-     * Parses the command line input, validates the command type and
-     * initialises the command.
+     * Parses the input, validates the command type and initialises
+     * the command.
      *
-     * @param commandLine The command line input from the user
+     * @param input The input from the user
      * @return The Command object that is initialised
      * @throws DukeException If the command is invalid or if there
      * are any errors when initialising the command
      */
-    public Command parse(String commandLine) throws DukeException {
-        String[] commandLineParts = commandLine.split("\\s+", 2);
+    public Command parse(String input) throws DukeException {
+        String[] inputParts = input.split("\\s+", 2);
 
-        CommandType commandType = validateCommandType(commandLineParts[0].toLowerCase());
+        CommandType commandType = validateCommandType(inputParts[0].toLowerCase());
 
         if (commandType == null) {
             throw new DukeException(ErrorMessage
                     .ERROR_INVALID_COMMAND.toString());
         }
 
-        String commandInfo = (commandLineParts.length == 2) ? commandLineParts[1] : "";
+        String commandInfo = (inputParts.length == 2) ? inputParts[1] : "";
 
         boolean isCommandTypeBye = commandType == CommandType.BYE;
         boolean isCommandTypeList = commandType == CommandType.LIST;
