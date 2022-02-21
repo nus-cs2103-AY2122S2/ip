@@ -11,13 +11,13 @@ public class DukeTest {
     private static Parser parser = new Parser();
 
     @Test
-    public void parseByeTest(){
+    public void parseByeTest() {
         Command bye = new CBye();
         try{
             Command parseBye = parser.parse("bye");
             assertEquals(bye.getClass(), parseBye.getClass());
         }
-        catch(DukeException e){
+        catch(DukeException e) {
             System.out.println(e.getMessage());
         }
     }

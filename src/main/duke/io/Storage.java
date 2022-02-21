@@ -32,10 +32,12 @@ public class Storage {
     }
 
     private String getDirname() {
-        return this.dirname;
+         return this.dirname;
     }
 
-    private String getFilename() { return this.filename; }
+    private String getFilename() {
+        return this.filename;
+    }
 
     private Path getDirPath() {
         return Paths.get(this.getCurrentDirectory(), this.getDirname());
@@ -64,6 +66,7 @@ public class Storage {
 
     /**
      * read the file for the saved list and update the list of tasks
+     *
      * @param taskList empty list of task
      */
     public void readFile(TaskList taskList) {
@@ -86,6 +89,7 @@ public class Storage {
 
     /**
      * decipher the array and add the appropriate task to the list
+     *
      * @param taskStringArray array of strings representing a task
      * @param taskList current list of tasks
      */
@@ -120,6 +124,7 @@ public class Storage {
 
     /**
      * save the list back into the save file
+     *
      * @param taskList current list of tasks
      */
     public void writeFile(TaskList taskList) {

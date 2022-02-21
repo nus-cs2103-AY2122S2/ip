@@ -13,7 +13,9 @@ public class Parser {
 
     /**
      * @param userInput the whole console command line from the user
+     *
      * @return Command to be executed
+     *
      * @throws DukeException when invalid input detected
      */
     public Command parse(String userInput) throws DukeException {

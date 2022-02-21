@@ -13,6 +13,7 @@ public class Ui {
 
     /**
      * prints out all the tasks in the current list
+     *
      * @param taskList the current list of tasks
      */
     public String respondList(TaskList taskList) {
@@ -30,6 +31,7 @@ public class Ui {
 
     /**
      * prints out the task that has been marked
+     *
      * @param markTask the targeted task to mark
      */
     public String respondMark(Task markTask) {
@@ -39,6 +41,7 @@ public class Ui {
 
     /**
      * prints out the task that has been unmarked
+     *
      * @param unmarkTask the targeted task to unmark
      */
     public String respondUnmark(Task unmarkTask) {
@@ -48,6 +51,7 @@ public class Ui {
 
     /**
      * prints out the task that has been added as well as the current number of tasks after adding
+     *
      * @param newTask the targeted task to add
      * @param taskList the current list of tasks
      */
@@ -58,6 +62,7 @@ public class Ui {
 
     /**
      * prints out the task that has been added as well as the current number of tasks after removing
+     *
      * @param deleteTask the targeted task to add
      * @param taskList the current list of tasks
      */
@@ -68,6 +73,7 @@ public class Ui {
 
     /**
      * prints out the task that was filtered by the user
+     *
      * @param foundTasks the targeted task to add
      */
     public String respondFindTask(ArrayList<Task> foundTasks) {
@@ -82,7 +88,11 @@ public class Ui {
             return response.toString();
         }
     }
-
+    /**
+     * undo the previous command
+     *
+     * @param taskList the new taskList after undo
+     */
     public String respondUndo(TaskList taskList) {
         return "Undo task successfully!\n" + this.respondList(taskList);
     }
