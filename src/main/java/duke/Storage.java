@@ -18,7 +18,7 @@ import duke.task.TaskList;
  * of tasks to the same file.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 0.1
+ * @version 1.0
  */
 public class Storage {
     private String filePath;
@@ -75,38 +75,67 @@ public class Storage {
             switch (tmp[0].trim()) {
             case "T":
                 assert tmp.length > 2 : "tmp[2] should exist";
-                Todo t = new Todo(tmp[2].trim());
-                if (isDone) {
-                    t.markComplete();
-                    assert t.getStatusIcon().equals("X") : "task should be complete";
-                }
-                tasks.add(t);
+                todoHandler(tmp, isDone);
                 break;
             case "D":
                 assert tmp.length > 3 : "tmp[2], tmp[3] should exist";
-                Deadline d = new Deadline(tmp[2].trim(), tmp[3].trim());
-                if (isDone) {
-                    d.markComplete();
-                    assert d.getStatusIcon().equals("X") : "task should be complete";
-                }
-                tasks.add(d);
+                deadlineHandler(tmp, isDone);
                 break;
             case "E":
                 assert tmp.length > 3 : "tmp[2], tmp[3] should exist";
-                Event e = new Event(tmp[2].trim(), tmp[3].trim());
-                if (isDone) {
-                    e.markComplete();
-                    assert e.getStatusIcon().equals("X") : "task should be complete";
-                }
-                tasks.add(e);
+                eventHandler(tmp, isDone);
                 break;
             default:
                 throw new RuntimeException("Corrupted data in data file at "
                         + filePath);
             }
         }
-        System.out.println("start" + tasks);
         fileReader.close();
+    }
+
+    /**
+     * Adds Todo to tasks.
+     *
+     * @param arr array of data [Type, isDone, description]
+     * @param isDone bool indicating if Todo is marked complete
+     */
+    public void todoHandler(String[] arr, Boolean isDone) {
+        Todo t = new Todo(arr[2].trim());
+        if (isDone) {
+            t.markComplete();
+            assert t.getStatusIcon().equals("X") : "task should be complete";
+        }
+        tasks.add(t);
+    }
+
+    /**
+     * Adds Deadline to tasks.
+     *
+     * @param arr array of data [Type, isDone, description, dateTime]
+     * @param isDone bool indicating if Deadline is marked complete
+     */
+    public void deadlineHandler(String[] arr, Boolean isDone) {
+        Deadline d = new Deadline(arr[2].trim(), arr[3].trim());
+        if (isDone) {
+            d.markComplete();y
+            assert d.getStatusIcon().equals("X") : "task should be complete";
+        }
+        tasks.add(d);
+    }
+
+    /**
+     * Adds Event to tasks.
+     *
+     * @param arr array of data [Type, isDone, description, dateTime]
+     * @param isDone bool indicating if Deadline is marked complete
+     */
+    public void eventHandler(String[] arr, Boolean isDone) {
+        Event e = new Event(arr[2].trim(), arr[3].trim());
+        if (isDone) {
+            e.markComplete();
+            assert e.getStatusIcon().equals("X") : "task should be complete";
+        }
+        tasks.add(e);
     }
 
     /**
@@ -141,6 +170,5 @@ public class Storage {
             isFirst = false;
         }
         f.close();
-        System.out.println("saved" + tasks);
     }
 }

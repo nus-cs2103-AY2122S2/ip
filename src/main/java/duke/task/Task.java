@@ -4,14 +4,14 @@ package duke.task;
  * Represents a task and consists of its description and completeness status.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 0.1
+ * @version 1.0
  */
 public class Task {
     private String description;
     private boolean isDone;
 
     /**
-     * Constructor for Task that initializes the task with a given description.
+     * Constructor for Task specifying description.
      *
      * @param description description of task
      */
@@ -21,14 +21,14 @@ public class Task {
     }
 
     /**
-     * Marks Task as having been completed.
+     * Marks Task as complete.
      */
     public void markComplete() {
         this.isDone = true;
     }
 
     /**
-     * Marks Task as explicitly being incomplete.
+     * Marks Task as incomplete.
      * Note: this is true by default for all Task objects.
      */
     public void markIncomplete() {
@@ -36,26 +36,17 @@ public class Task {
     }
 
     /**
-     * Checks if Task is an empty (invalid) Task.
-     *
-     * @return true if task description = "", false otherwise
-     */
-    public boolean isEmpty() {
-        return description.equals("");
-    }
-
-    /**
      * Returns the state of completeness of Task.
      *
-     * @return "X" if Task is completed, " " otherwise
+     * @return "X" if Task is completed, " " otherwise.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
     /**
-     * Default toString method that returns the description of Task with
-     * its completion status.
+     * Default toString method that returns the description of Task.
+     * Includes completion status.
      *
      * @return formatted string of the description and completeness status
      * of Task.
@@ -67,7 +58,7 @@ public class Task {
     /**
      * Parses contents of Task into a csv-like format delimited by '|'.
      *
-     * @return formatted string of Task and its completion status
+     * @return formatted string of Task and its completion status.
      */
     public String writeToFile() {
         String s = (isDone) ? "D" : "N";

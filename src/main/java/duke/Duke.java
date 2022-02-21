@@ -11,85 +11,171 @@ import duke.task.Todo;
  * event), mark tasks as done, and delete tasks.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 0.1
+ * @version 1.0
  */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private final Ui ui = new Ui();
 
-    public String doHandler(String command, String input) throws Exception {
+    /**
+     * Marks Task as complete.
+     *
+     * @param input index of task
+     * @return generic update message string
+     * @throws Exception if an exception occurs in the saving of
+     * data to the file at filePath
+     */
+    public String doHandler(String input) throws Exception {
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
         assert i <= tasks.length() && i >= 1 : "index of item should be within scope of tasklist";
+      
         tasks.get(i).markComplete();
         assert tasks.get(i).getStatusIcon().equals("X") : "task should be marked done";
+
         storage.save(tasks);
-        return ui.showCommandMessage(command, tasks);
+        return Ui.showUpdateMessage();
     }
 
-    public String undoHandler(String command, String input) throws Exception {
-        int j = Integer.parseInt(input.replaceAll("[^0-9]",
+    /**
+     * Marks Task as incomplete.
+     *
+     * @param input index of task
+     * @return generic update message string
+     * @throws Exception if an exception occurs in the saving of
+     * data to the file at filePath
+     */
+    public String undoHandler(String input) throws Exception {
+        int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
-        assert j <= tasks.length() && j >= 1 : "index of item should be within scope of tasklist";
-        tasks.get(j).markIncomplete();
-        assert tasks.get(j).getStatusIcon().equals(" ") : "task should be marked incomplete";
+        assert i <= tasks.length() && i >= 1 : "index of item should be within scope of tasklist";
+      
+        tasks.get(i).markIncomplete();
+        assert tasks.get(i).getStatusIcon().equals(" ") : "task should be marked incomplete";
+
         storage.save(tasks);
-        return ui.showCommandMessage(command, tasks);
+        return Ui.showUpdateMessage();
     }
 
-    public String deleteHandler(String command, String input) throws Exception {
-        int k = Integer.parseInt(input.replaceAll("[^0-9]",
+    /**
+     * Deletes Task at a specified index from tasks.
+     *
+     * @param input index of task
+     * @return string of list of tasks and deletion message.
+     * @throws Exception if an exception occurs in the saving of
+     * data to the file at filePath
+     */
+    public String deleteHandler(String input) throws Exception {
+        int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
-        assert k <= tasks.length() && k >= 1 : "index of item should be within scope of tasklist";
-        tasks.remove(k);
+        assert i <= tasks.length() && i >= 1 : "index of item should be within scope of tasklist";
+        tasks.remove(i);
+
         storage.save(tasks);
-        return ui.showCommandMessage(command, tasks);
+        return Ui.showDeleteMessage(tasks);
     }
 
-    public String listHandler(String command) {
-        return ui.showCommandMessage(command, tasks);
+    /**
+     * Returns a string of the list of Tasks.
+     *
+     * @return formatted string of list of tasks.
+     */
+    public String listHandler() {
+        return Ui.showListMessage(tasks);
     }
 
-    public String todoHandler(String command, String input) throws Exception {
+    /**
+     * Adds a Todo to tasks and returns string about the addition.
+     *
+     * @param input description of Todo
+     * @return string stating that Todo has been added.
+     * @throws Exception if an exception occurs in the saving of
+     * data to the file at filePath
+     */
+    public String todoHandler(String input) throws Exception {
         Todo t = new Todo(input);
         tasks.add(t);
+
         storage.save(tasks);
-        return ui.showCommandMessage(command, tasks) + "\n" + t;
+        return Ui.showTodoMessage() + t;
     }
 
-    public String findHandler(String command, String input) {
-        ui.showCommandMessage(command, tasks);
-        return tasks.find(input).toString();
+
+    /**
+     * Finds tasks with matching keywords in tasklist and returns them.
+     *
+     * @param input keyword to search for
+     * @return string stating that matching tasks are found.
+     */
+    public String findHandler(String input) {
+        return Ui.showFindMessage() + tasks.find(input).toString();
     }
 
-    public String deadlineHandler(String command, String input) throws Exception {
+    /**
+     * Adds a Deadline task to tasks and returns string about the addition.
+     *
+     * @param input string containing description and dateTime of task
+     * @return  string stating that a Deadline task has been added.
+     * @throws Exception if an exception occurs in the saving of
+     * data to the file at filePath
+     */
+    public String deadlineHandler(String input) throws Exception {
         String datetime = input.replaceAll(".* by ", "");
         input = input.replaceAll(" by .*", "");
+
         Deadline d = new Deadline(input, datetime);
         tasks.add(d);
+
         storage.save(tasks);
-        return ui.showCommandMessage(command, tasks) + "\n" + d;
+        return Ui.showDeadlineMessage() + d;
     }
 
-    public String eventHandler(String command, String input) throws Exception {
+    /**
+     * Adds an Event task to tasks and returns string about the addition.
+     *
+     * @param input string containing description and dateTime of task
+     * @return  string stating that an Event task has been added.
+     * @throws Exception if an exception occurs in the saving of
+     * data to the file at filePath
+     */
+    public String eventHandler(String input) throws Exception {
         String time = input.replaceAll(".* at ", "");
         input = input.replaceAll(" at .*", "");
         Event e = new Event(input, time);
         tasks.add(e);
         storage.save(tasks);
-        return ui.showCommandMessage(command, tasks) + "\n" + e;
+        return Ui.showEventMessage() + e;
     }
 
+    /**
+     * Returns 'EXIT' string to signal program termination.
+     *
+     * @return goodbye signal
+     */
     public String byeHandler() {
-        return "EXIT";
+        return Ui.showByeMessage() + "EXIT";
     }
 
-    public String defaultHandler(String command, String input) {
-        return input.equals("") ? Ui.showEmptyMessage() :
-                ui.showCommandMessage(command, tasks);
+    /**
+     * Returns response to indecipherable input.
+     *
+     * @param input string to respond to
+     * @return generic strings indicative of incorrect input.
+     */
+    public String defaultHandler(String input) {
+        return input.equals("")
+                ? Ui.showEmptyMessage()
+                : Ui.showDefaultMessage();
     }
 
+
+    /**
+     * Determines Duke's responses to user input.
+     *
+     * @param input user input
+     * @return string of Duke's response.
+     */
     public String getResponse(String input) {
         try {
             String command = Parser.parse(input, tasks);
@@ -97,25 +183,25 @@ public class Duke {
 
             switch (command) {
             case "list":
-                return listHandler(command);
+                return listHandler();
             case "do":
-                return doHandler(command, input);
+                return doHandler(input);
             case "undo":
-                return undoHandler(command, input);
+                return undoHandler(input);
             case "delete":
-                return deleteHandler(command, input);
+                return deleteHandler(input);
             case "todo":
-                return todoHandler(command, input);
+                return todoHandler(input);
             case "find":
-                return findHandler(command, input);
+                return findHandler(input);
             case "deadline":
-                return deadlineHandler(command, input);
+                return deadlineHandler(input);
             case "event":
-                return eventHandler(command, input);
+                return eventHandler(input);
             case "bye":
                 return byeHandler();
             default:
-                return defaultHandler(command, input);
+                return defaultHandler(input);
             }
         } catch (Exception e) {
             return ui.showError(e.getMessage());
@@ -123,12 +209,11 @@ public class Duke {
     }
 
     /**
-     * Constructor for Duke.
+     * Constructor for Duke specifying UI and Storage.
      *
-     * Instantiates UI and storage, and loads Tasks from a file into tasks.
+     * It loads Tasks from a file into tasks.
      * If there is an error with loading Tasks from the specified file, it
      * initializes tasks to bean empty TaskList.
-     *
      */
     public Duke(String filePath) {
         try {

@@ -53,11 +53,14 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (response.equals("EXIT")) {
-            Platform.exit();
-            System.exit(0);
-        }
+        if (response.length() >= 4) {
+            String lastFourLetters = response.substring(response.length() - 4);
 
+            if (lastFourLetters.equals("EXIT")){
+                Platform.exit();
+                System.exit(0);
+            }
+        }
     }
 
     private void showWelcomeMessage() {
