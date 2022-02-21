@@ -131,7 +131,7 @@ Examples:
 
 #### 10. `bye`
 
-####Expected Outcome:
+Expected Outcome:
 ```
 Goodbye. 
 ```
