@@ -4,7 +4,7 @@ description: 'An interactive task management application. Made by <a href="https
 url: https://spyobird.github.io/ip
 
 markdown: GFM
-remote-theme: poole/hyde
+theme: jekyll-theme-cayman
 
 author:
   name: 'Elliot Lim'
