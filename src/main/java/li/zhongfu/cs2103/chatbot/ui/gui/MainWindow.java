@@ -142,6 +142,9 @@ public class MainWindow extends BorderPane {
     @FXML
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
+        if (input.isEmpty()) {
+            return;
+        }
         userInput.clear();
         historyAdd(input);
 
