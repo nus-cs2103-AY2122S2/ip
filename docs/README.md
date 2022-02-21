@@ -1,6 +1,6 @@
 # The all new Bob!
 
-Bob is a personal task manager.
+Bob is a personal desktop task manager.
 
 # User Guide
 
@@ -130,7 +130,7 @@ Examples:
 
 ### Archiving the current task list - `Archive`
 
-Saves all current entries in the task list in the file `bob_archive.txt`.  
+Saves all current entries in the task list in the file `bob_archive.txt` in the same directory that `bob.jar` is saved in.  
 Removes all entries from the list afterwards.
 
 Format: `archive`
