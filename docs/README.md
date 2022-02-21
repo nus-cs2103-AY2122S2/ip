@@ -216,5 +216,5 @@ EXIT - bye
 
 ### A short sneak peek
 
-![Dooke](./Ui.png)
+![Dooke](./Ui.png width=250)
 
