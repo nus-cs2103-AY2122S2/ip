@@ -20,16 +20,16 @@ What can I do for you?
  Now you have 2 tasks in the list.
 ####################
 ####################
-1. [D][ ]  return book (by: Sunday)
-2. [E][ ]  project meeting (at: Mon 2-4pm)
+1. [D][ ]  return book (by: Sunday) 
+2. [E][ ]  project meeting (at: Mon 2-4pm) 
 ####################
 ####################
 Nice! I've marked this task as done:
 [D][X]  return book (by: Sunday)
 ####################
 ####################
-1. [D][X]  return book (by: Sunday)
-2. [E][ ]  project meeting (at: Mon 2-4pm)
+1. [D][X]  return book (by: Sunday) 
+2. [E][ ]  project meeting (at: Mon 2-4pm) 
 ####################
 ####################
  Noted. I've removed this task:
@@ -37,7 +37,7 @@ Nice! I've marked this task as done:
  Now you have 1 tasks in the list.
 ####################
 ####################
-1. [D][X]  return book (by: Sunday)
+1. [D][X]  return book (by: Sunday) 
 ####################
 ####################
 Nice! I've marked this task as NOT done:
