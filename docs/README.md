@@ -1,6 +1,6 @@
 # Juke User Guide
 
-Juke is an interactive desktop application for task management with a chatbot interface.
+Juke is an **interactive desktop application** for **task management** with a chatbot interface.
 
 ## Features 
 
@@ -19,7 +19,7 @@ Find tasks easily by searching for keywords.
 ### Local storage of tasks
 
 Tasks are saved automatically whenever the list is modified.
-The data is automatically loaded on startup
+The data is automatically loaded on startup.
 
 ## Quick Start
 
