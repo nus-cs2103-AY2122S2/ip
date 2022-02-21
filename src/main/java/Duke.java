@@ -20,6 +20,9 @@ public class Duke {
         public final static String list = "list";
         public final static String mark = "mark";
         public final static String unmark = "unmark";
+        public final static String todo = "todo";
+        public final static String event = "event";
+        public final static String deadline = "deadline";
     }
 
 
@@ -36,26 +39,45 @@ public class Duke {
             System.out.println((i + 1) +". " + currentTask);
         }
     }
-
-    public static Task processAdd(String command){
-        String taskStr = command;
+    public static Task processTodo(String command) {
+        String taskStr = command.substring(DukeCommand.todo.length());
+        taskStr = taskStr.trim();
+        //String[] taskInfo = taskStr.split("TODO");
         String description = taskStr;
-        printMessage(DukeMessage.addedTaskMsg + "\n" + command);
-        return new Task(description, false);
+        printMessage(DukeMessage.addedTaskMsg + "\n" + command); // + "\n" + DukeMessage.getTaskInListMsg());
+        return new ToDoTask(description, false);
+    }
+
+    public static Task processEvent(String command) {
+        String taskStr = command.substring(DukeCommand.event.length());
+        taskStr = taskStr.trim();
+        String[] taskInfo = taskStr.split("/at");
+        String description = taskInfo[0].trim();
+        String dateStr = taskInfo[1].trim();
+        return new EventTask(description, false, dateStr);
+    }
+
+    public static Task processDeadline(String command)  {
+        String taskStr = command.substring(DukeCommand.deadline.length());
+        taskStr = taskStr.trim();
+        String[] taskInfo = taskStr.split("/by");
+        String description = taskInfo[0].trim();
+        String dateStr = taskInfo[1].trim();
+        return new DeadlineTask(description,false, dateStr);
     }
 
     public static boolean processMarkingTask(String taskIndexStr, ArrayList<Task> taskList, boolean isCompleted){
-            taskList.get(Integer.parseInt(taskIndexStr) - 1).setCompleted(isCompleted);
-            System.out.println(DukeMessage.horizontalLine);
-            for (int i = 0; i < taskList.size(); i++) {
-                Task currentTask = taskList.get(i);
-                if (i == (Integer.parseInt(taskIndexStr) - 1)){
-                    System.out.println((i + 1) + ". " + currentTask);
-                }
+        taskList.get(Integer.parseInt(taskIndexStr) - 1).setCompleted(isCompleted);
+        System.out.println(DukeMessage.horizontalLine);
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currentTask = taskList.get(i);
+            if (i == (Integer.parseInt(taskIndexStr) - 1)){
+                System.out.println((i + 1) + ". " + currentTask);
             }
-            printMessage(DukeMessage.getCompleteMessage(isCompleted));
-            return true;
         }
+        printMessage(DukeMessage.getCompleteMessage(isCompleted));
+        return true;
+    }
 
     public static void main(String[] args) {
         ArrayList<Task> taskList = new ArrayList();
@@ -69,6 +91,16 @@ public class Duke {
             if (userinput.equals(DukeCommand.bye)) {
                 printMessage(DukeMessage.byeMsg);
                 break;
+            }
+            else if (userinput.startsWith(DukeCommand.todo)){
+                newTask = processTodo(userinput);
+                //taskList.add(newTask);
+            }
+            else if (userinput.startsWith(DukeCommand.deadline)){
+                newTask = processDeadline(userinput);
+            }
+            else if (userinput.startsWith(DukeCommand.event)){
+                newTask = processEvent(userinput);
             }
             else if (userinput.equals(DukeCommand.list)) {
                 processPrintList(taskList);
@@ -84,9 +116,8 @@ public class Duke {
                 taskStr = taskStr.trim();
                 processMarkingTask(taskStr, taskList, false);
             }
-            else if (!userinput.equals(null)){
-                newTask = processAdd(userinput);
-                taskList.add(newTask);
+            else {
+                printMessage("I do not understand");
             }
         }
 
