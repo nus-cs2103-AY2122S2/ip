@@ -50,6 +50,7 @@ public class Deadline extends Task {
         }
         return "D | " + isDoneNumber + " | " + description +
                 " |" + by.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " " + time + System.lineSeparator();
+
     }
 
     /**
@@ -58,6 +59,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-     return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) +" " + time + ")";
+     return "[D]" + super.toString() + " (by: " +
+                by.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) +" " + time + ")";
     }
 }

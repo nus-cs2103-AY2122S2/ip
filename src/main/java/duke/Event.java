@@ -41,7 +41,7 @@ public class Event extends Task {
             isDoneNumber = 0;
         }
         return "E | " + isDoneNumber + " | " + description +
-                    " | " + at + System.lineSeparator();
+                    "|" + at + System.lineSeparator();
     }
 
     /**

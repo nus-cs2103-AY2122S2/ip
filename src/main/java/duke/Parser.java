@@ -38,7 +38,8 @@ public class Parser {
                                 } else if(command.equals("event")) {
                                         String[] arrOfStr2 = arrOfStr[1].split("/", 2);
                                         String[] arrOfStr3 = arrOfStr2[1].split(" ", 2);
-                                        return new EventCommand(arrOfStr2[0], arrOfStr3[1]);
+                                        assert(arrOfStr3[0].equals("at")) : "event command is not entered properly.";
+                                        return new EventCommand(arrOfStr2[0],(" " + arrOfStr3[1]));
                                 } else if(command.equals("find")) {
                                         return new FindCommand(arrOfStr[1]);
                                 } else {
