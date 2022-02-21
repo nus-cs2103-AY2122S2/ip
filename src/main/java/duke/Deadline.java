@@ -59,7 +59,12 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+<<<<<<< Updated upstream
      return "[D]" + super.toString() +
                 " (by: " + by.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) +" " + time + ")";
+=======
+     return "[D]" + super.toString() + " (by: " +
+                by.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) +" " + time + ")";
+>>>>>>> Stashed changes
     }
 }
