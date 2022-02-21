@@ -1,18 +1,18 @@
 # User Guide
 
 Duke is an organisational tool that helps you **stay clutter free and keep track of your tasks!**
-- [Quick Start](#Quick-Qtart) 
-- [Features](#Features)
-  - [Adding Tasks](#Adding-Tasks)
-    - [Todo](#Todo)
-    - [Deadlines](#Deadline)
-    - [Events](#Events)
-  - [Mark/Unmark](#Mark/Unmark)
-  - [List](#List)
-  - [Delete](#Delete)
-  - [Find](#Find)
-  - [Priority](#Priority)
-  - [Bye](#Bye)
+- [Quick Start](#quick-start) 
+- [Features](#features)
+  - [Adding Tasks](#adding-tasks)
+    - [Todo](#todo-todo)
+    - [Deadlines](#deadlines-deadline)
+    - [Events](#events-event)
+  - [Mark/Unmark](#markunmark)
+  - [List](#list-list)
+  - [Delete](#delete-delete)
+  - [Find](#find-find)
+  - [Priority](#priority-priority)
+  - [Bye](#bye-bye)
 
 
 ## Quick start
@@ -126,23 +126,25 @@ Exits the program.
 
 Syntax: `bye`
 
+
 ##Command Summary
-[todo](#Todo): `todo <task>`
 
-[event](#Events): `event <title> /at YYYY/MM/DD HH:MM`
+[todo](#todo-todo): `todo <task>`
 
-[deadline](#Deadlines): `deadline <title> /by YYYY/MM/DD HH:MM`
+[event](#events-event): `event <title> /at YYYY/MM/DD HH:MM`
 
-[mark](#Mark/Unmark): `mark <index>`
+[deadline](#deadlines-deadline): `deadline <title> /by YYYY/MM/DD HH:MM`
 
-[unmark](#Mark/Unmark): `unmark <index`
+[mark](#markunmark): `mark <index>`
 
-[list](#List): `list`
+[unmark](#markunmark): `unmark <index`
 
-[delete](#Delete): `delete <index>`
+[list](#list-list): `list`
 
-[find](#Find): `find <term>`
+[delete](#delete-delete): `delete <index>`
 
-[priority](#priority): `priority <index> <priority>`
+[find](#find-find): `find <term>`
 
-[bye](#bye): `bye`
+[priority](#priority-priority): `priority <index> <priority>`
+
+[bye](#bye-bye): `bye`
