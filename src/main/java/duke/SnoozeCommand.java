@@ -2,14 +2,14 @@ package duke;
 
 
 /**
- * Command to delete task
+ * Command to snooze task
  */
 public class SnoozeCommand extends Command {
     public int number;
 
     /**
      * Constructor for command
-     * @param number index of task to be deleted
+     * @param number index of task to be snoozed
      */
     public SnoozeCommand(int number) {
         this.number = number;
