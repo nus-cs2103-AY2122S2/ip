@@ -1,7 +1,151 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+-------------------------------------------------
+Hi I'm Zen!
+How can I help ?
+-------------------------------------------------
 
+-------------------------------------------------
+      Got it! I've added this task:
+      [T][ ] borrow book
+      Now you have 1 tasks in the list
+-------------------------------------------------
+
+-------------------------------------------------
+      Got it! I've added this task:
+      [T][ ] read book
+      Now you have 2 tasks in the list
+-------------------------------------------------
+
+-------------------------------------------------
+      Got it! I've added this task:
+      [D][ ] finish book review (by: Tuesday)
+      Now you have 3 tasks in the list
+-------------------------------------------------
+
+-------------------------------------------------
+      Got it! I've added this task:
+      [D][ ] return book (by: Sunday 7pm)
+      Now you have 4 tasks in the list
+-------------------------------------------------
+
+-------------------------------------------------
+      Here are the tasks in your list:
+      1. [T][ ] borrow book
+      2. [T][ ] read book
+      3. [D][ ] finish book review (by: Tuesday)
+      4. [D][ ] return book (by: Sunday 7pm)
+-------------------------------------------------
+
+-------------------------------------------------
+      Got it! I've added this task:
+      [E][ ] book presentation (at: Monday 3pm)
+      Now you have 5 tasks in the list
+-------------------------------------------------
+
+-------------------------------------------------
+      Here are the tasks in your list:
+      1. [T][ ] borrow book
+      2. [T][ ] read book
+      3. [D][ ] finish book review (by: Tuesday)
+      4. [D][ ] return book (by: Sunday 7pm)
+      5. [E][ ] book presentation (at: Monday 3pm)
+-------------------------------------------------
+
+-------------------------------------------------
+      Nice! I've marked this task as done!
+      [T][X] borrow book
+-------------------------------------------------
+
+-------------------------------------------------
+      Here are the tasks in your list:
+      1. [T][X] borrow book
+      2. [T][ ] read book
+      3. [D][ ] finish book review (by: Tuesday)
+      4. [D][ ] return book (by: Sunday 7pm)
+      5. [E][ ] book presentation (at: Monday 3pm)
+-------------------------------------------------
+
+-------------------------------------------------
+      OK, I've marked this task as not done yet
+      [T][ ] borrow book
+-------------------------------------------------
+
+-------------------------------------------------
+      Nice! I've marked this task as done!
+      [T][X] read book
+-------------------------------------------------
+
+-------------------------------------------------
+      Got it! I've added this task:
+      [T][ ] go to school
+      Now you have 6 tasks in the list
+-------------------------------------------------
+
+-------------------------------------------------
+      Nice! I've marked this task as done!
+      [D][X] return book (by: Sunday 7pm)
+-------------------------------------------------
+
+-------------------------------------------------
+      Here are the tasks in your list:
+      1. [T][ ] borrow book
+      2. [T][X] read book
+      3. [D][ ] finish book review (by: Tuesday)
+      4. [D][X] return book (by: Sunday 7pm)
+      5. [E][ ] book presentation (at: Monday 3pm)
+      6. [T][ ] go to school
+-------------------------------------------------
+
+-------------------------------------------------
+Please enter a date (eg. /at Monday 3-4pm)!
+-------------------------------------------------
+
+-------------------------------------------------
+      Got it! I've added this task:
+      [D][ ] buy plane tickets (by: Monday 4pm)
+      Now you have 7 tasks in the list
+-------------------------------------------------
+
+-------------------------------------------------
+      Nice! I've marked this task as done!
+      [T][X] go to school
+-------------------------------------------------
+
+-------------------------------------------------
+Please enter a valid command word (eg. list, mark, todo)!
+-------------------------------------------------
+
+-------------------------------------------------
+Please enter a valid number!
+-------------------------------------------------
+
+-------------------------------------------------
+Please enter a valid number!
+-------------------------------------------------
+
+-------------------------------------------------
+      Noted! I've removed this task:
+      [D][X] return book (by: Sunday 7pm)
+      Now you have 6 tasks in the list
+-------------------------------------------------
+
+-------------------------------------------------
+      Noted! I've removed this task:
+      [E][ ] book presentation (at: Monday 3pm)
+      Now you have 5 tasks in the list
+-------------------------------------------------
+
+-------------------------------------------------
+Please enter a valid number!
+-------------------------------------------------
+
+-------------------------------------------------
+Please enter a valid number!
+-------------------------------------------------
+
+-------------------------------------------------
+Please enter a valid number!
+-------------------------------------------------
+
+-------------------------------------------------
+      Bye! See you soon !
+-------------------------------------------------

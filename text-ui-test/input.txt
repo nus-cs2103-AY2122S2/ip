@@ -1,0 +1,26 @@
+todo borrow book
+todo read book
+deadline finish book review /by Tuesday
+deadline return book /by Sunday 7pm
+list
+event book presentation /at Monday 3pm
+list
+mark 1
+list
+unmark 1
+mark 2
+todo go to school
+mark 4
+list
+     event   attend concert
+    deadline    buy plane tickets    /by     Monday 4pm
+           mark          6
+      blah blah
+  unmark  -1
+     unmark 3 4
+delete 4
+delete 4
+delete -1
+delete 9 8 2
+delete 100
+bye
