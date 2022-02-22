@@ -14,7 +14,7 @@
 
 7. unmark - Unmarks the specified marked event.
 
-8. find - Shows all tasks that has that specified word.
+8. find - Shows all tasks that have that specified word.
 
 9. help - Shows all commands & some examples.
 
