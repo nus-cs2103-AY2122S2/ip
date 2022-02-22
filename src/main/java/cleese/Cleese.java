@@ -24,7 +24,8 @@ public class Cleese extends Application {
      * Initializes the elements needed for the Cleese class to work correctly
      */
     public static void initialize() {
-        String filePath = "./src/TaskListDB.txt";
+        String filePath = "./TaskListDB.txt";
+        File file = new File(filePath);
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filePath);
@@ -32,8 +33,11 @@ public class Cleese extends Application {
         // Read inputs from file
         try {
             storage.readFromFile(taskList);
+            file.createNewFile();
         } catch (FileNotFoundException e) {
-            File fileName = new File("./src/TaskListDB.txt");
+            System.out.println("File not found exception");
+        } catch (IOException e) {
+            System.out.println("Data file cannot be created");
         }
     }
 

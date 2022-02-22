@@ -48,7 +48,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "Launcher"
+    archiveBaseName = "Cleese"
     archiveClassifier = null
 }
 
