@@ -4,7 +4,7 @@ Baron ChatBot or **BCB** in short, is your personal assistant chatbot to help yo
 
 It is an easy-to-use desktop application that you can open on your laptop or desktop anywhere and anytime. If you can type fast, you can manage your tasks faster than any other applications.
 
-- [Prerequisite](#prerequisite)
+- [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
 - [Features](#features)
   * [Adding a ToDo task: `todo`](#adding-a-todo-task-todo)
@@ -17,8 +17,9 @@ It is an easy-to-use desktop application that you can open on your laptop or des
   * [Finding tasks with a keyword: `find`](#finding-tasks-with-a-keyword-find)
   * [Exiting the application: `bye`](#exiting-the-application-bye)
 - [Notes](#notes)
+- [Command Summary](#command-summary)
 
-## Prerequisite
+## Prerequisites
 
 - You should have `Java 11` installed in your computer.
 - You should know how to operate a shell application (i.e. cd in `Command Prompt` or `Terminal`).
@@ -52,7 +53,7 @@ Adds a To-Do task to return book
 
 ```
 Got it. I've added this task:
-  [T][ ] borrow book 
+  [T][ ] return book 
 Now you have 1 task in your list.
 ```
 
@@ -124,7 +125,8 @@ Notes:
 - `[T]` represents a To-Do task.
 - `[D]` represents a Deadline task.
 - `[E]` represents an Event.
-- `[ ]` represents that it's not done yet.
+- `[ ]` represents that the task is not done yet (a cross in the application).
+- `[X]` represents that the task is done (a tick in the application).
 
 ### Deleting a task: `delete`
 
@@ -132,7 +134,7 @@ Deletes the specified task from the task list.
 
 Format: `delete <index>`
 - Deletes the task at the specified `<index>`
-- `<index>` is the index of the task when the command `list` is executed.
+- `<index>` is the index/ID of the task when the command `list` is executed.
 
 Example of usage:
 
@@ -144,7 +146,7 @@ Marks the specified task in the task list as done.
 
 Format: `mark <index>`
 - Marks the task at the specified `<index>` as done
-- `<index>` is the index of the task when the command `list` is executed
+- `<index>` is the index/ID of the task when the command `list` is executed
 
 Example of usage:
 
@@ -156,7 +158,7 @@ Un-marks the specified task in the task list as not done yet.
 
 Format: `unmark <index>`
 - Un-marks the task at the specified `<index>` as not done yet
-- `<index>` is the index of the task when the command `list` is executed
+- `<index>` is the index/ID of the task when the command `list` is executed
 
 Example of usage:
 
@@ -182,3 +184,17 @@ Format: `bye`
 ## Notes
 1. A `data` folder will be created in the folder with the `jar` file. It is the storage of the tasks, so you can just leave it there in the folder.
 2. Marked tasks is represented by a tick and un-marked tasks will be represented by a cross in the application.
+
+## Command Summary
+
+| Action   | Format                                   | Example                                                   |
+|----------|------------------------------------------|-----------------------------------------------------------|
+| todo     | `todo <description>`                     | `todo return book`                                        |
+| deadline | `deadline <description> /at <date/time>` | `deadline submit physics assignment /by 02/11/2022 23:59` |
+| event    | `event <description> /at <date/time>`    | `event Google Interview /at 2/3/2022 13:30`               |
+| list     | `list`                                   | `list`                                                    |
+| delete   | `delete <index>`                         | `delete 1`                                                |
+| mark     | `mark <index>`                           | `mark 1`                                                  |
+| unmark   | `unmark <index>`                         | `unmark 1`                                                |
+| find     | `find <keyword>`                         | `find book`                                               |
+| bye      | `bye`                                    | `bye`                                                     |
