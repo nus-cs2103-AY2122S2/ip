@@ -6,7 +6,6 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.command.Command;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.File;
 
@@ -23,7 +22,7 @@ public class Duke {
     /**
      * Creates a new Duke object.
      */
-    public Duke() throws FileNotFoundException {
+    public Duke() throws IOException {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage("./data/duke.txt");
@@ -38,7 +37,7 @@ public class Duke {
      */
     public void run() throws IOException, DukeException {
 
-        File dir = new File("./data"); 
+        File dir = new File("./data");
         if (!dir.exists()) {
             dir.mkdir();
         }

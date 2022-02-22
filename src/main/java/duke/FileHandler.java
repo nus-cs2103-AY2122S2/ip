@@ -39,7 +39,7 @@ public class FileHandler {
      * @throws FileNotFoundException If file being read does not exist.
      */
     public static void readFromFile(ArrayList<Task> arr) throws FileNotFoundException {
-        File f = new File("./data/Duke.txt");
+        File f = new File("./data/duke.txt");
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
 
@@ -91,7 +91,7 @@ public class FileHandler {
      * Copies an entire file to another file.
      *
      * @param src    The source file whose contents will be copied.
-     * @param target The target file whih will be copied over to.
+     * @param target The target file which will be copied over to.
      * @throws IOException If I/O error occurs.
      */
     public static void copyToFile(File src, File target) throws IOException {
