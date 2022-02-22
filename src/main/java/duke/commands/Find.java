@@ -7,14 +7,13 @@ import duke.tasks.Task;
 /**
  * Find the tasks that have matching keywords.
  */
-public class Find {
-    public static String LINE_BREAK = "---------------";
-    public static String FIND_INTRO = "Here are the matching tasks in your list:";
+public class Find extends Commands {
 
     /**
      * Constructor to instantiate Find.
      */
-    public Find() {
+    public Find(ArrayList<Task> tasks) {
+        super(tasks);
     }
 
     /**
@@ -25,8 +24,8 @@ public class Find {
      */
     private String printResults(ArrayList<Task> tasks) {
         String res = "";
-        res += LINE_BREAK + "\n";
-        res += " " + FIND_INTRO + "\n";
+        res += super.LINE_BREAK + "\n";
+        res += " " + super.FIND_INTRO + "\n";
 
         int internalCounter = 1;
         // iterate through the list
@@ -38,7 +37,7 @@ public class Find {
                 break;
             }
         }
-        res += LINE_BREAK;
+        res += super.LINE_BREAK;
         return res;
     }
 
