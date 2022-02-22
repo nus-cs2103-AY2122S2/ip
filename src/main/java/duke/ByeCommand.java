@@ -17,6 +17,7 @@ public class ByeCommand extends Command {
     String runCommand(TaskList taskList, Ui ui, Storage storage) {
         String exitMessage = "Thank you for using Duke App. Have a nice day";
         ui.outputMessage(exitMessage);
+        System.exit(1);
         return exitMessage;
     }
 
