@@ -61,4 +61,36 @@ public class DukeException extends Throwable {
         return "The task number provided is not valid. \r\n " +
                 "Please use the 'list' command to view all your tasks.";
     }
+
+    /**
+     * Method to indicate to User that the supplied Tag Syntax is incorrect
+     *
+     * @return Message to user indicating that tag syntax is invalid
+     */
+    public String invalidTagSyntax() {
+        return "The tag syntax is not valid \r\n " +
+                "Tag Syntax: tag <Task Number> <Description of Tag>";
+    }
+
+    /**
+     * Method to indicate to User that the Task number supplied is invalid.
+     *
+     * @return Message to user indicating that task number is not within the list
+     */
+    public String invalidDeleteSyntax() {
+        return "The delete syntax is not valid. \r\n " +
+                "Delete Syntax: delete <Task Number>";
+    }
+
+
+    /**
+     * Method to indicate to User that the Task number supplied is invalid.
+     *
+     * @return Message to user indicating that task number is not within the list
+     */
+    public String invalidDeleteTagSyntax() {
+        return "The remove tag syntax is not valid. \r\n " +
+                "Remove Tag Syntax: \r\n removeTag <Task Number> <Tag Number> " +
+                "You can use [list allTags] command to view all tags";
+    }
 }

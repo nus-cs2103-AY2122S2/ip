@@ -1,6 +1,8 @@
 package duke;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import java.io.File;
@@ -22,11 +24,42 @@ public class Storage {
      */
     public Storage(String filePath) {
         loadTask(taskList, filePath);
+        loadTags(taskList);
     }
 
-
+    /**
+     * Method to load all tags from File
+     *
+     * @param taskList Current session's TaskList
+     */
+    public void loadTags(ArrayList<Task> taskList) {
+        String path = "src\\main\\java\\data\\tagList.txt";
+        path = path.replace("\\", "/");
+        try {
+            File taskFile = new File(path);
+            Scanner reader = new Scanner(taskFile);
+            while (reader.hasNextLine()) {
+                String data = reader.nextLine();
+                int index = Integer.parseInt(data.substring(0,1));
+                Task currentTask = taskList.get(index-1);
+                data = data.substring(3,data.length()-1);
+                if(!data.isEmpty()) {
+                    String[] tags = data.split(",");
+                    for (String tag : tags) {
+                        String tagDescription = tag.strip();
+                        currentTask.addTag(tagDescription);
+                    }
+                }
+            }
+        } catch(NullPointerException fileInvalid) {
+            System.out.println("File is Invalid!");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Return all task stored within File.
+     *
      * @return ArrayList of current stored Task
      */
     public ArrayList<Task> getTaskList() {
@@ -90,14 +123,16 @@ public class Storage {
      */
     // Reusable code for writing into duke.txt task list
     public void saveToTaskList(ArrayList<Task> taskList) {
-        String path = "src\\main\\java\\data\\duke.txt";
-        path = path.replace("\\", "/");
+        String tasksPath = "src\\main\\java\\data\\duke.txt";
+        tasksPath = tasksPath.replace("\\", "/");
 
+        String tagsPath = "src\\main\\java\\data\\tagList.txt";
+        tagsPath = tagsPath.replace("\\", "/");
         try {
             // Remove current file tasks
-            PrintWriter pw = new PrintWriter(path);
+            PrintWriter pw = new PrintWriter(tasksPath);
             pw.close();
-            File taskFile = new File(path);
+            File taskFile = new File(tasksPath);
             FileWriter myWriter = new FileWriter(taskFile,true);
             for(int i = 0; i < taskList.size(); i++) {
                 myWriter.write((i + 1) + "." + taskList.get(i).toString() + "\r\n");
@@ -106,6 +141,20 @@ public class Storage {
         } catch(NullPointerException | IOException fileInvalid) {
             System.out.println("File is Invalid!");
         }
+
+        try {
+            PrintWriter pw = new PrintWriter(tagsPath);
+            pw.close();
+            File tagFile = new File(tagsPath);
+            FileWriter myWriter = new FileWriter(tagFile,true);
+            for(int i = 0; i < taskList.size(); i++) {
+                myWriter.write((i + 1) + "." + taskList.get(i).getTags() + "\r\n");
+            }
+            myWriter.close();
+        } catch(NullPointerException | IOException fileInvalid) {
+            System.out.println("File is Invalid!");
+        }
+
     }
 }
 

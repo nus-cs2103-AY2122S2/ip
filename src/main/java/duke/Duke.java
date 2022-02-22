@@ -31,17 +31,6 @@ public class Duke {
      */
     public void run() {
         ui.start();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            Scanner scanner = new Scanner(System.in);
-//            String command = scanner.nextLine().trim(); // Can also convert result to lower-case to handle cases.
-//            Parser parser = new Parser(storage, tasks, ui);
-//            parser.parse(command);
-//            boolean isExitTriggered = parser.isExitTrigger();
-//            if (isExitTriggered) {
-//                isExit = true;
-//            }
-//        }
     }
 
     /**

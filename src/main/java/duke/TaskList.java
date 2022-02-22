@@ -1,6 +1,5 @@
 package duke;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -119,6 +118,47 @@ public class TaskList {
         }
     }
 
+    /**
+     * Given a Task Index, and  Delete the specific Task.
+     *
+     * @param index Index of Task
+     * @param tagDescription String input of what the task should be tagged with
+     * @return Message to user that specific task has been tagged accordingly, otherwise throw DukeException handler.
+     */
+    public String tag(int index, String tagDescription) {
+        try {
+            Task selectedTask = taskList.get(index - 1);
+            selectedTask.addTag(tagDescription);
+            return "Successfully added tag " +
+                    tagDescription +
+                    " to:\r\n" +
+                    selectedTask;
+        } catch (NumberFormatException noTaskNumber) {
+            return dukeException.noTaskNumber();
+        } catch (IndexOutOfBoundsException invalidTaskNumber) {
+            return dukeException.invalidTaskNumber();
+        }
+    }
+
+
+    /**
+     * Given a Task Index, and  Delete the specific Task.
+     *
+     * @param index Index of Task
+     * @param tagIndex String input of what the task should be tagged with
+     * @return Message to user that specific task has been tagged accordingly, otherwise throw DukeException handler.
+     */
+    public String removeTag(int index, int tagIndex) {
+        try {
+            Task selectedTask = taskList.get(index - 1);
+            String removedTag = selectedTask.removeTag(tagIndex);
+            return "Successfully removed tag " + removedTag + " from:\r\n" + selectedTask;
+        } catch (NumberFormatException noTaskNumber) {
+            return dukeException.noTaskNumber();
+        } catch (IndexOutOfBoundsException invalidTaskNumber) {
+            return dukeException.invalidTaskNumber();
+        }
+    }
 
     /**
      * Method is used to scan through current TaskList, searching by supplied keyword.
@@ -127,17 +167,34 @@ public class TaskList {
      * @return List of tasks found with matching description
      */
     public String find(String matchingDescription) {
-        ArrayList<Task> matchingTasks = new ArrayList<>();
-        ArrayList<Integer> indexList = new ArrayList<>();
-        for(int i = 0; i < taskList.size(); i++) {
-            Task currentTask = taskList.get(i);
-            String currentDescription = currentTask.getDescription().toLowerCase();
-            matchingDescription = matchingDescription.toLowerCase();
-            if (currentDescription.contains(matchingDescription)) {
-                matchingTasks.add(currentTask);
-                indexList.add(i+1);
+        if(matchingDescription.startsWith("#")) {
+            String tagDescription = matchingDescription.replace("#", "");
+            ArrayList<Task> matchingTasks = new ArrayList<>();
+            ArrayList<Integer> indexList = new ArrayList<>();
+            for(int i = 0; i < taskList.size(); i++) {
+                Task currentTask = taskList.get(i);
+                ArrayList<String> tagList = currentTask.getTags();
+                if (tagList.contains(tagDescription)) {
+                    indexList.add(i+1);
+                    matchingTasks.add(currentTask);
+                }
             }
+            return "Here are your task with " +
+                    matchingDescription +
+                    ui.displayFoundTasks(matchingTasks,indexList);
+        } else {
+            ArrayList<Task> matchingTasks = new ArrayList<>();
+            ArrayList<Integer> indexList = new ArrayList<>();
+            for(int i = 0; i < taskList.size(); i++) {
+                Task currentTask = taskList.get(i);
+                String currentDescription = currentTask.getDescription().toLowerCase();
+                matchingDescription = matchingDescription.toLowerCase();
+                if (currentDescription.contains(matchingDescription)) {
+                    matchingTasks.add(currentTask);
+                    indexList.add(i+1);
+                }
+            }
+            return ui.displayFoundTasks(matchingTasks, indexList);
         }
-        return ui.displayFoundTasks(matchingTasks, indexList);
     }
 }
