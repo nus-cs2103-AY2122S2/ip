@@ -25,7 +25,7 @@ public class List extends Commands {
         // iterate through the list
         for (Task task : super.tasks) {
             if (task != null) {
-                res += " " + internalCounter + ". " + task + "\n";
+                res += " " + internalCounter + ". " + task + " " + task.getTag() + "\n";
                 ++internalCounter;
             } else {
                 break;

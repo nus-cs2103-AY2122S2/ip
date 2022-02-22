@@ -22,9 +22,23 @@ public abstract class Commands {
     protected String UNMARK_MESSAGE = "No probs bro, unmarked already!";
     // intro specific
     protected String LINE_INTRO = "Nah, here's your list";
+    // tag specific
+    protected String TAG_OUTRO = "Added a tag to: ";
 
     protected ArrayList<Task> tasks;
 
+    /**
+     * Constructor for Commands which does not
+     * require an ArrayList as an argument.
+     */
+    public Commands() {
+    }
+
+    /**
+     * Constructor for Commands.
+     * 
+     * @param tasks An arrayList of tasks.
+     */
     public Commands(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }

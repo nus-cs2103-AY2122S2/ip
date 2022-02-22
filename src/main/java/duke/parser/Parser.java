@@ -10,6 +10,7 @@ import duke.commands.Event;
 import duke.commands.Find;
 import duke.commands.List;
 import duke.commands.Mark;
+import duke.commands.Tag;
 import duke.commands.Todo;
 import duke.commands.Unmark;
 import duke.exception.DukeException;
@@ -144,11 +145,28 @@ public class Parser {
             Find f = new Find(tasks.getTasks());
             return f.findRelevantTasks(keyword, tasks.getTasks());
 
+        } else if (command[0].equals("tag")) {
+            return tagCommand(command, tasks);
         } else {
             DukeException e = new DukeException("Tak faham banggg, speak in my language la bayi....");
             res += e.getMessage();
             return res;
         }
+    }
+
+    /**
+     * Receives the tag command. Calls on Tag:handleTag(...) after
+     * instantiating a Tag class.
+     * 
+     * @param command Received command from user
+     * @param tasks   Current tasks available
+     * @return direction to another method - Tags:handleTag(...)
+     */
+    private String tagCommand(String[] command, TaskList tasks) {
+        int pos = Integer.parseInt(command[1]) - 1;
+        String tagName = command[2];
+        Tag t = new Tag(tasks.getTasks());
+        return t.handleTag(tasks, pos, tagName);
     }
 
 }

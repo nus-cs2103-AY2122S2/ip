@@ -7,6 +7,7 @@ package duke.tasks;
 public class Task {
     private String description;
     private boolean isDone;
+    private String tag = "";
 
     public Task(String description) {
         this.description = description;
@@ -31,8 +32,17 @@ public class Task {
         return this.description;
     }
 
+    public String getTag() {
+
+        return !this.tag.isEmpty() ? ("[tag: " + this.tag + "] ") : "";
+    }
+
     // Setters
     public void setDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }
