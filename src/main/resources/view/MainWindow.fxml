@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" stylesheets="@../values/style.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="541.0" prefWidth="400.0" styleClass="gray-background" stylesheets="@../values/style.css" vvalue="1.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefHeight="558.0" prefWidth="400.0" styleClass="gray-background" stylesheets="@../values/style.css" />
+            </content>
+        </ScrollPane>
+        <TextField fx:id="userInput" layoutX="8.0" layoutY="545.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" styleClass="radius-user-input" stylesheets="@../values/style.css" AnchorPane.bottomAnchor="14.0" />
+        <Button fx:id="sendButton" layoutX="338.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="54.0" styleClass="radius-dialogue-box" stylesheets="@../values/style.css" text="Send" />
+    </children>
+   <styleClass>
+      <String fx:value="gray-background" />
+      <String fx:value="dark-purple-background" />
+      <String fx:value="gray-background" />
+   </styleClass>
+</fx:root>

@@ -1,0 +1,14 @@
+.dark-purple-background{
+    -fx-background-color: #301934;
+}
+
+.gray-background{
+    -fx-background-color: #636566;
+}
+.radius-dialogue-box{
+    -fx-background-radius: 30px;
+}
+
+.radius-user-input{
+    -fx-background-radius: 10px;
+}
