@@ -49,7 +49,9 @@ public class HelpCommand extends Command {
                     + "<p>2. Type event to create an event. (eg. event Career Fair /at 26/01/2022 10:00 AM $LOW)"
                     + "<p>3. Type deadline to create an deadline. "
                     + " (eg. deadline CS2103 Assignement /by 29/01/2022 11:59 PM $MEDIUM)"
-                    + "<p>4. Type list to see what are the tasks on hand.";
+                    + "<p>4. Type list to see what are the tasks on hand."
+                    + "<p>5. Type bye to close the system.";
+
             JOptionPane.showMessageDialog(null, String.format(html, width, width), title,
                     JOptionPane.INFORMATION_MESSAGE, null);
         };
