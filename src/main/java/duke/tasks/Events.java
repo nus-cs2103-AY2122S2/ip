@@ -34,8 +34,6 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        // String date = (date != null ? date.format(DateTimeFormatter.ofPattern("MMM d
-        // yyyy")) : at);
         return "[E]" + "[" + super.getStatusIcon() + "] " + super.getDescription() + " (at: " + at + ")";
     }
 }
