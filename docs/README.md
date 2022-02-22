@@ -1,5 +1,12 @@
 # Adam - User Guide
 
+## Quick Start
+
+1. Ensure you have Java 11 or above installed on your computer.
+2. Download Adam from [here](https://github.com/markbiju/ip/releases/download/A-Release/duke.jar)
+3. Copy the file to the directory you want to use as the home directory
+4. Double click the file to start using Adam!
+
 ## Features 
 
 ### Todo
