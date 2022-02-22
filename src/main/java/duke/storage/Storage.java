@@ -31,6 +31,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
+        assert (filePath.equals("data/duke.txt"));
     }
 
     /**
