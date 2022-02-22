@@ -22,91 +22,109 @@ public class Ui {
 
     /**
      * Method to print a goodbye message to users.
+     *
+     * @return Goodbye message
      */
-    public void displayBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String displayBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Prints All current tasks in supplied TaskList
      *
      * @param taskList ArrayList of Current Task
+     * @return String representation of all tasks in ArrayList
      */
-    public void displayTasks(ArrayList<Task> taskList) {
+    public String displayTasks(ArrayList<Task> taskList) {
+        StringBuilder list = new StringBuilder();
         if (taskList.isEmpty()) {
-            System.out.println("The current taskList is empty.");
+            list.append("The current task list is empty!");
         } else {
             for(int i = 0; i < taskList.size(); i++) {
-                System.out.println((i + 1) + "." + taskList.get(i).toString());
+                list.append(i + 1)
+                        .append(".")
+                        .append(taskList.get(i).toString())
+                        .append("\r\n");
             }
         }
+        return list.toString();
     }
     /**
      * Prints All found tasks in supplied TaskList.
      *
      * @param taskList ArrayList of Current Tasks
      * @param indexList ArrayList of Task indexes found by find function.
+     * @return List of task found by index list.
      */
-    public void displayFoundTasks(ArrayList<Task> taskList, ArrayList<Integer> indexList) {
+    public String displayFoundTasks(ArrayList<Task> taskList, ArrayList<Integer> indexList) {
         if (taskList.isEmpty()) {
-            System.out.println("No task found by your given keyword");
+            return "No task found by your given keyword";
         } else {
+            StringBuilder result = new StringBuilder();
             for(int i = 0; i < indexList.size(); i++) {
                int taskIndex = indexList.get(i);
                Task taskFound = taskList.get(i);
-               System.out.println(taskIndex + "." + taskFound);
+               result.append(taskIndex + "." + taskFound).append("\r\n");
             }
+            return result.toString();
         }
     }
     /**
      * Prints message with the size of supplied TaskList
      *
      * @param taskList ArrayList of Current Task
+     * @return Message with amount of tasks in tasklist
      */
-    public void displayTaskAmount(ArrayList<Task> taskList) {
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+    public String displayTaskAmount(ArrayList<Task> taskList) {
+        return "Now you have " + taskList.size() + " tasks in the list.";
     }
 
     /**
      * Prints String Representation of Task added.
      *
      * @param task Task to be added to TaskList
+     * @return Message when user adds a task
      */
-    public void addTask(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
+    public String addTask(Task task) {
+        return "Got it. I've added this task: \r\n" + task;
     }
 
     /**
      * Prints String Representation of marked Task
      *
      * @param task Task needed to be marked
+     * @return Message when task is successfully marked.
      */
-    public void markTask(Task task) {
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(task.getStatusIcon() + " " + task.getDescription());
+    public String markTask(Task task) {
+        StringBuilder result = new StringBuilder();
+        result.append("Nice! I've marked this task as done: \n")
+                .append(task.getStatusIcon())
+                .append(" ")
+                .append(task.getDescription());
+        return result.toString();
+    }
+
+    /**
+     * Prints String Representation of marked Task
+     *
+     * @param task Task needed to be marked
+     * @return Message when task is successfully marked.
+     */
+    public String unmarkTask(Task task) {
+        return "Nice! I've marked this task as not done: \n" +
+                task.getStatusIcon() +
+                " " +
+                task.getDescription();
     }
 
     /**
      * Prints message to indicate that supplied Task has been deleted.
      *
      * @param task Task to be deleted
+     * @return Message when deleting task
      */
-    public void deleteTask(Task task) {
-        System.out.println(" Noted. I've removed this task: ");
-        System.out.println(task);
+    public String deleteTask(Task task) {
+        return " Noted. I've removed this task: \r\n" + task;
     }
 
-//    public void showLoadingError() {
-//        System.out.println("There was an error loading the file!");
-//    }
-//
-//    public void readCommand() {
-//
-//    }
-
-    // Can display all commands
-//    public void displayCommands() {
-//        System.out.println("DISPLAY LIST OF COMMANDS");
-//    }
 }

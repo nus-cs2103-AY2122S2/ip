@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Main driver class for Duke.
  */
@@ -9,6 +7,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
+    private Parser parser;
 
     public Duke() {
     }
@@ -16,12 +15,14 @@ public class Duke {
     /**
      * Constructor of Duke, creating a new Duke.
      * Setup Ui, Storage and TaskList.
+     *
      * @param filePath filePath of Storage of TaskList
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.getTaskList());
+        ui = new Ui();
+        parser = new Parser(storage, tasks, ui);
     }
 
 
@@ -30,17 +31,17 @@ public class Duke {
      */
     public void run() {
         ui.start();
-        boolean isExit = false;
-        while (!isExit) {
-            Scanner scanner = new Scanner(System.in);
-            String command = scanner.nextLine().trim(); // Can also convert result to lower-case to handle cases.
-            Parser parser = new Parser(storage, tasks, ui);
-            parser.parse(command);
-            boolean isExitTriggered = parser.isExitTrigger();
-            if (isExitTriggered) {
-                isExit = true;
-            }
-        }
+//        boolean isExit = false;
+//        while (!isExit) {
+//            Scanner scanner = new Scanner(System.in);
+//            String command = scanner.nextLine().trim(); // Can also convert result to lower-case to handle cases.
+//            Parser parser = new Parser(storage, tasks, ui);
+//            parser.parse(command);
+//            boolean isExitTriggered = parser.isExitTrigger();
+//            if (isExitTriggered) {
+//                isExit = true;
+//            }
+//        }
     }
 
     /**
@@ -48,7 +49,8 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        Parser parser = new Parser(storage, tasks, ui);
+        return parser.parse(input);
     }
 
     /**

@@ -41,27 +41,28 @@ public class Parser {
      * Parse User Input, routing input to the correct action.
      *
      * @param command String Value of User Input
+     * @return String Message once command is executed.
      */
-        public void parse(String command) {
+        public String parse(String command) {
             command = command.trim().strip();
             if (command.equals("bye")) {
-                ui.displayBye();
                 storage.saveToTaskList(taskListArr);
                 isExit = true;
+                return ui.displayBye();
             } else if (command.equals("list")) {
-                ui.displayTasks(taskListArr);
+                return ui.displayTasks(taskListArr);
             } else if (command.startsWith("mark")) {
                 int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
-                taskListObj.mark(value);
+                return taskListObj.mark(value);
             } else if (command.startsWith("unmark")) {
                 int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
-                taskListObj.unmark(value);
+                return taskListObj.unmark(value);
             } else if (command.startsWith("todo")) {
                 try {
                     Todo todoTask = new Todo(command.substring(5));
-                    taskListObj.addTask(todoTask);
+                    return taskListObj.addTask(todoTask);
                 } catch (StringIndexOutOfBoundsException noDescription) {
-                    dukeException.noDescriptionException();
+                   return dukeException.noDescriptionException();
                 }
             } else if (command.startsWith("deadline")) {
                 command = command.replace("deadline", "");
@@ -79,31 +80,31 @@ public class Parser {
                             .toFormatter();
                     LocalDate parsedDate = LocalDate.parse(taskText[1].strip(),parser);
                     Deadline deadlineTask = new Deadline(taskText[0].strip(), parsedDate);
-                    taskListObj.addTask(deadlineTask);
+                    return taskListObj.addTask(deadlineTask);
                 } catch(ArrayIndexOutOfBoundsException invalidDeadlineSyntax) {
-                    dukeException.invalidDeadlineSyntax();
+                    return dukeException.invalidDeadlineSyntax();
                 } catch(DateTimeParseException wrongDate) {
                     // This means that there is no date to be parsed, or incorrect format, so treat it as normal string
                     Deadline deadlineTask = new Deadline(taskText[0].strip(), taskText[1].strip());
-                    taskListObj.addTask(deadlineTask);
+                    return taskListObj.addTask(deadlineTask);
                 }
             } else if (command.startsWith("event")) {
                 try {
                     command = command.replace("event", "");
                     String[] taskText = command.split(" /at");
                     Event eventTask = new Event(taskText[0].strip(), taskText[1].strip());
-                    taskListObj.addTask(eventTask);
+                    return taskListObj.addTask(eventTask);
                 } catch(ArrayIndexOutOfBoundsException invalidEventSyntax) {
-                    dukeException.invalidEventSyntax();
+                    return dukeException.invalidEventSyntax();
                 }
             } else if (command.startsWith("delete")) {
                 int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
-                taskListObj.delete(value);
+                return taskListObj.delete(value);
             } else if (command.startsWith("find")) {
                 String filteredCommand = command.replace("find", "").strip();
-                taskListObj.find(filteredCommand);
+                return taskListObj.find(filteredCommand);
             } else {
-                dukeException.noSuchTaskException();
+                return dukeException.noSuchCommandException();
             }
         }
 

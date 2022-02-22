@@ -57,25 +57,29 @@ public class TaskList {
      * Add task to taskList.
      *
      * @param task Task to be added to the taskList
+     * @return Message when adding task into taskList
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
+        StringBuilder result = new StringBuilder();
         taskList.add(task);
-        ui.addTask(task);
-        ui.displayTaskAmount(taskList);
+        result.append(ui.addTask(task));
+        result.append(ui.displayTaskAmount(taskList));
+        return result.toString();
     }
 
     /**
      * Given a Task Index, Set Task to done, and marks the Task.
      *
      * @param index Index of Task
+     * @return Message when task is marked, or if selected index is invalid.
      */
-    public void mark(int index) {
+    public String mark(int index) {
         try {
             Task selectedTask = taskList.get(index - 1);
             selectedTask.setDone();
-            ui.markTask(selectedTask);
+            return ui.markTask(selectedTask);
         } catch (Exception e) {
-            System.out.println("Task is invalid, please select a valid task number.");
+            return "Task is invalid, please select a valid task number.";
         }
     }
 
@@ -83,14 +87,15 @@ public class TaskList {
      * Given a Task Index, Set Task to not done, and unchecks the Task.
      *
      * @param index Index of Task
+     * @return Message when task is unmarked, or if selected index is invalid.
      */
-    public void unmark(int index) {
+    public String unmark(int index) {
         try {
             Task selectedTask = taskList.get(index - 1);
             selectedTask.setUndone();
-            ui.markTask(selectedTask);
+            return ui.unmarkTask(selectedTask);
         } catch (Exception e) {
-            System.out.println("Task is invalid, please select a valid task number.");
+            return "Task is invalid, please select a valid task number.";
         }
     }
 
@@ -98,16 +103,19 @@ public class TaskList {
      * Given a Task Index, Delete the specific Task.
      *
      * @param index Index of Task
+     * @return Message to user that specific task has been removed, otherwise throw DukeException handler.
      */
-    public void delete(int index) {
+    public String delete(int index) {
         try {
+            StringBuilder result = new StringBuilder();
             Task removedTask = taskList.remove(index - 1);
-            ui.deleteTask(removedTask);
-            ui.displayTaskAmount(taskList);
+            result.append(ui.deleteTask(removedTask)).append("\r\n");
+            result.append(ui.displayTaskAmount(taskList));
+            return result.toString();
         } catch (NumberFormatException noTaskNumber) {
-            dukeException.noTaskNumber();
+            return dukeException.noTaskNumber();
         } catch (IndexOutOfBoundsException invalidTaskNumber) {
-            dukeException.invalidTaskNumber();
+            return dukeException.invalidTaskNumber();
         }
     }
 
@@ -116,8 +124,9 @@ public class TaskList {
      * Method is used to scan through current TaskList, searching by supplied keyword.
      *
      * @param matchingDescription Description of Task that User is finding
+     * @return List of tasks found with matching description
      */
-    public void find(String matchingDescription) {
+    public String find(String matchingDescription) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         ArrayList<Integer> indexList = new ArrayList<>();
         for(int i = 0; i < taskList.size(); i++) {
@@ -129,6 +138,6 @@ public class TaskList {
                 indexList.add(i+1);
             }
         }
-        ui.displayFoundTasks(matchingTasks, indexList);
+        return ui.displayFoundTasks(matchingTasks, indexList);
     }
 }
