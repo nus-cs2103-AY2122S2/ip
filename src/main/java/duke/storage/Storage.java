@@ -164,7 +164,6 @@ public class Storage {
                 handleDeadlineCommand(lineDetails[1], lineDetails[2], lineDetails[3]);
             }
         }
-
         s.close();
         return res;
     }
@@ -176,10 +175,8 @@ public class Storage {
      * @param arr
      */
     public static void updateDukeTxt(String filePath, ArrayList<Task> arr) throws IOException {
-
         int counter = 0;
         for (Task item : arr) {
-
             String task = item.toString();
             String addText = "";
 
@@ -205,7 +202,5 @@ public class Storage {
                 ++counter;
             }
         }
-
     }
-
 }
