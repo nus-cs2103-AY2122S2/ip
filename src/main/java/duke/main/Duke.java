@@ -99,7 +99,6 @@ public class Duke extends Application {
             try {
                 handleUserInput();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         });
@@ -108,7 +107,6 @@ public class Duke extends Application {
             try {
                 handleUserInput();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         });
@@ -174,7 +172,7 @@ public class Duke extends Application {
         try {
             String commandType = parser.scanInput(input);
             if (commandType.equals("bye")) {
-                // this should return a string value indicating what the command type is
+                // return a string value indicating what the command type is
                 return commandType;
             } else {
                 // parser will handle the commands
@@ -184,34 +182,5 @@ public class Duke extends Application {
             System.out.println(e.getMessage());
             return e.getMessage();
         }
-    }
-
-    public void run() throws IOException {
-        // in here i will call the scanner fom Ui, and run the inputs to the relevant
-        // methods of classes.
-        System.out.println(ui.greeting);
-        boolean isExit = false;
-        // instantiate the Parser class
-        Parser parser = new Parser(tasks);
-        while (!isExit) {
-            try {
-                System.out.println(ui.lineBreak);
-                // call for the input to be received
-                String line = ui.nextInput();
-                // parse the input to understand what it says
-                // should return the commmand type - bye, find, todo, deadline, event etc.
-                // if bye, then update isExit
-                String commandType = parser.scanInput(line);
-                if (commandType.equals("bye")) {
-                    isExit = true;
-                } else {
-                    // Parser will handle the progress of the code for the other commands.
-                }
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
-
-        }
-
     }
 }
