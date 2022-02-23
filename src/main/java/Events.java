@@ -5,15 +5,19 @@
 
 public class Events extends Task {
 
+<<<<<<< HEAD
     protected final String duration;
+=======
+    private final DateTime duration;
+>>>>>>> branch-Level-8
 
-    public Events(String description, String duration) {
+    public Events(String description, DateTime duration) {
         super(description);
         this.duration = duration;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.duration + ")";
+        return "[E]" + super.toString() + "(at: " + this.duration.toString() + ")";
     }
 }

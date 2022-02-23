@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.util.Scanner;
 
+
 /**
  * Project Duke is a educational software project designed to take you
  * through the steps of building a small software incrementally,
@@ -41,8 +42,10 @@ public class Duke {
         bw.flush();
     }
 
-    private static final String getDateTime(String[] inputArr) {
-        return inputArr[1].split("/")[1].split(" ", 2)[1]; // split input from slash
+    private static final DateTime getDateTime(String[] inputArr) {
+        String[] dateTimeArr = inputArr[1].split("/")[1].split("[- ]"); // [String, yyyy, mm, dd, HHMM]
+        return new DateTime(dateTimeArr);
+
     }
 
     private static final String getDescription(String[] inputArr) {
