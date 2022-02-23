@@ -129,4 +129,21 @@ public class Ui {
     public static String duplicateTask() {
         return "This Task is already in your list, sir.";
     }
+    /**
+     * Displays a message to specify all valid commands.
+     *
+     * @return String the list of commands
+     */
+    public static String listOfCommands() {
+        return "Here are the commands which I have been programmed to understand sir:"
+                + "\n  list"
+                + "\n  todo [description]"
+                + "\n  deadline [description]"
+                + "\n  event [description] /at [venue]"
+                + "\n  mark [id]"
+                + "\n  unmark [id]"
+                + "\n  remove [id]"
+                + "\n  find [keyword]"
+                + "\n  bye";
+    }
 }

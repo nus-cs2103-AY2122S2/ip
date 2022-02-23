@@ -79,10 +79,12 @@ public class Parser {
             }
         case "find":
             return tasks.find(command[1]);
+        case "help":
+            return Ui.listOfCommands();
         case "bye":
             return Ui.bye();
         default:
-            return Ui.unknownCommand("\"" + input + "\"");
+            return Ui.unknownCommand("\"" + input + "\"") + "\n" + Ui.listOfCommands();
         }
     }
 
