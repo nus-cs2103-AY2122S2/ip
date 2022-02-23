@@ -2,8 +2,10 @@ package juke.common;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import juke.Juke;
 import juke.exception.JukeException;
@@ -28,6 +30,19 @@ public class Storage {
     private static final String MISSING_MESSAGE = "File not found.";
     private static final String CREATE_MESSAGE = "Creating new file.";
     private static final String FORMAT_ERROR_MESSAGE = "File has incorrect arguments.";
+
+    private static final List<String> SAMPLE_DATA = List.of(
+            "T;false;Hello and welcome to Juke!",
+            "T;false;Use todo to create a simple task.",
+            "D;false;The command deadline creates a deadline at a date specified by '-by'.;1 Jan 2000 00:00",
+            "E;false;event creates an event at a date specified by '-at'.;1 Jan 2000 00:00",
+            "T;false;Use list to lists all tasks.",
+            "T;true;Mark tasks as done or not done with mark and unmark.",
+            "T;false;Delete tasks with delete.",
+            "T;false;Edit tasks with edit. Do specify a description with '-d' or date with 't'.",
+            "T;false;To exit Juke, use command bye.",
+            "T;false;Have fun using Juke! For addition information check the user guide at "
+                    + "spyobird.github.io/ip.");
 
     /**
      * Reference to the Juke instance.
@@ -59,6 +74,7 @@ public class Storage {
             }
             if (file.createNewFile()) {
                 juke.getTextUi().formattedPrint(MISSING_MESSAGE, CREATE_MESSAGE);
+                populateWithSampleDate();
             }
         } catch (IOException | SecurityException e) {
             juke.getTextUi().formattedPrint(e.getMessage());
@@ -72,6 +88,7 @@ public class Storage {
         try {
             file.createNewFile();
             juke.getTextUi().formattedPrint(FORMAT_ERROR_MESSAGE, CREATE_MESSAGE);
+            populateWithSampleDate();
         } catch (IOException | SecurityException e) {
             juke.getTextUi().formattedPrint(e.getMessage());
         }
@@ -273,11 +290,30 @@ public class Storage {
     }
 
     /**
-     * Method to throw decode error exception.
+     * Throws decode error exception.
      *
      * @throws JukeException Exception.
      */
     private void throwDecodeError() throws JukeException {
         throw new JukeException(FORMAT_ERROR_MESSAGE);
+    }
+
+    /**
+     * Populates a new file with sample data.
+     */
+    private void populateWithSampleDate() {
+        assert file != null;
+        assert file.exists();
+        try {
+            FileWriter out = new FileWriter(file);
+            for (String str : SAMPLE_DATA) {
+                out.write(str + System.lineSeparator());
+            }
+            out.close();
+        } catch (IOException e) {
+            // Should not reach here
+            assert false;
+            return;
+        }
     }
 }

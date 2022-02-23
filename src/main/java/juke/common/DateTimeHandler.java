@@ -121,6 +121,6 @@ public class DateTimeHandler {
      * @return Formatted date and time string.
      */
     public String getDateTime() {
-        return this.dateTime.format(outputFormatter);
+        return dateTime.format(outputFormatter);
     }
 }
