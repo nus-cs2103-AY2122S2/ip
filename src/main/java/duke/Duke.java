@@ -61,21 +61,22 @@ public class Duke {
                     TaskList.reportList();
                 } else {
                     String[] details = instruct.split(" ", 2);
-                    if (details[0].equals("mark")) {
-                        TaskList.markAsDone(Integer.parseInt(details[1]));
-                    } else if (details[0].equals("unmark")) {
-                        TaskList.markNotDone(Integer.parseInt(details[1]));
-                    } else if (details[0].equals("delete")) {
-                        TaskList.deleteTask(Integer.parseInt(details[1]));
-                    } else if (details[0].equals("find")) {
-                        TaskList.findTasks(details[1]);
-                    } else {
-                        String taskType = details[0];
-                        if (!parser.isValidCommand(taskType)) {
-                            ui.showInvalidCommandError();
-                        } else {
-                            TaskList.addTask(taskType, instruct);
-                        }
+                    switch (details[0]) {
+                        case "mark":
+                            TaskList.markAsDone(Integer.parseInt(details[1]));
+                        case "unmark":
+                            TaskList.markNotDone(Integer.parseInt(details[1]));
+                        case "delete":
+                            TaskList.deleteTask(Integer.parseInt(details[1]));
+                        case "find":
+                            TaskList.findTasks(details[1]);
+                        default:
+                            String taskType = details[0];
+                            if (!parser.isValidCommand(taskType)) {
+                                ui.showInvalidCommandError();
+                            } else {
+                                TaskList.addTask(taskType, instruct);
+                            }
                     }
                 }
                 ui.addLineBreak();
@@ -84,5 +85,6 @@ public class Duke {
                 ui.addLineBreak();
             }
         }
+
     }
 }
