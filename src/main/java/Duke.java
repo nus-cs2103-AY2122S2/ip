@@ -3,6 +3,9 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Project Duke is a educational software project designed to take you
@@ -38,8 +41,10 @@ public class Duke {
         bw.flush();
     }
 
-    private static final String getDateTime(String[] inputArr) {
-        return inputArr[1].split("/")[1].split(" ", 2)[1]; // split input from slash
+    private static final DateTime getDateTime(String[] inputArr) {
+        String[] dateTimeArr = inputArr[1].split("/")[1].split("[- ]"); // [String, yyyy, mm, dd, HHMM]
+        return new DateTime(dateTimeArr);
+
     }
 
     private static final String getDescription(String[] inputArr) {

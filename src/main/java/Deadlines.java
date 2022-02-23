@@ -5,15 +5,15 @@
 
 public class Deadlines extends Task {
 
-    private final String deadline;
+    private final DateTime deadline;
 
-    public Deadlines(String description, String deadline) {
+    public Deadlines(String description, DateTime deadline) {
         super(description);
         this.deadline = deadline;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + this.deadline + ")";
+        return "[D]" + super.toString() + "(by: " + this.deadline.toString() + ")";
     }
 }
