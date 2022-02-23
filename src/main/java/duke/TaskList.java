@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * A class that stores a list of tasks and provides complementary functionalities such as add, find, delete and mark
+ * tasks.
+ */
 public class TaskList {
     protected static ArrayList<Task> manager;
     private static Parser parser;
@@ -14,6 +18,10 @@ public class TaskList {
         parser = new Parser();
     }
 
+    /**
+     * displays all the elements of the task list to the user.
+     * @throws CustomException if the task list is currently empty and has nothing to display.
+     */
     public static void reportList() throws CustomException {
         int len = manager.size();
         if (len != 0) {
@@ -25,6 +33,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * finds the task, at a specific index, in the task list.
+     * @param num is the integer referring to the list index.
+     * @return desiredTask, which is the task that the user was looking for.
+     * @throws CustomException if the list is empty or if the index supplied is invalid.
+     */
     public static Task findTask(int num) throws CustomException {
         Task desiredTask = new Task("empty task");
         int len = manager.size();
@@ -45,6 +59,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * adds a task object to the tasklist
+     * @param taskType a String that highlights type of task object required to be created.
+     * @param instruction a String that contains details pertaining to the task.
+     */
     public static void addTask(String taskType, String instruction) {
         try {
             Task toAdd = Parser.parseCommandFromUser(taskType, instruction);
@@ -56,6 +75,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * deletes the task at a particular index in the task list.
+     * @param num the integer index.
+     * @throws CustomException if the index inputted is invalid.
+     */
     public static void deleteTask(int num) throws CustomException {
         if (num <= 0) {
             throw new CustomException("Invalid task ID: number must be a positive integer:)");
@@ -67,6 +91,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * marks a task, on a specific index, as done.
+     * @param num integer index.
+     * @throws CustomException if index is invalid.
+     */
     public static void markAsDone(int num) throws CustomException {
         Task t = findTask(num);
         t.markDone();
@@ -74,6 +103,11 @@ public class TaskList {
         System.out.println(t);
     }
 
+    /**
+     * marks a task, on a specific index, as not done.
+     * @param num integer index.
+     * @throws CustomException if index is invalid.
+     */
     public static void markNotDone(int num) throws CustomException {
         Task t = findTask(num);
         t.undo();
@@ -81,6 +115,10 @@ public class TaskList {
         System.out.println(t);
     }
 
+    /**
+     * finds and displays all the tasks that contain either one or some keywords as listed by the user.
+     * @param keywords a String containing at least one keyword.
+     */
     public static void findTasks(String keywords) {
         List<String> allKeywords = Arrays.stream(keywords.split(",")).sequential()
                 .map(String::trim)
