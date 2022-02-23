@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.util.Scanner;
+import java.util.Arrays;
 
 
 /**
@@ -44,7 +45,9 @@ public class Duke {
 
     private static final DateTime getDateTime(String[] inputArr) {
         String[] dateTimeArr = inputArr[1].split("/")[1].split("[- ]"); // [String, yyyy, mm, dd, HHMM]
-        return new DateTime(dateTimeArr);
+        return new DateTime(Arrays.copyOfRange(dateTimeArr, 1, dateTimeArr.length));
+        // will reduce dateTimeArr to [yyyy, mm, dd, HHMM]
+
 
     }
 
@@ -98,7 +101,7 @@ public class Duke {
             break;
 
         case "D":
-            Task newDeadline = new Deadlines(splitDescription[2], splitDescription[3]);
+            Task newDeadline = new Deadlines(splitDescription[2], new DateTime(splitDescription[3].split("[- ]")));
             if (splitDescription[1].equals("1")) {
                 newDeadline.markAsDone();
             }
@@ -106,7 +109,7 @@ public class Duke {
             break;
 
         case "E":
-            Task newEvent = new Events(splitDescription[2], splitDescription[3]);
+            Task newEvent = new Events(splitDescription[2], new DateTime(splitDescription[3].split("[- ]")));
             if (splitDescription[1].equals("1")) {
                 newEvent.markAsDone();
             }

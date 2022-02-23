@@ -5,11 +5,8 @@
 
 public class Events extends Task {
 
-<<<<<<< HEAD
-    protected final String duration;
-=======
     private final DateTime duration;
->>>>>>> branch-Level-8
+
 
     public Events(String description, DateTime duration) {
         super(description);
