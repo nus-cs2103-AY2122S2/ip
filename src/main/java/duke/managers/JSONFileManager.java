@@ -24,8 +24,8 @@ public class JSONFileManager {
     static private final String FILE_NAME = "tasks.json";
     static private final Path SAVE_FILE_PATH = SAVE_FOLDER_PATH.resolve(FILE_NAME);
 
-    private Path saveFolderPath;
-    private Path saveFilePath;
+    private final Path saveFolderPath;
+    private final Path saveFilePath;
 
     /**
      * Construct a default JSONFileManager
@@ -104,7 +104,6 @@ public class JSONFileManager {
 
     private String parseListToJSONString(WordList wordList) {
         JSONArray jsonArray = new JSONArray();
-        JSONObject jsonWrapper = new JSONObject();
 
         wordList.forEach(wordListItem -> {
             JSONObject itemJSON = new JSONObject();
