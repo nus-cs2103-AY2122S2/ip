@@ -1,4 +1,3 @@
-
 import duke.managers.DateTimeManager;
 import duke.parsers.InputParser;
 import duke.parsers.InputType;
@@ -11,11 +10,18 @@ import duke.ui.DukeUI;
 
 import java.util.Scanner;
 
+/**
+ * Duke is an app made for users with some technical background to manage their tasks.
+ * Duke is highly customized for those used to the CLI.
+ */
 public class Duke {
     private WordList wordList;
     private JSONFileManager jsonFileManager;
     private DukeUI ui;
 
+    /**
+     * Constructs the app Duke with default settings.
+     */
     public Duke() {
         this.ui = new DukeUI(new Scanner(System.in));
         this.jsonFileManager = new JSONFileManager();
@@ -23,6 +29,11 @@ public class Duke {
         this.wordList = this.jsonFileManager.loadListFromJSONFile();
     }
 
+    /**
+     * Construct the app Duke with the given storagePath and storageFileName.
+     * @param storagePath string of storage path
+     * @param storageFileName string of storage file name (with .json extension)
+     */
     public Duke(String storagePath, String storageFileName) {
         this.ui = new DukeUI(new Scanner(System.in));
         this.jsonFileManager = new JSONFileManager(storagePath, storageFileName);
@@ -30,6 +41,10 @@ public class Duke {
         this.wordList = this.jsonFileManager.loadListFromJSONFile();
     }
 
+    /**
+     * Runs the Duke app.
+     * Handles the logic and processes of the app.
+     */
     public void run() {
         this.ui.replyWelcomeMessage();
         String input;
@@ -62,16 +77,26 @@ public class Duke {
         this.ui.replyBye();
     }
 
+    /**
+     * initiate Duke.java to start the app.
+     * @param args
+     */
     public static void main(String[] args) {
         Duke dukeApp = new Duke("src/data/", "anotherTasks.json");
         dukeApp.run();
     }
 
+    /**
+     * Process the input based on the InputType and values given.
+     * @see InputType
+     * @param inputType type of the input
+     * @param value value of the input
+     */
     public void processInput(InputType inputType, String[] value) {
         WordListItem wordListItem;
         switch(inputType) {
             case LIST:
-                wordList.printList();
+                ui.display(wordList);
                 break;
             case MARK:
                 wordList.markItem(Integer.parseInt(value[0]));
@@ -101,7 +126,7 @@ public class Duke {
         }
     }
 
-    public static void checkEmpty(String input) throws EmptyInputException {
+    private static void checkEmpty(String input) throws EmptyInputException {
         if (input.isEmpty()) {
             throw new EmptyInputException("Input cannot be empty!");
         }

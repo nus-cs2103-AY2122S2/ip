@@ -3,7 +3,19 @@ package duke.parsers;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.UnknownInputException;
 
+/**
+ * Handles the parsing of the input.
+ * All input should be parsed via InputParser.
+ */
 public class InputParser {
+    /**
+     * parse the input of string into an InputType and the values of the input.
+     * @see InputType
+     * @param input the string of input
+     * @return an Object[] where the first element is an InputType and the second element is an array of values.
+     * @throws EmptyDescriptionException
+     * @throws UnknownInputException
+     */
     static public Object[] parseInput(String input) throws EmptyDescriptionException, UnknownInputException {
         InputType type = InputType.NONE;
         String[] value = new String[]{ input };

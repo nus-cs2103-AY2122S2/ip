@@ -13,6 +13,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
+/**
+ * Manages the storage system of the app.
+ * Utilizes java.nio and org.json to establish the saving system.
+ * Files are saved in form of json files.
+ */
 public class JSONFileManager {
     static private final String BASE_PATH = System.getProperty("user.dir");
     static private final Path SAVE_FOLDER_PATH = Paths.get(BASE_PATH, "src", "main", "data");
@@ -22,11 +27,19 @@ public class JSONFileManager {
     private Path saveFolderPath;
     private Path saveFilePath;
 
+    /**
+     * Construct a default JSONFileManager
+     */
     public JSONFileManager() {
         this.saveFolderPath = SAVE_FOLDER_PATH;
         this.saveFilePath = SAVE_FILE_PATH;
     }
 
+    /**
+     * Construct a JSONFileManager with a specified save folder path and save json file.
+     * @param saveFolderPath path to the new save folder
+     * @param jsonFileName name of the new save file
+     */
     public JSONFileManager(String saveFolderPath, String jsonFileName) {
         String[] strPaths = saveFolderPath.split("/");
         this.saveFolderPath = Paths.get(BASE_PATH, strPaths);
@@ -57,6 +70,10 @@ public class JSONFileManager {
         }
     }
 
+    /**
+     * Set up the save system with the given save folder path and save file name.
+     * @see #JSONFileManager(String, String)
+     */
     public void setUpSaveSystem() {
         if (!isExistsSaveFolder()) {
             createSaveFolder();
@@ -143,10 +160,18 @@ public class JSONFileManager {
         return wordList;
     }
 
+    /**
+     * load the list of words from the save file
+     * @return a WordList object consisting of items based on the save file system
+     */
     public WordList loadListFromJSONFile() {
         return parseJSONStringToList(readSavedString());
     }
 
+    /**
+     * save the list of words to the save file in form of json
+     * @param wordList the list of words to be saved to the save file
+     */
     public void saveListToJSONFile(WordList wordList) {
         writeSavedString(parseListToJSONString(wordList));
     }

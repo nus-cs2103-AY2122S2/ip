@@ -1,5 +1,8 @@
 package duke.parsers;
 
+/**
+ * Defines the types of inputs as well as the labels representing it.
+ */
 public enum InputType {
     BYE("bye"),
     LIST("list"),
