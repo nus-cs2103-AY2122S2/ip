@@ -129,7 +129,7 @@ public class TaskList {
                         .anyMatch(y -> x.description.contains(y)))
                 .collect(Collectors.toCollection(ArrayList<Task>::new));
 
-        System.out.println("Here are the relevant tasks found~ ");
+        System.out.println("Here are the matching tasks found~ ");
         matchingTasks.forEach(System.out::println);
     }
 }
