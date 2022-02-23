@@ -20,7 +20,25 @@ import java.util.Arrays;
 public class Duke {
     private static final String LINE_BREAK = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private static ArrayList<Task> masterList = new ArrayList<>();
-    ;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+
+    public Duke(String filePath) {
+        this.ui = new Ui(LINE_BREAK);
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        this.ui.initUi();
+    }
     /**
      * Prints line break.
      * @return void
@@ -123,7 +141,8 @@ public class Duke {
         return tempTask;
     }
 
-    public static void main(String[] args) throws Exception, IOException {
+    public static void main(String[] args) throws Exception, IOException, DukeException {
+
         String home =  System.getProperty("user.home"); // base directory
         // following code should give me [HOME_DIRECTORY]/Desktop/iP/data
         java.nio.file.Path path = java.nio.file.Paths.get(home,"Desktop", "iP", "data");
@@ -226,7 +245,7 @@ public class Duke {
 
 
             default:
-                System.out.println("Invalid input: " + input);
+                throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means!");
             }
         } while (!ifBye);
         printLineBreak();
