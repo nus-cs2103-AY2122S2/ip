@@ -38,6 +38,21 @@ public class DukeUI {
     }
 
     /**
+     * Display the tasks found with the matching keyword in the list of tasks.
+     * @param wordListItems array of list of tasks
+     * @param keyword the keyword
+     */
+    public void displayFoundItem(WordListItem[] wordListItems, String keyword) {
+        System.out.println("  ------------------------------------");
+        System.out.println("  Here are the tasks matching '" + keyword + "':");
+        for (WordListItem wordListItem: wordListItems) {
+            System.out.println("    " + wordListItem);
+        }
+        System.out.println("  You have " + wordListItems.length + " matching results.");
+        System.out.println("  ------------------------------------");
+    }
+
+    /**
      * Echo a task when added to the wordlist.
      * @param wordListItem - the task
      * @param wordList - the wordList

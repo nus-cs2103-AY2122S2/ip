@@ -28,7 +28,7 @@ public class InputParser {
                 if (inputType == InputType.BYE || inputType == InputType.LIST) {
                     value = new String[]{};
                 } else if (inputType == InputType.TODO || inputType == InputType.MARK
-                        || inputType == InputType.UNMARK || inputType == InputType.DELETE) {
+                        || inputType == InputType.UNMARK || inputType == InputType.DELETE || inputType == InputType.FIND) {
                     try {
                         String description = input.substring(inputType.label.length() + 1).trim();
                         if (description.isBlank()) {

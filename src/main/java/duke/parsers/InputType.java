@@ -11,6 +11,7 @@ public enum InputType {
     TODO("todo"),
     MARK("mark"),
     UNMARK("unmark"),
+    FIND("find"),
     DELETE("delete"),
     NONE("none");
 

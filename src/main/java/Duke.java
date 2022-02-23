@@ -104,6 +104,10 @@ public class Duke {
             case UNMARK:
                 wordList.unmarkItem(Integer.parseInt(value[0]));
                 break;
+            case FIND:
+                WordListItem[] wordListItems = wordList.findItems(value[0]);
+                ui.displayFoundItem(wordListItems, value[0]);
+                break;
             case TODO:
                 wordListItem = wordList.storeTodo(value[0], false);
                 ui.echoAddedItem(wordListItem, wordList);

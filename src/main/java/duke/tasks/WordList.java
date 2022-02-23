@@ -111,8 +111,8 @@ public class WordList {
      * @return an array of tasks.
      */
     public WordListItem[] findItems(String keyword) {
-        return (WordListItem[]) wordList.stream().filter(wordListItem -> wordListItem.getDescription().contains(keyword))
-                .toArray();
+        return wordList.stream().filter(wordListItem -> wordListItem.getDescription().contains(keyword))
+                .toArray(WordListItem[]::new);
     }
 
     /**
