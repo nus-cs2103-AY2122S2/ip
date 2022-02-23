@@ -1,7 +1,11 @@
 package juke;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.stage.Stage;
 import juke.command.CommandHandler;
 import juke.common.Storage;
@@ -79,10 +83,21 @@ public class Juke extends Application {
      */
     @Override
     public void stop() throws Exception {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        Task<Void> pauseOnExit = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                // Seems like this still causes thread breaks on JavaFX application thread
+                Thread.sleep(2000);
+                return null;
+            }
+        };
+        ExecutorService executor = Executors.newFixedThreadPool(1);
+        executor.submit(pauseOnExit);
+        while (true) {
+            if (pauseOnExit.isDone()) {
+                executor.shutdown();
+                break;
+            }
         }
         super.stop();
     }
