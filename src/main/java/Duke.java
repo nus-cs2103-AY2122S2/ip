@@ -16,6 +16,16 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    private static void taskAddedMessage(Task task) {
+        System.out.println("Got it. I've added this task:\n  " + task
+                + "\nNow you have " + taskList.size() + " tasks in the list.");
+    }
+
+    private static void addTaskToTaskList(Task task) {
+        taskList.add(task);
+        taskAddedMessage(task);
+    }
+
     private static void viewTaskList() {
         System.out.println("Here are the tasks in your list:");
         ListIterator<Task> iterator = taskList.listIterator();
@@ -32,6 +42,18 @@ public class Duke {
             Scanner scanner = new Scanner(System.in);
             command = scanner.next().toUpperCase();
             switch (command) {
+            case "TODO":
+                String todoTask = scanner.nextLine().trim();
+                addTaskToTaskList(new Todo(todoTask));
+                break;
+            case "DEADLINE":
+                String[] deadlineTask = scanner.nextLine().trim().split(" /by ");
+                addTaskToTaskList(new Deadline(deadlineTask[0], deadlineTask[1]));
+                break;
+            case "EVENT":
+                String[] eventTask = scanner.nextLine().trim().split(" /at ");
+                addTaskToTaskList(new Event(eventTask[0], eventTask[1]));
+                break;
             case "LIST":
                 viewTaskList();
                 break;
@@ -46,9 +68,6 @@ public class Duke {
             case "BYE":
                 break;
             default:
-                String taskToBeAdded = command + scanner.nextLine().toUpperCase();
-                taskList.add(new Task(taskToBeAdded));
-                System.out.println("added: " + taskToBeAdded);
             }
         }
         farewellMessage();
