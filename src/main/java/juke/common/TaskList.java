@@ -69,6 +69,13 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Deletes all tasks in the list.
+     */
+    public void clear() {
+        taskList.clear();
+    }
+
+    /**
      * Returns the task at a specific index.
      * Returns null if index out of bounds.
      *

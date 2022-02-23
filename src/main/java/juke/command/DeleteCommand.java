@@ -12,6 +12,9 @@ public class DeleteCommand extends Command {
     private static final String SUCCESS_MESSAGE = "Successfully deleted task: %s.";
     private static final String COMMAND_NAME = "delete";
 
+    private static final String ALL_PARAMETER = "a";
+    private static final String ALL_SUCCESS_MESSAGE = "Successfully deleted all tasks.";
+
     /**
      * Checks if the parameters and arguments are valid.
      * Requires an integer relating to the index of the task to delete.
@@ -23,7 +26,8 @@ public class DeleteCommand extends Command {
         if (hasUnnecessaryParameters()) {
             return this;
         }
-        if (!hasDefaultArgument()) {
+        if (!hasDefaultArgument()
+                && !hasParameter(ALL_PARAMETER)) {
             setErroneousResult(new JukeMissingArgumentException(COMMAND_NAME));
             return this;
         }
@@ -37,7 +41,8 @@ public class DeleteCommand extends Command {
      */
     private boolean hasUnnecessaryParameters() {
         for (String param : paramArgs.keySet()) {
-            if (isDefaultParameter(param)) {
+            if (isDefaultParameter(param)
+                    || (param.equals(ALL_PARAMETER) && !hasArgument(ALL_PARAMETER))) {
                 continue;
             }
             setErroneousResult(new JukeInvalidParameterException(param));
@@ -81,6 +86,12 @@ public class DeleteCommand extends Command {
      * @throws NumberFormatException Throws if cannot parse to integer.
      */
     private void deleteTask() throws NumberFormatException {
+        if (hasParameter(ALL_PARAMETER)) {
+            assert !hasArgument(ALL_PARAMETER);
+            juke.getTaskList().clear();
+            setSuccessfulResult(ALL_SUCCESS_MESSAGE);
+            return;
+        }
         int index = Integer.parseInt(getDefaultArgument()) - 1;
         Task task = juke.getTaskList().remove(index);
         setSuccessfulResult(String.format(SUCCESS_MESSAGE, task.getDescription()));

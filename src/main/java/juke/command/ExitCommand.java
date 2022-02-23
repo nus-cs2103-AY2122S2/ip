@@ -59,8 +59,8 @@ public class ExitCommand extends Command {
             return this;
         }
         assert isEmpty();
-        juke.exit();
         setSuccessfulResult(SUCCESS_MESSAGE);
+        juke.exit();
         return this;
     }
 }

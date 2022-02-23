@@ -67,8 +67,8 @@ public class EditCommand extends Command {
     private boolean hasUnnecessaryParameters() {
         for (String param : this.paramArgs.keySet()) {
             if (!isDefaultParameter(param)
-                && !param.equals(DESCRIPTION_PARAMETER)
-                && !param.equals(TIME_PARAMETER)) {
+                    && !param.equals(DESCRIPTION_PARAMETER)
+                    && !param.equals(TIME_PARAMETER)) {
                 setErroneousResult(new JukeInvalidParameterException(param));
                 return true;
             }

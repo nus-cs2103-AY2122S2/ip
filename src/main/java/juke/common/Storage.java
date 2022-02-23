@@ -41,8 +41,8 @@ public class Storage {
             "T;false;Delete tasks with delete.",
             "T;false;Edit tasks with edit. Do specify a description with '-d' or date with 't'.",
             "T;false;To exit Juke, use command bye.",
-            "T;false;Have fun using Juke! For addition information check the user guide at "
-                    + "spyobird.github.io/ip.");
+            "T;false;Have fun using Juke! To clear all tasks use delete -a. "
+                    + "For addition information check the user guide at spyobird.github.io/ip.");
 
     /**
      * Reference to the Juke instance.
