@@ -14,8 +14,9 @@ Graphical User Interface (GUI).
 2. Download the latest `heylo.jar` from the [Releases](https://github.com/ckcherry23/ip/releases) page of Heylo's
    repository.
 
-3. Double-click the downloaded file to start the app. The GUI similar to this should appear.<br>
-   ![HeyloUi](./Ui.png)
+3. Double-click the downloaded file to start the app. The interface similar to the following should appear.
+
+![HeyloUi](./Ui.png)
 
 4. Refer to the [Usage](#usage) below for the details of each command supported.
 
@@ -27,26 +28,29 @@ Graphical User Interface (GUI).
 
 ## Features
 
-- [x] Viewing all tasks 🤓
-- [x] Adding todos 📝
-- [x] Noting events 🎃
-- [x] Managing deadlines 📅
-- [x] Marking tasks as done ✅
-- [x] Deleting tasks 🗑
-- [x] Searching for tasks 🔍
-- [x] Prioritising tasks 🌟
+1. [x] Viewing all tasks 🤓
+2. [x] Adding todos 📝
+3. [x] Noting events 🎃
+4. [x] Managing deadlines 📅
+5. [x] Marking tasks as (un)done ✅
+6. [x] Deleting tasks 🗑
+7. [x] Searching for tasks 🔍
+8. [x] Prioritising tasks 🌟
 
+Why Heylo?
 
 - [x] User-friendly 😇
 - [x] Optimised for keyboard lovers 😍
 - [x] Cross-platform support 👩🏽‍💻
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Usage
 
 **Notes about the command format**<br>
 
 * Words in `<Angular brackets>` are the details to be supplied by the user without the brackets.<br>
-  e.g. in `todo <description>`, `todo` is a parameter which can be used as `todo complete quiz 3`.
+  e.g. in `todo <description>`, `todo` is a parameter which can be used as `todo Complete quiz 3`.
 
 
 * Extra details for commands that do not take in parameters (such as `list`) will be ignored.<br>
@@ -145,7 +149,6 @@ Format: `no-p <index>`
 
 * The `index` is the number of the task you want to mark as done in the list displayed by Heylo with the `list` command.
 
-
 ### Exit the chatbot: `bye`
 
 Saves all your tasks and exits the application.
@@ -165,86 +168,20 @@ from the file that was created by Heylo in your previous computer
 
 ## Command summary
 
-**List** | `list`
+| Action              | Format                                    | Example                             |
+|---------------------|-------------------------------------------|-------------------------------------|
+| **List**            | `list`                                    | `list`                              |
+| **Todo**            | `todo <description>`                      | `todo Study for midterms`           |
+| **Event**           | `event <description> /at <yyyy-mm-dd>`    | `event Halloween /at 2022-10-31`    |
+| **Deadline**        | `deadline <description> /by <yyyy-mm-dd>` | `deadline Submit iP /by 2022-02-18` |                      
+| **Mark**            | `mark <index>`                            | `mark 2`                            |
+| **Unmark**          | `unmark <index>`                          | `unmark 11`                         |
+| **Delete**          | `delete <index>`                          | `delete 5`                          |
+| **Find**            | `find <search-string>`                    | `find Hallow`                       |
+| **Low priority**    | `low <index>`                             | `low 7`                             |                           
+| **Medium priority** | `med <index>`                             | `med 12`                            |
+| **High priority**   | `high <index>`                            | `high 1`                            |
+| **No priority**     | `no-p <index>`                            | `no-p 12`                           |
+| **Exit**            | `bye`                                     | `bye`                               |
 
-**Todo** | `todo <description>`
-
-**Event** | `event <description> /at <yyyy-mm-dd>`
-
-**Deadline** | `deadline <description> /by <yyyy-mm-dd>`
-
-**Mark** | `mark <index>`
-
-**Unmark** | `unmark <index>`
-
-**Delete** | `delete <index>`
-
-**Find** | `find <search-string>`
-
-**Low priority** | `low <index>`
-
-**Medium priority** | `med <index>`
-
-**High priority** | `high <index>`
-
-**No priority** | `no-p <index>`
-
-**Exit** | `bye`
-
-[//]: # (# User Guide)
-
-[//]: # ()
-
-[//]: # (## Features)
-
-[//]: # ()
-
-[//]: # (### Feature-ABC)
-
-[//]: # ()
-
-[//]: # (Description of the feature.)
-
-[//]: # ()
-
-[//]: # (### Feature-XYZ)
-
-[//]: # ()
-
-[//]: # (Description of the feature.)
-
-[//]: # ()
-
-[//]: # (## Usage)
-
-[//]: # ()
-
-[//]: # (### `Keyword` - Describe action)
-
-[//]: # ()
-
-[//]: # (Describe the action and its outcome.)
-
-[//]: # ()
-
-[//]: # (Example of usage:)
-
-[//]: # ()
-
-[//]: # (`keyword &#40;optional arguments&#41;`)
-
-[//]: # ()
-
-[//]: # (Expected outcome:)
-
-[//]: # ()
-
-[//]: # (Description of the outcome.)
-
-[//]: # ()
-
-[//]: # (```)
-
-[//]: # (expected output)
-
-[//]: # (```)
+--------------------------------------------------------------------------------------------------------------------
