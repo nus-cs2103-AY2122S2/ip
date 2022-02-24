@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import mnsky.core.Parser;
 import org.junit.jupiter.api.Test;
+
+import mnsky.core.Parser;
 
 public class ParserTest {
     @Test
@@ -19,7 +20,7 @@ public class ParserTest {
         expected.add(new ArrayList<>(List.of("mark", "400")));
         expected.add(new ArrayList<>(List.of("unmark", "300")));
         expected.add(new ArrayList<>(List.of("delete", "12489")));
-        expected.add(new ArrayList<>(List.of("invalid")));
+        expected.add(new ArrayList<>(List.of("vioivvv")));
 
         for (int i = 0; i < inputs.length; i++) {
             assertEquals(expected.get(i), Parser.parseInput(inputs[i]));
@@ -36,8 +37,8 @@ public class ParserTest {
         };
 
         ArrayList<ArrayList<String>> expected = new ArrayList<>();
-        expected.add(new ArrayList<>(List.of("task", "idk")));
-        expected.add(new ArrayList<>(List.of("task", "a b c 1 2 3")));
+        expected.add(new ArrayList<>(List.of("todo", "idk", "")));
+        expected.add(new ArrayList<>(List.of("todo", "a b c 1 2 3", "")));
         expected.add(new ArrayList<>(List.of("deadline", "some thing", "att 123")));
         expected.add(new ArrayList<>(List.of("event", "what are you talking about   ???", "12:34 pm december 15")));
 
