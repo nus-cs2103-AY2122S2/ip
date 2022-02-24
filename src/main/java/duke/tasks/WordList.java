@@ -78,21 +78,25 @@ public class WordList {
     /**
      * Mark the task with the index/itemNumber in the wordlist as done.
      * @param itemNumber index of the task in the wordlist.
+     * @return string response statement
      */
-    public void markItem(int itemNumber) {
+    public String markItem(int itemNumber) {
         this.wordList.get(itemNumber - 1).markItem();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("  " + this.wordList.get(itemNumber - 1));
+        String s = "Nice! I've marked this task as done: \n";
+        s += "  " + this.wordList.get(itemNumber - 1);
+        return s;
     }
 
     /**
      * Mark the task with the index/itemNumber in the wordlist as not done.
      * @param itemNumber index of the task in the wordlist.
+     * @return string response statement
      */
-    public void unmarkItem(int itemNumber) {
+    public String unmarkItem(int itemNumber) {
         this.wordList.get(itemNumber - 1).unmarkItem();
-        System.out.println("Nice! I've marked this task as not done: ");
-        System.out.println("  " + this.wordList.get(itemNumber - 1));
+        String s = "Nice! I've marked this task as not done: \n";
+        s += "  " + this.wordList.get(itemNumber - 1);
+        return s;
     }
 
     /**
@@ -135,12 +139,11 @@ public class WordList {
     public String toString() {
         int i = 1;
         String str = "";
-        str += "------------------------------------\n";
+        str += "Here is your current tasks:\n";
         for(WordListItem wordListItem: this.wordList) {
             str += i + ". " + wordListItem + "\n";
             i++;
         }
-        str += "------------------------------------\n";
         return str;
     }
 }

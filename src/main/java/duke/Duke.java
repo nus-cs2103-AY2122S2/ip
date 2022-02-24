@@ -1,3 +1,5 @@
+package duke;
+
 import duke.managers.DateTimeManager;
 import duke.parsers.InputParser;
 import duke.parsers.InputType;
@@ -15,6 +17,9 @@ import java.util.Scanner;
  * Duke is highly customized for those used to the CLI.
  */
 public class Duke {
+    private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String ERROR_MESSAGE_PREFIX = "Oh no! Duke is encountering a problem :(\n";
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duked \nWhat can I do for you?";
     private WordList wordList;
     private JSONFileManager jsonFileManager;
     private DukeUI ui;
@@ -91,43 +96,65 @@ public class Duke {
      * @see InputType
      * @param inputType type of the input
      * @param value value of the input
+     * @return
      */
-    public void processInput(InputType inputType, String[] value) {
+    public String processInput(InputType inputType, String[] value) {
         WordListItem wordListItem;
         switch(inputType) {
             case LIST:
-                ui.display(wordList);
-                break;
+                return wordList.toString();
             case MARK:
-                wordList.markItem(Integer.parseInt(value[0]));
-                break;
+                return wordList.markItem(Integer.parseInt(value[0]));
             case UNMARK:
-                wordList.unmarkItem(Integer.parseInt(value[0]));
-                break;
+                return wordList.unmarkItem(Integer.parseInt(value[0]));
             case FIND:
                 WordListItem[] wordListItems = wordList.findItems(value[0]);
-                ui.displayFoundItem(wordListItems, value[0]);
-                break;
+                return ui.displayFoundItem(wordListItems, value[0]);
             case TODO:
                 wordListItem = wordList.storeTodo(value[0], false);
-                ui.echoAddedItem(wordListItem, wordList);
-                break;
+                return ui.echoAddedItem(wordListItem, wordList);
             case DEADLINE:
                 wordListItem = wordList.storeDeadline(value[0], DateTimeManager.parseString(value[1]), false);
-                ui.echoAddedItem(wordListItem, wordList);
-                break;
+                return ui.echoAddedItem(wordListItem, wordList);
             case EVENT:
                 wordListItem = wordList.storeEvent(value[0], DateTimeManager.parseString(value[1]), false);
-                ui.echoAddedItem(wordListItem, wordList);
-                break;
+                return ui.echoAddedItem(wordListItem, wordList);
             case BYE:
-                break;
+                return BYE_MESSAGE;
             case DELETE:
                 wordListItem = wordList.removeItem(Integer.parseInt(value[0]));
-                ui.echoRemovedItem(wordListItem, wordList);
+                return ui.echoRemovedItem(wordListItem, wordList);
             case NONE:
                 break;
         }
+        return "Something is wrong with Duke :O!!";
+    }
+
+    public String getWelcomeMessage() {
+        return WELCOME_MESSAGE;
+    }
+
+    public String getResponse(String userInput) {
+        String properResponse = "";
+        try {
+            checkEmpty(userInput);
+            Object[] parseResult = InputParser.parseInput(userInput);
+            InputType inputType = (InputType) parseResult[0];
+            String[] value = (String[]) parseResult[1];
+
+            properResponse = processInput(inputType, value);
+            if (inputType == InputType.BYE) {
+                return BYE_MESSAGE;
+            }
+            this.jsonFileManager.saveListToJSONFile(wordList);
+        } catch (Exception e) {
+            return ERROR_MESSAGE_PREFIX + e.getMessage();
+        }
+        return properResponse;
+    }
+
+    public boolean isByeMessage(String response) {
+        return BYE_MESSAGE.equals(response);
     }
 
     private static void checkEmpty(String input) throws EmptyInputException {
@@ -136,3 +163,4 @@ public class Duke {
         }
     }
 }
+
