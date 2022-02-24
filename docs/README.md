@@ -5,6 +5,24 @@
 Heylo is a **desktop app for managing your day-to-day tasks with a friendly chatbot** while still having the speed of a
 Graphical User Interface (GUI).
 
+-   [Quick start](#quick-start)
+-   [Features](#features)
+-   [Usage](#usage)
+    -   [Viewing all tasks: `list`](#viewing-all-tasks-list)
+    -   [Adding todos : `todo`](#adding-todos-todo)
+    -   [Noting events: `event`](#noting-events-event)
+    -   [Managing deadlines : `deadline`](#managing-deadlines-deadline)
+    -   [Marking tasks as done : `mark`](#marking-tasks-as-done-mark)
+    -   [Marking tasks as not done : `unmark`](#marking-tasks-as-not-done-unmark)
+    -   [Deleting tasks : `delete`](#deleting-tasks-delete)
+    -   [Searching for tasks: `find`](#searching-for-tasks-find)
+    -   [Mark tasks as low priority: `low`](#mark-tasks-as-low-priority-low)
+    -   [Mark tasks as medium priority: `med`](#mark-tasks-as-medium-priority-med)
+    -   [Mark tasks as high priority: `high`](#mark-tasks-as-high-priority-high)
+    -   [Clear task priority: `no-p`](#clear-task-priority-no-p)
+    -   [Exit the chatbot: `bye`](#exit-the-chatbot-bye)
+-   [Command summary](#command-summary)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -37,7 +55,7 @@ Graphical User Interface (GUI).
 7. [x] Searching for tasks 🔍
 8. [x] Prioritising tasks 🌟
 
-Why Heylo?
+**Why Heylo?**
 
 - [x] User-friendly 😇
 - [x] Optimised for keyboard lovers 😍
