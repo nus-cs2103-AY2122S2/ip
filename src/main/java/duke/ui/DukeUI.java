@@ -38,44 +38,47 @@ public class DukeUI {
     }
 
     /**
-     * Display the tasks found with the matching keyword in the list of tasks.
+     * Returns the string response of the tasks found with the matching keyword in the list of tasks.
      * @param wordListItems array of list of tasks
      * @param keyword the keyword
+     * @return
      */
-    public void displayFoundItem(WordListItem[] wordListItems, String keyword) {
-        System.out.println("  ------------------------------------");
-        System.out.println("  Here are the tasks matching '" + keyword + "':");
+    public String displayFoundItem(WordListItem[] wordListItems, String keyword) {
+        String s = "";
+        s += "  Here are the tasks matching '" + keyword + "':\n";
         for (WordListItem wordListItem: wordListItems) {
-            System.out.println("    " + wordListItem);
+            s += "    " + wordListItem +"\n";
         }
-        System.out.println("  You have " + wordListItems.length + " matching results.");
-        System.out.println("  ------------------------------------");
+        s += "  You have " + wordListItems.length + " matching results.";
+        return s;
     }
 
     /**
-     * Echo a task when added to the wordlist.
+     * Returns the string response of a task when added to the wordlist.
      * @param wordListItem - the task
      * @param wordList - the wordList
+     * @return
      */
-    public void echoAddedItem(WordListItem wordListItem, WordList wordList) {
-        System.out.println("  ------------------------------------");
-        System.out.println("  Got it. I've added this task: ");
-        System.out.println("    " + wordListItem);
-        System.out.println("  You currently have " + wordList.length() + " tasks in your list");
-        System.out.println("  ------------------------------------");
+    public String echoAddedItem(WordListItem wordListItem, WordList wordList) {
+        String s = "";
+        s += "  Got it. I've added this task: \n";
+        s += "    " + wordListItem + "\n";
+        s += "  You currently have " + wordList.length() + " tasks in your list \n";
+        return s;
     }
 
     /**
-     * Echo a task when removed from the wordlist.
+     * Returns the string response of a task when removed from the wordlist.
      * @param wordListItem - the task
      * @param wordList - the wordList
+     * @return
      */
-    public void echoRemovedItem(WordListItem wordListItem, WordList wordList) {
-        System.out.println("  ------------------------------------");
-        System.out.println("  Noted. I've removed this task: ");
-        System.out.println("    " + wordListItem);
-        System.out.println("  You currently have " + wordList.length() + " tasks in your list");
-        System.out.println("  ------------------------------------");
+    public String echoRemovedItem(WordListItem wordListItem, WordList wordList) {
+        String s = "";
+        s += "  Got it. I've removed this task: \n";
+        s += "    " + wordListItem + "\n";
+        s += "  You currently have " + wordList.length() + " tasks in your list \n";
+        return s;
     }
 
     /**

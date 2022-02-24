@@ -4,6 +4,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import duke.Duke;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
