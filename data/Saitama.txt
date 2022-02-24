@@ -1,0 +1,7 @@
+D false null 2022-02-12 CS2105 Assignment 1 /by 18/02/2022 23:59
+D false --rw 2022-02-20 CS2107 Tutorial /by 26/02/2022 09:00
+E false --rb 2022-02-20 GEQ Tutorial /at CREATE
+D true --rm 2022-02-13 CS2107 Tutorial /by 28/02/2022 09:00
+D false --rw 2022-02-20 cs2011 /by 27/02/2022 10:00
+D false null 2022-02-14 cs2103 /by 20/12/2022 23:00
+T false --rw 2022-02-20 eat

@@ -1,0 +1,17 @@
+todo eat
+deadline cs2103t ip /by 20/01/2022
+event party /at my house
+deadline cs2105
+event ceremony
+list
+mark 1
+unmark 1
+mark 2
+list
+delete 4
+list
+FAKE COMMANDDDDDDDDDDD
+delete
+mark
+unmark
+bye

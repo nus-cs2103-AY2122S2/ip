@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.shape.Circle?>
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="148.0" prefWidth="462.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <Text fx:id="dialog" text="Text" textAlignment="RIGHT" wrappingWidth="352.0">
+         <font>
+            <Font name="Comic Sans MS" size="14.0" />
+         </font>
+        <Insets left="6.0" right="8.0" />
+         <HBox.margin>
+            <Insets left="6.0" right="8.0" />
+         </HBox.margin>
+    </Text>
+    <Circle fx:id="displayPicture" radius="40.0">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+    </Circle>
+  </children>
+  <padding>
+    <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+  </padding>
+</fx:root>
