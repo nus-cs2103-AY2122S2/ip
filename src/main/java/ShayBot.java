@@ -19,7 +19,9 @@ public class ShayBot {
     private static final String UNMARK_MESSAGE = "Aight, I've marked the following task as not done yet:\n%s";
     private static final String EXIT_MESSAGE = "Bye~! See you next time!";
     private static final String TASK_ADDITION_MESSAGE = "Hiya! I've added:\n%s\nYou now have %d task(s)!";
+    private static final String TASK_DELETION_MESSAGE = "Hiya! I've deleted:\n%s\nYou now have %d task(s)!";
     private static final String ERROR_MESSAGE = "I don't understand what '%s' means";
+    private static final String INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE = "Task '%s' is out of bounds (Tasks are 1-indexed!)";
 
     private final OutputHandler outputHandler;
     private final TaskList taskList;
@@ -49,6 +51,9 @@ public class ShayBot {
                 break;
             case "add":
                 addBasicTask(remainingInput);
+                break;
+            case "delete":
+                deleteTask(remainingInput);
                 break;
             case "todo":
                 addTodoTask(remainingInput);
@@ -164,22 +169,27 @@ public class ShayBot {
         outputHandler.print(taskList.toString());
     }
 
-    private void markTask(int number, boolean isComplete) {
+    private void markTask(String number, boolean isComplete) {
         try {
-            Task markedTask = taskList.markTask(number, isComplete);
+            Task markedTask = taskList.markTask(Integer.parseInt(number), isComplete);
             outputHandler.print(String.format(isComplete ? MARK_MESSAGE : UNMARK_MESSAGE, markedTask));
         } catch (IndexOutOfBoundsException e) {
-            outputHandler.printError(String.format("Task '%s' is out of bounds (Tasks are 1-indexed!)", e.getMessage()));
+            outputHandler.printError(String.format(INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE, e.getMessage()));
         } catch (TaskNoChangeException e) {
             outputHandler.printError(String.format("%s", e.getMessage()));
+        } catch (NumberFormatException e) {
+            outputHandler.printError(String.format(ERROR_MESSAGE, "Task '" + number + "'"));
         }
     }
 
-    private void markTask(String number, boolean isComplete) {
+    private void deleteTask(String number) {
         try {
-            markTask(Integer.parseInt(number), isComplete);
+            Task deletedTask = taskList.deleteTask(Integer.parseInt(number));
+            outputHandler.print(String.format(TASK_DELETION_MESSAGE, deletedTask, taskList.getSize()));
+        } catch (IndexOutOfBoundsException e) {
+            outputHandler.printError(String.format(INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE, e.getMessage()));
         } catch (NumberFormatException e) {
-            outputHandler.printError(String.format("I'm not sure what you mean by Task '%s'", number));
+            outputHandler.printError(String.format(ERROR_MESSAGE, "Task '" + number + "'"));
         }
     }
 
