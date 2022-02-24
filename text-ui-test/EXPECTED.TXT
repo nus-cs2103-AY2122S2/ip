@@ -11,13 +11,19 @@ Hiya! I'm ShayBot
 How may I help you?
 -----------------------------------------------
 -----------------------------------------------
-Hiya! I've added: [ ] sample event
+Hiya! I've added:
+[ ] sample event
+You now have 1 task(s)!
 -----------------------------------------------
 -----------------------------------------------
-Hiya! I've added: [T] [ ] borrow books
+Hiya! I've added:
+[T] [ ] borrow books
+You now have 2 task(s)!
 -----------------------------------------------
 -----------------------------------------------
-Hiya! I've added: [D] [ ] return books (by: 6/6/2022 4pm)
+Hiya! I've added:
+[D] [ ] return books (by: 6/6/2022 4pm)
+You now have 3 task(s)!
 -----------------------------------------------
 -----------------------------------------------
 1. [ ] sample event
@@ -47,7 +53,9 @@ Aight, I've marked the following task as not done yet:
 3. [D] [ ] return books (by: 6/6/2022 4pm)
 -----------------------------------------------
 -----------------------------------------------
-Hiya! I've added: [E] [ ] random event (at: 6/7/2022 4pm - 6pm)
+Hiya! I've added:
+[E] [ ] random event (at: 6/7/2022 4pm - 6pm)
+You now have 4 task(s)!
 -----------------------------------------------
 -----------------------------------------------
 Well done! I've marked the following task as done:

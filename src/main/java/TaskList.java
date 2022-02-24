@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import model.Task;
+import model.TaskNoChangeException;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -12,7 +13,7 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public Task markTask(int index, boolean isComplete) throws IndexOutOfBoundsException {
+    public Task markTask(int index, boolean isComplete) throws IndexOutOfBoundsException, TaskNoChangeException {
         if (index <= 0 || index > tasks.size()) {
             throw(new IndexOutOfBoundsException(index + ""));
         }

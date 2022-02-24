@@ -1,7 +1,4 @@
-import model.DeadlineTask;
-import model.EventTask;
-import model.Task;
-import model.TodoTask;
+import model.*;
 import util.OutputHandler;
 
 import java.util.ArrayList;
@@ -18,10 +15,11 @@ public class ShayBot {
             + "          ╰━━╯";
     private static final String INTRO_MESSAGE = "Hiya! I'm ShayBot\n"
             + "How may I help you?";
-    private static final String ERROR_MESSAGE = "I'm not sure what you mean by \"%s\"...";
     private static final String MARK_MESSAGE = "Well done! I've marked the following task as done:\n%s";
     private static final String UNMARK_MESSAGE = "Aight, I've marked the following task as not done yet:\n%s";
     private static final String EXIT_MESSAGE = "Bye~! See you next time!";
+    private static final String TASK_ADDITION_MESSAGE = "Hiya! I've added:\n%s\nYou now have %d task(s)!";
+    private static final String ERROR_MESSAGE = "I don't understand what '%s' means";
 
     private final OutputHandler outputHandler;
     private final TaskList taskList;
@@ -72,7 +70,7 @@ public class ShayBot {
                 markTask(remainingInput, false);
                 break;
             default:
-                printError(operator);
+                outputHandler.printError(String.format(ERROR_MESSAGE, operator));
                 break;
             }
         }
@@ -93,7 +91,7 @@ public class ShayBot {
 
     private void addTask(Task task) {
         taskList.addTask(task);
-        outputHandler.print("Hiya! I've added: " + task);
+        outputHandler.print(String.format(TASK_ADDITION_MESSAGE, task, taskList.getSize()));
     }
 
     private void addBasicTask(String task) {
@@ -107,29 +105,33 @@ public class ShayBot {
     }
 
     private void addDeadlineTask(String taskBody) {
-        String[] taskParameters = parseTaskBody(taskBody);
-        if (taskParameters.length != 3) {
-            printError(taskBody);
-            return;
-        } else if (!taskParameters[1].equals("by")) {
-            printError(taskParameters[1]);
-            return;
+        try {
+            String[] taskParameters = parseTaskBody(taskBody);
+            if (taskParameters.length != 3) {
+                throw(new ShayBotException(String.format(ERROR_MESSAGE, taskBody)));
+            } else if (!taskParameters[1].equals("by")) {
+                throw(new ShayBotException(String.format(ERROR_MESSAGE, taskParameters[1])));
+            }
+            Task newTask = new DeadlineTask(taskParameters[0], taskParameters[2]);
+            addTask(newTask);
+        } catch (ShayBotException e) {
+            outputHandler.printError(e.getMessage());
         }
-        Task newTask = new DeadlineTask(taskParameters[0], taskParameters[2]);
-        addTask(newTask);
     }
 
     private void addEventTask(String taskBody) {
-        String[] taskParameters = parseTaskBody(taskBody);
-        if (taskParameters.length != 3) {
-            printError(taskBody);
-            return;
-        } else if (!taskParameters[1].equals("at")) {
-            printError(taskParameters[1]);
-            return;
+        try {
+            String[] taskParameters = parseTaskBody(taskBody);
+            if (taskParameters.length != 3) {
+                throw(new ShayBotException(String.format(ERROR_MESSAGE, taskBody)));
+            } else if (!taskParameters[1].equals("at")) {
+                throw(new ShayBotException(String.format(ERROR_MESSAGE, taskParameters[1])));
+            }
+            Task newTask = new EventTask(taskParameters[0], taskParameters[2]);
+            addTask(newTask);
+        } catch (ShayBotException e) {
+            outputHandler.printError(e.getMessage());
         }
-        Task newTask = new EventTask(taskParameters[0], taskParameters[2]);
-        addTask(newTask);
     }
 
     private String[] parseTaskBody(String task) {
@@ -162,16 +164,14 @@ public class ShayBot {
         outputHandler.print(taskList.toString());
     }
 
-    private void printError(String errorMessage) {
-        outputHandler.print(String.format(ERROR_MESSAGE, errorMessage));
-    }
-
     private void markTask(int number, boolean isComplete) {
         try {
             Task markedTask = taskList.markTask(number, isComplete);
             outputHandler.print(String.format(isComplete ? MARK_MESSAGE : UNMARK_MESSAGE, markedTask));
         } catch (IndexOutOfBoundsException e) {
-            printError(String.format("Task '%s'", e.getMessage()));
+            outputHandler.printError(String.format("Task '%s' is out of bounds (Tasks are 1-indexed!)", e.getMessage()));
+        } catch (TaskNoChangeException e) {
+            outputHandler.printError(String.format("%s", e.getMessage()));
         }
     }
 
@@ -179,7 +179,7 @@ public class ShayBot {
         try {
             markTask(Integer.parseInt(number), isComplete);
         } catch (NumberFormatException e) {
-            printError(number);
+            outputHandler.printError(String.format("I'm not sure what you mean by Task '%s'", number));
         }
     }
 

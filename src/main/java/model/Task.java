@@ -3,6 +3,7 @@ package model;
 public class Task {
     private static final String FINISHED_STRING = "[X]";
     private static final String UNFINISHED_STRING = "[ ]";
+    private static final String MARKING_ERROR_MESSAGE = "Task already %sed";
     private final String task;
     private boolean isFinished;
 
@@ -19,11 +20,17 @@ public class Task {
         return isFinished;
     }
 
-    public void markComplete() {
+    public void markComplete() throws TaskNoChangeException {
+        if (isFinished) {
+            throw(new TaskNoChangeException(String.format(MARKING_ERROR_MESSAGE, "mark")));
+        }
         isFinished = true;
     }
 
-    public void markIncomplete() {
+    public void markIncomplete() throws TaskNoChangeException {
+        if (!isFinished) {
+            throw(new TaskNoChangeException(String.format(MARKING_ERROR_MESSAGE, "unmark")));
+        }
         isFinished = false;
     }
 

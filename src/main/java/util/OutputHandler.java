@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class OutputHandler {
     private static final String LINE_BORDER = "-----------------------------------------------";
-
+    private static final String ERROR_MESSAGE = "Uh oh! %s :(";
 
     public void print(ArrayList<String> texts, boolean hasBorder) {
         if (hasBorder) {
@@ -30,5 +30,9 @@ public class OutputHandler {
 
     public void print(String text) {
         print(text, true);
+    }
+
+    public void printError(String text) {
+        print(String.format(ERROR_MESSAGE, text));
     }
 }
