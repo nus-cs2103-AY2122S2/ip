@@ -1,7 +1,12 @@
 import java.io.*;
+import java.nio.Buffer;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.util.Scanner;
+import java.util.Arrays;
+
 
 /**
  * Project Duke is a educational software project designed to take you
@@ -14,7 +19,8 @@ import java.nio.file.Files;
  */
 public class Duke {
     private static final String LINE_BREAK = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    private static final ArrayList<Task> masterList = new ArrayList<>();
+    private static ArrayList<Task> masterList = new ArrayList<>();
+    ;
     /**
      * Prints line break.
      * @return void
@@ -28,7 +34,7 @@ public class Duke {
      * @param bw BufferedWriter from main to print out the Master List.
      * @throws java.io.IOException If an I/O error occurs. Only takes in string.
      */
-    private static final void printList(BufferedWriter bw) throws Exception {
+    private static final void printList(BufferedWriter bw) throws IOException {
         for(int i = 0; i < masterList.size(); i++) {
             Task curr = masterList.get(i);
             bw.write((i + 1) + "." + curr.toString());
@@ -37,34 +43,109 @@ public class Duke {
         bw.flush();
     }
 
-    private static final String getDateTime(String[] inputArr) {
-        return inputArr[1].split("/")[1].split(" ", 2)[1]; // split input from slash
+    private static final DateTime getDateTime(String[] inputArr) {
+        String[] dateTimeArr = inputArr[1].split("/")[1].split("[- ]"); // [String, yyyy, mm, dd, HHMM]
+        return new DateTime(Arrays.copyOfRange(dateTimeArr, 1, dateTimeArr.length));
+        // will reduce dateTimeArr to [yyyy, mm, dd, HHMM]
+
+
     }
 
     private static final String getDescription(String[] inputArr) {
         return inputArr[1].split("/")[0]; // split input from slash
     }
 
-    public static void main(String[] args) throws Exception {
+    private static final String taskToString(Task task) {
+        String toReturn = "";
+        if (task instanceof ToDos) {
+            toReturn = toReturn + "T|";
+        } else if (task instanceof Deadlines) {
+            toReturn = toReturn + "D|";
+        } else if (task instanceof Events) {
+            toReturn = toReturn + "E|";
+        }
+        if (task.isDone) {
+            toReturn = toReturn + "1|";
+        } else {
+            toReturn = toReturn + "0|";
+        }
+        toReturn = toReturn + task.description;
+        if (task instanceof Deadlines || task instanceof Events) {
+            String[] durationArr = task.toString().split("[:)]");
+            String duration = durationArr[1].split(" ")[1];
+            toReturn = toReturn + "|" + duration;
+        }
+        return toReturn;
+    }
 
+    private static final void saveAllTask(ArrayList<Task> tasks, String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task task : tasks) {
+            fw.write(taskToString(task));
+            fw.write("\n");
+        }
+        fw.close();
+    }
+
+    public static final Task loadTask(String description) {
+        String[] splitDescription = description.split("\\|");
+        String taskType = splitDescription[0];
+        Task tempTask = new Task("Temp task");
+        switch (taskType) {
+        case "T":
+            Task newToDo = new ToDos(splitDescription[2]);
+            if (splitDescription[1].equals("1")) {
+                newToDo.markAsDone();
+            }
+            tempTask = newToDo;
+            break;
+
+        case "D":
+            Task newDeadline = new Deadlines(splitDescription[2], new DateTime(splitDescription[3].split("[- ]")));
+            if (splitDescription[1].equals("1")) {
+                newDeadline.markAsDone();
+            }
+            tempTask = newDeadline;
+            break;
+
+        case "E":
+            Task newEvent = new Events(splitDescription[2], new DateTime(splitDescription[3].split("[- ]")));
+            if (splitDescription[1].equals("1")) {
+                newEvent.markAsDone();
+            }
+            tempTask = newEvent;
+            break;
+
+        default:
+            System.out.println("All tasks loaded!");
+
+        }
+        return tempTask;
+    }
+
+    public static void main(String[] args) throws Exception, IOException {
         String home =  System.getProperty("user.home"); // base directory
         // following code should give me [HOME_DIRECTORY]/Desktop/iP/data
         java.nio.file.Path path = java.nio.file.Paths.get(home,"Desktop", "iP", "data");
-        boolean directoryExists = java.nio.file.Files.exists(path);
-        System.out.println(directoryExists);
-        // if path doesn't exist, make new directory and file
-        if (!directoryExists) {
-            File dataDirectory = new File(path.toString());
-            File dukeStore = new File(path + "\\duke.txt");
-            System.out.println("I tried creating a new directory " + dataDirectory);
-            System.out.println("I tried creating a new file " + dukeStore);
-
-        }
-        System.out.println("Does this directory " + path + " exist? " + directoryExists);
-        System.exit(0);
-        //java.nio.file.Path path = java.nio.file.Paths.get(home, "");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        try {
+            File dukeStore = new File(path + "/duke.txt");
+            Scanner fileReader = new Scanner(dukeStore);
+            while (fileReader.hasNextLine()) {
+                masterList.add(loadTask(fileReader.nextLine()));
+            }
+        } catch (IOException e) {
+            Path filePath = Paths.get("data");
+            boolean isDirectoryExists = Files.exists(filePath);
+            if (!isDirectoryExists) {
+                new File("data").mkdir();
+            }
+            new File(path + "/duke.txt").createNewFile();
+        }
+
+
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -85,6 +166,9 @@ public class Duke {
             switch (inputArr[0]) {
             case "bye":
                 ifBye = true;
+                File dukeStore = new File(path + "/duke.txt");
+                dukeStore.delete();
+                saveAllTask(masterList, path + "/duke.txt");
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
 
