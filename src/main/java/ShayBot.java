@@ -1,6 +1,10 @@
+import model.DeadlineTask;
+import model.EventTask;
 import model.Task;
+import model.TodoTask;
 import util.OutputHandler;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ShayBot {
@@ -46,7 +50,16 @@ public class ShayBot {
                 listTasks();
                 break;
             case "add":
-                addTask(remainingInput);
+                addBasicTask(remainingInput);
+                break;
+            case "todo":
+                addTodoTask(remainingInput);
+                break;
+            case "deadline":
+                addDeadlineTask(remainingInput);
+                break;
+            case "event":
+                addEventTask(remainingInput);
                 break;
             case "bye":
                 endInteraction();
@@ -78,10 +91,71 @@ public class ShayBot {
         }
     }
 
-    private void addTask(String task) {
-        Task newTask = new Task(task);
-        taskList.addTask(newTask);
+    private void addTask(Task task) {
+        taskList.addTask(task);
         outputHandler.print("Hiya! I've added: " + task);
+    }
+
+    private void addBasicTask(String task) {
+        Task newTask = new Task(task);
+        addTask(newTask);
+    }
+
+    private void addTodoTask(String taskBody) {
+        Task newTask = new TodoTask(taskBody);
+        addTask(newTask);
+    }
+
+    private void addDeadlineTask(String taskBody) {
+        String[] taskParameters = parseTaskBody(taskBody);
+        if (taskParameters.length != 3) {
+            printError(taskBody);
+            return;
+        } else if (!taskParameters[1].equals("by")) {
+            printError(taskParameters[1]);
+            return;
+        }
+        Task newTask = new DeadlineTask(taskParameters[0], taskParameters[2]);
+        addTask(newTask);
+    }
+
+    private void addEventTask(String taskBody) {
+        String[] taskParameters = parseTaskBody(taskBody);
+        if (taskParameters.length != 3) {
+            printError(taskBody);
+            return;
+        } else if (!taskParameters[1].equals("at")) {
+            printError(taskParameters[1]);
+            return;
+        }
+        Task newTask = new EventTask(taskParameters[0], taskParameters[2]);
+        addTask(newTask);
+    }
+
+    private String[] parseTaskBody(String task) {
+        ArrayList<String> parameters = new ArrayList<>(0);
+        String[] parameterList = task.split(" ", -1);
+        StringBuilder curParameter = new StringBuilder();
+        for (String str : parameterList) {
+            if (str.length() == 0) {
+                curParameter.append(" ");
+            } else if (str.charAt(0) == '/') {
+                if (curParameter.length() > 0) {
+                    parameters.add(curParameter.toString());
+                    curParameter = new StringBuilder();
+                }
+                parameters.add(str.substring(1));
+            } else {
+                if (curParameter.length() > 0) {
+                    curParameter.append(" ");
+                }
+                curParameter.append(str);
+            }
+        }
+        if (curParameter.length() > 0) {
+            parameters.add(curParameter.toString());
+        }
+        return parameters.toArray(new String[0]);
     }
 
     private void listTasks() {
