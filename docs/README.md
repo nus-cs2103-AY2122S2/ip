@@ -1,5 +1,5 @@
 # AnnBot User Guide
-AnnBot is a **desktop app for managing your tasks**. It's optimized for usage via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI).
+AnnBot is a **desktop app for managing your tasks**. It's optimized for usage via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**.
 
 * [Quick Start](./README.md#quick-start)
 * [Features](./README.md#features)
