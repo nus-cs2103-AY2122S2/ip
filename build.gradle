@@ -1,9 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    //id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
-    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
 repositories {
@@ -13,7 +11,8 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
-    String javaFxVersion = '17'
+
+    String javaFxVersion = '11'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
@@ -44,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "main.java.Launcher"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
@@ -52,27 +51,6 @@ shadowJar {
     archiveClassifier = null
 }
 
-jar {
-    manifest {
-        attributes "Main-Class": "Launcher"
-    }
-
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-}
-
-//checkstyle {
-//    toolVersion = '8.29'
-//}
-
 run {
     standardInput = System.in
 }
-
-javafx {
-    version = "17"
-    modules = ['javafx.controls', 'javafx.fxml']
-}
-
-mainClassName = 'Launcher'
