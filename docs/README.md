@@ -80,7 +80,7 @@ Lists all the tasks managed by the Heylo app.
 
 Format: `list`
 
-### Adding todos : `todo`
+### Adding todos: `todo`
 
 Adds a simple todo to the task list with your specified description.
 
@@ -94,7 +94,7 @@ Format: `event <description> /at <yyyy-mm-dd>`
 
 * Make sure you provide the date in the specified `yyyy-mm-dd` format.
 
-### Managing deadlines : `deadline`
+### Managing deadlines: `deadline`
 
 Adds a task along with the date of its deadline to the task list.
 
@@ -102,7 +102,7 @@ Format: `deadline <description> /by <yyyy-mm-dd>`
 
 * Make sure you provide the date in the specified `yyyy-mm-dd` format.
 
-### Marking tasks as done : `mark`
+### Marking tasks as done: `mark`
 
 Marks a task as done.
 
@@ -110,7 +110,7 @@ Format: `mark <index>`
 
 * The `index` is the number of the task you want to mark as done in the list displayed by Heylo with the `list` command.
 
-### Marking tasks as not done : `unmark`
+### Marking tasks as not done: `unmark`
 
 Marks a task as not done.
 
@@ -118,7 +118,7 @@ Format: `unmark <index>`
 
 * The `index` is the number of the task you want to mark as done in the list displayed by Heylo with the `list` command.
 
-### Deleting tasks : `delete`
+### Deleting tasks: `delete`
 
 Deletes a task from your task list.
 
