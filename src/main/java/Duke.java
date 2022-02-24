@@ -37,9 +37,9 @@ public class Duke {
 
     public static void main(String[] args) {
         welcomeMessage();
+        Scanner scanner = new Scanner(System.in);
         String command = "";
         while(!command.equals("BYE")) {
-            Scanner scanner = new Scanner(System.in);
             command = scanner.next().toUpperCase();
             switch (command) {
             case "TODO":
