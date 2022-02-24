@@ -157,15 +157,6 @@ Format: `bye`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-
-**A**: Install the app in the other computer and overwrite the empty data file it creates on running the app with data
-from the file that was created by Heylo in your previous computer
-
---------------------------------------------------------------------------------------------------------------------
-
 ## Command summary
 
 | Action              | Format                                    | Example                             |
