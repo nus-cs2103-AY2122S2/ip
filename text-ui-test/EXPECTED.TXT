@@ -5,3 +5,15 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+How may I assist you?
+Your current task list is empty
+This task has been added as requested:
+[T][ ] borrow book
+You now have 1 item(s) in your list
+This task has been added as requested:
+[D][ ] return book (by: sunday)
+You now have 2 item(s) in your list
+This task has been added as requested:
+[E][ ] project meeting (at: Mon 2-4pm)
+You now have 3 item(s) in your list
+Till we meet again
