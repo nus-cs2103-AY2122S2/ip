@@ -65,7 +65,7 @@ Graphical User Interface (GUI).
 
 ## Usage
 
-**Notes about the command format**<br>
+**_Notes about the command format_**<br>
 
 * Words in `<Angular brackets>` are the details to be supplied by the user without the brackets.<br>
   e.g. in `todo <description>`, `todo` is a parameter which can be used as `todo Complete quiz 3`.
@@ -78,19 +78,23 @@ Graphical User Interface (GUI).
 
 Lists all the tasks managed by the Heylo app.
 
-Format: `list`
+_Format:_ `list`
 
 ### Adding todos: `todo`
 
 Adds a simple todo to the task list with your specified description.
 
-Format: `todo <description>`
+_Format:_ `todo <description>`
+
+_Example:_ `todo Study for midterms`
 
 ### Noting events: `event`
 
 Adds an event along with the date it will occur on to the task list.
 
-Format: `event <description> /at <yyyy-mm-dd>`
+_Format:_ `event <description> /at <yyyy-mm-dd>`
+
+_Example:_ `event Halloween /at 2022-10-31`
 
 * Make sure you provide the date in the specified `yyyy-mm-dd` format.
 
@@ -98,7 +102,9 @@ Format: `event <description> /at <yyyy-mm-dd>`
 
 Adds a task along with the date of its deadline to the task list.
 
-Format: `deadline <description> /by <yyyy-mm-dd>`
+_Format:_ `deadline <description> /by <yyyy-mm-dd>`
+
+_Example:_ `deadline Submit iP /by 2022-02-18`
 
 * Make sure you provide the date in the specified `yyyy-mm-dd` format.
 
@@ -106,7 +112,9 @@ Format: `deadline <description> /by <yyyy-mm-dd>`
 
 Marks a task as done.
 
-Format: `mark <index>`
+_Format:_ `mark <index>`
+
+_Example:_ `mark 5`
 
 * The `index` is the number of the task you want to mark as done in the list displayed by Heylo with the `list` command.
 
@@ -114,7 +122,9 @@ Format: `mark <index>`
 
 Marks a task as not done.
 
-Format: `unmark <index>`
+_Format:_ `unmark <index>`
+
+_Example:_ `unmark 2`
 
 * The `index` is the number of the task you want to mark as done in the list displayed by Heylo with the `list` command.
 
@@ -125,7 +135,9 @@ Deletes a task from your task list.
 **Caution:**
 This is an irreversible action.
 
-Format: `delete <index>`
+_Format:_ `delete <index>`
+
+_Example:_ `delete 11`
 
 * The `index` is the number of the task you want to mark as done in the list displayed by Heylo with the `list` command.
 
@@ -133,13 +145,17 @@ Format: `delete <index>`
 
 Finds tasks that match the input that you have entered and lists them according to their index in the task list.
 
-Format: `find <search-string>`
+_Format:_ `find <search-string>`
+
+_Example:_ `find mid`
 
 ### Mark tasks as low priority: `low`
 
 Marks the specified task as low priority with a `*` prefix.
 
-Format: `low <index>`
+_Format:_ `low <index>`
+
+_Example:_ `low 3`
 
 * The `index` is the number of the task you want to mark as done in the list displayed by Heylo with the `list` command.
 
@@ -147,7 +163,9 @@ Format: `low <index>`
 
 Marks the specified task as medium priority with a `**` prefix.
 
-Format: `med <index>`
+_Format:_ `med <index>`
+
+_Example:_ `med 8`
 
 * The `index` is the number of the task you want to mark as done in the list displayed by Heylo with the `list` command.
 
@@ -155,7 +173,9 @@ Format: `med <index>`
 
 Marks the specified task as high priority with a `***` prefix.
 
-Format: `high <index>`
+_Format:_ `high <index>`
+
+_Example:_ `high 1`
 
 * The `index` is the number of the task you want to mark as done in the list displayed by Heylo with the `list` command.
 
@@ -163,7 +183,9 @@ Format: `high <index>`
 
 Removes the priority of the task.
 
-Format: `no-p <index>`
+_Format:_ `no-p <index>`
+
+_Example:_ `no-p 2`
 
 * The `index` is the number of the task you want to mark as done in the list displayed by Heylo with the `list` command.
 
@@ -171,7 +193,7 @@ Format: `no-p <index>`
 
 Saves all your tasks and exits the application.
 
-Format: `bye`
+_Format:_ `bye`
 
 --------------------------------------------------------------------------------------------------------------------
 
