@@ -52,7 +52,7 @@ test {
 }
 
 application {
-    mainClassName = "heylo.ui.App"
+    mainClassName = "heylo.Launcher"
 }
 
 shadowJar {
