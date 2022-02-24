@@ -14,7 +14,7 @@ src/main/resources/docs/
 bin/
 
 # save folder and file name
-src/data
+src/main/data
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
