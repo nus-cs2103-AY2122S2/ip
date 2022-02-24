@@ -8,6 +8,6 @@ public class TodoTest {
     @Test
     public void toString_validTodo_success() {
         Todo todo = new Todo("todo-1");
-        assertEquals(" [T][ ] todo-1", todo.toString());
+        assertEquals(" [T][   ] todo-1", todo.toString());
     }
 }

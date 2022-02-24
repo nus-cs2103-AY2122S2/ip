@@ -148,4 +148,13 @@ public class Command {
         assert !str.toString().isBlank() : "Running user command should not return empty output";
         return str.toString();
     }
+
+    @Override
+    public String toString() {
+        return "Command{" +
+                "command='" + command + '\'' +
+                ", argument='" + argument + '\'' +
+                ", extraInfo='" + extraInfo + '\'' +
+                '}';
+    }
 }
