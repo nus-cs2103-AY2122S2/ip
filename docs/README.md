@@ -29,8 +29,6 @@ Using a search function, you can find any tasks in the list
 All tasks in tasklist are listed out in index order based
 on when they were added.
 
-Due to limitations, only some tasks can be listed out.
-
 To see all your tasks, make sure you have the following file
 created in the directory: C:/repos/ip/data/tasks.txt. Then click
 on the menubar and go to help -> my tasks. This will open a file
