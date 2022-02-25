@@ -1,0 +1,13 @@
+List
+deadline help Kris do cs3132 /by 2/3/2001 1800
+Todo buy bread
+deadline help Kris do cs2103 /by 2/3/2001 1800
+Event help Kris do cn4122 /at 3/2/1222 1800
+list
+Mark 1
+Mark 2
+List
+Find cs
+Find help
+Bye
+
