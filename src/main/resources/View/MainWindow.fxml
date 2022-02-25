@@ -12,27 +12,32 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.gui.MainWindow">
-    <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" promptText="Type help for list of full commands" AnchorPane.bottomAnchor="1.0">
-      <font>
-         <Font name="Arial" size="12.0" />
-      </font></TextField>
-    <Button contentDisplay="CENTER" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="📨" textAlignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="400.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/11"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.gui.MainWindow">
+    <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0"
+               promptText="Type help for list of full commands" AnchorPane.bottomAnchor="1.0">
         <font>
-            <Font name="Arial" size="24.0" />
+            <Font name="Arial" size="12.0"/>
+        </font>
+    </TextField>
+    <Button contentDisplay="CENTER" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput"
+            prefHeight="41.0" prefWidth="76.0" text="📨" textAlignment="CENTER">
+        <font>
+            <Font name="Arial" size="24.0"/>
         </font>
     </Button>
     <ScrollPane fx:id="scrollPane" hvalue="1.0" pannable="true" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
         <VBox fx:id="dialogContainer" minHeight="557.0" prefWidth="388.0" style="-fx-background-color: aliceblue;">
             <MenuBar id="menuBar" onKeyPressed="#handleKeyInput">
                 <Menu text="Help">
-                    <MenuItem disable="true" text="Search" visible="false" />
-                    <MenuItem onAction="#handleMyTasks" text="My tasks" />
-                    <SeparatorMenuItem />
-                    <MenuItem onAction="#handleAboutAction" text="About" />
+                    <MenuItem disable="true" text="Search" visible="false"/>
+                    <MenuItem onAction="#handleMyTasks" text="My tasks"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem onAction="#handleAboutAction" text="About"/>
                 </Menu>
                 <cursor>
-                    <Cursor fx:constant="WAIT" />
+                    <Cursor fx:constant="WAIT"/>
                 </cursor>
             </MenuBar>
         </VBox>

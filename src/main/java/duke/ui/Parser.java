@@ -145,14 +145,14 @@ public class Parser {
      */
     public static Command commandsWithNumbers(String command, int number) throws DukeException {
         switch (command) {
-            case "delete":
-                return new DeleteCommand(number);
-            case "mark":
-                return new MarkCommand(number);
-            case "unmark":
-                return new UnmarkCommand(number);
-            default:
-                throw new DukeException("Command has no number");
+        case "delete":
+            return new DeleteCommand(number);
+        case "mark":
+            return new MarkCommand(number);
+        case "unmark":
+            return new UnmarkCommand(number);
+        default:
+            throw new DukeException("Command has no number");
         }
     }
 }

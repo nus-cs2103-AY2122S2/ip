@@ -12,9 +12,10 @@ public class ClearCommand extends Command {
 
     /**
      * Returns a string indicating that the list has been emptied.
+     *
      * @param taskList a list of the current tasks
-     * @param ui user interface
-     * @param storage file storage
+     * @param ui       user interface
+     * @param storage  file storage
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -24,6 +25,7 @@ public class ClearCommand extends Command {
 
     /**
      * Returns false for non-exit commands
+     *
      * @return true
      */
     @Override
