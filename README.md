@@ -31,7 +31,7 @@ Features:
 - [ ] Managing deadlines (coming soon)
 - [ ]  Reminders (coming soon)
 
-If you Java programmer, you can use it to practice Java too. Here's the `main` method:
+If you are Java programmer, you can use it to practice Java too. Here's the `main` method:
 
 ```ruby
 public static void main(String[] args) throws IOException, ClassNotFoundException {
