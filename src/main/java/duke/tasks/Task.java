@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Encapsulates a task object
  */
-public class Task implements Serializable {
+public class Task implements Serializable, KeywordFinder {
 
     /**
      * Description of a task object
@@ -33,6 +33,16 @@ public class Task implements Serializable {
      */
     public void markDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    /**
+     * Checks if task description contains specified keyword
+     *
+     * @param keyword the keyword
+     * @return whether or not task description contains keyword
+     */
+    public boolean matches(String keyword) {
+        return this.task.contains(keyword);
     }
 
     /**

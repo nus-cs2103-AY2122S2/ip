@@ -9,6 +9,7 @@ import duke.commands.UnmarkCommand;
 import duke.commands.DeadlineCommand;
 import duke.commands.EventCommand;
 import duke.commands.TodoCommand;
+import duke.commands.FindCommand;
 import duke.exceptions.DukeException;
 
 import java.util.NoSuchElementException;
@@ -38,6 +39,10 @@ public class Parser {
      * A string that prefixes the program unmark command.
      */
     public static final String COMMAND_UNMARK = "unmark";
+    /**
+     * A string that prefixes the program find command.
+     */
+    public static final String COMMAND_FIND = "find";
     /**
      * A string that prefixes the program deadline command.
      */
@@ -88,6 +93,8 @@ public class Parser {
             return parseDeadline(input.replaceFirst(cmd, ""));
         case COMMAND_EVENT:
             return parseEvent(input.replaceFirst(cmd, ""));
+        case COMMAND_FIND:
+            return new FindCommand(getKeyword(st));
         default:
             throw new DukeException("Maybe try not trying to break my chatbot? thx xoxo");
         }
@@ -106,6 +113,14 @@ public class Parser {
             return Integer.parseInt(st.nextToken());
         } catch (NoSuchElementException e) {
             throw new DukeException("Maybe try specifyin' what task you want next time? jfc");
+        }
+    }
+
+    private static String getKeyword(StringTokenizer st) throws DukeException {
+        try {
+            return st.nextToken();
+        } catch (NoSuchElementException e) {
+            throw new DukeException("Find what?? FIND WHAT????? LF NEVER SAY HOW I FKING KNOW");
         }
     }
 
