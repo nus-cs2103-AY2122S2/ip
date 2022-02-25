@@ -62,7 +62,8 @@ public class Parser {
                     Todo todoTask = new Todo(command.substring(5));
                     return taskListObj.addTask(todoTask);
                 } catch (StringIndexOutOfBoundsException noDescription) {
-                   return dukeException.noDescriptionException();
+                    assert command.substring(5).isEmpty(): "Description empty!";
+                    return dukeException.noDescriptionException();
                 }
             } else if (command.startsWith("deadline")) {
                 command = command.replace("deadline", "");
