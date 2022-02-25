@@ -1,29 +1,56 @@
-# User Guide
+# Adam - User Guide
+
+## Quick Start
+
+1. Ensure you have Java 11 or above installed on your computer.
+2. Download Adam from [here](https://github.com/markbiju/ip/releases/download/A-Release/duke.jar)
+3. Copy the file to the directory you want to use as the home directory
+4. Double click the file to start using Adam!
 
 ## Features 
 
-### Feature-ABC
+### Todo
 
-Description of the feature.
+Adding a task you have to do: **todo**  
+Format: todo TASK  
+Example: todo math homework  
 
-### Feature-XYZ
+### Deadline
 
-Description of the feature.
+Adding an impending deadline: **deadline**  
+Format: deadline TASK /by YYYY-MM-DD TIME  
+Example: deadline finish individual project /by 2022-01-07 1800  
 
-## Usage
+### Event
 
-### `Keyword` - Describe action
+Adding an upcoming event: **event**  
+Format: event TASK /at START TIME-END TIME  
+Example: event Mark's party /at 4pm-6pm  
 
-Describe the action and its outcome.
+### Snooze
+Extends the deadline of a task by 1 day: **snooze**  
+Format: snooze INDEX_OF_TASK  
+Example: snooze 2  
 
-Example of usage: 
+### Mark
+Marks task as completed: **mark**  
+Format: mark INDEX_OF_TASK  
+Example: mark 2  
 
-`keyword (optional arguments)`
+### Unmark
+Marks completed tasks as incomplete: **unmark**  
+Format: unmark INDEX_OF_TASK  
+Example: unmark 2 
 
-Expected outcome:
+### Delete
+Deletes a task from the list: **delete**  
+Format: delete INDEX_OF_TASK  
+Example: delete 2 
 
-Description of the outcome.
+### List
+Listing out all tasks added to Adam: **list**  
+Format: list 
 
-```
-expected output
-```
+### Save
+Saves tasks to computer: **bye**  
+Format: bye 

@@ -1,0 +1,4 @@
+E | 0 | eat tacos  | 2pm on Sunday
+T | 0 | eat chien
+T | 0 | buy chicken
+D | 0 | buy lovely chicken  | 12 Jan 2019 1800
