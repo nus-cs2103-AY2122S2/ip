@@ -97,10 +97,11 @@ public class Ui {
      */
     public String markTask(Task task) {
         StringBuilder result = new StringBuilder();
-        result.append("Nice! I've marked this task as done: \n")
+        result.append("Nice! I've marked this task as done: \r\n")
                 .append(task.getStatusIcon())
                 .append(" ")
-                .append(task.getDescription());
+                .append(task.getDescription())
+                .append("\r\n");
         return result.toString();
     }
 
@@ -127,4 +128,22 @@ public class Ui {
         return " Noted. I've removed this task: \r\n" + task;
     }
 
+    /**
+     * Prints all task tags
+     *
+     * @return Message that displays all tags for all tasks
+     */
+    public String displayTags(ArrayList<Task> taskList) {
+        StringBuilder result = new StringBuilder();
+        for(int i = 0; i < taskList.size(); i++) {
+            result.append(i+1)
+                    .append(". ");
+            ArrayList<String> tagList = taskList.get(i).getTags();
+            for(int j = 0; j < tagList.size(); j++) {
+                result.append(tagList.get(j)).append(" ");
+            }
+            result.append("\r\n");
+        }
+        return result.toString();
+    }
 }

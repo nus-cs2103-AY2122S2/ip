@@ -1,11 +1,14 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Represent Task with description
  */
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected ArrayList<String> tagList;
 
     /**
      * Creates a new Task with description
@@ -15,6 +18,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tagList = new ArrayList<>();
     }
 
     /**
@@ -49,6 +53,35 @@ public class Task {
     public void setUndone() {
         isDone = false;
     }
+
+    /**
+     * Method to add a tag to task
+     */
+    public void addTag(String tag) {
+        if(tag.startsWith("#")) {
+            tagList.add(tag);
+        } else {
+            tagList.add("#" + tag);
+        }
+    }
+
+    /**
+     * Method to remove a tag from task
+     *
+     * @param tagIndex index of tag to be removed
+     * @return String of removed tag
+     */
+    public String removeTag(int tagIndex) {
+        return tagList.remove(tagIndex-1);
+    }
+
+    /**
+     * Getter method to get tag ArrayList
+     */
+    public ArrayList<String> getTags() {
+        return tagList;
+    }
+
 
     /**
      * Returns String representation of {@code Task}.
