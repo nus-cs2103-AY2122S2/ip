@@ -132,4 +132,35 @@ public class TaskList {
         System.out.println("Here are the matching tasks found~ ");
         matchingTasks.forEach(System.out::println);
     }
+
+    public static void snooze(String details) throws CustomException {
+        String[] information = details.split(" ", 3);
+        int taskIndex = Integer.parseInt(information[0]);
+        String changeField = information[1];
+        Task taskInConsideration = findTask(taskIndex);
+        String newTime = " ";
+        if (changeField.equalsIgnoreCase("both")) {
+            String[] data = information[2].split(" ", 2);
+            String date = data[0];
+            newTime = data[1];
+            if (taskInConsideration instanceof Todo) {
+                throw new CustomException("todo tasks are not associated with dates and times- please recheck!");
+            } else if (taskInConsideration instanceof Deadline) {
+                ((Deadline) taskInConsideration).setDate(date);
+            } else {
+                ((Event) taskInConsideration).setDate(date);
+            }
+            System.out.println("Date updated!");
+        }
+
+        if (taskInConsideration instanceof Todo) {
+            throw new CustomException("todo tasks are not associated with times- please recheck!");
+        } else if (taskInConsideration instanceof Deadline) {
+            ((Deadline) taskInConsideration).setTime(newTime);
+        } else {
+            ((Event) taskInConsideration).setTime(newTime);
+        }
+        System.out.println("task snoozed as desired! Check it out:  ");
+        System.out.println(taskInConsideration);
+    }
 }

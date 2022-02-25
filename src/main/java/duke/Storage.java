@@ -61,7 +61,8 @@ public class Storage {
             if (!(isExistFile(this.f))) {
                 this.f = createFile(this.f);
             }
-            assert f.exists();
+            assert f.exists(): "file exists!";
+            System.out.println("writing to the file!");
             FileWriter writer = new FileWriter(f);
             for (Task t : TaskList.manager) {
                 String output;

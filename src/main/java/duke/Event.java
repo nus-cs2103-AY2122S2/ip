@@ -15,9 +15,12 @@ public class Event extends Task {
     private final DateTimeFormatter outputFormatterEnd = DateTimeFormatter.ofPattern(" HH:mm");
     protected LocalDateTime dateAndStartTime;
     protected LocalTime endTime;
+    private String date;
+    private String startTime;
 
     public Event(String description, String dateAndStartTime, String endTime) {
         super(description);
+        this.date = dateAndStartTime.split(" ")[0];
         this.dateAndStartTime = LocalDateTime.parse(dateAndStartTime, inputFormatterStart);
         this.endTime = LocalTime.parse(endTime, inputFormatterEnd);
     }
@@ -38,6 +41,21 @@ public class Event extends Task {
     public String displayTimeInOriginalFormat() {
         return dateAndStartTime.format(inputFormatterStart) + " - "
                 + endTime.format(inputFormatterEnd);
+    }
+
+    public void setTime(String newTime) {
+        String currDate = this.date;
+        String[] details = newTime.split("-");
+        String newStart = details[0].trim();
+        String newEnd = details[1].trim();
+        this.startTime = newStart;
+        String updatedDateAndStartTime = currDate + " " + newStart;
+        this.dateAndStartTime = LocalDateTime.parse(updatedDateAndStartTime, inputFormatterStart);
+        this.endTime = LocalTime.parse(newEnd, inputFormatterEnd);
+    }
+
+    public void setDate(String newDate) {
+        this.date = newDate;
     }
 
     @Override

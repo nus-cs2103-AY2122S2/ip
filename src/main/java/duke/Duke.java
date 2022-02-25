@@ -61,16 +61,18 @@ public class Duke {
                     TaskList.reportList();
                 } else {
                     String[] details = instruct.split(" ", 2);
-                    switch (details[0]) {
-                    case "mark":
+                    String command = details[0];
+                    if (command.equalsIgnoreCase("mark")) {
                         TaskList.markAsDone(Integer.parseInt(details[1]));
-                    case "unmark":
+                    } else if (command.equalsIgnoreCase("unmark")) {
                         TaskList.markNotDone(Integer.parseInt(details[1]));
-                    case "delete":
+                    } else if (command.equalsIgnoreCase("delete")) {
                         TaskList.deleteTask(Integer.parseInt(details[1]));
-                    case "find":
+                    } else if (command.equalsIgnoreCase("find")) {
                         TaskList.findTasks(details[1]);
-                    default:
+                    } else if (command.equalsIgnoreCase("snooze")) {
+                        TaskList.snooze(details[1]);
+                    } else {
                         String taskType = details[0];
                         if (!parser.isValidCommand(taskType)) {
                             ui.showInvalidCommandError();
