@@ -6,6 +6,7 @@ import duke.ui.Duke;
 import duke.ui.DukeException;
 import duke.ui.Parser;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.ScrollPane;
@@ -22,14 +23,12 @@ import javafx.scene.layout.VBox;
 
 import java.awt.Desktop;
 
-import java.io.File;
 import java.io.IOException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -52,14 +51,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String welcomeMessage = "Hello!! I am Friendly Friend, your humble personal chatbot.\n"
-                + "What can I do for you?\n";
-        String cannotSeeFullListAdvice = "PS - If you cannot see your tasks, please go to " +
+        String welcomeMessage = "Hello!! I am Friendly Friend, your humble personal chatbot. "
+                + "What can I do for you?";
+        String cannotSeeFullListAdvice = " PS - If you cannot see your tasks, please go to " +
                 "help -> my tasks";
         String helpMessage = "If you are new to this app, please type help to see full list of " +
                 "commands";
         String fileLocationWarning = "Please create a file with the path:\n~/FFdata/tasks.txt" +
-                " or there will be\nerrors using the app.";
+                " or there will be errors using the app.";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage + cannotSeeFullListAdvice, dukeImage),
                 DialogBox.getDukeDialog(helpMessage, dukeImage),
@@ -76,7 +75,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws URISyntaxException, IOException {
+    private void handleUserInput() throws URISyntaxException, IOException, InterruptedException {
         String input = userInput.getText();
         try {
             Command c = Parser.parse(input);
@@ -84,10 +83,16 @@ public class MainWindow extends AnchorPane {
             if (response.equals("Help has arrived!")) {
                 provideAboutFunctionality();
             }
+
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
             );
+
+            if (response.equals("Bye! Hope to see you again soon!")) {
+                Platform.exit();
+            }
+
         } catch (DukeException dukeError) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
