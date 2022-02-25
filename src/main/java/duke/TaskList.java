@@ -43,19 +43,19 @@ public class TaskList {
         Task desiredTask = new Task("empty task");
         int len = manager.size();
 
-        if ((num <= len) && (len > 0) && (num > 0)) {
+        if (num < 0) {
+            throw new CustomException("Invalid task ID: number must be a positive integer:)");
+        } else if (num > len) {
+            throw new CustomException("Invalid task ID: this task number does not exist as of now.");
+        } else if (len == 0){
+            throw new CustomException("your task list is currently empty. " + "Add a task first:)");
+        } else { //default, normal case
             for (int i = 1; i <= len; i++) {
                 if (i == num) {
                     desiredTask = manager.get(i - 1);
                 }
             }
             return desiredTask;
-        } else if (num < 0) {
-            throw new CustomException("Invalid task ID: number must be a positive integer:)");
-        } else if (num > len) {
-            throw new CustomException("Invalid task ID: this task number does not exist as of now.");
-        } else { // length of task list == 0
-            throw new CustomException("your task list is currently empty. " + "Add a task first:)");
         }
     }
 
@@ -85,7 +85,7 @@ public class TaskList {
             throw new CustomException("Invalid task ID: number must be a positive integer:)");
         } else if (num > manager.size()) {
             throw new CustomException("Invalid task ID: this task number does not exist as of now.");
-        } else {
+        } else { //normal case
             manager.remove(num - 1);
             System.out.println("Sure! Task item " + num + " has now been deleted:)");
         }
