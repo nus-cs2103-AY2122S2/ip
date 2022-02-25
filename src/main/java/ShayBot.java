@@ -32,6 +32,10 @@ public class ShayBot {
         taskList = new TaskList();
     }
 
+    private void test() {
+
+    }
+
     public void startInteraction() {
         outputHandler.print(INTRO_LOGO, false);
         outputHandler.print(INTRO_MESSAGE);
