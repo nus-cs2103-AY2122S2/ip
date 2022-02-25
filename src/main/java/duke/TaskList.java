@@ -138,7 +138,7 @@ public class TaskList {
         int taskIndex = Integer.parseInt(information[0]);
         String changeField = information[1];
         Task taskInConsideration = findTask(taskIndex);
-        String newTime = " ";
+        String newTime = information[2];
         if (changeField.equalsIgnoreCase("both")) {
             String[] data = information[2].split(" ", 2);
             String date = data[0];
