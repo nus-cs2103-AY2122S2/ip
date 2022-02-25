@@ -1,15 +1,17 @@
-import java.lang.*;
-import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    String at;
+    private LocalDate date;
 
-    public Event(int rank, String description) {
-        super(rank, description.split(" /at ")[0]);
-        this.at = description.split(" /at ")[1];
+    public Event(int rank, String description, LocalDate date) throws DateTimeParseException {
+        super(rank, description);
+        this.date = date;
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
+        return "[E]" + super.toString() + " (at: " + formatter.format(this.date) + ")";
     }
 }

@@ -3,7 +3,6 @@ import java.util.*;
 import java.io.Serializable;
 
 public class Task implements Serializable {
-    private static final long SERIAL_VERSION_UID = 1L;
 
     int rank;
     String task;
@@ -15,7 +14,7 @@ public class Task implements Serializable {
         this.task = task;
     }
 
-    public void setDone(boolean b) {
+    public void markDone(boolean b) {
         this.isDone = b;
     }
 
