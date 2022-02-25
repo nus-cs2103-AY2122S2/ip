@@ -34,8 +34,8 @@ public class Ui {
     /**
      * Method to display the breaker line.
      */
-    public void displayLine() {
-        display("--------------------------------------------------");
+    public String displayLine() {
+        return("--------------------------------------------------");
     }
 
 
@@ -139,6 +139,7 @@ public class Ui {
      * @throws IOException Throws invalid if file does not exist
      */
     public void executeCommand(String command, String description) throws DukeException, IOException {
+        String str = "";
         try {
             if (command.equals("list")) {
                 displayList();
@@ -147,6 +148,7 @@ public class Ui {
                 Task toBeCompleted = TaskList.getTask(taskIndex - 1);
                 toBeCompleted.setIsDone(true);
                 toBeCompleted.isComplete();
+                str += displayLine();
                 displayTaskCompletion(toBeCompleted);
             } else if (command.equals("unmark")) {
                 int taskIndex = Integer.parseInt(description.substring(1));
