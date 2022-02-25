@@ -29,14 +29,14 @@ Using a search function, you can find any tasks in the list
 All tasks in tasklist are listed out in index order based
 on when they were added.
 
-Due to limitations, only some tasks can be listed out.
-
 To see all your tasks, make sure you have the following file
 created in the directory: C:/repos/ip/data/tasks.txt. Then click
 on the menubar and go to help -> my tasks. This will open a file
 containing your added tasks.
 
 ### `bye` - Summons a goodbye message from Friendly Friend
+
+After the message, the app automatically closes (almost immediately unfortunately).
 
 ### `todo` - Adds a normal task
 
@@ -107,6 +107,8 @@ Format: *delete the_index* (Note: 0 < the_index value <= tasklist size)
 Example of usage: 
 
 `delete 1`, `delete 3`
+
+### `clear` - Clears all tasks from the list
 
 ### `find` - Finds a task on the list
 
