@@ -59,6 +59,13 @@ public class TaskList {
     }
 
     /**
+     * Clears the list of all tasks
+     */
+    public void clear() {
+        list.clear();
+    }
+
+    /**
      * Sets one of the list's task's status to done
      * according to the given index from
      * the input.

@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.command.AddCommand;
+import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
@@ -37,6 +38,9 @@ public class Parser {
         }
         if (userInput.equals("help")) {
             return new HelpCommand();
+        }
+        if (userInput.equals("clear")) {
+            return new ClearCommand();
         }
         checkForEmptyOrIncompleteCommands(userInput);
         String[] twoWords = userInput.split(" ", 2);
