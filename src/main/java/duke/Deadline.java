@@ -37,12 +37,12 @@ public class Deadline extends Task {
 
     public void setTime(String newTime) {
         String currDate = this.date;
-        String snoozedTime = this.date + " " + newTime;
+        String snoozedTime = this.date.trim() + " " + newTime.trim();
         this.time = LocalDateTime.parse(snoozedTime, inputFormatter);
     }
 
     public void setDate(String newDate) {
-        this.date = newDate;
+        this.date = newDate.trim();
     }
 
     @Override
