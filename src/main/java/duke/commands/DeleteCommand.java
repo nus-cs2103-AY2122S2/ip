@@ -8,20 +8,20 @@ import duke.ui.Ui;
 /**
  * Encapsulates command to delete a task from task list
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand implements Command {
     /**
      * The index of task to be deleted
      */
-    private final int task;
+    private final int index;
 
     /**
      * Instantiates a new Delete command.
      *
-     * @param task index of task to be deleted
+     * @param index index of task to be deleted
      */
-    public DeleteCommand(int task) {
+    public DeleteCommand(int index) {
         super();
-        this.task = task;
+        this.index = index;
     }
 
     /**
@@ -38,12 +38,12 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
         try {
-            Task t = tasks.remove(this.task);
+            Task task = tasks.remove(this.index);
             ui.showMessage("Noted. I've removed the task:");
-            ui.showMessage(t.toString());
+            ui.showMessage(task.toString());
             storage.updateStorage(tasks);
         } catch (IndexOutOfBoundsException e) {
-            ui.showError("Could not delete task as it was not found.");
+            ui.showErrorMessage("Could not delete task as it was not found.");
         }
     }
 }

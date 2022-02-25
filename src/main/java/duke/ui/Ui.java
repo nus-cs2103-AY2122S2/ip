@@ -18,7 +18,7 @@ public class Ui {
     private static final String LINE = "    ____________________________________________________________";
 
     /**
-     * Prints a horizotal line
+     * Prints a horizontal line
      */
     public void showLine() {
         System.out.println(LINE);
@@ -29,7 +29,7 @@ public class Ui {
      *
      * @param str the str
      */
-    public void sandwich(String str) {
+    public void sandwichMessage(String str) {
         showLine();
         System.out.println(INDENT+str);
         showLine();
@@ -41,7 +41,7 @@ public class Ui {
      *
      * @return User input string
      */
-    public String readCommand() {
+    public String readUserInput() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
@@ -58,14 +58,15 @@ public class Ui {
     /**
      * Prints welcome message
      */
-    public void showWelcome() {
-        sandwich("Hello! I'm Duke\n" + INDENT + "What can I do for you?");
+    public void showWelcomeMessage() {
+        sandwichMessage("Hello! I'm Duke\n"
+                + INDENT + "What can I do for you?");
     }
 
     /**
      * Prints farewell message
      */
-    public void showFarewell() {
+    public void showFarewellMessage() {
         showMessage("Bye. Hope to see you again soon!");
     }
 
@@ -84,7 +85,7 @@ public class Ui {
      *
      * @param errorMessage error message
      */
-    public void showError(String errorMessage) {
+    public void showErrorMessage(String errorMessage) {
         showMessage("ERROR: " + errorMessage);
     }
 }

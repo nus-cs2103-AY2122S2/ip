@@ -72,24 +72,24 @@ public class Parser {
         String cmd = st.nextToken();
 
         switch (cmd) {
-            case COMMAND_BYE:
-                return new ExitCommand();
-            case COMMAND_LIST:
-                return new ListCommand();
-            case COMMAND_DELETE:
-                return new DeleteCommand(getIndex(st));
-            case COMMAND_MARK:
-                return new MarkCommand(getIndex(st));
-            case COMMAND_UNMARK:
-                return new UnmarkCommand(getIndex(st));
-            case COMMAND_TODO:
-                return new TodoCommand(validDescription(input.replaceFirst(cmd, "")));
-            case COMMAND_DEADLINE:
-                return parseDeadline(input.replaceFirst(cmd, ""));
-            case COMMAND_EVENT:
-                return parseEvent(input.replaceFirst(cmd, ""));
-            default:
-                throw new InvalidCommandException("Maybe try not trying to break my chatbot? thx xoxo");
+        case COMMAND_BYE:
+            return new ExitCommand();
+        case COMMAND_LIST:
+            return new ListCommand();
+        case COMMAND_DELETE:
+            return new DeleteCommand(getIndex(st));
+        case COMMAND_MARK:
+            return new MarkCommand(getIndex(st));
+        case COMMAND_UNMARK:
+            return new UnmarkCommand(getIndex(st));
+        case COMMAND_TODO:
+            return new TodoCommand(validDescription(input.replaceFirst(cmd, "")));
+        case COMMAND_DEADLINE:
+            return parseDeadline(input.replaceFirst(cmd, ""));
+        case COMMAND_EVENT:
+            return parseEvent(input.replaceFirst(cmd, ""));
+        default:
+            throw new DukeException("Maybe try not trying to break my chatbot? thx xoxo");
         }
     }
 

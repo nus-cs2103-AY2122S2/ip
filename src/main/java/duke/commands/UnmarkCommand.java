@@ -8,20 +8,20 @@ import duke.ui.Ui;
 /**
  * Encapsulates command to mark a task as incomplete.
  */
-public class UnmarkCommand extends Command{
+public class UnmarkCommand implements Command {
     /**
      * The index of the task to be marked as incompleted.
      */
-    private final int task;
+    private final int index;
 
     /**
      * Instantiates a new Unmark command.
      *
-     * @param task the index of the task
+     * @param index the index of the task
      */
-    public UnmarkCommand(int task) {
+    public UnmarkCommand(int index) {
         super();
-        this.task = task;
+        this.index = index;
     }
 
     /**
@@ -38,11 +38,11 @@ public class UnmarkCommand extends Command{
     @Override
     public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
         try {
-            tasks.markDone(task, false);
+            tasks.markDone(index, false);
             ui.showMessage("OK. I've marked this task as not-yet-done:");
-            ui.showMessage(tasks.get(task).toString());
+            ui.showMessage(tasks.get(index).toString());
         } catch (IndexOutOfBoundsException e) {
-            ui.showError("Please enter a valid task. Task " + this.task + " does not exist.");
+            ui.showErrorMessage("Please enter a valid task. Task " + this.index + " does not exist.");
         }
     }
 }

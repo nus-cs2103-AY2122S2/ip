@@ -16,14 +16,13 @@ public class Deadline extends Task {
     /**
      * Instantiates a new Deadline object
      *
-     * @param rank        rank of deadline task
-     * @param description the description of deadline task
+     * @param taskDescription the taskDescription of deadline task
      * @param deadline    the date of the deadline task
      * @throws DateTimeParseException thrown when user
      * inputs an invalid date format
      */
-    public Deadline(int rank, String description, LocalDate deadline) throws DateTimeParseException {
-        super(rank, description);
+    public Deadline(String taskDescription, LocalDate deadline) throws DateTimeParseException {
+        super(taskDescription);
         this.deadline = deadline;
     }
 

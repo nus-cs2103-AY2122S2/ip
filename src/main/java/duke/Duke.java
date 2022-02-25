@@ -39,25 +39,25 @@ public class Duke {
     public Duke() throws IOException {
         this.ui = new Ui();
         this.storage = new Storage();
-        this.tasks = this.storage.load();
+        this.tasks = this.storage.loadSavedTasks();
     }
 
     /**
      * Runs the Duke chatbot program.
      */
     public void run() {
-        ui.showWelcome();
+        ui.showWelcomeMessage();
         boolean exitDuke = false;
 
         while (!exitDuke) {
             try {
-                String fullCommand = ui.readCommand();
+                String fullCommand = ui.readUserInput();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 exitDuke = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                ui.showErrorMessage(e.getMessage());
             } finally {
                 ui.showLine();
             }

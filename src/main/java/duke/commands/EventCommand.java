@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Encapsulates command to create an event task.
  */
-public class EventCommand extends Command implements DateValidator {
+public class EventCommand implements DateValidator, Command {
     /**
      * The description of event
      */
@@ -42,13 +42,13 @@ public class EventCommand extends Command implements DateValidator {
      * Refiormats a date in string Local ISO format to a
      * LocalDate object
      *
-     * @param dateStr the Local ISO date string to be reformatted
+     * @param date the Local ISO date string to be reformatted
      * @return the reformatted LocalDate date object
      * @throws DateTimeParseException when provided date string
      * is not in Local ISO format
      */
-    public LocalDate validDate(String dateStr) throws DateTimeParseException {
-        return LocalDate.parse(dateStr);
+    public LocalDate validDate(String date) throws DateTimeParseException {
+        return LocalDate.parse(date);
     }
 
     /**
@@ -64,10 +64,10 @@ public class EventCommand extends Command implements DateValidator {
      */
     @Override
     public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
-        Event task = new Event(tasks.size() + 1, this.description, this.date);
-        tasks.add(task);
+        Event event = new Event(this.description, this.date);
+        tasks.add(event);
         ui.showMessage("Got it. I've added the deadline task:");
-        ui.showMessage(task.toString());
+        ui.showMessage(event.toString());
         ui.showMessage("Now you have " + tasks.size() + " tasks in your list.");
     }
 }

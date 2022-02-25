@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Encapsulates command to add a deadline task
  */
-public class DeadlineCommand extends Command implements DateValidator {
+public class DeadlineCommand implements DateValidator, Command {
     /**
      * The description of the deadline task to be added
      */
@@ -20,7 +20,7 @@ public class DeadlineCommand extends Command implements DateValidator {
     /**
      * The deadline of the deadline task to be added
      */
-    private LocalDate deadline;
+    private final LocalDate deadline;
 
     /**
      * Instantiates a new Deadline command.
@@ -33,8 +33,9 @@ public class DeadlineCommand extends Command implements DateValidator {
             this.description = description;
             this.deadline = validDate(deadline);
         } catch (DateTimeParseException e) {
-            String exceptionMsg = "Please input date in a valid date-time format.";
-            throw new DateTimeParseException(exceptionMsg, description.split(" /by ")[1], e.getErrorIndex());
+            throw new DateTimeParseException(
+                    "Please input date in a valid date-time format.",
+                    description.split(" /by ")[1], e.getErrorIndex());
         }
     }
 
@@ -42,13 +43,13 @@ public class DeadlineCommand extends Command implements DateValidator {
      * Refiormats a date in string Local ISO format to a
      * LocalDate object
      *
-     * @param dateStr the Local ISO date string to be reformatted
+     * @param date the Local ISO date string to be reformatted
      * @return the reformatted LocalDate date object
      * @throws DateTimeParseException when provided date string
      * is not in Local ISO format
      */
-    public LocalDate validDate(String dateStr) throws DateTimeParseException {
-        return LocalDate.parse(dateStr);
+    public LocalDate validDate(String date) throws DateTimeParseException {
+        return LocalDate.parse(date);
     }
 
     /**
@@ -64,7 +65,7 @@ public class DeadlineCommand extends Command implements DateValidator {
      */
     @Override
     public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
-        Deadline task = new Deadline(tasks.size() + 1, this.description, this.deadline);
+        Deadline task = new Deadline(this.description, this.deadline);
         tasks.add(task);
         ui.showMessage("Got it. I've added the deadline task:");
         ui.showMessage(task.toString());

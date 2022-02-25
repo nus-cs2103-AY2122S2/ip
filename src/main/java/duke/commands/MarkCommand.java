@@ -8,20 +8,20 @@ import duke.ui.Ui;
 /**
  * Encapsulates command to mark task as completed
  */
-public class MarkCommand extends Command{
+public class MarkCommand implements Command {
     /**
      * The index of task to be marked as completed.
      */
-    private final int task;
+    private final int index;
 
     /**
      * Instantiates a new Mark command.
      *
-     * @param task the index of the task
+     * @param index the index of the task
      */
-    public MarkCommand(int task) {
+    public MarkCommand(int index) {
         super();
-        this.task = task;
+        this.index = index;
     }
 
     /**
@@ -38,11 +38,11 @@ public class MarkCommand extends Command{
     @Override
     public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
         try {
-            tasks.markDone(task, true);
+            tasks.markDone(index, true);
             ui.showMessage("OK. I've marked this task as done:");
-            ui.showMessage(tasks.get(task).toString());
+            ui.showMessage(tasks.get(index).toString());
         } catch (IndexOutOfBoundsException e) {
-            ui.showError("Please enter a valid task. Task " + this.task + " does not exist.");
+            ui.showErrorMessage("Please enter a valid task. Task " + this.index + " does not exist.");
         }
     }
 }

@@ -51,44 +51,30 @@ public class TaskList<T extends Task> {
     /**
      * Gets specified task object using index
      *
-     * @param i the index of the task
-     * @return the task at index i
+     * @param index the index of the task
+     * @return the task at index index
      */
-    public T get(int i) {
-        return this.tasks.get(i-1);
+    public T get(int index) {
+        return this.tasks.get(index - 1);
     }
 
     /**
-     * Removes a specified task object from task list
+     * Removes specified task object from task list
      *
-     * @param i the index of the task object to be removed
+     * @param index the index of the task object to be removed
      * @return the task object that was removed
      */
-    public T remove(int i) {
-        return this.tasks.remove(i-1);
+    public T remove(int index) {
+        return this.tasks.remove(index - 1);
     }
 
     /**
      * Marks a specified task's completion state.
      *
-     * @param i    the index of task object to be marked or unmarked
-     * @param done the state of completion to mark the specified task
+     * @param index    the index of task object to be marked or unmarked
+     * @param isDone the state of completion to mark the specified task
      */
-    public void markDone(int i, boolean done) {
-        this.tasks.get(i-1).markDone(done);
-    }
-
-    /**
-     * String representation of the task list
-     *
-     * @return string representation of the task list
-     */
-    @Override
-    public String toString() {
-        String result = "";
-        for (int i=0; i<tasks.size(); i++) {
-            result += (i+1) + ". " + tasks.get(i) + "\n";
-        }
-        return result;
+    public void markDone(int index, boolean isDone) {
+        this.tasks.get(index - 1).markDone(isDone);
     }
 }

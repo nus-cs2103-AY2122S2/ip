@@ -8,13 +8,9 @@ import java.io.Serializable;
 public class Task implements Serializable {
 
     /**
-     * The rank of the task
-     */
-    int rank;
-    /**
      * Description of a task object
      */
-    String task;
+    String taskDescription;
     /**
      * Completed state of a task
      */
@@ -23,22 +19,20 @@ public class Task implements Serializable {
     /**
      * Instantiates a new Task.
      *
-     * @param rank the rank of the task
-     * @param task the description of the task
+     * @param taskDescription the description of the task
      */
-    public Task(int rank, String task) {
-        this.rank = rank;
+    public Task(String taskDescription) {
         this.isDone = false;
-        this.task = task;
+        this.taskDescription = taskDescription;
     }
 
     /**
      * Marks a task as done
      *
-     * @param done state to mark the completion status of a task
+     * @param isDone state to mark the completion status of a task
      */
-    public void markDone(boolean done) {
-        this.isDone = done;
+    public void markDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
@@ -47,7 +41,7 @@ public class Task implements Serializable {
      * @return the string representation of a task
      */
     public String toString() {
-        String isDone = this.isDone ? "[X] " : "[ ] ";
-        return isDone + task;
+        String state = this.isDone ? "[X] " : "[ ] ";
+        return state + taskDescription;
     }
 }

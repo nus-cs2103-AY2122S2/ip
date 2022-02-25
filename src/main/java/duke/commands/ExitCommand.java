@@ -8,7 +8,7 @@ import duke.ui.Ui;
 /**
  * Encapsulates command to exit the Duke program.
  */
-public class ExitCommand extends Command {
+public class ExitCommand implements Command {
     /**
      * {@inheritDoc}
      */
@@ -23,6 +23,6 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
         storage.updateStorage(tasks);
-        ui.showFarewell();
+        ui.showFarewellMessage();
     }
 }

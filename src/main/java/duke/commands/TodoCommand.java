@@ -9,7 +9,7 @@ import duke.ui.Ui;
 /**
  * Encapsulates command to create a todo task.
  */
-public class TodoCommand extends Command {
+public class TodoCommand implements Command {
     /**
      * The todo task description
      */
@@ -37,7 +37,7 @@ public class TodoCommand extends Command {
      */
     @Override
     public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
-        Todo todo = new Todo(tasks.size() + 1, this.description);
+        Todo todo = new Todo(this.description);
         tasks.add(todo);
         ui.showMessage("Got it. I've added the to-do task:");
         ui.showMessage(todo.toString());

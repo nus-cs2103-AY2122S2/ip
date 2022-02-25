@@ -13,10 +13,4 @@ public class DukeException extends Exception {
         super(message);
     }
 
-    /**
-     * Instantiates a new Duke exception.
-     */
-    public DukeException() {
-        super();
-    }
 }

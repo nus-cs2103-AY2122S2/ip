@@ -8,11 +8,10 @@ public class Todo extends Task {
     /**
      * Instantiates a new Todo task
      *
-     * @param rank    the rank of the todo task
-     * @param command description of the todo task
+     * @param taskDescription description of the todo task
      */
-    public Todo(int rank, String command) {
-        super(rank, command);
+    public Todo(String taskDescription) {
+        super(taskDescription);
     }
 
     /**

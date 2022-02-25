@@ -8,14 +8,14 @@ import duke.ui.Ui;
 /**
  * Encapsulates a command parsed from a user input
  */
-public abstract class Command {
+public interface Command {
 
     /**
      * Checks whether the command prompts Duke program exit
      *
      * @return value indicating if command prompts Duke program exit
      */
-    abstract public boolean isExit();
+    boolean isExit();
 
     /**
      * Executes command
@@ -24,5 +24,5 @@ public abstract class Command {
      * @param ui      the controller for UI interactions
      * @param storage the encapsulated storage object handling local memory
      */
-    abstract public void execute(TaskList<Task> tasks, Ui ui, Storage storage);
+    void execute(TaskList<Task> tasks, Ui ui, Storage storage);
 }

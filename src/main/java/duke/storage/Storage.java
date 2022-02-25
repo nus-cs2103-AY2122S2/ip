@@ -20,7 +20,7 @@ public class Storage {
      * @return the task list of saved tasks
      * @throws IOException when file content is invalid
      */
-    public TaskList<Task> load() throws IOException {
+    public TaskList<Task> loadSavedTasks() throws IOException {
         TaskList<Task> tasks = new TaskList<>();
 
         try {
@@ -58,7 +58,7 @@ public class Storage {
             } catch (ClassNotFoundException|IOException e) {
                 nextTask = false;
             }
-            if (t!=null) {
+            if (t != null) {
                 tasks.add(t);
             }
         }
@@ -75,7 +75,7 @@ public class Storage {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
             // Write updated tasks to file
-            for (int i=1; i<=tasks.size(); i++) {
+            for (int i = 1; i <= tasks.size(); i++) {
                 objectOutputStream.writeObject(tasks.get(i));
             }
 

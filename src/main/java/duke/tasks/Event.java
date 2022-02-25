@@ -11,20 +11,19 @@ public class Event extends Task {
     /**
      * The date of the event
      */
-    private LocalDate date;
+    private final LocalDate eventDate;
 
     /**
      * Instantiates a new Event object
      *
-     * @param rank        the rank of the Event object
-     * @param description the event description
-     * @param date        the date of event
+     * @param taskDescription the event description
+     * @param eventDate        the date of event
      * @throws DateTimeParseException thrown when user does not
      * input date of event in a valid format
      */
-    public Event(int rank, String description, LocalDate date) throws DateTimeParseException {
-        super(rank, description);
-        this.date = date;
+    public Event(String taskDescription, LocalDate eventDate) throws DateTimeParseException {
+        super(taskDescription);
+        this.eventDate = eventDate;
     }
 
     /**
@@ -32,8 +31,9 @@ public class Event extends Task {
      *
      * @return the string representation of the event task
      */
+    @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
-        return "[E]" + super.toString() + " (at: " + formatter.format(this.date) + ")";
+        return "[E]" + super.toString() + " (at: " + formatter.format(this.eventDate) + ")";
     }
 }
