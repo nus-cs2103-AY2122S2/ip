@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 
@@ -15,6 +16,9 @@ import java.io.IOException;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final Font CHAT_FONT = Font.loadFont(
+            DialogBox.class.getResource("/fonts/verdana.ttf").toExternalForm(), 12);
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -32,6 +36,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        userInput.setFont(CHAT_FONT);
+        sendButton.setFont(CHAT_FONT);
     }
 
     public void setDuke(Duke d) {

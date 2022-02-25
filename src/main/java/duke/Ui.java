@@ -133,7 +133,7 @@ public class Ui {
 
     public StringBuilder markAsAdded(StringBuilder str) {
         str.append(displayLine());
-        str.append("Got it. I've added this task:");
+        str.append("Got it. I've added this task:\n");
         return str;
     }
 

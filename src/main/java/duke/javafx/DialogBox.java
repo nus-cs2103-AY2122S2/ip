@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 
 /**
  * An example of a custom control using FXML.
@@ -20,6 +21,9 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
+    private static final Font CHAT_FONT = Font.loadFont(
+            DialogBox.class.getResource("/fonts/verdana.ttf").toExternalForm(), 12);
     @FXML
     private Label dialog;
     @FXML
@@ -31,6 +35,7 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            dialog.setFont(CHAT_FONT);
         } catch (IOException e) {
             e.printStackTrace();
         }
