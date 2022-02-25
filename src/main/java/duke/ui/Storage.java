@@ -74,16 +74,14 @@ public class Storage {
      */
     public void save(TaskList taskList) {
         ArrayList<Action> list = taskList.getList();
-        if (!list.isEmpty()) {
-            StringBuilder s = new StringBuilder();
-            for (Action act : list) {
-                s.append(act.toString()).append("\n");
-            }
-            try {
-                writeToFile(file.getPath(), s.toString());
-            } catch (IOException e) {
-                System.out.println("Save error");
-            }
+        StringBuilder s = new StringBuilder();
+        for (Action act : list) {
+            s.append(act.toString()).append("\n");
+        }
+        try {
+            writeToFile(file.getPath(), s.toString());
+        } catch (IOException e) {
+            System.out.println("Save error");
         }
     }
 }

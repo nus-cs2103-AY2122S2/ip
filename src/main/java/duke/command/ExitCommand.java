@@ -13,9 +13,10 @@ public class ExitCommand extends Command {
     /**
      * Returns a string indicating the temrminating of the program.
      * Executes a farewell print statement.
+     *
      * @param taskList a list of the current tasks
-     * @param ui user interface
-     * @param storage file storage
+     * @param ui       user interface
+     * @param storage  file storage
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -24,6 +25,7 @@ public class ExitCommand extends Command {
 
     /**
      * Returns true for ExitCommands
+     *
      * @return true
      */
     @Override

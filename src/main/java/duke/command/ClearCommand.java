@@ -20,6 +20,7 @@ public class ClearCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.clear();
+        storage.save(taskList);
         return "INITIATING EXTERMINATION OF TASKS...\nTASKLIST IS NOW EMPTY.";
     }
 
