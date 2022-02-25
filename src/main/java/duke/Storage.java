@@ -117,7 +117,7 @@ public class Storage {
     public void deadlineHandler(String[] arr, Boolean isDone) {
         Deadline d = new Deadline(arr[2].trim(), arr[3].trim());
         if (isDone) {
-            d.markComplete();y
+            d.markComplete();
             assert d.getStatusIcon().equals("X") : "task should be complete";
         }
         tasks.add(d);
