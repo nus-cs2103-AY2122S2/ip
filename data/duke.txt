@@ -1,6 +1,1 @@
-[T][ ]/run
-[D][ ]/run/2007-01-02
-[E][ ]/run/at 3pm
-[T][X]/fly
-[T][ ]/read book
-[E][ ]/go party/at 2022-06-10
+[T][ ]/home

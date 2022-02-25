@@ -13,14 +13,14 @@ public class TaskList {
      * @param task the task number as a string.
      * @param list list containing all the tasks.
      */
-    public void mark(String task, ArrayList<Task> list) {
-        Ui.lineOne();
-        System.out.println("Good Job! ^_^");
-        System.out.println("Task number " + task + " has been marked as done!");
+    public void mark(String task, ArrayList<Task> list, StringBuilder str) {
+        str.append(Ui.lineOne());
+        str.append("Good Job! ^_^\n");
+        str.append("Task number ").append(task).append(" has been marked as done!\n");
         int tNum = Integer.parseInt(task);
         list.get(tNum - 1).done();
-        System.out.println(list.get(tNum - 1));
-        Ui.lineOne();
+        str.append(list.get(tNum - 1)).append("\n");
+        str.append(Ui.lineOne());
     }
 
     /**
@@ -28,14 +28,14 @@ public class TaskList {
      * @param task the task number as a string.
      * @param list list containing all the tasks.
      */
-    public void unmark(String task, ArrayList<Task> list) {
-        Ui.lineOne();
-        System.out.println("I've unmarked task number " + task);
-        System.out.println("Complete it soon! ^_^");
+    public void unmark(String task, ArrayList<Task> list, StringBuilder str) {
+        str.append(Ui.lineOne());
+        str.append("I've unmarked task number ").append(task).append("\n");
+        str.append("Complete it soon! ^_^\n");
         int tNo = Parser.stringToInt(task);
         list.get(tNo - 1).undo();
-        System.out.println(list.get(tNo - 1));
-        Ui.lineOne();
+        str.append(list.get(tNo - 1)).append("\n");
+        str.append(Ui.lineOne());
     }
 
     /**
@@ -43,13 +43,13 @@ public class TaskList {
      * @param task the task number as a string.
      * @param list list containing all the tasks.
      */
-    public void delete(String task, ArrayList<Task> list) {
-        Ui.lineOne();
-        System.out.println("Noted. I've removed this task:");
+    public void delete(String task, ArrayList<Task> list, StringBuilder str) {
+        str.append(Ui.lineOne());
+        str.append("Noted. I've removed this task:\n");
         int t2No = Parser.stringToInt(task);
-        System.out.println(list.get(t2No - 1));
+        str.append(list.get(t2No - 1)).append("\n");
         list.remove(t2No - 1);
-        Ui.lineOne();
+        str.append(Ui.lineOne());
     }
 
     /**
@@ -58,15 +58,15 @@ public class TaskList {
      * @param at additional information.
      * @param list list containing all the tasks.
      */
-    public void event(String desc, String at, ArrayList<Task> list) {
-        Ui.lineTwo();
-        System.out.println("New task added:");
+    public void event(String desc, String at, ArrayList<Task> list, StringBuilder str) {
+        str.append(Ui.lineTwo());
+        str.append("New task added:\n");
         String[] date = Parser.splitSpace(at);
         Task t2 = new Event(desc, LocalDate.parse(date[1]));
         list.add(t2);
-        System.out.println(t2);
-        System.out.println("You have " + list.size() + " tasks left now! ^_^");
-        Ui.lineTwo();
+        str.append(t2).append("\n");
+        str.append("You have ").append(list.size()).append(" tasks left now! ^_^\n");
+        str.append(Ui.lineTwo());
     }
 
     /**
@@ -74,14 +74,14 @@ public class TaskList {
      * @param desc description of the event.
      * @param list list containing all the tasks.
      */
-    public void todo(String desc, ArrayList<Task> list) {
-        Ui.lineTwo();
-        System.out.println("New task added:");
+    public void todo(String desc, ArrayList<Task> list, StringBuilder str) {
+        str.append(Ui.lineTwo());
+        str.append("New task added:\n");
         Task t = new ToDo(desc);
         list.add(t);
-        System.out.println(t);
-        System.out.println("You have " + list.size() + " tasks left now! ^_^");
-        Ui.lineTwo();
+        str.append(t).append("\n");
+        str.append("You have ").append(list.size()).append(" tasks left now! ^_^\n");
+        str.append(Ui.lineTwo());
     }
 
     /**
@@ -90,15 +90,15 @@ public class TaskList {
      * @param by additional information
      * @param list list containing all the tasks.
      */
-    public void deadline(String desc, String by, ArrayList<Task> list) {
-        Ui.lineTwo();
-        System.out.println("New task added:");
+    public void deadline(String desc, String by, ArrayList<Task> list, StringBuilder str) {
+        str.append(Ui.lineTwo());
+        str.append("New task added:\n");
         String[] date = Parser.splitSpace(by);
         Task t2 = new Deadline(desc, LocalDate.parse(date[1]));
         list.add(t2);
-        System.out.println(t2);
-        System.out.println("You have " + list.size() + " tasks left now! ^_^");
-        Ui.lineTwo();
+        str.append(t2).append("\n");
+        str.append("You have ").append(list.size()).append(" tasks left now! ^_^\n");
+        str.append(Ui.lineTwo());
     }
 
     /**
@@ -106,8 +106,7 @@ public class TaskList {
      * @return String
      */
     public String returnMatching() {
-        String string = "Here are the matching tasks:";
-        System.out.println(string);
+        String string = "Here are the matching tasks:\n";
         return string;
     }
 
@@ -116,14 +115,14 @@ public class TaskList {
      * @param desc description of the task to be found.
      * @param list list containing all the tasks.
      */
-    public void find(String desc, ArrayList<Task> list) {
-        Ui.lineTwo();
-        returnMatching();
+    public void find(String desc, ArrayList<Task> list, StringBuilder str) {
+        str.append(Ui.lineTwo());
+        str.append(returnMatching());
         for(int i = 0; i < list.size(); i++) {
             if(list.get(i).description.contains(desc)) {
-                System.out.println(i + 1 + ". " + list.get(i));
+                str.append(i+1).append(". ").append(list.get(i)).append("\n");
             }
         }
-        Ui.lineTwo();
+        str.append(Ui.lineTwo());
     }
 }

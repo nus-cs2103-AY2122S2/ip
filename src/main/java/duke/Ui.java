@@ -10,15 +10,15 @@ public class Ui {
     /**
      * Method to print divider of type *.
      */
-    public static void lineOne() {
-        System.out.println("*************************************************************************");
+    public static String lineOne() {
+        return("***************************\n");
     }
 
     /**
      * Method to print divider of type |-|.
      */
-    public static void lineTwo() {
-        System.out.println("|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|");
+    public static String lineTwo() {
+        return("|-|-|-|-|-|-|-|-|-|-|-|-|-|\n");
     }
 
     /**
@@ -26,32 +26,31 @@ public class Ui {
      * @param list contains all the current tasks.
      * @param size list size.
      */
-    public static void printList(ArrayList<Task> list, int size) {
-        lineOne();
-        System.out.println("List:");
+    public static void printList(ArrayList<Task> list, int size, StringBuilder str) {
+        str.append(lineOne());
+        str.append("List: \n");
         if(list.isEmpty()) {
-            System.out.println("No tasks to complete! ^_^");
+            str.append("No tasks to complete! ^_^\n");
             return;
         }
         for (int i = 0; i < size; i++) {
-            System.out.println(i + 1 + ". " + list.get(i));
+            str.append(i+1).append(". ").append(list.get(i)).append("\n");
         }
-        lineOne();
+        str.append(lineOne());
     }
 
     /**
      * Method to print the start of program.
      */
-    public static void enterHalloumi() {
-        lineOne();
-        System.out.println("Hi! I'm Halloumi ^_^");
-        System.out.println("What do you need help with today?");
-        lineOne();
+    public static void enterHalloumi(StringBuilder str) {
+        str.append(lineOne());
+        str.append("Hi! I'm Halloumi ^_^\n");
+        str.append("What do you need help with today?\n");
+        str.append(lineOne());
     }
 
     public static String byeMessage() {
-        String string = "See you soon! Have a good day ^_^";
-        System.out.println(string);
+        String string = "See you soon! Have a good day ^_^\n";
         return string;
     }
 
@@ -59,10 +58,10 @@ public class Ui {
      * Method to exit the chatbot.
      * @return an int to signify the end of the program.
      */
-    public static int exitHalloumi() {
-        lineOne();
-        byeMessage();
-        lineOne();
+    public static int exitHalloumi(StringBuilder str) {
+        str.append(lineOne());
+        str.append(byeMessage());
+        str.append(lineOne());
         return 1;
     }
 }

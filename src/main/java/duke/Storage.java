@@ -19,10 +19,9 @@ public class Storage {
      */
     public void writeToFile(ArrayList<Task> list) throws IOException {
         try {
-            File f = new File("/Users/riakhaitan/iP/ip/data/duke.txt");
-            f.createNewFile();
-
-            boolean directory = f.getParentFile().mkdirs();
+            File f = new File("./data/duke.txt");
+            boolean hasCreatedDirectory = f.getParentFile().mkdirs();
+            boolean hasCreated = f.createNewFile();
             FileWriter writer = new FileWriter(f, false);
             for (Task task : list) {
                 String fileInput;
@@ -50,8 +49,9 @@ public class Storage {
      * @throws IOException
      */
     public void loadFromFile(ArrayList<Task> list) throws IOException {
-        File f = new File("/Users/riakhaitan/iP/ip/data/duke.txt");
-        f.createNewFile();
+        File f = new File("./data/duke.txt");
+        boolean hasCreatedDirectory = f.getParentFile().mkdirs();
+        boolean hasCreated = f.createNewFile();
         String input, desc;
         Task t;
         Scanner in = new Scanner(f);
@@ -81,7 +81,6 @@ public class Storage {
                 list.add(t);
             }
         }
-        Ui.printList(list, list.size());
         in.close();
     }
 }
