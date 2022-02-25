@@ -28,6 +28,7 @@ public class Storage {
                 f.getParentFile().mkdirs();
                 f.createNewFile();
             }
+            assert f.exists();
 
             Scanner sc = new Scanner(f);
             while (sc.hasNextLine()) {
@@ -52,6 +53,7 @@ public class Storage {
                 f.getParentFile().mkdirs();
                 f.createNewFile();
             }
+            assert f.exists();
             FileWriter writer = new FileWriter(f);
             for (Task t : TaskList.manager) {
                 String output;
