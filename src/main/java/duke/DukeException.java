@@ -12,8 +12,9 @@ public class DukeException extends Throwable {
      * @return Message to user to indicate command is invalid
      */
     public String noSuchCommandException() {
-        return ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
+
     /**
      * Method to indicate to User that Description of Task is not found.
      *
