@@ -1,7 +1,12 @@
+package duke.storage;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+
 import java.io.*;
 
 public class Storage {
-    private static final String FILEPATH = "tasks.txt";
+    private static final String FILEPATH = "duke/data/tasks.txt";
 
     public TaskList<Task> load() throws IOException {
         TaskList<Task> tasks = new TaskList<>();

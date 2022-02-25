@@ -1,14 +1,22 @@
+package duke.commands;
+
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.tasks.Event;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class DeadlineCommand extends Command implements DateValidator {
+public class EventCommand extends Command implements DateValidator {
     private final String description;
-    private LocalDate deadline;
+    private LocalDate date;
 
-    public DeadlineCommand(String description, String deadline) {
+    public EventCommand(String description, String date) {
         try {
             this.description = description;
-            this.deadline = validDate(deadline);
+            this.date = validDate(date);
         } catch (DateTimeParseException e) {
             String exceptionMsg = "Please input date in a valid date-time format.";
             throw new DateTimeParseException(exceptionMsg, description.split(" /by ")[1], e.getErrorIndex());
@@ -26,7 +34,7 @@ public class DeadlineCommand extends Command implements DateValidator {
 
     @Override
     public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
-        Deadline task = new Deadline(tasks.size() + 1, this.description, this.deadline);
+        Event task = new Event(tasks.size() + 1, this.description, this.date);
         tasks.add(task);
         ui.showMessage("Got it. I've added the deadline task:");
         ui.showMessage(task.toString());
