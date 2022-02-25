@@ -9,15 +9,20 @@ public class Ui {
 
     /**
      * Method to print Duke's initial UI.
+     *
+     *
      */
-    public void start() {
+    public String start() {
+        StringBuilder result = new StringBuilder();
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\r\nWhat can I do for you?");
+
+        result.append("Hello from\n" + logo).append("Hello! I'm Duke\r\nWhat can I do for you?");
+
+        return result.toString();
     }
 
     /**

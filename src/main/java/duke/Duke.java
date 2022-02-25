@@ -24,18 +24,12 @@ public class Duke {
 
 
     /**
-     * Main Driver Method to run program until exit command is called.
-     */
-    public void run() {
-        ui.start();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Method to get response from User input
+     *
+     * @param input Input for parser
+     * @return Response to user input
      */
     protected String getResponse(String input) {
-        Parser parser = new Parser(storage, tasks, ui);
         String result = parser.parse(input);
         assert !result.isEmpty() : "Input cannot be empty!!";
         return parser.parse(input);
@@ -47,6 +41,6 @@ public class Duke {
      * @param args Command Line Argument not used in this iteration of the program.
      */
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("data/tasks.txt");
     }
 }
