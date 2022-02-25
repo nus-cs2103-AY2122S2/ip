@@ -9,10 +9,20 @@ import java.util.Scanner;
  * A class that focuses on creating data/tasks.txt on the users hard disk alongside reading from and writing to it.
  */
 public class Storage {
-    private final File f;
+    private File f;
 
     public Storage(String filePath) {
         this.f = new File(filePath);
+    }
+
+    public boolean isExistFile(File f) {
+        return f.exists() && !f.isDirectory();
+    }
+
+    public File createFile(File f) throws IOException {
+        f.getParentFile().mkdirs();
+        f.createNewFile();
+        return f;
     }
 
     /**
@@ -24,9 +34,8 @@ public class Storage {
      */
     public void load() throws CustomException {
         try {
-            if (!(f.exists() && !f.isDirectory())) {
-                f.getParentFile().mkdirs();
-                f.createNewFile();
+            if (!(isExistFile(this.f))) {
+                this.f = createFile(this.f);
             }
             assert f.exists();
 
@@ -49,9 +58,8 @@ public class Storage {
      */
     public void addToFile() {
         try {
-            if (!(f.exists() && !f.isDirectory())) {
-                f.getParentFile().mkdirs();
-                f.createNewFile();
+            if (!(isExistFile(this.f))) {
+                this.f = createFile(this.f);
             }
             assert f.exists();
             FileWriter writer = new FileWriter(f);
