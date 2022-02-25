@@ -9,10 +9,25 @@ import duke.ui.Ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates command to create an event task.
+ */
 public class EventCommand extends Command implements DateValidator {
+    /**
+     * The description of event
+     */
     private final String description;
+    /**
+     * The date of the event
+     */
     private LocalDate date;
 
+    /**
+     * Instantiates a new Event command.
+     *
+     * @param description the description of the event
+     * @param date        date of the event
+     */
     public EventCommand(String description, String date) {
         try {
             this.description = description;
@@ -23,15 +38,30 @@ public class EventCommand extends Command implements DateValidator {
         }
     }
 
+    /**
+     * Refiormats a date in string Local ISO format to a
+     * LocalDate object
+     *
+     * @param dateStr the Local ISO date string to be reformatted
+     * @return the reformatted LocalDate date object
+     * @throws DateTimeParseException when provided date string
+     * is not in Local ISO format
+     */
     public LocalDate validDate(String dateStr) throws DateTimeParseException {
         return LocalDate.parse(dateStr);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
         Event task = new Event(tasks.size() + 1, this.description, this.date);

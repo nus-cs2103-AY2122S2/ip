@@ -5,9 +5,21 @@ import duke.tasks.TaskList;
 
 import java.io.*;
 
+/**
+ * Encapsulates the methods to store and update tasks to local memory.
+ */
 public class Storage {
+    /**
+     * Constant file path to file containing stored data.
+     */
     private static final String FILEPATH = "duke/data/tasks.txt";
 
+    /**
+     * Loads saved tasks from local file to program
+     *
+     * @return the task list of saved tasks
+     * @throws IOException when file content is invalid
+     */
     public TaskList<Task> load() throws IOException {
         TaskList<Task> tasks = new TaskList<>();
 
@@ -30,6 +42,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Loads a task from local disk to the program task list.
+     *
+     * @param tasks             list of tasks to add the task
+     * @param objectInputStream the stream of objects read from local file
+     */
     public void loadTask(TaskList<Task> tasks, ObjectInputStream objectInputStream) {
         boolean nextTask = true;
 
@@ -46,6 +64,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates tasks from program to local disk
+     *
+     * @param tasks list of tasks to be saved to local disk
+     */
     public void updateStorage(TaskList<Task> tasks) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(FILEPATH);

@@ -5,12 +5,21 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Encapsulates command to display list of all tasks
+ */
 public class ListCommand extends Command {
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
         if (tasks.size() <= 0) {

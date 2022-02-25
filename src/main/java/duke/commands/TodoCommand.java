@@ -6,18 +6,35 @@ import duke.tasks.TaskList;
 import duke.tasks.Todo;
 import duke.ui.Ui;
 
+/**
+ * Encapsulates command to create a todo task.
+ */
 public class TodoCommand extends Command {
+    /**
+     * The todo task description
+     */
     private final String description;
 
+    /**
+     * Instantiates a new Todo command.
+     *
+     * @param description the todo task description
+     */
     public TodoCommand(String description) {
         this.description = description;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
         Todo todo = new Todo(tasks.size() + 1, this.description);
