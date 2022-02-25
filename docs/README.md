@@ -38,6 +38,8 @@ containing your added tasks.
 
 ### `bye` - Summons a goodbye message from Friendly Friend
 
+After the message, the app automatically closes (almost immediately unfortunately).
+
 ### `todo` - Adds a normal task
 
 Format: *todo the_task*
@@ -107,6 +109,8 @@ Format: *delete the_index* (Note: 0 < the_index value <= tasklist size)
 Example of usage: 
 
 `delete 1`, `delete 3`
+
+### `clear` - Clears all tasks from the list
 
 ### `find` - Finds a task on the list
 
