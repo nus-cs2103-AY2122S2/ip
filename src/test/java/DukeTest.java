@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Class to test the Duke file.
+ * Class to test the duke.Duke file.
  */
 public class DukeTest {
 

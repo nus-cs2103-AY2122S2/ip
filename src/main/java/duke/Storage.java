@@ -66,19 +66,19 @@ public class Storage {
             switch (commandWords[0]) {
             case "D":
                 task = new Deadline(commandWords[2], commandWords[3]);
-                display(input);
+                //display(input);
                 break;
             case "E":
                 task = new Event(commandWords[2], commandWords[3]);
-                display(input);
+                //display(input);
                 break;
             case "T":
                 task = new ToDo(commandWords[2]);
                 String text = "T | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription() + '\n';
-                display(input);
+                //display(input);
                 break;
             default:
-                System.err.println("error!!");
+                //System.err.println("error!!");
                 break;
             }
 

@@ -1,6 +1,6 @@
 # User Guide
 
-Hello I am Duke.
+Hello I am duke.Duke.
 
 I can keep track of your tasks, deadlines and events for you, and am your own personal tasks manager.
 
@@ -8,7 +8,7 @@ I can keep track of your tasks, deadlines and events for you, and am your own pe
 
 ### Feature- Allowed tasks
 
-Three kinds of tasks are currently handled by Duke :
+Three kinds of tasks are currently handled by duke.Duke :
 
 1. **ToDo** : A simple task with a description that serves as a reminder for the user to complete this task.
 2. **Deadline** : A task that needs to be completed by a specific deadline.

@@ -1,5 +1,0 @@
-T | 0 | read book
-T | 0 | go away
-T | 0 | go home
-D | 0 | read book | Feb 2 2022
-E | 0 | party | Oct 10 2021
