@@ -5,7 +5,7 @@ Duke frees your mind of having to remember things you need to do. It's,
 
 - text-based
 - easy to learn
-- FAST SUPER FAST to use
+- **FAST** *SUPER FAST* to use
 - All you need to do is,
 
 1. Download it
@@ -19,11 +19,17 @@ Features:
 - [x] Managing deadlines
 - [ ] Reminders (coming soon)
 
+***
 My On-Repeat Song:
 [Check it out!](https://youtu.be/otPB54Wxf5c)
 
+Inline `code`
+~~Strikethrough~~
+
+---
+
 If you Java programmer, you can use it to practice Java too. Here's the main method:
-```
+```java
 public class Main {
     public static void main(String[] args) {
         Application.launch(MainApp.class, args);
