@@ -9,9 +9,6 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
 
-    public Duke() {
-    }
-
     /**
      * Constructor of Duke, creating a new Duke.
      * Setup Ui, Storage and TaskList.
@@ -31,17 +28,6 @@ public class Duke {
      */
     public void run() {
         ui.start();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            Scanner scanner = new Scanner(System.in);
-//            String command = scanner.nextLine().trim(); // Can also convert result to lower-case to handle cases.
-//            Parser parser = new Parser(storage, tasks, ui);
-//            parser.parse(command);
-//            boolean isExitTriggered = parser.isExitTrigger();
-//            if (isExitTriggered) {
-//                isExit = true;
-//            }
-//        }
     }
 
     /**
@@ -50,6 +36,8 @@ public class Duke {
      */
     protected String getResponse(String input) {
         Parser parser = new Parser(storage, tasks, ui);
+        String result = parser.parse(input);
+        assert !result.isEmpty() : "Input cannot be empty!!";
         return parser.parse(input);
     }
 
