@@ -16,7 +16,6 @@ import duke.task.Todo;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private final Ui ui = new Ui();
 
     /**
      * Marks Task as complete.
@@ -203,8 +202,10 @@ public class Duke {
             default:
                 return defaultHandler(input);
             }
+        } catch (NumberFormatException e) {
+            return Ui.showNumberFormatMessage();
         } catch (Exception e) {
-            return ui.showError(e.getMessage());
+            return Ui.showError(e.getMessage());
         }
     }
 

@@ -35,7 +35,7 @@ public class Ui {
      * @param s string describing error
      * @return string describing error
      */
-    public String showError(String s) {
+    public static String showError(String s) {
         return s;
     }
 
@@ -133,4 +133,15 @@ public class Ui {
     public static String showDefaultMessage() {
         return "That went over Paimon's head a little...";
     }
+
+    /**
+     * Returns generic message for incorrect number input.
+     *
+     * @return warning message about number input.
+     */
+    public static String showNumberFormatMessage() {
+        return "That went over Paimon's head a little...\n"
+                + "You need to type a number instead.";
+    }
+
 }
