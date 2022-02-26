@@ -17,18 +17,78 @@ public class Ui {
             + System.lineSeparator()
             + "Nice to meet you! ^_^"
             + System.lineSeparator()
-            + "What can I do for you?";
+            + "What can I do for you?"
+            + System.lineSeparator()
+            + System.lineSeparator()
+            + "Enter 'help' command to see all available commands.";
 
     public static final String GREET_OLD_USER_MESSAGE = "Hello! I'm Duke, your Personal Assistant ChatBot. "
             + EMOJI_FACE
             + System.lineSeparator()
             + "Welcome back! ^_^"
             + System.lineSeparator()
-            + "Enter 'list' command to see your task list.";
+            + System.lineSeparator()
+            + "Enter 'list' command to see your task list."
+            + System.lineSeparator()
+            + "Enter 'help' command to see all available commands.";
 
     public static final String EXIT_MESSAGE = "Bye. Hope to see you again soon! ^_^"
             + System.lineSeparator()
             + "The program will exit in 10 seconds.";
+
+    public static final String HELP_MESSAGE_COMMAND_ADD = "Add a task"
+            + System.lineSeparator()
+            + "Format: \t [ToDo (T) task] \t todo <description>"
+            + System.lineSeparator()
+            + "\t\t [Deadline (D) task] \t deadline <description> /by <date time>"
+            + System.lineSeparator()
+            + "\t\t [Event (E) task] \t event <description> /at <date time>"
+            + System.lineSeparator()
+            + "Note: \t For proper recognition of <date time>, use yyyy-MM-dd hhmm format (e.g. 2022-01-21 1800)";
+
+    public static final String HELP_MESSAGE_COMMAND_LIST = "List down all tasks"
+            + System.lineSeparator()
+            + "Format: \t list";
+
+    public static final String HELP_MESSAGE_COMMAND_MARK = "Mark a task as done"
+            + System.lineSeparator()
+            + "Format: \t mark INDEX"
+            + System.lineSeparator()
+            + "Note: \t INDEX refers to the specified numbering of the task in the List of tasks or filtered tasks";
+
+    public static final String HELP_MESSAGE_COMMAND_UNMARK = "Mark a task as not done yet"
+            + System.lineSeparator()
+            + "Format: \t unmark INDEX"
+            + System.lineSeparator()
+            + "Note: \t INDEX refers to the specified numbering of the task in the List of tasks or filtered tasks";
+
+    public static final String HELP_MESSAGE_COMMAND_DELETE = "Delete a task"
+            + System.lineSeparator()
+            + "Format: \t delete INDEX"
+            + System.lineSeparator()
+            + "Note: \t INDEX refers to the specified numbering of the task in the List of tasks or filtered tasks";
+
+    public static final String HELP_MESSAGE_COMMAND_PRINT = "Print deadlines/events on a specific date"
+            + System.lineSeparator()
+            + "Format: \t print /on <date>";
+
+    public static final String HELP_MESSAGE_COMMAND_FIND = "Find tasks that contains the keyword in the description"
+            + System.lineSeparator()
+            + "Format: \t find <keyword>";
+
+    public static final String HELP_MESSAGE_COMMAND_BYE = "Exit the ChatBot program"
+            + System.lineSeparator()
+            + "Format: \t bye";
+
+    public static final String HELP_MESSAGE = "Here are the available commands and the respective formats:"
+            + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_ADD
+            + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_LIST
+            + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_MARK
+            + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_UNMARK
+            + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_DELETE
+            + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_PRINT
+            + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_FIND
+            + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_BYE;
 
     /**
      * Constructor to initialize an instance of Ui class.

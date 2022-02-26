@@ -8,6 +8,7 @@ import duke.command.CommandType;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.PrintCommand;
@@ -44,13 +45,14 @@ public class Parser {
 
         String commandInfo = (inputParts.length == 2) ? inputParts[1] : "";
 
-        boolean isCommandTypeBye = commandType == CommandType.BYE;
         boolean isCommandTypeList = commandType == CommandType.LIST;
+        boolean isCommandTypeHelp = commandType == CommandType.HELP;
+        boolean isCommandTypeBye = commandType == CommandType.BYE;
         boolean isCommandInfoEmpty = commandInfo.isEmpty();
 
-        // If user inputs extra information for "bye" or "list" commands,
+        // If user inputs extra information for "list", "help" or "bye" commands,
         // then it is not a valid command
-        if ((isCommandTypeBye || isCommandTypeList) && !isCommandInfoEmpty) {
+        if ((isCommandTypeList || isCommandTypeHelp || isCommandTypeBye) && !isCommandInfoEmpty) {
             throw new DukeException(ErrorMessage
                     .ERROR_INVALID_COMMAND.toString());
         }
@@ -86,9 +88,9 @@ public class Parser {
      */
     private Command initialiseCommand(CommandType commandType, String commandInfo) throws DukeException {
         Command command;
-        int taskNum;
         String taskDescription;
         String taskInfo;
+        int taskNum;
         String date;
         String keyword;
 
@@ -96,20 +98,11 @@ public class Parser {
         case BYE:
             command = new ExitCommand();
             break;
+        case HELP:
+            command = new HelpCommand();
+            break;
         case LIST:
             command = new ListCommand();
-            break;
-        case MARK:
-            taskNum = getTaskNumFromMarkCommand(commandInfo);
-            command = new MarkCommand(taskNum);
-            break;
-        case UNMARK:
-            taskNum = getTaskNumFromUnmarkCommand(commandInfo);
-            command = new UnmarkCommand(taskNum);
-            break;
-        case DELETE:
-            taskNum = getTaskNumFromDeleteCommand(commandInfo);
-            command = new DeleteCommand(taskNum);
             break;
         case TODO:
             taskDescription = getTaskDescriptionFromToDoCommand(commandInfo);
@@ -122,6 +115,18 @@ public class Parser {
         case EVENT:
             taskInfo = getTaskInfoFromEventCommand(commandInfo);
             command = new AddEventCommand(taskInfo);
+            break;
+        case MARK:
+            taskNum = getTaskNumFromMarkCommand(commandInfo);
+            command = new MarkCommand(taskNum);
+            break;
+        case UNMARK:
+            taskNum = getTaskNumFromUnmarkCommand(commandInfo);
+            command = new UnmarkCommand(taskNum);
+            break;
+        case DELETE:
+            taskNum = getTaskNumFromDeleteCommand(commandInfo);
+            command = new DeleteCommand(taskNum);
             break;
         case PRINT:
             date = getDateFromPrintCommand(commandInfo);
@@ -141,76 +146,6 @@ public class Parser {
         }
 
         return command;
-    }
-
-    /**
-     * Returns the task number from Mark command.
-     *
-     * @param commandInfo Command information
-     * @return The task number
-     * @throws DukeException If the task number is empty or not a valid integer
-     */
-    private int getTaskNumFromMarkCommand(String commandInfo) throws DukeException {
-        String errorMessageTaskNumEmpty = ErrorMessage
-                .ERROR_MARK_TASK_NUM_EMPTY.toString();
-        String errorMessageTaskNumInvalid = ErrorMessage
-                .ERROR_MARK_TASK_NUM_INVALID.toString();
-
-        return getTaskNumFromCommandInfo(commandInfo, errorMessageTaskNumEmpty, errorMessageTaskNumInvalid);
-    }
-
-    /**
-     * Returns the task number from Unmark command.
-     *
-     * @param commandInfo Command information
-     * @return The task number
-     * @throws DukeException If the task number is empty or not a valid integer
-     */
-    private int getTaskNumFromUnmarkCommand(String commandInfo) throws DukeException {
-        String errorMessageTaskNumEmpty = ErrorMessage
-                .ERROR_UNMARK_TASK_NUM_EMPTY.toString();
-        String errorMessageTaskNumInvalid = ErrorMessage
-                .ERROR_UNMARK_TASK_NUM_INVALID.toString();
-
-        return getTaskNumFromCommandInfo(commandInfo, errorMessageTaskNumEmpty, errorMessageTaskNumInvalid);
-    }
-
-    /**
-     * Returns the task number from Delete command.
-     *
-     * @param commandInfo Command information
-     * @return The task number
-     * @throws DukeException If the task number is empty or not a valid integer
-     */
-    private int getTaskNumFromDeleteCommand(String commandInfo) throws DukeException {
-        String errorMessageTaskNumEmpty = ErrorMessage
-                .ERROR_DELETE_TASK_NUM_EMPTY.toString();
-        String errorMessageTaskNumInvalid = ErrorMessage
-                .ERROR_DELETE_TASK_NUM_INVALID.toString();
-
-        return getTaskNumFromCommandInfo(commandInfo, errorMessageTaskNumEmpty, errorMessageTaskNumInvalid);
-    }
-
-    /**
-     * Returns the task number from command information
-     *
-     * @param commandInfo Command information
-     * @param errorMessageTaskNumEmpty Error message if the task number is empty
-     * @param errorMessageTaskNumInvalid Error message if the task number is invalid
-     * @return The task number
-     * @throws DukeException If the task number is empty or not a valid integer
-     */
-    private int getTaskNumFromCommandInfo(String commandInfo, String errorMessageTaskNumEmpty,
-                                          String errorMessageTaskNumInvalid) throws DukeException {
-        if (!isCommandInfoPresent(commandInfo)) {
-            throw new DukeException(errorMessageTaskNumEmpty);
-        }
-
-        try {
-            return Integer.parseInt(commandInfo);
-        } catch (NumberFormatException e) {
-            throw new DukeException(errorMessageTaskNumInvalid);
-        }
     }
 
     /**
@@ -337,6 +272,76 @@ public class Parser {
         }
 
         return commandInfo;
+    }
+
+    /**
+     * Returns the task number from Mark command.
+     *
+     * @param commandInfo Command information
+     * @return The task number
+     * @throws DukeException If the task number is empty or not a valid integer
+     */
+    private int getTaskNumFromMarkCommand(String commandInfo) throws DukeException {
+        String errorMessageTaskNumEmpty = ErrorMessage
+                .ERROR_MARK_TASK_NUM_EMPTY.toString();
+        String errorMessageTaskNumInvalid = ErrorMessage
+                .ERROR_MARK_TASK_NUM_INVALID.toString();
+
+        return getTaskNumFromCommandInfo(commandInfo, errorMessageTaskNumEmpty, errorMessageTaskNumInvalid);
+    }
+
+    /**
+     * Returns the task number from Unmark command.
+     *
+     * @param commandInfo Command information
+     * @return The task number
+     * @throws DukeException If the task number is empty or not a valid integer
+     */
+    private int getTaskNumFromUnmarkCommand(String commandInfo) throws DukeException {
+        String errorMessageTaskNumEmpty = ErrorMessage
+                .ERROR_UNMARK_TASK_NUM_EMPTY.toString();
+        String errorMessageTaskNumInvalid = ErrorMessage
+                .ERROR_UNMARK_TASK_NUM_INVALID.toString();
+
+        return getTaskNumFromCommandInfo(commandInfo, errorMessageTaskNumEmpty, errorMessageTaskNumInvalid);
+    }
+
+    /**
+     * Returns the task number from Delete command.
+     *
+     * @param commandInfo Command information
+     * @return The task number
+     * @throws DukeException If the task number is empty or not a valid integer
+     */
+    private int getTaskNumFromDeleteCommand(String commandInfo) throws DukeException {
+        String errorMessageTaskNumEmpty = ErrorMessage
+                .ERROR_DELETE_TASK_NUM_EMPTY.toString();
+        String errorMessageTaskNumInvalid = ErrorMessage
+                .ERROR_DELETE_TASK_NUM_INVALID.toString();
+
+        return getTaskNumFromCommandInfo(commandInfo, errorMessageTaskNumEmpty, errorMessageTaskNumInvalid);
+    }
+
+    /**
+     * Returns the task number from command information
+     *
+     * @param commandInfo Command information
+     * @param errorMessageTaskNumEmpty Error message if the task number is empty
+     * @param errorMessageTaskNumInvalid Error message if the task number is invalid
+     * @return The task number
+     * @throws DukeException If the task number is empty or not a valid integer
+     */
+    private int getTaskNumFromCommandInfo(String commandInfo, String errorMessageTaskNumEmpty,
+                                          String errorMessageTaskNumInvalid) throws DukeException {
+        if (!isCommandInfoPresent(commandInfo)) {
+            throw new DukeException(errorMessageTaskNumEmpty);
+        }
+
+        try {
+            return Integer.parseInt(commandInfo);
+        } catch (NumberFormatException e) {
+            throw new DukeException(errorMessageTaskNumInvalid);
+        }
     }
 
     /**

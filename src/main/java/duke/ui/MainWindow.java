@@ -81,7 +81,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
+        String input = userInput.getText().trim();
 
         if (isInputEmpty(input)) {
             userInput.clear();

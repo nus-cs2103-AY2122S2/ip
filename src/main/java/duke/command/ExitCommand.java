@@ -38,6 +38,9 @@ public class ExitCommand implements Command {
         // This will clear the List of filteredTasks
         taskList.resetFilteredTasks();
 
-        return Ui.EXIT_MESSAGE;
+        String response = Ui.EXIT_MESSAGE;
+        assert !response.equals("") : "Exit response should not be empty";
+
+        return response;
     }
 }

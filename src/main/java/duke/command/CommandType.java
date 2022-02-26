@@ -5,13 +5,14 @@ package duke.command;
  */
 public enum CommandType {
     BYE("bye"),
+    HELP("help"),
     LIST("list"),
-    MARK("mark"),
-    UNMARK("unmark"),
-    DELETE("delete"),
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
+    MARK("mark"),
+    UNMARK("unmark"),
+    DELETE("delete"),
     PRINT("print"),
     FIND("find");
 
