@@ -23,6 +23,7 @@ public class Main extends Application {
             fxmlLoader.<wonka.gui.MainWindow>getController().setWonka(wonka);
             fxmlLoader.<wonka.gui.MainWindow>getController().setStage(stage);
             stage.getIcons().add(appIcon);
+            stage.setResizable(false);
             stage.show();
             stage.setTitle("Wonka");
         } catch (IOException e) {
