@@ -8,7 +8,8 @@ import util.InputParser;
 public class EventTask extends Task{
     private final LocalDateTime eventTime;
 
-    public EventTask(String task, String eventTime, boolean isComplete) {
+    //todo handle DateTimeParseException
+    public EventTask(String task, String eventTime, boolean isComplete) throws DateTimeParseException {
         super(task, isComplete);
         this.eventTime = LocalDateTime.parse(eventTime);
     }

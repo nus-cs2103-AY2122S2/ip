@@ -5,18 +5,16 @@ import java.time.format.DateTimeParseException;
 
 import util.InputParser;
 
-public class DeadlineTask extends Task{
+public class DeadlineTask extends Task {
     private final LocalDate deadlineTime;
 
-    public DeadlineTask(String task, String deadlineTime) throws DateTimeParseException {
-    public DeadlineTask(String task, String deadlineTime, boolean isComplete) {
+    public DeadlineTask(String task, String deadlineTime, boolean isComplete) throws DateTimeParseException {
         super(task, isComplete);
-        this.deadlineTime = deadlineTime;
+        this.deadlineTime = LocalDate.parse(deadlineTime);
     }
 
     public DeadlineTask(String task, String deadlineTime) {
-        super(task);
-        this.deadlineTime = LocalDate.parse(deadlineTime);
+        this(task, deadlineTime, false);
     }
 
     public static DeadlineTask of(String taskBody) throws IncorrectTaskFormatException {
