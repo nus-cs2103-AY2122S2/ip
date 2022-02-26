@@ -1,0 +1,13 @@
+add sample event
+todo borrow books
+deadline return books /by 6/6/2022 4pm
+list
+mark 2
+mark 1
+list
+unmark 2
+list
+event random event /at 6/7/2022 4pm - 6pm
+mark 4
+list
+bye
