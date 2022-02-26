@@ -1,10 +1,11 @@
 package duke;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -31,8 +32,9 @@ public class Storage {
      * @param taskList Current session's TaskList
      */
     public void loadTags(ArrayList<Task> taskList) {
-        String path = "src\\main\\java\\data\\tagList.txt";
-        path = path.replace("\\", "/");
+        String currentDirectory = System.getProperty("user.dir");
+        String path = currentDirectory + "\\src\\main\\java\\duke\\data\\tagList.txt";
+        path = path.replace("\\", File.separator);
         try {
             File taskFile = new File(path);
             Scanner reader = new Scanner(taskFile);
@@ -49,10 +51,14 @@ public class Storage {
                     }
                 }
             }
-        } catch(NullPointerException fileInvalid) {
-            System.out.println("File is Invalid!");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch(Exception fileInvalid) {
+            try {
+                File file = new File(path);
+                Files.createDirectories(Path.of(file.getParent()));
+                Files.createFile(Path.of(path));
+            } catch (Exception e) {
+                System.out.println("Error");
+            }
         }
     }
     /**
@@ -71,8 +77,9 @@ public class Storage {
      * @param filePath FilePath for where File is stored.
      */
     public void loadTask(ArrayList<Task> taskList, String filePath) {
-        String path = "src\\main\\java\\data\\duke.txt";
-        path = path.replace("\\", "/");
+        String currentDirectory = System.getProperty("user.dir");
+        String path = currentDirectory + "\\src\\main\\java\\duke\\data\\duke.txt";
+        path = path.replace("\\", File.separator);
         try {
             File taskFile = new File(path);
             Scanner reader = new Scanner(taskFile);
@@ -107,10 +114,14 @@ public class Storage {
                     taskList.add(todoTask);
                 }
             }
-        } catch(NullPointerException fileInvalid) {
-            System.out.println("File is Invalid!");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch(Exception fileInvalid) {
+            try {
+                File file = new File(path);
+                Files.createDirectories(Path.of(file.getParent()));
+                Files.createFile(Path.of(path));
+            } catch (Exception e) {
+                System.out.println("Error");
+            }
         }
     }
 
@@ -121,11 +132,13 @@ public class Storage {
      */
     // Reusable code for writing into duke.txt task list
     public void saveToTaskList(ArrayList<Task> taskList) {
-        String tasksPath = "src\\main\\java\\data\\duke.txt";
-        tasksPath = tasksPath.replace("\\", "/");
 
-        String tagsPath = "src\\main\\java\\data\\tagList.txt";
-        tagsPath = tagsPath.replace("\\", "/");
+        String currentDir = System.getProperty("user.dir");
+        String tasksPath = currentDir + "\\src\\main\\java\\duke\\data\\duke.txt";
+        tasksPath = tasksPath.replace("\\", File.separator);
+
+        String tagsPath = currentDir + "\\src\\main\\java\\duke\\data\\tagList.txt";
+        tagsPath = tagsPath.replace("\\", File.separator);
         try {
             // Remove current file tasks
             PrintWriter pw = new PrintWriter(tasksPath);
@@ -150,7 +163,7 @@ public class Storage {
             }
             myWriter.close();
         } catch(NullPointerException | IOException fileInvalid) {
-            System.out.println("File is Invalid!");
+            System.out.println("ERROR!!");
         }
 
     }

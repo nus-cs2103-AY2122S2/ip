@@ -39,6 +39,6 @@ public class Duke {
      * @param args Command Line Argument not used in this iteration of the program.
      */
     public static void main(String[] args) {
-        new Duke("data/tasks.txt");
+        new Duke("duke/data/tasks.txt");
     }
 }
