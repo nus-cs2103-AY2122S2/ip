@@ -48,9 +48,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = wonka.getResponse(input) + "\n"
-                + "________________________________\n" + wonka.handleInput(input)
-                + "\n________________________________";
+        String response = wonka.getResponse(input) + "\n" + wonka.handleInput(input);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getWonkaDialog(response, wonkaImage)
@@ -61,7 +60,6 @@ public class MainWindow extends AnchorPane {
             PauseTransition end = new PauseTransition(Duration.seconds(5));
             end.setOnFinished(x -> stage.close());
             end.play();
-
         }
     }
 

@@ -81,14 +81,14 @@ public class Save {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("\t Preparing for initial launch, creating new save file.");
+            System.out.println("\t Save file not found, creating new save file.");
             File fileDir = new File("src/main/java/wonka/data");
             fileDir.mkdirs();
             File fileToCreate = new File(fileDir, "wonka.txt");
             try {
                 fileToCreate.createNewFile();
             } catch (IOException e1) {
-                System.out.println("File cannot be created");
+                System.out.println("\t File cannot be created");
             }
         }
     }
