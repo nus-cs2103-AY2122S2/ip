@@ -1,8 +1,9 @@
 package duke;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+import duke.util.CustomStringBuilder;
+import javafx.application.Platform;
 
 public class Duke {
 
@@ -23,70 +24,42 @@ public class Duke {
         }
     }
 
-    /**
-     * Simply outputs the initial Duke logo to indicate running of program
-     * @param args
-     * @throws IOException
-     */
-    public static void main(String[] args) throws IOException {
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        new Duke().run();
-    }
-
-    /**
-     * Greets and accepts commands from users. Also parses commands to create appropriate objects and call necessary
-     * functions.
-     * @throws IOException
-     */
-    public void run() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        ui.greet();
-        ui.addLineBreak();
-
-        while (true) {
-            String instruct = br.readLine();
-            try {
-                if (instruct.equals("bye")) {
-                    storage.addToFile();
-                    ui.endSession();
-                    break;
-                } else if (instruct.equals("list")) {
-                    TaskList.reportList();
+    public String getResponse(String input) {
+        CustomStringBuilder customStringBuilder = new CustomStringBuilder();
+        try {
+            if (input.equals("bye")) {
+                storage.addToFile();
+                customStringBuilder.bulkAppend(ui.endSession());
+                Platform.exit();
+            } else if (input.equals("list")) {
+                customStringBuilder.bulkAppend(TaskList.reportList());
+            } else {
+                String[] details = input.split(" ", 2);
+                String command = details[0];
+                if (command.equalsIgnoreCase("mark")) {
+                    customStringBuilder.bulkAppend(TaskList.markAsDone(Integer.parseInt(details[1])));
+                } else if (command.equalsIgnoreCase("unmark")) {
+                    customStringBuilder.bulkAppend(TaskList.markNotDone(Integer.parseInt(details[1])));
+                } else if (command.equalsIgnoreCase("delete")) {
+                    customStringBuilder.bulkAppend(TaskList.deleteTask(Integer.parseInt(details[1])));
+                } else if (command.equalsIgnoreCase("find")) {
+                    customStringBuilder.bulkAppend(TaskList.findTasks(details[1]));
+                } else if (command.equalsIgnoreCase("snooze")) {
+                    customStringBuilder.bulkAppend(TaskList.snooze(details[1]));
                 } else {
-                    String[] details = instruct.split(" ", 2);
-                    String command = details[0];
-                    if (command.equalsIgnoreCase("mark")) {
-                        TaskList.markAsDone(Integer.parseInt(details[1]));
-                    } else if (command.equalsIgnoreCase("unmark")) {
-                        TaskList.markNotDone(Integer.parseInt(details[1]));
-                    } else if (command.equalsIgnoreCase("delete")) {
-                        TaskList.deleteTask(Integer.parseInt(details[1]));
-                    } else if (command.equalsIgnoreCase("find")) {
-                        TaskList.findTasks(details[1]);
-                    } else if (command.equalsIgnoreCase("snooze")) {
-                        TaskList.snooze(details[1]);
+                    String taskType = details[0];
+                    if (!parser.isValidCommand(taskType)) {
+                        customStringBuilder.bulkAppend("sorry, this isn't a valid command yet!");
                     } else {
-                        String taskType = details[0];
-                        if (!parser.isValidCommand(taskType)) {
-                            ui.showInvalidCommandError();
-                        } else {
-                            TaskList.addTask(taskType, instruct);
-                        }
+                        customStringBuilder.bulkAppend(TaskList.addTask(taskType, input));
                     }
                 }
-                ui.addLineBreak();
-            } catch (CustomException e) {
-                System.out.println(e.getMessage());
-                ui.addLineBreak();
             }
+            customStringBuilder.bulkAppend(ui.addLineBreak());
+        } catch (CustomException e) {
+            customStringBuilder.bulkAppend(e.getMessage(), "\n", ui.addLineBreak());
         }
 
+        return customStringBuilder.toString();
     }
 }
