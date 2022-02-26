@@ -38,7 +38,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
 
-        dialog.setStyle("-fx-font-size: 15");
+        dialog.setStyle("-fx-font-size: 11");
 
         double x = displayPicture.getX() + displayPicture.getFitWidth() / 2;
         double y = displayPicture.getY() + displayPicture.getFitHeight() / 2;
