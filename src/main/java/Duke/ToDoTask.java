@@ -10,6 +10,9 @@ class ToDoTask extends Task{
         return "[T]"+super.toString();
     }
 
+    /**
+     * Generates ToDo string to be stored in the file.
+     */
     // T | 1 | read book
     @Override
     public String toFileString(){

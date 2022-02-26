@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author Pragya Jha
+ */
 public class Duke {
 //    public static class DukeMessage{
 //        public final static String welcomeMsg = "Hello! I am Duke\nWhat can I do for you?";

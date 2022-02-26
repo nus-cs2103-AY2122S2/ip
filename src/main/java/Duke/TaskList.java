@@ -25,6 +25,9 @@ class TaskList {
         return taskList.size();
     }
 
+    /**
+     * Process the printing of a task.
+     */
     public void processPrintList(Ui uiPrinter){
         uiPrinter.printMessage(Ui.listMsg);
         for (int i = 0; i < taskList.size(); i++) {
@@ -33,6 +36,9 @@ class TaskList {
         }
     }
 
+    /**
+     * Process the marking status of a task.
+     */
     public boolean processMarkingTask(String taskIndexStr, boolean isCompleted, Ui uiPrinter) throws DukeException{
         int markingIndex = getExistingIndex(taskIndexStr);
         if(markingIndex != -1) {
@@ -53,10 +59,16 @@ class TaskList {
         }
     }
 
+    /**
+     * Processes a todo task from the user input provided.
+     */
     public Task processTodo(String description) {
         return new ToDoTask(description, false);
     }
 
+    /**
+     * Processes deletion of a task.
+     */
     public boolean processDelete(String delStrIndex, Ui uiPrinter) throws DukeException{
         int delIndex = getExistingIndex(delStrIndex);
         if(delIndex != -1) {
@@ -71,6 +83,9 @@ class TaskList {
         }
     }
 
+    /**
+     * Check if in put is a valid number.
+     */
     public void checkIfNumber(String numStr) throws DukeException {
         try{
             Integer.parseInt(numStr);
@@ -80,14 +95,23 @@ class TaskList {
         }
     }
 
+    /**
+     * Processes an Event task from the user input provided.
+     */
     public Task processEvent(String description, LocalDateTime fromDt, LocalDateTime toDt ) {
         return new EventTask(description, false, fromDt, toDt);
     }
 
+    /**
+     * Processes a Deadline task from the user input provided.
+     */
     public Task processDeadline(String description, LocalDateTime dt)  {
         return new DeadlineTask(description,false, dt);
     }
 
+    /**
+     * Ensures number selected is within the range of values the tasklist has.
+     */
     public int getExistingIndex(String findStrIndex) throws DukeException{
         if(taskList.size() == 0){
             throw new DukeException("Task list is empty!");

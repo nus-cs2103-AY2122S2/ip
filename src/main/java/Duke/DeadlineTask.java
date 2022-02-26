@@ -24,6 +24,9 @@ class DeadlineTask extends Task{
         return "[D]"+super.toString() + "(by: " + byDate.format(fm) + ")";
     }
 
+    /**
+     * Generates Deadline string to be stored in the file.
+     */
     @Override
     public String toFileString(){
         return "D" + super.toFileString() + " | " + byDate.format(Parser.dtFormat);
