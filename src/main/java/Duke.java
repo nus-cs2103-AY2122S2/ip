@@ -35,6 +35,17 @@ public class Duke {
         }
     }
 
+    private static void taskDeletedMessage(Task task) {
+        System.out.println("Noted. I've removed this task:\n  " + task +
+                "\nNow you have " + taskList.size() + " tasks in the list.");
+    }
+
+    private static void deleteTask(int index) {
+        Task taskToBeDeleted = taskList.get(index);
+        taskList.remove(taskToBeDeleted);
+        taskDeletedMessage(taskToBeDeleted);
+    }
+
     public static void main(String[] args) {
         welcomeMessage();
         Scanner scanner = new Scanner(System.in);
@@ -68,6 +79,10 @@ public class Duke {
             case "UNMARK":
                 int indexItemToBeUnmarked = scanner.nextInt() + TURN_ONE_BASED_INDEXING_TO_ZERO_BASED_INDEXING;
                 taskList.get(indexItemToBeUnmarked).markTaskAsUndone();
+                break;
+            case "DELETE":
+                int indexItemToBeDeleted = scanner.nextInt() + TURN_ONE_BASED_INDEXING_TO_ZERO_BASED_INDEXING;
+                deleteTask(indexItemToBeDeleted);
                 break;
             case "BYE":
                 break;
