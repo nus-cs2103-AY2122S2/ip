@@ -26,7 +26,7 @@ public class Duke {
 
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
-        assert i <= tasks.size() && i >= 1 : "index of item should be within scope of tasklist";
+        assert i <= tasks.size() && i >= 0 : "index of item should be within scope of tasklist";
       
         tasks.get(i).markComplete();
         assert tasks.get(i).getStatusIcon().equals("X") : "task should be marked done";
@@ -46,7 +46,8 @@ public class Duke {
     public String undoHandler(String input) throws Exception {
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
-        assert i <= tasks.size() && i >= 1 : "index of item should be within scope of tasklist";
+        System.out.println("i " + i + " tasks size:" + tasks.size());
+        assert i <= tasks.size() && i >= 0 : "index of item should be within scope of tasklist";
       
         tasks.get(i).markIncomplete();
         assert tasks.get(i).getStatusIcon().equals(" ") : "task should be marked incomplete";
@@ -66,7 +67,7 @@ public class Duke {
     public String deleteHandler(String input) throws Exception {
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
-        assert i <= tasks.size() && i >= 1 : "index of item should be within scope of tasklist";
+        assert i <= tasks.size() && i >= 0 : "index of item should be within scope of tasklist";
         tasks.remove(i);
 
         storage.save(tasks);
