@@ -2,7 +2,7 @@
 
 Wonka is a **desktop app created with the sole purpose of task management, optimized for use via a 
 Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, Wonka can increase your task management efficiency up by **at least 40%**!
+If you can type fast, Wonka can increase your task management efficiency by **at least 40%**!
 
 ## Quick Start
 
