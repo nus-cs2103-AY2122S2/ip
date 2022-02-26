@@ -9,8 +9,7 @@ import java.time.format.DateTimeParseException;
  * An abstract class that represents a task with date/time.
  */
 public abstract class TaskWithDateTime extends Task {
-    private String dateTimeInput;
-    private String dateInput;
+    private final String dateTimeInput;
     private LocalDate date;
 
     /* DateTime of the task to be printed */
@@ -49,32 +48,45 @@ public abstract class TaskWithDateTime extends Task {
      * output with the proper date/time, otherwise generate output with the input.
      */
     private void processDateTimeInput() {
-        String[] dateTimeInputParts = dateTimeInput.split("\\s+", 2);
-
+        String dateInput;
         String timeInput;
+        LocalTime timeStart;
+        LocalTime timeEnd;
 
-        if (dateTimeInputParts.length == 2) {
-            dateInput = dateTimeInputParts[0].trim();
-            timeInput = dateTimeInputParts[1].trim();
+        if (dateTimeInput.contains("d/") && dateTimeInput.contains("t/")) {
+            dateInput = dateTimeInput.split("d/", 2)[1].trim().split("t/", 2)[0].trim();
+            timeInput = dateTimeInput.split("t/", 2)[1].trim();
 
-            // Omit any additional whitespaces in between date and time inputs
-            dateTimeInput = dateInput + " " + timeInput;
-        } else {
-            dateInput = dateTimeInputParts[0].trim();
+            // Process date input
+            date = processDateInput(dateInput);
+
+            // Process time input
+            if (timeInput.length() == 9 && timeInput.charAt(4) == '-') {
+                String timeInputStart = timeInput.substring(0, 4);
+                String timeInputEnd = timeInput.substring(5);
+
+                timeStart = isTimeInputProper(timeInputStart) ? processTimeInput(timeInputStart) : null;
+                timeEnd = isTimeInputProper(timeInputEnd) ? processTimeInput(timeInputEnd) : null;
+            } else {
+                timeStart = null;
+                timeEnd = isTimeInputProper(timeInput) ? processTimeInput(timeInput) : null;
+            }
+
+            // Generate dateTime output
+            dateTimeOutput = generateDateTimeOutput(date, dateInput, timeStart, timeEnd, timeInput);
+        } else if (dateTimeInput.contains("d/")) {
+            dateInput = dateTimeInput.split("d/", 2)[1].trim();
             timeInput = "";
 
-            // Omit any additional whitespaces that comes with date input
-            dateTimeInput = dateInput;
+            // Process date input
+            date = processDateInput(dateInput);
+
+            // Generate dateTime output
+            dateTimeOutput = generateDateTimeOutput(date, dateInput, null, null, timeInput);
+        } else {
+            dateInput = dateTimeInput;
+            dateTimeOutput = dateTimeInput;
         }
-
-        // Process date input
-        date = processDateInput(dateInput);
-
-        // Process time input
-        LocalTime time = isTimeInputProper(timeInput) ? processTimeInput(timeInput) : null;
-
-        // Generate dateTime output
-        dateTimeOutput = generateDateTimeOutput(date, dateInput, time, timeInput, isTimeInputProper(timeInput));
     }
 
     /**
@@ -140,32 +152,64 @@ public abstract class TaskWithDateTime extends Task {
      *
      * @param date Date in LocalDate format
      * @param dateInput Date input of the task
-     * @param time Time in LocalTime format
+     * @param timeStart Start time in LocalTime format
+     * @param timeEnd End time in LocalTime format
      * @param timeInput Time input of the task
-     * @param isTimeInputProper Flag to indicate if the input time is proper
      * @return The date/time output of the task
      */
-    private String generateDateTimeOutput(LocalDate date, String dateInput, LocalTime time,
-                                          String timeInput, boolean isTimeInputProper) {
+    private String generateDateTimeOutput(LocalDate date, String dateInput, LocalTime timeStart,
+                                          LocalTime timeEnd, String timeInput) {
         String dateTimeOutput = "";
 
-        // Put date into output String
+        // For task with date (in LocalDate format), timeStart (in LocalTime format)
+        // and timeEnd (in LocalTime format)
+        // Put date, timeStart and timeEnd into output String
+        if (date != null && timeStart != null && timeEnd != null) {
+            dateTimeOutput = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    + ", " + timeStart.format(DateTimeFormatter.ofPattern("hh:mm a"))
+                    + " to " + timeEnd.format(DateTimeFormatter.ofPattern("hh:mm a"));
+            return dateTimeOutput;
+        }
+
+        // For task with date (in LocalDate format) and timeEnd (in LocalTime format)
+        // Put date, timeStart and timeEnd into output String
+        if (date != null && timeStart == null && timeEnd != null) {
+            dateTimeOutput = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    + ", " + timeEnd.format(DateTimeFormatter.ofPattern("hh:mm a"));
+            return dateTimeOutput;
+        }
+
+        // For task without date (in LocalDate format), timeStart (in LocalTime format)
+        // and timeEnd (in LocalTime format)
+        // Put original date and time input into output String
+        if (date == null && timeStart == null && timeEnd == null) {
+            dateTimeOutput = dateTimeInput;
+            return dateTimeOutput;
+        }
+
+        // Put date (in LocalDate format) into output String if it is not null,
+        // otherwise put the original date input
         if (date != null) {
             dateTimeOutput = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } else {
             dateTimeOutput = dateInput;
         }
 
-        // Put time into output String
-        if (time != null) {
-            dateTimeOutput += ", " + time.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        // Put timeStart (in LocalTime format) and/or timeEnd (in LocalTime format)
+        // into output String if it is not null, otherwise put the original time input
+        if (timeStart != null && timeEnd != null) {
+            dateTimeOutput += ", " + timeStart.format(DateTimeFormatter.ofPattern("hh:mm a"))
+                    + " to " + timeEnd.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        } else if (timeStart == null && timeEnd != null) {
+            dateTimeOutput += ", " + timeEnd.format(DateTimeFormatter.ofPattern("hh:mm a"));
         } else {
             if (!timeInput.equals("")) {
-                dateTimeOutput += ", " + timeInput;
-
-                if (!isTimeInputProper) {
-                    dateTimeOutput += " [Note: Invalid time format]";
+                if ((timeInput.length() == 9 && timeInput.charAt(4) == '-') || !isTimeInputProper(timeInput)) {
+                    dateTimeOutput += ", " + timeInput + "[Note: Invalid time format]";
+                } else {
+                    dateTimeOutput += ", " + timeInput;
                 }
+
             }
         }
 
@@ -199,9 +243,9 @@ public abstract class TaskWithDateTime extends Task {
     public boolean isOnDate(String dateStr) {
         try {
             LocalDate dateToSearch = LocalDate.parse(dateStr);
-            return date != null ? date.equals(dateToSearch) : dateInput.equals(dateStr);
+            return date != null && date.equals(dateToSearch);
         } catch (DateTimeParseException e) {
-            return dateInput.equals(dateStr);
+            return false;
         }
     }
 

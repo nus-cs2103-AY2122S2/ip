@@ -36,58 +36,50 @@ public class Ui {
             + System.lineSeparator()
             + "The program will exit in 10 seconds.";
 
-    public static final String HELP_MESSAGE_COMMAND_ADD = "Add a task"
+    public static final String HELP_MESSAGE_COMMAND_ADD = "Adding a task"
             + System.lineSeparator()
-            + "Format: \t [ToDo (T) task] \t todo <description>"
+            + "ToDo (T): \t\t todo <description>"
             + System.lineSeparator()
-            + "\t\t [Deadline (D) task] \t deadline <description> /by <date time>"
+            + "Deadline (D): \t deadline <description> /by <date time>"
             + System.lineSeparator()
-            + "\t\t [Event (E) task] \t event <description> /at <date time>"
-            + System.lineSeparator()
-            + "Note: \t For proper recognition of <date time>, use yyyy-MM-dd hhmm format (e.g. 2022-01-21 1800)";
+            + "Event (E): \t\t event <description> /at <date time>";
 
-    public static final String HELP_MESSAGE_COMMAND_LIST = "List down all tasks"
+    public static final String HELP_MESSAGE_COMMAND_LIST = "Listing down all tasks"
             + System.lineSeparator()
-            + "Format: \t list";
+            + "list";
 
-    public static final String HELP_MESSAGE_COMMAND_MARK = "Mark a task as done"
+    public static final String HELP_MESSAGE_COMMAND_PRINT = "Printing deadlines/events on a specific date"
             + System.lineSeparator()
-            + "Format: \t mark INDEX"
-            + System.lineSeparator()
-            + "Note: \t INDEX refers to the specified numbering of the task in the List of tasks or filtered tasks";
+            + "print /on <date>";
 
-    public static final String HELP_MESSAGE_COMMAND_UNMARK = "Mark a task as not done yet"
+    public static final String HELP_MESSAGE_COMMAND_FIND = "Finding tasks that contains the keyword in the description"
             + System.lineSeparator()
-            + "Format: \t unmark INDEX"
-            + System.lineSeparator()
-            + "Note: \t INDEX refers to the specified numbering of the task in the List of tasks or filtered tasks";
+            + "find <keyword>";
 
-    public static final String HELP_MESSAGE_COMMAND_DELETE = "Delete a task"
+    public static final String HELP_MESSAGE_COMMAND_MARK = "Marking a task as done"
             + System.lineSeparator()
-            + "Format: \t delete INDEX"
-            + System.lineSeparator()
-            + "Note: \t INDEX refers to the specified numbering of the task in the List of tasks or filtered tasks";
+            + "mark INDEX";
 
-    public static final String HELP_MESSAGE_COMMAND_PRINT = "Print deadlines/events on a specific date"
+    public static final String HELP_MESSAGE_COMMAND_UNMARK = "Marking a task as not done yet"
             + System.lineSeparator()
-            + "Format: \t print /on <date>";
+            + "unmark INDEX";
 
-    public static final String HELP_MESSAGE_COMMAND_FIND = "Find tasks that contains the keyword in the description"
+    public static final String HELP_MESSAGE_COMMAND_DELETE = "Deleting a task"
             + System.lineSeparator()
-            + "Format: \t find <keyword>";
+            + "delete INDEX";
 
-    public static final String HELP_MESSAGE_COMMAND_BYE = "Exit the ChatBot program"
+    public static final String HELP_MESSAGE_COMMAND_BYE = "Exiting the ChatBot program"
             + System.lineSeparator()
-            + "Format: \t bye";
+            + "bye";
 
     public static final String HELP_MESSAGE = "Here are the available commands and the respective formats:"
             + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_ADD
             + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_LIST
+            + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_PRINT
+            + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_FIND
             + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_MARK
             + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_UNMARK
             + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_DELETE
-            + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_PRINT
-            + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_FIND
             + System.lineSeparator() + System.lineSeparator() + HELP_MESSAGE_COMMAND_BYE;
 
     /**

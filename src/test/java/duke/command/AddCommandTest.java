@@ -38,7 +38,7 @@ public class AddCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage("data", "test.txt");
 
-        AddCommand addDeadlineCommand = new AddDeadlineCommand("Test Deadline Task /by 2022-01-30 2359");
+        AddCommand addDeadlineCommand = new AddDeadlineCommand("Test Deadline Task /by d/2022-01-30 t/2359");
         addDeadlineCommand.execute(taskList, ui, storage);
 
         Task deadlineTask = taskList.getTask(0);
@@ -55,11 +55,11 @@ public class AddCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage("data", "test.txt");
 
-        AddCommand addEventCommand = new AddEventCommand("Test Event Task /at 2022-01-31 7-10pm");
+        AddCommand addEventCommand = new AddEventCommand("Test Event Task /at d/2022-01-31 t/1900-2200");
         addEventCommand.execute(taskList, ui, storage);
 
         Task eventTask = taskList.getTask(0);
-        assertEquals("[E] [   ] Test Event Task (at: Jan 31 2022, 7-10pm)", eventTask.toString());
+        assertEquals("[E] [   ] Test Event Task (at: Jan 31 2022, 07:00 PM to 10:00 PM)", eventTask.toString());
 
         // Deletes the data file after JUnit test
         File dataFile = storage.getDataFile();

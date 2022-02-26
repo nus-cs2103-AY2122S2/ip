@@ -1,7 +1,12 @@
 # User Guide
 
-Duke is a **Personal Assistant ChatBot desktop application** that can help you to
-keep track of various tasks.
+Duke is a **personal assistant chatbot desktop application** that can help you keep track of 3 types of tasks.
+
+* ToDo: Tasks without any date/time attached
+* Deadline: Tasks that need to be done before a specific date/time
+* Event: Tasks that start at a specific date/time and ends at a specific time
+
+It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 ![](Ui.png)
 
@@ -9,237 +14,502 @@ keep track of various tasks.
 
 1. [Quick Start](#quick-start)
 2. [Features](#features)
-3. [Usage](#usage)
-4. [Command Summary](#command-summary)
+3. [Command Summary](#command-summary)
 
 ## Quick Start
 
-1. Ensure that you have ``Java 11`` installed on your Computer.
-
-2. Download the latest release of ```duke.jar``` from [release](https://github.com/dannytayjy/ip/releases).
-
-3. Double-click on the file to start the app.
-
-4. Type in the command in the text box.
-
-5. Press the ```Enter``` key or click on the ```Send``` button to send the command over to Duke.
+1. Ensure that you have `Java 11` installed on your Computer.
+2. Download the latest release of `duke.jar` from [here](https://github.com/dannytayjy/ip/releases).
+3. Copy the file to the folder you want to use as the home folder for the chatbot application.
+4. Double-click the file to start the app.
+5. Type the command in the text box and press Enter or click on the Send button to execute it. Some example commands you can try:
+   * `list` : Lists all tasks.
+   * `todo Clean Up Bedroom` : Adds a ToDo task with description `Clean Up Bedroom` to the task list. .
+   * `bye` : Exits the chatbot application.
+7. Refer to the [Features](#features) below for details of each command.
 
 ## Features
 
-### Create tasks
+### Viewing help : `help` ###
 
-Duke allows tracking of 3 types of tasks:
-- ToDo: Tasks without any date/time attached
-- Deadline: Tasks that need to be done before a specific date/time
-- Event: Tasks that start at a specific date/time and ends at a specific time
+Shows a message with the available commands and the respective formats.
 
-### List tasks
+Format: `help`
 
-Duke can show all the tasks which are currently tracked.
+### Adding a ToDo task : `todo`
 
-### Change completion status of tasks
-
-Duke can mark a task as done/undone.
-
-### Delete task
-
-Duke can delete any task that user does not want to track anymore.
-
-### Save tasks automatically
-
-Duke automatically saves any changes made into a memory file called `tasks.txt` locally in a folder called `data` and retrieved next time.
-
-### Print tasks occurring on a date
-
-Duke can find tasks occurring on a specified date.
-
-### Find tasks containing a keyword
-
-Duke can find tasks with find tasks by searching for a keyword in the description.
-
-## Usage
-
-### Add a ToDo task: `todo`
-
-Adds a ToDo task to the task list
+Adds a ToDo task to the task list.
 
 Format: `todo <description>`
-* `description` refers to the description of the ToDo task
 
-Example of usage: `todo Change bedsheet`
+* `description` refers to the description of the ToDo task.
 
-Expected outcome:
-```
-Got it. I've added this task:
-     [T][ ] Change bedsheet
-Now you have 1 task in the list.
-```
+Example of usages and outcomes:
 
-### Add a Deadline task: `deadline`
+* `todo Clean Up Bedroom`
 
-Adds a Deadline task to the task list
+  ```
+  Got it. I've added this task:
+       [T][ ] Clean Up Bedroom
+  Now you have 1 task in the list.
+  ```
+  
+* `todo Wash Laundry`
+
+  ```
+  Got it. I've added this task:
+       [T][ ] Wash Laundry
+  Now you have 2 tasks in the list.
+  ```
+
+### Adding a Deadline task : `deadline`
+
+Adds a Deadline task to the task list.
 
 Format: `deadline <description> /by <date time>`
-* `description` refers to the description of the Deadline task
-* `date` refers to the date by which the Deadline task needs to be completed
-* `time` refers to the time by which the Deadline task needs to be completed, which can be optional
-* For proper recognition of `date time`, use yyyy-MM-dd hhmm format (e.g. 2022-01-21 1800)
+* `description` refers to the description of the Deadline task.
+* `date time` refers to the date and time by which the Deadline task needs to be completed.
+* `date time` can be in any format that the user prefers.
+* For proper recognition of `date` and `time`,
+  * `date` has to be entered first, followed by `time`.
+  * `date` has to be in the format `d/yyyy-MM-dd` (e.g. `d/2022-01-21`).
+  * `time` has to be in the format `hhmm` (e.g. `t/1800`) and can be optional.
 
-Example of usage: `deadline CS2102 Week 6 Tutorial Q3b /by 2022-02-15 0900`
+Example of usages and outcomes:
 
-Expected outcome:
-```
-Got it. I've added this task:
-     [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
-Now you have 2 tasks in the list.
-```
+* `deadline CS3240 G1 /by Week 6 Saturday 19 Feb 2pm`
 
-### Add an Event task: `event`
+  ```
+  Got it. I've added this task:
+       [D][ ] CS3240 G1 (by: Week 6 Saturday 19 Feb 2pm)
+  Now you have 3 tasks in the list.
+  ```
+
+* `deadline Pay Town Council S&C Charges on AXS app /by d/2022-02-15`
+
+  ```
+  Got it. I've added this task:
+       [D][ ] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+  Now you have 4 tasks in the list.
+  ```
+
+* `deadline CS2102 Week 6 Tutorial Q3b /by d/2022-02-15 t/0900`
+
+  ```
+  Got it. I've added this task:
+       [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  Now you have 5 tasks in the list.
+  ```
+
+### Adding an Event task : `event`
 
 Adds an Event task to the task list
 
 Format: `event <description> /at <date time>`
-* `description` refers to the description of the Event task
-* `date` refers to the date at which the Event task is taking place
-* `time` refers to the time at which the Event task is taking place, which can be optional
-* For proper recognition of `date time`, use yyyy-MM-dd hhmm format (e.g. 2022-01-21 1800)
 
-Example of usage: `event Meet-up with Fabian /at 2022-02-20 1130`
+* `description` refers to the description of the Event task.
+* `date time` refers to the date and time at which the Event task is taking place.
+* `date time` can be in any format that the user prefers.
+* For proper recognition of `date` and `time`,
+  * `date` has to be entered first, followed by `time`.
+  * `date` has to be in the format `d/yyyy-MM-dd` (e.g. `d/2022-01-21`).
+  * `time` has to be in the format `hhmm` (e.g. `t/1800`) or `hhmm-hhmm` (e.g. `t/1800-2000`) and can be optional.
 
-Expected outcome:
-```
-Got it. I've added this task:
-     [E][ ] Meet-up with Fabian (at: Feb 20 2022, 11:30 AM)
-Now you have 3 tasks in the list.
-```
+Example of usages and outcomes:
 
-### List down all tasks: `list`
+* `event CS3230 Midterm Exam /at Week 7 Thursday 3 Mar 2pm`
 
-Displays all the tasks the user currently have and their completion status.
+  ```
+  Got it. I've added this task:
+       [E][ ] CS3230 Midterm Exam (at: Week 7 Thursday 3 Mar 2pm)
+  Now you have 6 tasks in the list.
+  ```
+
+* `event Staycation /at d/2022-02-23`
+
+  ```
+  Got it. I've added this task:
+       [E][ ] Staycation (at: Feb 23 2022)
+  Now you have 7 tasks in the list.
+  ```
+
+* `event Meet Jason at Jewel for Lunch /at d/2022-02-20 t/1200`
+
+  ```
+  Got it. I've added this task:
+       [E][ ] Meet Jason at Jewel for Lunch (at: Feb 20 2022, 12:00 PM)
+  Now you have 8 tasks in the list.
+  ```
+
+* `event CS2102 Project Part 1 Evaluation /at d/2022-02-21 t/1700-1730`
+
+  ```
+  Got it. I've added this task:
+       [E][ ] CS2102 Project Part 1 Evaluation (at: Feb 21 2022, 05:00 PM to 05:30 PM)
+  Now you have 9 tasks in the list.
+  ```
+
+### Listing all tasks : `list`
+
+Shows a list of all the tasks and their completion status.
 * `[✓]` indicates the task is marked as done
-* `[ ]` indicates the task is not markes as done yet
+* `[ ]` indicates the task is not marked as done yet
 
 Format: `list`
 
-Example of usage: `list`
-
 Expected outcome:
+
 ```
 Here are the tasks in your list:
 [Legend: T = todo, D = deadline, E = event]
 
-1.   [T][ ] Change bedsheet
-2.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
-3.   [E][ ] Meet-up with Fabian (at: Feb 20 2022, 11:30 AM)
+1.   [T][ ] Clean Up Bedroom
+2.   [T][ ] Wash Laundry
+3.   [D][ ] CS3240 G1 (by: Week 6 Saturday 19 Feb 2pm)
+4.   [D][ ] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+5.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+6.   [E][ ] CS3230 Midterm Exam (at: Week 7 Thursday 3 Mar 2pm)
+7.   [E][ ] Staycation (at: Feb 23 2022)
+8.   [E][ ] Meet Jason at Jewel for Lunch (at: Feb 20 2022, 12:00 PM)
+9.   [E][ ] CS2102 Project Part 1 Evaluation (at: Feb 21 2022, 05:00 PM to 05:30 PM)
 ```
 
-### Mark a task as done: `mark`
+### Printing deadlines/events that occurs on a specific date : `print`
 
-Mark an existing task as done with a check mark. <br>
-By default, tasks when added are initially marked as undone.
-
-Format `mark INDEX`
-* `INDEX` refers to the specified numbering of the task in the List of tasks or filtered tasks
-* `INDEX` must be a positive integer 1, 2, 3, ...
-* `INDEX` must be valid, i.e., cannot mark task 7 as done if there are only 6 tasks in the List of tasks or filtered tasks
-
-Example of usage: `mark 1`
-
-Expected outcome:
-```
-Nice! I've marked this task as done:
-     [T][✓] Change bedsheet
-```
-
-### Mark a task as not done yet: `unmark`
-
-Mark an existing task as not done yet by removing the check mark.
-
-Format: `unmark INDEX`
-* `INDEX` refers to the specified numbering of the task in the List of tasks or filtered tasks
-* `INDEX` must be a positive integer 1, 2, 3, ...
-* `INDEX` must be valid, i.e., cannot mark task 7 as done if there are only 6 tasks in the List of tasks or filtered tasks
-
-Example of usage: `unmark 1`
-
-Expected outcome:
-```
-OK, I've marked this task as not done yet:
-     [T][ ] Change bedsheet
-```
-### Delete a task: `delete`
-
-Delete the specified task from Duke.
-
-Format `delete INDEX`
-* `INDEX` refers to the specified numbering of the task in the List of tasks or filtered tasks
-* `INDEX` must be a positive integer 1, 2, 3, ...
-* `INDEX` must be valid, i.e., cannot delete task 7 if there are only 6 tasks in the List of tasks or filtered tasks
-
-Example of usage: `delete 1`
-```list``` followed by ```delete 1``` deletes the 1st task in Duke.
-
-Expected outcome:
-```
-Noted. I've removed this task:
-     [T][ ] Change bedsheet
-Now yoy have 2 tasks in the list.
-```
-### Print deadlines/events on a specific date: `print`
-
-Print deadlines/events occurring on a specific date.
+Prints deadlines/events occurring on a specific date.
 
 Format: `print /on <date>`
-* The search is not case-sensitive.
-* It will search any tasks with the description that contains the keyword partially
+* The search is date-sensitive, i.e., it can only search for tasks having `date` in the format of `yyyy-MM-dd` (e.g. `2022-01-21`).
 
-Example of usage: `print /on 2022-02-20`
+Expected usage and outcome:
 
-Expected outcome:
-```
-Here is the task on this date (Feb 20 2022):
-[Legend: T = todo, D = deadline, E = event]
+* `print /on 2022-02-15`
 
-1.   [E][ ] Meet-up with Fabian (at: Feb 20 2022, 1130 AM)
-```
+  ```
+  Here is the task on this date (Feb 15 2022):
+  [Legend: T = todo, D = deadline, E = event]
+  
+  1.   [D][ ] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+  2.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  ```
 
 ### Locating tasks by keyword: `find`
 
-Finds existing tasks whose descriptions contain the given keyword.
+Finds existing tasks whose description contains the given keyword.
 
 Format: `find <keyword>`
-* The search is not case-sensitive.
-* It will search any tasks with the description that contains the keyword partially
+* The search is case-insensitive, i.e., `cs` will match `CS` and vice-versa.
+* The search should contain only one keyword.
+* The search will find any tasks whose descriptions contain the keyword partially.
 
-Example of usage: `find CS2102`
+Example of usage and outcome:
 
-Expected outcome:
-```
-Here is the matching task in your list:
-[Keyword Search: CS2102]
-[Legend: T = todo, D = deadline, E = event]
+* `find cs`
 
-1.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 0900 AM)
-```
+  ```
+  Here is the matching task in your list:
+  [Keyword Search: cs]
+  [Legend: T = todo, D = deadline, E = event]
 
-### Exiting the application: `bye`
+  1.   [D][ ] CS3240 G1 (by: Week 6 Saturday 19 Feb 2pm)
+  2.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  3.   [E][ ] CS3230 Midterm Exam (at: Week 7 Thursday 3 Mar 2pm)
+  4.   [E][ ] CS2102 Project Part 1 Evaluation (at: Feb 21 2022, 05:00 PM to 05:30 PM)
+  ```
 
-Exits the application.
+### Marking a task as done : `mark`
 
-Format `bye`
+Marks the specified task in the task list as done with a check mark. By default, tasks when added are initially marked as undone.
+
+Format `mark INDEX`
+
+* Marks the task at the specified `INDEX` as done.
+* The index refers to the index number shown in the displayed task list.
+* The index **must be a positive integer** 1, 2, 3, ...
+
+Examples of usage and outcomes:
+
+* `list` followed by `mark 2` marks the second task in the task list as done.
+
+  ```
+  Here are the tasks in your list:
+  [Legend: T = todo, D = deadline, E = event]
+    
+  1.   [T][ ] Clean Up Bedroom
+  2.   [T][ ] Wash Laundry
+  3.   [D][ ] CS3240 G1 (by: Week 6 Saturday 19 Feb 2pm)
+  4.   [D][ ] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+  5.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  6.   [E][ ] CS3230 Midterm Exam (at: Week 7 Thursday 3 Mar 2pm)
+  7.   [E][ ] Staycation (at: Feb 23 2022)
+  8.   [E][ ] Meet Jason at Jewel for Lunch (at: Feb 20 2022, 12:00 PM)
+  9.   [E][ ] CS2102 Project Part 1 Evaluation (at: Feb 21 2022, 05:00 PM to 05:30 PM)
+  ```
+
+  ```
+  Nice! I've marked this task as done:
+       [T][✓] Wash Laundry
+  ```
+
+* `print /on 2022-02-15` followed by `mark 1` marks the first task in the results of the `print` command as done.
+
+  ```
+  Here is the task on this date (Feb 15 2022):
+  [Legend: T = todo, D = deadline, E = event]
+  
+  1.   [D][ ] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+  2.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  ```
+
+  ```
+  Nice! I've marked this task as done:
+       [D][✓] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+  ```
+
+  ```
+  [FILTERED TASKS]
+
+  Here is the task on this date (Feb 15 2022):
+  [Legend: T = todo, D = deadline, E = event]
+  
+  1.   [D][✓] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+  2.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  ```
+
+* `find cs` followed by `mark 2` marks the second task in the results of the `find` command as done.
+
+  ```
+  Here is the matching task in your list:
+  [Keyword Search: cs]
+  [Legend: T = todo, D = deadline, E = event]
+
+  1.   [D][ ] CS3240 G1 (by: Week 6 Saturday 19 Feb 2pm)
+  2.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  3.   [E][ ] CS3230 Midterm Exam (at: Week 7 Thursday 3 Mar 2pm)
+  4.   [E][ ] CS2102 Project Part 1 Evaluation (at: Feb 21 2022, 05:00 PM to 05:30 PM)
+  ```
+  
+  ```
+  Nice! I've marked this task as done:
+       [D][✓] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  ```
+
+  ```
+  [FILTERED TASKS]
+
+  Here is the matching task in your list:
+  [Keyword Search: cs]
+  [Legend: T = todo, D = deadline, E = event]
+  
+  1.   [D][ ] CS3240 G1 (by: Week 6 Saturday 19 Feb 2pm)
+  2.   [D][✓] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  3.   [E][ ] CS3230 Midterm Exam (at: Week 7 Thursday 3 Mar 2pm)
+  4.   [E][ ] CS2102 Project Part 1 Evaluation (at: Feb 21 2022, 05:00 PM to 05:30 PM)
+  ```
+
+### Marking a task as not done yet : `unmark`
+
+Marks the specified task in the task list as not done yet by removing the check mark.
+
+Format `unmark INDEX`
+
+* Marks the task at the specified `INDEX` as not done yet.
+* The index refers to the index number shown in the displayed task list.
+* The index **must be a positive integer** 1, 2, 3, ...
+
+Examples of usage and outcomes:
+
+* `list` followed by `unmark 2` marks the second task in the task list as not done yet.
+
+  ```
+  Here are the tasks in your list:
+  [Legend: T = todo, D = deadline, E = event]
+    
+  1.   [T][ ] Clean Up Bedroom
+  2.   [T][✓] Wash Laundry
+  3.   [D][ ] CS3240 G1 (by: Week 6 Saturday 19 Feb 2pm)
+  4.   [D][✓] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+  5.   [D][✓] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  6.   [E][ ] CS3230 Midterm Exam (at: Week 7 Thursday 3 Mar 2pm)
+  7.   [E][ ] Staycation (at: Feb 23 2022)
+  8.   [E][ ] Meet Jason at Jewel for Lunch (at: Feb 20 2022, 12:00 PM)
+  9.   [E][ ] CS2102 Project Part 1 Evaluation (at: Feb 21 2022, 05:00 PM to 05:30 PM)
+  ```
+  
+  ```
+  OK! I've marked this task as not done yet:
+       [T][ ] Wash Laundry
+  ```
+
+* `print /on 2022-02-15` followed by `unmark 1` marks the first task in the results of the `print` command as not done yet.
+
+  ```
+  Here is the task on this date (Feb 15 2022):
+  [Legend: T = todo, D = deadline, E = event]
+  
+  1.   [D][✓] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+  2.   [D][✓] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  ```
+
+  ```
+  OK! I've marked this task as not done yet:
+       [D][ ] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+  ```
+
+  ```
+  [FILTERED TASKS]
+
+  Here is the task on this date (Feb 15 2022):
+  [Legend: T = todo, D = deadline, E = event]
+  
+  1.   [D][ ] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+  2.   [D][✓] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  ```
+
+* `find cs` followed by `unmark 2` marks the second task in the results of the `find` command as done.
+
+  ```
+  Here is the matching task in your list:
+  [Keyword Search: cs]
+  [Legend: T = todo, D = deadline, E = event]
+
+  1.   [D][ ] CS3240 G1 (by: Week 6 Saturday 19 Feb 2pm)
+  2.   [D][✓] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  3.   [E][ ] CS3230 Midterm Exam (at: Week 7 Thursday 3 Mar 2pm)
+  4.   [E][ ] CS2102 Project Part 1 Evaluation (at: Feb 21 2022, 05:00 PM to 05:30 PM)
+  ```
+
+  ```
+  OK! I've marked this task as not done yet:
+       [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  ```
+
+  ```
+  [FILTERED TASKS]
+
+  Here is the matching task in your list:
+  [Keyword Search: CS]
+  [Legend: T = todo, D = deadline, E = event]
+  
+  1.   [D][ ] CS3240 G1 (by: Week 6 Saturday 19 Feb 2pm)
+  2.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  3.   [E][ ] CS3230 Midterm Exam (at: Week 7 Thursday 3 Mar 2pm)
+  4.   [E][ ] CS2102 Project Part 1 Evaluation (at: Feb 21 2022, 05:00 PM to 05:30 PM)
+  ```
+
+### Deleting a task : `delete`
+
+Deletes the specified task from the task list.
+
+Format `delete INDEX`
+
+* Deletes the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index **must be a positive integer** 1, 2, 3, ...
+
+Examples of usage and outcomes:
+
+* `list` followed by `delete 2` deletes the second task in the task list.
+
+  ```
+  Here are the tasks in your list:
+  [Legend: T = todo, D = deadline, E = event]
+    
+  1.   [T][ ] Clean Up Bedroom
+  2.   [T][ ] Wash Laundry
+  3.   [D][ ] CS3240 G1 (by: Week 6 Saturday 19 Feb 2pm)
+  4.   [D][ ] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+  5.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  6.   [E][ ] CS3230 Midterm Exam (at: Week 7 Thursday 3 Mar 2pm)
+  7.   [E][ ] Staycation (at: Feb 23 2022)
+  8.   [E][ ] Meet Jason at Jewel for Lunch (at: Feb 20 2022, 12:00 PM)
+  9.   [E][ ] CS2102 Project Part 1 Evaluation (at: Feb 21 2022, 05:00 PM to 05:30 PM)
+  ```
+
+  ```
+  Noted! I've removed this task:
+       [T][ ] Wash Laundry
+  Now you have 8 tasks in the list.
+  ```
+
+* `print /on 2022-02-15` followed by `delete 1` deletes the first task in the results of the `print` command.
+
+  ```
+  Here is the task on this date (Feb 15 2022):
+  [Legend: T = todo, D = deadline, E = event]
+  
+  1.   [D][ ] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+  2.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  ```
+
+  ```
+  Noted! I've removed this task:
+       [D][ ] Pay Town Council S&C Charges on AXS app (by: Feb 15 2022)
+  Now you have 7 tasks in the list.
+  ```
+
+  ```
+  [FILTERED TASKS]
+
+  Here is the task on this date (Feb 15 2022):
+  [Legend: T = todo, D = deadline, E = event]
+  
+  1.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  ```
+
+* `find cs` followed by `delete 2` marks the second task in the results of the `find` command.
+
+  ```
+  Here is the matching task in your list:
+  [Keyword Search: cs]
+  [Legend: T = todo, D = deadline, E = event]
+
+  1.   [D][ ] CS3240 G1 (by: Week 6 Saturday 19 Feb 2pm)
+  2.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  3.   [E][ ] CS3230 Midterm Exam (at: Week 7 Thursday 3 Mar 2pm)
+  4.   [E][ ] CS2102 Project Part 1 Evaluation (at: Feb 21 2022, 05:00 PM to 05:30 PM)
+  ```
+
+  ```
+  Noted! I've removed this task:
+       [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 09:00 AM)
+  Now you have 7 tasks in the list.
+  ```
+
+  ```
+  [FILTERED TASKS]
+
+  Here is the matching task in your list:
+  [Keyword Search: cs]
+  [Legend: T = todo, D = deadline, E = event]
+  
+  1.   [D][ ] CS3240 G1 (by: Week 6 Saturday 19 Feb 2pm)
+  2.   [E][ ] CS3230 Midterm Exam (at: Week 7 Thursday 3 Mar 2pm)
+  3.   [E][ ] CS2102 Project Part 1 Evaluation (at: Feb 21 2022, 05:00 PM to 05:30 PM)
+  ```
+  
+### Exiting the program : `bye`
+
+Exits the program in 10 seconds.
+
+Format: `bye`
+
+### Saving the data
+
+Duke's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ## Command Summary
 
-| Action       | Format, Examples                                                                                                                         |
-|:-------------|:-----------------------------------------------------------------------------------------------------------------------------------------|
-| **todo**     | `todo <description>` <br> e.g. `todo Change bedsheet`                                                                                    |
-| **deadline** | `deadline <description> /by <date time>` <br> e.g. `deadline CS2102 Week 6 Tutorial Q3b /by 2022-02-15 0900`                             |
-| **event**    | `event <description> /at <date time>` <br> e.g. ``event Meet-up with Fabian /at 2022-02-20 1130``                                        |
-| **list**     | `list`                                                                                                                                   |
-| **mark**     | `mark INDEX` <br> e.g. `mark 1`                                                                                                          |
-| **unmark**   | `unmark INDEX` <br> e.g. `unmark 1`                                                                                                      |
-| **delete**   | `delete INDEX` <br> e.g. `delete 1`                                                                                                      |
-| **print**    | `print /on <date>` <br> e.g. `print /on 2022-02-20`                                                                                      |
-| **find**     | `find KEYWORD` <br> e.g. `find CS2103`                                                                                                   |
-| **help**     | `help`                                                                                                                                   |
-| **bye**      | `bye`                                                                                                                                    |
+| Action       | Format                                   | Examples                                                              |
+|:-------------|:-----------------------------------------|:----------------------------------------------------------------------|
+| **todo**     | `todo <description>`                     | `todo Clean Up Bedroom`                                               |
+| **deadline** | `deadline <description> /by <date time>` | `deadline CS2102 Week 6 Tutorial Q3b /by d/2022-02-15 t/0900`         |
+| **event**    | `event <description> /at <date time>`    | `event CS2102 Project Part 1 Evaluation /at d/2022-02-21 t/1700-1730` |
+| **list**     | `list`                                   |                                                                       |
+| **print**    | `print /on <date>`                       | `print /on 2022-02-15`                                                |
+| **find**     | `find KEYWORD`                           | `find cs`                                                             |
+| **mark**     | `mark INDEX`                             | `mark 2`                                                              |
+| **unmark**   | `unmark INDEX`                           | `unmark 2`                                                            |
+| **delete**   | `delete INDEX`                           | `delete 2`                                                            |
+| **help**     | `help`                                   |                                                                       |
+| **bye**      | `bye`                                    |                                                                       |
