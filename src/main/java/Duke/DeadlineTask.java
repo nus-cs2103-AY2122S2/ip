@@ -1,7 +1,9 @@
+package Duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class DeadlineTask extends Task{
+class DeadlineTask extends Task{
     LocalDateTime byDate;
     private final static DateTimeFormatter fm = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
     public DeadlineTask(String description, boolean isCompleted, LocalDateTime byDate){

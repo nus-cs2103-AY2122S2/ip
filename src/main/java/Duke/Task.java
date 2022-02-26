@@ -1,4 +1,6 @@
-abstract public class Task {
+package Duke;
+
+abstract class Task {
     private String description;
     private boolean isCompleted;
 

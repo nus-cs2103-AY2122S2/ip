@@ -1,4 +1,6 @@
-public class ToDoTask extends Task{
+package Duke;
+
+class ToDoTask extends Task{
     public ToDoTask(String description, boolean isCompleted){
         super(description, isCompleted);
     }
@@ -14,4 +16,3 @@ public class ToDoTask extends Task{
         return "T" + super.toFileString();
     }
 }
-list
