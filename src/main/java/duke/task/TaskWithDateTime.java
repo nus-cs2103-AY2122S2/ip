@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
 public class TaskWithDateTime extends Task {
     private LocalDate day;
     private String dateTime;
+    private String originalDateTime;
 
     /**
      * Constructor for TaskWithDateTime.
@@ -34,6 +35,7 @@ public class TaskWithDateTime extends Task {
 
         dateTime = dateTime.trim();
         this.dateTime = dateTime;
+        this.originalDateTime = dateTime;
 
         extractTime(extractDate());
     }
@@ -114,6 +116,6 @@ public class TaskWithDateTime extends Task {
      */
     @Override
     public String writeToFile() {
-        return super.writeToFile() + " | " + dateTime.trim();
+        return super.writeToFile() + " | " + originalDateTime;
     }
 }
