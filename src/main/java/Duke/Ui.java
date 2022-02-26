@@ -11,12 +11,12 @@ class Ui {
     public final static String invalidCommandMsg = "I do not understand your command!";
     public final static String addedTaskMsg = "Got it. I've added this task:\n";
     public final static String completedTaskMsg = "Task has been marked as completed.\n";
-    public final static String notCompletedTaskMsg = "Task has been marked as not completed.\n";
+    public final static String notCompletedTaskMsg = "Task has been marked as not completed.";
     public final static String expectedDeadline = "Try typing it in the following format:\n " +
             "deadline <desciption> /by 31-01-2022 1800";
     public final static String expectedEvent = "Try typing it in the following format:\n " +
             "event <desciption> /at 31-01-2022 1800_to_31-01-2022 2100";
-    public final static String getTaskMsg = "Here are the tasks containing the keyword\n";
+    public final static String getTaskMsg = "Here are the tasks containing the keyword";
 
 
     /**

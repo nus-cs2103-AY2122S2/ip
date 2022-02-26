@@ -27,8 +27,6 @@ abstract class Task {
 
     public void setCompleted(boolean completed) { isCompleted = completed; }
 
-    //public void setCompleted() { this.isCompleted = true; }
-
     public String getDescription() {
         return description;
     }

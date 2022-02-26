@@ -22,22 +22,6 @@ class EventTask extends Task{
         this.atEndDT = atEndDT;
     }
 
-    public LocalDateTime getStartAtDateTime() {
-        return atStartDT;
-    }
-
-    public void setStartAtDate(LocalDateTime atDate) {
-        this.atStartDT = atDate;
-    }
-
-    public LocalDateTime getEndAtDateTime() {
-        return atEndDT;
-    }
-
-    public void setEndAtDate(LocalDateTime atDate) {
-        this.atEndDT = atDate;
-    }
-
     @Override
     public String toString() {
         return "[E]"+super.toString() + "(at: " + atStartDT.format(dtFm) +
