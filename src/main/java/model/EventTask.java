@@ -1,18 +1,20 @@
 package model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import util.InputParser;
 
 public class EventTask extends Task{
-    private final String eventTime;
+    private final LocalDateTime eventTime;
 
     public EventTask(String task, String eventTime, boolean isComplete) {
         super(task, isComplete);
-        this.eventTime = eventTime;
+        this.eventTime = LocalDateTime.parse(eventTime);
     }
 
-    public EventTask(String task, String eventTime) {
-        super(task);
-        this.eventTime = eventTime;
+    public EventTask(String task, String eventTime) throws DateTimeParseException {
+        this(task, eventTime, false);
     }
 
     public static EventTask of(String taskBody) throws IncorrectTaskFormatException {

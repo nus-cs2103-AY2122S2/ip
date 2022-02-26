@@ -1,10 +1,14 @@
 package model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import util.InputParser;
 
 public class DeadlineTask extends Task{
-    private final String deadlineTime;
+    private final LocalDate deadlineTime;
 
+    public DeadlineTask(String task, String deadlineTime) throws DateTimeParseException {
     public DeadlineTask(String task, String deadlineTime, boolean isComplete) {
         super(task, isComplete);
         this.deadlineTime = deadlineTime;
@@ -12,7 +16,7 @@ public class DeadlineTask extends Task{
 
     public DeadlineTask(String task, String deadlineTime) {
         super(task);
-        this.deadlineTime = deadlineTime;
+        this.deadlineTime = LocalDate.parse(deadlineTime);
     }
 
     public static DeadlineTask of(String taskBody) throws IncorrectTaskFormatException {
