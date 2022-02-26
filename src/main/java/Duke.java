@@ -44,7 +44,11 @@ public class Duke {
             switch (command) {
             case "TODO":
                 String todoTask = scanner.nextLine().trim();
-                addTaskToTaskList(new Todo(todoTask));
+                if (todoTask.isEmpty()) {
+                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                } else {
+                    addTaskToTaskList(new Todo(todoTask));
+                }
                 break;
             case "DEADLINE":
                 String[] deadlineTask = scanner.nextLine().trim().split(" /by ");
@@ -68,6 +72,7 @@ public class Duke {
             case "BYE":
                 break;
             default:
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
         farewellMessage();
