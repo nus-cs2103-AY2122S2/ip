@@ -3,10 +3,20 @@
 /out/
 /*.iml
 
+#Package files
+*.jar
+
 # Gradle build files
-/.gradle/
+.gradle
+build.gradle
 /build/
 src/main/resources/docs/
+
+#Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+#Cache of project
+.gradletasknamecache
 
 # MacOS custom attributes files created by Finder
 .DS_Store
@@ -15,3 +25,5 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+src/main/resources/list.txt
