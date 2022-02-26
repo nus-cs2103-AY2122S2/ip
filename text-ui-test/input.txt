@@ -1,0 +1,13 @@
+todo read book
+todo buy milk
+event birthday party /at Tuesday
+deadline return book /by Wednesday
+list
+mark 1
+mark 2
+mark 4
+list
+event sports meet /at Jan 21
+list
+unmark 2
+bye
