@@ -1,6 +1,5 @@
 package Duke;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -25,7 +24,8 @@ class Parser {
         }
     }
 
-    public boolean parseCommand(String userinput, TaskList taskList, Ui uiPrinter, Storage storage) throws DukeException{
+    public boolean parseCommand(String userinput, TaskList taskList,
+                                Ui uiPrinter, Storage storage) throws DukeException{
         Task newTask = null;
         boolean requiredSaveToFile = false;
         if (userinput.equals(bye)) {

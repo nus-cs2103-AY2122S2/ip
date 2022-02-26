@@ -33,7 +33,8 @@ class TaskList {
         }
     }
 
-    public boolean processMarkingTask(String taskIndexStr, boolean isCompleted, Ui uiPrinter) throws DukeException{
+    public boolean processMarkingTask(String taskIndexStr, boolean isCompleted,
+                                      Ui uiPrinter) throws DukeException{
         int markingIndex = getExistingIndex(taskIndexStr);
         if(markingIndex != -1) {
             taskList.get(markingIndex).setCompleted(isCompleted);
