@@ -33,6 +33,7 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] fullCommandArray = fullCommand.split(" ");
+        assert fullCommandArray.length > 0;
         String command = fullCommandArray[0];
         if (command.equals("deadline")) {
             return parseAddDeadlineCommand(fullCommand);
