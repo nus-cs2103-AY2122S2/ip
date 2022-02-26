@@ -15,6 +15,7 @@ class Ui {
     public final static String notCompletedTaskMsg = "Task has been marked as not completed.\n";
     public final static String expectedDeadline = "Try typing it in the following format:\n deadline <desciption> /by 31-01-2022 1800";
     public final static String expectedEvent = "Try typing it in the following format:\n event <desciption> /at 31-01-2022 1800_to_31-01-2022 2100";
+    public final static String getTaskMsg = "Here are the tasks containing the keyword\n";
     public static String getTaskInListMsg(Task task, int numTask){
         return addedTaskMsg + "\t" + task + "\nNow you have " + numTask + " tasks in the list";
     }

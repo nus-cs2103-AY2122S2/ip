@@ -102,4 +102,12 @@ class TaskList {
 
         throw new DukeException("Invalid task number selected!");
     }
+    public void processFind(String keyword, Ui uiPrinter) {
+        uiPrinter.printMessage(Ui.getTaskMsg);
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getDescription().contains(keyword)) {
+                System.out.println( (i+1) + ". " + taskList.get(i).toString());
+            }
+        }
+    }
 }

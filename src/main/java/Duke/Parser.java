@@ -16,6 +16,7 @@ class Parser {
     public final static String delete = "delete";
     public final static String mark = "mark";
     public final static String unmark = "unmark";
+    public final static String find = "find";
     public final static DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
 
@@ -60,6 +61,10 @@ class Parser {
                 String taskStr = userinput.substring(unmark.length());
                 taskStr = taskStr.trim();
                 requiredSaveToFile = taskList.processMarkingTask(taskStr, false, uiPrinter);
+            }
+            else if (userinput.startsWith(find)) {
+                String findStr = userinput.substring(find.length()).trim();
+                taskList.processFind(findStr, uiPrinter);
             }
             else {
                 throw new DukeException(Ui.invalidCommandMsg);
