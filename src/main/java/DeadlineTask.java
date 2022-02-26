@@ -24,6 +24,6 @@ public class DeadlineTask extends Task{
 
     @Override
     public String toFileString(){
-        return "D" + super.toFileString() + " | " + byDate.format(Duke.DukeCommand.dtFormat);
+        return "D" + super.toFileString() + " | " + byDate.format(Parser.dtFormat);
     }
 }

@@ -7,9 +7,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
+    String filePath;
+    public Storage(String filePath){
+        this.filePath = filePath;
+    }
 
-    public static void loadTaskListFromFile(ArrayList<Task> taskList){
-        File f = new File("data/duke.txt");
+    public ArrayList<Task> loadTaskListFromFile() throws DukeException {
+        ArrayList<Task> taskList = new ArrayList<>();
+        File f = new File(filePath);
         try {
             Scanner scanFile =  new Scanner(f);
             while(scanFile.hasNext()){
@@ -25,14 +30,14 @@ public class Storage {
                         break;
                     case "D":
                         String byDateStr = taskData[3].trim();
-                        LocalDateTime dt = LocalDateTime.parse(byDateStr, Duke.DukeCommand.dtFormat);
+                        LocalDateTime dt = LocalDateTime.parse(byDateStr, Parser.dtFormat);
                         newTask = new DeadlineTask(desc, isCompleted, dt);
                         break;
                     case "E":
                         String fromDateStr = taskData[3].trim();
-                        LocalDateTime fDt = LocalDateTime.parse(fromDateStr, Duke.DukeCommand.dtFormat);
+                        LocalDateTime fDt = LocalDateTime.parse(fromDateStr, Parser.dtFormat);
                         String toDateStr = taskData[4].trim();
-                        LocalDateTime tDt = LocalDateTime.parse(toDateStr, Duke.DukeCommand.dtFormat);
+                        LocalDateTime tDt = LocalDateTime.parse(toDateStr, Parser.dtFormat);
                         newTask = new EventTask(desc, isCompleted, fDt, tDt);
                         break;
                 }
@@ -40,14 +45,19 @@ public class Storage {
                     taskList.add(newTask);
                 }
             }
+            scanFile.close();
+            return taskList;
         }
         catch(FileNotFoundException e){
             // do nothing, no file no load
+            throw new DukeException("No file available for loading.");
         }
+
+
     }
 
-    public static void saveTaskToFile(ArrayList<Task> taskList){
-        File f = new File("data/duke.txt");
+    public void saveTaskToFile(ArrayList<Task> taskList, Ui uiPrinter){
+        File f = new File(filePath);
         try{
             if(!f.exists()) {
                 // create data folder if not exist
@@ -64,10 +74,10 @@ public class Storage {
             fw.close();
         }
         catch(SecurityException se){
-            printMessage(se.getMessage());
+            uiPrinter.printMessage(se.getMessage());
         }
         catch(IOException e){
-            printMessage("Unable to save to filepath data/duke.txt");
+            uiPrinter.printMessage("Unable to save to filepath data/duke.txt");
         }
     }
 }

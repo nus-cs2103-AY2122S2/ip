@@ -37,7 +37,7 @@ public class EventTask extends Task{
     @Override
     public String toFileString(){
 
-        return "E" + super.toFileString() + " | " + atStartDT.format(Duke.DukeCommand.dtFormat) + " | " +
-                atEndDT.format(Duke.DukeCommand.dtFormat);
+        return "E" + super.toFileString() + " | " + atStartDT.format(Parser.dtFormat) + " | " +
+                atEndDT.format(Parser.dtFormat);
     }
 }
