@@ -18,3 +18,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 src/main/java/duke/output/production
 src/main/java/duke/output/test
+
+build/libs/duke-all.jar
