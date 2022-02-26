@@ -10,6 +10,7 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Event;
 import duke.task.Deadline;
+import duke.task.DoAfter;
 import duke.task.TaskList;
 
 /**
@@ -85,6 +86,10 @@ public class Storage {
                 assert tmp.length > 3 : "tmp[2], tmp[3] should exist";
                 eventHandler(tmp, isDone);
                 break;
+            case "A":
+                assert tmp.length > 3 : "tmp[2], tmp[3] should exist";
+                doAfterHandler(tmp, isDone);
+                break;
             default:
                 throw new RuntimeException("Corrupted data in data file at "
                         + filePath);
@@ -136,6 +141,21 @@ public class Storage {
             assert e.getStatusIcon().equals("X") : "task should be complete";
         }
         tasks.add(e);
+    }
+
+    /**
+     * Adds DoAfter to tasks.
+     *
+     * @param arr array of data [Type, isDone, description, dateTime]
+     * @param isDone bool indicating if Deadline is marked complete
+     */
+    public void doAfterHandler(String[] arr, Boolean isDone) {
+        DoAfter d = new DoAfter(arr[2].trim(), arr[3].trim());
+        if (isDone) {
+            d.markComplete();
+            assert d.getStatusIcon().equals("X") : "task should be complete";
+        }
+        tasks.add(d);
     }
 
     /**

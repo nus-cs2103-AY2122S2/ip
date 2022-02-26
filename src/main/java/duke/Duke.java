@@ -1,9 +1,6 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.Todo;
+import duke.task.*;
 
 /**
  * The Duke program implements a simple task bot with CRUD functionality.
@@ -16,7 +13,6 @@ import duke.task.Todo;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private final Ui ui = new Ui();
 
     /**
      * Marks Task as complete.
@@ -24,9 +20,10 @@ public class Duke {
      * @param input index of task
      * @return generic update message string
      * @throws Exception if an exception occurs in the saving of
-     * data to the file at filePath
+     * data to the file at filePath or NumberFormatException
      */
     public String doHandler(String input) throws Exception {
+
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
         assert i <= tasks.size() && i >= 1 : "index of item should be within scope of tasklist";
@@ -44,7 +41,7 @@ public class Duke {
      * @param input index of task
      * @return generic update message string
      * @throws Exception if an exception occurs in the saving of
-     * data to the file at filePath
+     * data to the file at filePath or NumberFormatException
      */
     public String undoHandler(String input) throws Exception {
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
@@ -64,7 +61,7 @@ public class Duke {
      * @param input index of task
      * @return string of list of tasks and deletion message.
      * @throws Exception if an exception occurs in the saving of
-     * data to the file at filePath
+     * data to the file at filePath or NumberFormatException
      */
     public String deleteHandler(String input) throws Exception {
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
@@ -149,6 +146,23 @@ public class Duke {
     }
 
     /**
+     * Adds a doAfter task to tasks and returns string about the addition.
+     *
+     * @param input string containing description and dateTime of task
+     * @return  string stating that a DoAfter task has been added.
+     * @throws Exception if an exception occurs in the saving of
+     * data to the file at filePath
+     */
+    public String doAfterHandler(String input) throws Exception {
+        String time = input.replaceAll(".* after ", "");
+        input = input.replaceAll(" after .*", "");
+        DoAfter e = new DoAfter(input, time);
+        tasks.add(e);
+        storage.save(tasks);
+        return Ui.showDoAfterMessage() + e;
+    }
+
+    /**
      * Returns 'EXIT' string to signal program termination.
      *
      * @return goodbye signal
@@ -198,13 +212,17 @@ public class Duke {
                 return deadlineHandler(input);
             case "event":
                 return eventHandler(input);
+            case "doafter":
+                return doAfterHandler(input);
             case "bye":
                 return byeHandler();
             default:
                 return defaultHandler(input);
             }
+        } catch (NumberFormatException e) {
+            return Ui.showNumberFormatMessage();
         } catch (Exception e) {
-            return ui.showError(e.getMessage());
+            return Ui.showError(e.getMessage());
         }
     }
 
