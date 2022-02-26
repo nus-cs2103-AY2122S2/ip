@@ -1,10 +1,12 @@
+package Duke;
+
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Parser {
+class Parser {
 
     public final static String bye = "bye";
     public final static String list = "list";

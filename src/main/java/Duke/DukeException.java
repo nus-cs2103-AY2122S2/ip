@@ -1,4 +1,6 @@
-public class DukeException extends Exception{
+package Duke;
+
+class DukeException extends Exception{
     DukeException(String errorMessage){
         super(errorMessage);
     }

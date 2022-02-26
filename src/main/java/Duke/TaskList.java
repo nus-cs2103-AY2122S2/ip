@@ -1,7 +1,9 @@
+package Duke;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class TaskList {
+class TaskList {
     private ArrayList<Task> taskList;
 
     public TaskList(){

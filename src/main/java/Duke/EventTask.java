@@ -1,7 +1,9 @@
+package Duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class EventTask extends Task{
+class EventTask extends Task{
     private LocalDateTime atStartDT;
     private LocalDateTime atEndDT;
     private final static DateTimeFormatter dtFm = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");

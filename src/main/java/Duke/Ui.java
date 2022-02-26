@@ -1,7 +1,9 @@
+package Duke;
+
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Ui {
+class Ui {
     public final static String welcomeMsg = "Hello! I am Duke\nWhat can I do for you?";
     public final static String horizontalLine = "________________________________";
     public final static String byeMsg = "Bye! hope to see you again soon!";
