@@ -46,7 +46,7 @@ public enum ErrorMessage {
             + System.lineSeparator() + "\t"
             + "The description of an event cannot be empty!"),
 
-    ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_EMPTY_AND_WRONG_COMMAND_DATETIME("INCOMPLETE & WRONG COMMAND"
+    ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_EMPTY_AND_WRONG_COMMAND_DATETIME("INCOMPLETE & WRONG COMMAND:"
             + System.lineSeparator() + "\t"
             + "The description of an event cannot be empty!"
             + System.lineSeparator() + "\t"

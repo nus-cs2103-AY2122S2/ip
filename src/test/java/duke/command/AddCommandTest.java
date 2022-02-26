@@ -25,7 +25,7 @@ public class AddCommandTest {
         addToDoCommand.execute(taskList, ui, storage);
 
         Task toDoTask = taskList.getTask(0);
-        assertEquals("[T] [ ] Test ToDo Task", toDoTask.toString());
+        assertEquals("[T] [   ] Test ToDo Task", toDoTask.toString());
 
         // Deletes the data file after JUnit test
         File dataFile = storage.getDataFile();
@@ -42,7 +42,7 @@ public class AddCommandTest {
         addDeadlineCommand.execute(taskList, ui, storage);
 
         Task deadlineTask = taskList.getTask(0);
-        assertEquals("[D] [ ] Test Deadline Task (by: Jan 30 2022, 11:59 PM)", deadlineTask.toString());
+        assertEquals("[D] [   ] Test Deadline Task (by: Jan 30 2022, 11:59 PM)", deadlineTask.toString());
 
         // Deletes the data file after JUnit test
         File dataFile = storage.getDataFile();
@@ -59,7 +59,7 @@ public class AddCommandTest {
         addEventCommand.execute(taskList, ui, storage);
 
         Task eventTask = taskList.getTask(0);
-        assertEquals("[E] [ ] Test Event Task (at: Jan 31 2022, 7-10pm)", eventTask.toString());
+        assertEquals("[E] [   ] Test Event Task (at: Jan 31 2022, 7-10pm)", eventTask.toString());
 
         // Deletes the data file after JUnit test
         File dataFile = storage.getDataFile();

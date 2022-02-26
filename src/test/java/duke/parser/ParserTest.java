@@ -56,7 +56,7 @@ public class ParserTest {
             assertTrue(command instanceof AddToDoCommand);
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            String errorMessage = "INCOMPLETE COMMAND"
+            String errorMessage = "INCOMPLETE COMMAND:"
                     + System.lineSeparator() + "\t"
                     + "The description of a deadline cannot be empty!";
             assertEquals(errorMessage, e.getMessage());
@@ -73,7 +73,7 @@ public class ParserTest {
             assertTrue(command instanceof AddDeadlineCommand);
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            String errorMessage = "WRONG COMMAND"
+            String errorMessage = "WRONG COMMAND:"
                     + System.lineSeparator() + "\t"
                     + "Enter /by before specifying the date/time!";
             assertEquals(errorMessage, e.getMessage());
@@ -90,7 +90,7 @@ public class ParserTest {
             assertTrue(command instanceof AddToDoCommand);
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            String errorMessage = "INCOMPLETE & WRONG COMMAND"
+            String errorMessage = "INCOMPLETE & WRONG COMMAND:"
                     + System.lineSeparator() + "\t"
                     + "The description of a deadline cannot be empty!"
                     + System.lineSeparator() + "\t"
@@ -118,7 +118,7 @@ public class ParserTest {
             assertTrue(command instanceof AddEventCommand);
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            String errorMessage = "INCOMPLETE COMMAND"
+            String errorMessage = "INCOMPLETE COMMAND:"
                     + System.lineSeparator() + "\t"
                     + "The description of an event cannot be empty!";
             assertEquals(errorMessage, e.getMessage());
@@ -135,7 +135,7 @@ public class ParserTest {
             assertTrue(command instanceof AddEventCommand);
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            String errorMessage = "WRONG COMMAND"
+            String errorMessage = "WRONG COMMAND:"
                     + System.lineSeparator() + "\t"
                     + "Enter /at before specifying the date/time!";
             assertEquals(errorMessage, e.getMessage());
@@ -152,7 +152,7 @@ public class ParserTest {
             assertTrue(command instanceof AddEventCommand);
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            String errorMessage = "INCOMPLETE & WRONG COMMAND"
+            String errorMessage = "INCOMPLETE & WRONG COMMAND:"
                     + System.lineSeparator() + "\t"
                     + "The description of an event cannot be empty!"
                     + System.lineSeparator() + "\t"
