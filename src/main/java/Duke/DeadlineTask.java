@@ -11,6 +11,12 @@ class DeadlineTask extends Task{
         this.byDate = byDate;
     }
 
+    public DeadlineTask(String description, boolean isCompleted,
+                        LocalDateTime createdDate, LocalDateTime byDate){
+        super(description, isCompleted, createdDate);
+        this.byDate = byDate;
+    }
+
     public LocalDateTime getByDate() {
         return byDate;
     }

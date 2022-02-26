@@ -19,6 +19,7 @@ class Parser {
     public final static String mark = "mark";
     public final static String unmark = "unmark";
     public final static String find = "find";
+    public final static String showStats = "stats";
     public final static DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
 
@@ -73,6 +74,11 @@ class Parser {
             else if (userinput.startsWith(find)) {
                 String findStr = userinput.substring(find.length()).trim();
                 taskList.processFind(findStr, uiPrinter);
+            }
+            else if (userinput.startsWith(showStats)) {
+                String numDayStr = userinput.substring(showStats.length());
+                numDayStr = numDayStr.trim();
+                taskList.processStats(numDayStr, uiPrinter);
             }
             else {
                 throw new DukeException(Ui.invalidCommandMsg);

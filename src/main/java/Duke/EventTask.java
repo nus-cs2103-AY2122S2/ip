@@ -15,6 +15,13 @@ class EventTask extends Task{
         this.atEndDT = atEndDT;
     }
 
+    public EventTask(String description, boolean isCompleted,
+                     LocalDateTime createdDate, LocalDateTime atStartDT, LocalDateTime atEndDT){
+        super(description, isCompleted, createdDate);
+        this.atStartDT = atStartDT;
+        this.atEndDT = atEndDT;
+    }
+
     public LocalDateTime getStartAtDateTime() {
         return atStartDT;
     }

@@ -28,22 +28,24 @@ class Storage {
                 String taskType = taskData[0].trim();
                 boolean isCompleted = taskData[1].trim().equals("1");
                 String desc = taskData[2].trim();
+                String createdDateStr = taskData[3].trim();
+                LocalDateTime createdDt = LocalDateTime.parse(createdDateStr, Parser.dtFormat);
                 Task newTask = null;
                 switch(taskType){
                     case "T":
-                        newTask = new ToDoTask(desc, isCompleted);
+                        newTask = new ToDoTask(desc, isCompleted, createdDt);
                         break;
                     case "D":
-                        String byDateStr = taskData[3].trim();
+                        String byDateStr = taskData[4].trim();
                         LocalDateTime dt = LocalDateTime.parse(byDateStr, Parser.dtFormat);
-                        newTask = new DeadlineTask(desc, isCompleted, dt);
+                        newTask = new DeadlineTask(desc, isCompleted, createdDt, dt);
                         break;
                     case "E":
-                        String fromDateStr = taskData[3].trim();
+                        String fromDateStr = taskData[4].trim();
                         LocalDateTime fDt = LocalDateTime.parse(fromDateStr, Parser.dtFormat);
-                        String toDateStr = taskData[4].trim();
+                        String toDateStr = taskData[5].trim();
                         LocalDateTime tDt = LocalDateTime.parse(toDateStr, Parser.dtFormat);
-                        newTask = new EventTask(desc, isCompleted, fDt, tDt);
+                        newTask = new EventTask(desc, isCompleted, createdDt, fDt, tDt);
                         break;
                 }
                 if(newTask != null){

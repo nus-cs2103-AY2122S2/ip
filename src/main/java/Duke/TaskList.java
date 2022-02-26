@@ -67,6 +67,19 @@ class TaskList {
         return new ToDoTask(description, false);
     }
 
+    public void processStats(String numDayStr, Ui uiPrinter)throws DukeException{
+        checkIfNumber(numDayStr);
+        LocalDateTime pastDays = LocalDateTime.now().minusDays(Integer.parseInt(numDayStr));
+        ArrayList<Task> filterList =  new ArrayList<>();
+        for(Task task: taskList){
+            if(!task.isCompleted()){ continue; }
+            if(task.getCreatedDate().isBefore(pastDays)){ continue; }
+            filterList.add(task);
+        }
+
+        uiPrinter.printTasks(filterList);
+    }
+
     /**
      * Processes deletion of a task.
      */

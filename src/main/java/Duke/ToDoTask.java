@@ -1,8 +1,14 @@
 package Duke;
 
+import java.time.LocalDateTime;
+
 class ToDoTask extends Task{
     public ToDoTask(String description, boolean isCompleted){
         super(description, isCompleted);
+    }
+
+    public ToDoTask(String description, boolean isCompleted, LocalDateTime createdDate){
+        super(description, isCompleted, createdDate);
     }
 
     @Override
