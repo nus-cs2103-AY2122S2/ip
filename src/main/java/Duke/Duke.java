@@ -25,12 +25,10 @@ public class Duke {
     public void run(){
         Scanner input = new Scanner(System.in);
         String userinput = "";
-        Task newTask = null;
         uiPrinter.printMessage(Ui.welcomeMsg);
         boolean isRunning = true;
         while(isRunning) {
             userinput = input.nextLine();
-            //newTask = null;
             try {
                 isRunning = commandParser.parseCommand(userinput, taskList, uiPrinter, storage);
             }

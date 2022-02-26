@@ -30,10 +30,7 @@ class TaskList {
      */
     public void processPrintList(Ui uiPrinter){
         uiPrinter.printMessage(Ui.listMsg);
-        for (int i = 0; i < taskList.size(); i++) {
-            Task currentTask = taskList.get(i);
-            System.out.println((i + 1) +". " + currentTask);
-        }
+        uiPrinter.printTasks(taskList);
     }
 
     /**
@@ -51,12 +48,6 @@ class TaskList {
         else{
             uiPrinter.printMessage("Fail to set task complete status!");
             return false;
-        }
-    }
-
-    public void checkCommandData(String[] taskInfo, int expectedInfoNum) throws DukeInvalidCommandDataInput{
-        if(taskInfo.length != expectedInfoNum){
-            throw new DukeInvalidCommandDataInput();
         }
     }
 

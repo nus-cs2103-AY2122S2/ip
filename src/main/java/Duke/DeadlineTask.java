@@ -17,14 +17,6 @@ class DeadlineTask extends Task{
         this.byDate = byDate;
     }
 
-    public LocalDateTime getByDate() {
-        return byDate;
-    }
-
-    public void setByDate(LocalDateTime byDate) {
-        this.byDate = byDate;
-    }
-
     @Override
     public String toString() {
         return "[D]"+super.toString() + "(by: " + byDate.format(fm) + ")";
