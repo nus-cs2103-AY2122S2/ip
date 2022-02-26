@@ -40,7 +40,7 @@ public abstract class Task {
      * @return Check mark if the task is done, empty otherwise
      */
     public String getStatusIcon() {
-        return isDone ? "[\u2713]" : "[  ]";
+        return isDone ? "[\u2713]" : "[   ]";
     }
 
     /**
