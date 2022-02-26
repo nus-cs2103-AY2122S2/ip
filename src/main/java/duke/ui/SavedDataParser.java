@@ -46,9 +46,14 @@ public class SavedDataParser {
      * @param list the tasklist to be added to
      */
     public static void parse(String task, ArrayList<Action> list) {
+        boolean isDone = isMarkedTask(task);
         if (task.contains("[T]")) { //todo
             task = actionSymbolFilter(task);
-            list.add(new Todo(task));
+            Action newTodoTask = new Todo(task);
+            if (isDone) {
+                newTodoTask = newTodoTask.setDone();
+            }
+            list.add(newTodoTask);
         } else { //deadline or event
             String action = actionFilter(task);
             String date = dateFilter(task);
@@ -56,9 +61,17 @@ public class SavedDataParser {
             LocalDateTime dateTime = LocalDateTime.parse(date, format);
             String dateReformatted = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd H:m"));
             if (task.contains("[D]")) { //deadline
-                list.add(new Deadline(action, dateReformatted));
+                Action newDeadlineTask = new Deadline(action, dateReformatted);
+                if (isDone) {
+                    newDeadlineTask = newDeadlineTask.setDone();
+                }
+                list.add(newDeadlineTask);
             } else { //event
-                list.add(new Event(action, dateReformatted));
+                Action newEventTask = new Event(action, dateReformatted);
+                if (isDone) {
+                    newEventTask = newEventTask.setDone();
+                }
+                list.add(newEventTask);
             }
         }
     }
@@ -76,6 +89,19 @@ public class SavedDataParser {
                 .replaceFirst("\\[(.*?)]", "")
                 .stripLeading();
         return task;
+    }
+
+    /**
+     * Returns true if task is already marked.
+     *
+     * @param task the task to be checked
+     * @return true if task is marked with an "X"
+     */
+    private static boolean isMarkedTask(String task) {
+        if (task.contains("[T][X]") || task.contains("[D][X]") || task.contains("[E][X]")) {
+            return true;
+        }
+        return false;
     }
 
     /**
