@@ -70,18 +70,18 @@ public class Parser {
      * @param command user input
      * @throws DukeException throws "Empty Command" or "XXX cannot be empty"
      */
-    public static void checkForEmptyOrIncompleteCommands(String command) throws DukeException {
+    private static void checkForEmptyOrIncompleteCommands(String command) throws DukeException {
         if (command.equals("")) {
             throw new DukeException("Empty Command");
         }
         if (command.equals("todo") || command.equals("todo ")) {
             throw new DukeException("Todo cannot be empty");
         }
-        if (command.equals("deadline") || command.equals("deadline ")) {
-            throw new DukeException("Deadline cannot be empty");
+        if (command.contains("deadline")) {
+            checkForCorrectDeadlineInput(command);
         }
-        if (command.equals("event") || command.equals("event ")) {
-            throw new DukeException("Event cannot be empty");
+        if (command.contains("event")) {
+            checkForCorrectEventInput(command);
         }
         if (command.equals("find") || command.equals("find ")) {
             throw new DukeException("Find cannot be empty");
@@ -95,12 +95,42 @@ public class Parser {
     }
 
     /**
+     * Checks for incorrect deadline-command inputs.
+     *
+     * @param command the deadline-command input to be checked
+     * @throws DukeException if deadline-command input does not follow the format: Deadline ... /by yyyy-mm-dd H:m
+     */
+    private static void checkForCorrectDeadlineInput(String command) throws DukeException {
+        if (command.equals("deadline") || command.equals("deadline ")) {
+            throw new DukeException("Deadline cannot be empty");
+        }
+        if (!command.contains(" /by ")) {
+            throw new DukeException("Please follow format:\nDeadline ... /by yyyy-mm-dd H:m");
+        }
+    }
+
+    /**
+     * Checks for incorrect event-command inputs.
+     *
+     * @param command the event-command input to be checked
+     * @throws DukeException if event-command input does not follow the format: Event ... /at yyyy-mm-dd H:m
+     */
+    private static void checkForCorrectEventInput(String command) throws DukeException {
+        if (command.equals("event") || command.equals("event ")) {
+            throw new DukeException("Event cannot be empty");
+        }
+        if (!command.contains(" /at ")) {
+            throw new DukeException("Please follow format:\nEvent ... /at yyyy-mm-dd H:m");
+        }
+    }
+
+    /**
      * Checks for inputs that are not coded for.
      *
      * @param command User input
      * @throws DukeException throws "Unknown Command"
      */
-    public static void checkForUnknownCommand(String command) throws DukeException {
+    private static void checkForUnknownCommand(String command) throws DukeException {
         if (!command.equals("deadline") && !command.equals("todo") && !command.equals("event")) {
             throw new DukeException("Unknown Command");
         }
@@ -113,7 +143,7 @@ public class Parser {
      * @param details date
      * @throws DukeException throws "Wrong date format: Please re-enter using yyyy-mm-dd format"
      */
-    public static void checkForWrongDateInput(String command, String details) throws DukeException {
+    private static void checkForWrongDateInput(String command, String details) throws DukeException {
         if (command.equals("deadline")) {
             try {
                 String date = details.split("/by ")[1];
@@ -143,7 +173,7 @@ public class Parser {
      * @return Delete/Mark/Unmark command
      * @throws DukeException throws 'Command has no number'
      */
-    public static Command commandsWithNumbers(String command, int number) throws DukeException {
+    private static Command commandsWithNumbers(String command, int number) throws DukeException {
         switch (command) {
         case "delete":
             return new DeleteCommand(number);
