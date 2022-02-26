@@ -31,7 +31,7 @@ public class Ui {
      */
     public void sandwichMessage(String str) {
         showLine();
-        System.out.println(INDENT+str);
+        System.out.println(INDENT + str);
         showLine();
         System.out.println();
     }

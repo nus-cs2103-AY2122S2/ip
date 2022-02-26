@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
@@ -7,8 +9,10 @@ import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Duke runs a chatbot that saves and updates tasks input by the user.
@@ -17,7 +21,7 @@ import java.io.IOException;
  * @version 0.1
  * @since 2022-01-10
  */
-public class Duke {
+public class Duke extends Application {
     /**
      * Encapsulates Duke's UI interaction.
      */
@@ -64,13 +68,22 @@ public class Duke {
         }
     }
 
-    /**
-     * The entry point of the Duke application.
-     *
-     * @param args the input arguments
-     * @throws IOException when storage file does not exist
-     */
-    public static void main(String[] args) throws IOException {
-        new Duke().run();
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
+
+    ///**
+    // * The entry point of the Duke application.
+    // *
+    // * @param args the input arguments
+    // * @throws IOException when storage file does not exist
+    // */
+    //public static void main(String[] args) throws IOException {
+    //    new Duke().run();
+    //}
 }

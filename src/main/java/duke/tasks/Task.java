@@ -10,11 +10,11 @@ public class Task implements Serializable, KeywordFinder {
     /**
      * Description of a task object
      */
-    String taskDescription;
+    private String taskDescription;
     /**
      * Completed state of a task
      */
-    boolean isDone;
+    private boolean isDone;
 
     /**
      * Instantiates a new Task.
@@ -42,7 +42,7 @@ public class Task implements Serializable, KeywordFinder {
      * @return whether or not task description contains keyword
      */
     public boolean matches(String keyword) {
-        return this.task.contains(keyword);
+        return this.taskDescription.contains(keyword);
     }
 
     /**
