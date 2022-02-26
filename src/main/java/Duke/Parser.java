@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Parses user input and delegates tasks accordingly.
+ */
 class Parser {
 
     public final static String bye = "bye";
@@ -20,12 +23,16 @@ class Parser {
     public final static DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
 
+
     public void checkCommandData(String[] taskInfo, int expectedInfoNum) throws DukeInvalidCommandDataInput{
         if(taskInfo.length != expectedInfoNum){
             throw new DukeInvalidCommandDataInput();
         }
     }
 
+    /**
+     * Parses the input specified by the user
+     */
     public boolean parseCommand(String userinput, TaskList taskList, Ui uiPrinter, Storage storage) throws DukeException{
         Task newTask = null;
         boolean requiredSaveToFile = false;
@@ -82,6 +89,9 @@ class Parser {
             return true;
     }
 
+    /**
+     * Processes instance where user input specifies an Event task.
+     */
     private Task processEventCommand(String command, TaskList taskList) throws DukeException {
         String taskStr = command.substring(event.length());
         taskStr = taskStr.trim();
@@ -111,6 +121,9 @@ class Parser {
         return taskList.processEvent(description, fromDt, toDt);
     }
 
+    /**
+     * Processes instance where user input specifies an Event task.
+     */
     private Task processDeadlineCommand(String command, TaskList taskList) throws DukeException {
         // deadline return book /by 2-12-2019 1800
         String taskStr = command.substring(deadline.length());

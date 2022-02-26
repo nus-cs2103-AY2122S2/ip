@@ -14,6 +14,9 @@ class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * loads and formats tasks from file into arraylist
+     */
     public ArrayList<Task> loadTaskListFromFile() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         File f = new File(filePath);
@@ -58,6 +61,9 @@ class Storage {
 
     }
 
+    /**
+     * saves the tasks in arraylist to file.
+     */
     public void saveTaskToFile(ArrayList<Task> taskList, Ui uiPrinter){
         File f = new File(filePath);
         try{

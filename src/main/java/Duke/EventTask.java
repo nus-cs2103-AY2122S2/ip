@@ -35,6 +35,9 @@ class EventTask extends Task{
         return "[E]"+super.toString() + "(at: " + atStartDT.format(dtFm) + " to " + atEndDT.format(dtFm) + ")";
     }
 
+    /**
+     * Generates Event string to be stored in the file.
+     */
     //E | 0 | project meeting | Aug 6th 2-4pm
     @Override
     public String toFileString(){

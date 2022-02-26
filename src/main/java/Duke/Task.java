@@ -28,6 +28,9 @@ abstract class Task {
         return "[" + ((isCompleted)?"X":" ") + "] " + description;
     }
 
+    /**
+     * Generates parent task string to be stored in the file.
+     */
     // T | 1 | read book
     public String toFileString(){
         return " | "+((isCompleted)?"1 | ":"0 | ") + description;
