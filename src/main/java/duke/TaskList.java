@@ -62,6 +62,7 @@ public class TaskList {
         StringBuilder result = new StringBuilder();
         taskList.add(task);
         result.append(ui.addTask(task));
+        result.append("\r\n");
         result.append(ui.displayTaskAmount(taskList));
         return result.toString();
     }

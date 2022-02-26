@@ -30,8 +30,6 @@ public class Duke {
      * @return Response to user input
      */
     protected String getResponse(String input) {
-        String result = parser.parse(input);
-        assert !result.isEmpty() : "Input cannot be empty!!";
         return parser.parse(input);
     }
 
