@@ -2,22 +2,18 @@
 
 ## Features 
 
-### Add Todo task
-A basic ```Todo``` task containing a description can be added.
+### Add Tasks
+There are a few types of tasks that can be added:
+1. A basic ```Todo``` task containing a description
+2. A ```Deadline``` task that need to be done before a specific date/time
+3. An ```Event``` task that occurs at a specific date/time/location
+4. A ```DoAfter``` task that needs to be done after a specific time/task
 
-### Add Deadline task
-A ```Deadline``` task that need to be done before a specific date/time can be added.
+<details><summary>
+Note: Automatic Date & Time Formatting</summary>
 
-### Add Event task
-An ```Event``` task that occurs at a specific date/time/location can be added.
+Dates in the form of YYYY/MM/DD, or with delimiters - | / . will be converted to MMM d yyyy format. Time in HHMM format will similarly be converted to HH:MM format.</details>
 
-### Add DoAfter task
-A ```DoAfter``` task that needs to be done after a specific time/task can be added.
-
-<details>
-<summary>Date & Time Formatting of Tasks</summary>
-Datetime messages containing dates in the form of YYYY/MM/DD, or with delimiters - | / . will be converted to MMM d yyyy format. Time in HHMM format will similarly be converted to HH:MM format.
-</details>
 
 ### List tasks
 Tasks that have been added so far can be listed.
@@ -37,8 +33,8 @@ Tasks at a specified index can be marked as complete or incomplete.
 ### `todo` - Add a Todo task
 
 Adds a ```Todo``` task containing a description.
-<details><summary>
-Example of usage: </summary>
+
+Example of usage: 
 
 `todo collect primogems`
 
@@ -50,13 +46,14 @@ Task of the type ```Todo``` containing the description 'read a book' will be add
 Got it! I have noted down the following task in your list.
 [T][ ] collect primogems
 ```
-</details>
+
+<hr>
 
 ### `deadline` - Add a Deadline task
 
 Adds a ```Deadline``` task containing a description and a datetime string.
-<details><summary>
-Example of usage: </summary>
+
+Example of usage: 
 
 `deadline wish on Zhongli's banner by 2022/02/18 2359 GMT +8`
 
@@ -69,13 +66,14 @@ Got it! I have noted down the following task in your list.
 Remember the deadline!
 [D][ ] wish on Zhongli's banner (by: Feb 18 2022 23:59 GMT +8)
 ```
-</details>
+
+<hr>
 
 ### `event` - Add an event task
 
 Adds an ```Event``` task containing a description and a datetime string.
-<details><summary>
-Example of usage: </summary>
+
+Example of usage: 
 
 `event Windtrace festival at 2022/02/08 online`
 
@@ -88,13 +86,14 @@ Got it! I have noted down the following task in your list.
 Do be there on time!
 [E][ ] Windtrace festival (at: Feb 8 2022 online)
 ```
-</details>
+
+<hr>
 
 ### `doafter` - Add a DoAfter task
 
 Adds a ```DoAfter``` task containing a description and a datetime string.
-<details><summary>
-Example of usage: </summary>
+
+Example of usage: 
 
 `doafter collect 900 primogems after reaching AR 15`
 
@@ -107,13 +106,14 @@ Got it! I have noted down the following task in your list.
 Don't forget it!
 [A][ ] collect 900 primogems (at: reaching AR 15)
 ```
-</details>
+
+<hr>
 
 ### `list` - List all tasks
 
 Lists all tasks thus far.
-<details><summary>
-Example of usage:</summary>
+
+Example of usage:
 
 `list`
 
@@ -128,13 +128,14 @@ Hmm... Paimon keeps a clear record in her diary.
  4. [A][ ] collect 900 primogems (at: reaching AR 15)
 You have 4 tasks on your list.
 ```
-</details>
+
+<hr>
 
 ### `delete` - Delete a task
 
 Deletes a task at a specified index.
-<details><summary>
-Example of usage:</summary>
+
+Example of usage:
 
 ```delete 2```
 
@@ -149,13 +150,14 @@ Noted, the task has been scrubbed off the list!
  3. [A][ ] collect 900 primogems (at: reaching AR 15)
 You have 3 tasks on your list.
 ```
-</details>
+
+<hr>
 
 ### `do` - Do a task
 
 Marks a task at a specified index as complete.
-<details><summary>
-Example of usage:</summary>
+
+Example of usage:
 
 ```do 1```
 
@@ -174,13 +176,14 @@ Noted, the task has been scrubbed off the list!
  3. [A][ ] collect 900 primogems (at: reaching AR 15)
 You have 3 tasks on your list.
 ```
-</details>
+
+<hr>
 
 ### `undo` - Undo a task
 
 Marks a task at a specified index as incomplete.
-<details><summary>
-Example of usage:</summary>
+
+Example of usage:
 
 ```undo 1```
 
@@ -199,14 +202,15 @@ Noted, the task has been scrubbed off the list!
  3. [A][ ] collect 900 primogems (at: reaching AR 15)
 You have 3 tasks on your list.
 ```
-</details>
+
+<hr>
 
 
 ### `find` - Search for keyword
 
 Finds and lists tasks containing a keyword. The keyword is case-sensitive.
-<details><summary>
-Example of usage:</summary>
+
+Example of usage:
 
 ```find collect```
 
@@ -220,4 +224,3 @@ Here are the matching tasks in your list:
  2. [A][ ] collect 900 primogems (at: reaching AR 15)
 You have 2 tasks on your list.
 ```
-</details>
