@@ -14,11 +14,21 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Handles hard disk storage for task list.
+ */
+
 public class Storage {
 
     private Path directory;
     private Path filePath;
 
+    /**
+     * Constructs storage object for task list.
+     *
+     * @param directory Directory file is in.
+     * @param filePath Full path to file including file name.
+     */
     public Storage(Path directory, Path filePath) {
         this.directory = directory;
         this.filePath = filePath;

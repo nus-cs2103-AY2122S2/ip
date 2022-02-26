@@ -17,6 +17,11 @@ public class Main extends Application {
 
     private Duke duke;
 
+    /**
+     * Connects Duke backend with FXML UI.
+     *
+     * @param stage FXML stage.
+     */
     @Override
     public void start(Stage stage) {
         try {

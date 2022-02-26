@@ -14,7 +14,7 @@ public class MarkCommand extends Command {
     private int taskNumber;
 
     /**
-     * Construct MarkCommand.
+     * Constructs MarkCommand.
      *
      * @param taskNumber Id of task to delete.
      */

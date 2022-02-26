@@ -50,17 +50,8 @@ public class Duke {
     }
 
     /**
-     * Creates and runs Duke instance with a specified file path.
-     */
-    // public static void main(String[] args) {
-    //     String home = System.getProperty("user.home");
-    //     Path path = java.nio.file.Paths.get(home, "Documents", "duke", "data.txt");
-    //     new Duke(path).run();
-    // }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets Duke's response to user.
+     *
      * @param input User input.
      * @return Duke's response to user.
      */

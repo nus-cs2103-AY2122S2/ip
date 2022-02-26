@@ -13,7 +13,7 @@ public class ContactList {
      * Construct contact list.
     `*/
     public ContactList(ArrayList<Contact> contacts) {
-         this.contacts = contacts;
+        this.contacts = contacts;
     }
 
     /**
