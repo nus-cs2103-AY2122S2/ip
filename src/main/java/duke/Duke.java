@@ -29,7 +29,7 @@ public class Duke {
         assert i <= tasks.size() && i >= 0 : "index of item should be within scope of tasklist";
       
         tasks.get(i).markComplete();
-        assert tasks.get(i).getStatusIcon().equals("X") : "task should be marked done";
+        assert tasks.get(i).getStatusIcon().equals("\u2713") : "task should be marked done";
 
         storage.save(tasks);
         return Ui.showUpdateMessage();

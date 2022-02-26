@@ -108,7 +108,7 @@ public class Storage {
         Todo t = new Todo(arr[2].trim());
         if (isDone) {
             t.markComplete();
-            assert t.getStatusIcon().equals("X") : "task should be complete";
+            assert t.getStatusIcon().equals("\u2713") : "task should be complete";
         }
         tasks.add(t);
     }
@@ -123,7 +123,7 @@ public class Storage {
         Deadline d = new Deadline(arr[2].trim(), arr[3].trim());
         if (isDone) {
             d.markComplete();
-            assert d.getStatusIcon().equals("X") : "task should be complete";
+            assert d.getStatusIcon().equals("\u2713") : "task should be complete";
         }
         tasks.add(d);
     }
@@ -138,7 +138,7 @@ public class Storage {
         Event e = new Event(arr[2].trim(), arr[3].trim());
         if (isDone) {
             e.markComplete();
-            assert e.getStatusIcon().equals("X") : "task should be complete";
+            assert e.getStatusIcon().equals("\u2713") : "task should be complete";
         }
         tasks.add(e);
     }
@@ -153,7 +153,7 @@ public class Storage {
         DoAfter d = new DoAfter(arr[2].trim(), arr[3].trim());
         if (isDone) {
             d.markComplete();
-            assert d.getStatusIcon().equals("X") : "task should be complete";
+            assert d.getStatusIcon().equals("\u2713") : "task should be complete";
         }
         tasks.add(d);
     }
