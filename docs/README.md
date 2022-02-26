@@ -222,27 +222,24 @@ Here is the matching task in your list:
 1.   [D][ ] CS2102 Week 6 Tutorial Q3b (by: Feb 15 2022, 0900 AM)
 ```
 
-
-
-
-
 ### Exiting the application: `bye`
 
 Exits the application.
 
 Format `bye`
 
-
 ## Command Summary
 
-| Action       | Format, Examples                                                                                                                                         |
-|:-------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **todo**     | `todo DESCRIPTION` <br> e.g. `todo CS2101 OP2 Slides`                                                                                                    |
-| **deadline** | `deadline DESCRIPTION /by DATE` <br> e.g. `deadline CS2105 Assignment 1 /by 2022-02-19`                                                                  |
-| **event**    | `event DESCRIPTION /at DATE` <br> e.g. `event DCTF /at 2022-02-13`                                                                                       |
-| **list**     | `list`                                                                                                                                                   |
-| **mark**     | `mark INDEX` <br> e.g. `mark 1`                                                                                                                          |
-| **unmark**   | `unmark INDEX` <br> e.g. `unmark 1`                                                                                                                      |
-| **find**     | `find KEYWORD` <br> e.g. `find CS2103` `find CS2105`                                                                                                     |
-| **delete**   | `delete INDEX` <br> e.g. `delete 1`                                                                                                                      |
-| **bye**      | `bye`                                                                                                                               
+| Action       | Format, Examples                                                                                                                         |
+|:-------------|:-----------------------------------------------------------------------------------------------------------------------------------------|
+| **todo**     | `todo <description>` <br> e.g. `todo Change bedsheet`                                                                                    |
+| **deadline** | `deadline <description> /by <date time>` <br> e.g. `deadline CS2102 Week 6 Tutorial Q3b /by 2022-02-15 0900`                             |
+| **event**    | `event <description> /at <date time>` <br> e.g. ``event Meet-up with Fabian /at 2022-02-20 1130``                                        |
+| **list**     | `list`                                                                                                                                   |
+| **mark**     | `mark INDEX` <br> e.g. `mark 1`                                                                                                          |
+| **unmark**   | `unmark INDEX` <br> e.g. `unmark 1`                                                                                                      |
+| **delete**   | `delete INDEX` <br> e.g. `delete 1`                                                                                                      |
+| **print**    | `print /on <date>` <br> e.g. `print /on 2022-02-20`                                                                                      |
+| **find**     | `find KEYWORD` <br> e.g. `find CS2103`                                                                                                   |
+| **help**     | `help`                                                                                                                                   |
+| **bye**      | `bye`                                                                                                                                    |
