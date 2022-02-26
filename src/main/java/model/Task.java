@@ -1,9 +1,11 @@
 package model;
 
-public class Task {
+public abstract class Task {
     private static final String FINISHED_STRING = "[X]";
     private static final String UNFINISHED_STRING = "[ ]";
     private static final String MARKING_ERROR_MESSAGE = "Task already %sed";
+    protected static final String ERROR_MESSAGE = "I don't understand what '%s' means";
+
     private final String task;
     private boolean isFinished;
 
@@ -37,5 +39,11 @@ public class Task {
     @Override
     public String toString() {
         return String.format("%s %s", isFinished ? FINISHED_STRING : UNFINISHED_STRING, task);
+    }
+
+    public abstract String getType();
+
+    public String getTaskBody() {
+        return task;
     }
 }

@@ -1,8 +1,16 @@
 import model.*;
+import util.InputParser;
 import util.OutputHandler;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class ShayBot {
     private static final String INTRO_LOGO = "╭━━━┳╮        ╭━━╮   ╭╮\n"
@@ -25,15 +33,104 @@ public class ShayBot {
 
     private final OutputHandler outputHandler;
     private final TaskList taskList;
+    private final Path path;
 
-
-    public ShayBot() {
+    public ShayBot(String filePath) {
         outputHandler = new OutputHandler();
-        taskList = new TaskList();
+        path = Paths.get(filePath);
+        taskList = loadTaskList(path);
     }
 
-    private void test() {
+    private TaskList loadTaskList(Path path) {
+        try {
+            TaskList importedTaskList = new TaskList();
+            BufferedReader reader = Files.newBufferedReader(path);
+            Stream<String> inputStream = reader.lines();
+            inputStream.forEach(line -> tryAddTask(importedTaskList, line));
+            reader.close();
+            return importedTaskList;
+        } catch (IOException e) {
+            return new TaskList();
+        }
+    }
 
+    private String formatTaskForSaveFile(Task task) {
+        String type = task.getType();
+        String completionStatus = task.getCompletionStatus() ? "1" : "0";
+        String taskBody = task.getTaskBody();
+        return String.format("%s | %s | %s\n", type, completionStatus, taskBody);
+    }
+
+    private void saveTaskList(TaskList taskList) {
+        try {
+            BufferedWriter writer = Files.newBufferedWriter(path);
+            for (int i = 1; i <= taskList.getSize(); i++) {
+                Task task = taskList.getTask(i);
+                writer.write(formatTaskForSaveFile(task));
+            }
+            writer.close();
+        } catch (IOException e) {
+            outputHandler.printError(String.format("Uh oh, I can't find '%s'", e.getMessage()));
+        }
+    }
+
+    private void tryAddTask(TaskList importedTaskList, String line) {
+        try {
+            Task task = createTask(line);
+            importedTaskList.addTask(task);
+        } catch (IncorrectTaskFormatException e) {
+            outputHandler.print(String.format("File error: %s", e.getMessage()), false);
+        }
+    }
+
+    //todo: clean up this method to not be a mess.
+    private Task createTask(String line) throws IncorrectTaskFormatException {
+        String[] parameters = parseFileData(line);
+        if (parameters.length < 3) {
+            String errorMessage = String.format("'%s' row does not contain at least 3 parameters", line);
+            throw(new IncorrectTaskFormatException(errorMessage));
+        }
+        try {
+            int completeness = Integer.parseInt(parameters[1]);
+            if (completeness < 0 || completeness > 1) {
+                throw new IncorrectTaskFormatException(String.format("Completion isn't 0 or 1: '%s'", parameters[1]));
+            }
+            boolean isComplete = (completeness == 1);
+            Task task;
+            switch (parameters[0]) {
+            case "T":
+            case "Todo":
+                task = new TodoTask(parameters[2], isComplete);
+                break;
+            case "D":
+            case "Deadline":
+                if (parameters.length < 4) {
+                    String errorMessage = String.format("'%s' does not contain at least 4 parameters", line);
+                    throw(new IncorrectTaskFormatException(errorMessage));
+                }
+                task = new DeadlineTask(parameters[2], parameters[3], isComplete);
+                break;
+            case "E":
+            case "Event":
+                if (parameters.length < 4) {
+                    String errorMessage = String.format("'%s' does not contain at least 4 parameters", line);
+                    throw(new IncorrectTaskFormatException(errorMessage));
+                }
+                task = new EventTask(parameters[2], parameters[3], isComplete);
+                break;
+            default:
+                throw(new IncorrectTaskFormatException(String.format("Unknown type: '%s'", parameters[0])));
+            }
+            return task;
+        } catch (NumberFormatException e) {
+            throw (new IncorrectTaskFormatException(String.format("Completion isn't 0 or 1: '%s'", parameters[1])));
+        } catch (DateTimeParseException e) {
+            throw (new IncorrectTaskFormatException(String.format("%s", e.getMessage())));
+        }
+    }
+
+    private String[] parseFileData(String line) {
+        return line.split(" \\| ");
     }
 
     public void startInteraction() {
@@ -47,14 +144,11 @@ public class ShayBot {
         boolean isEnded = false;
         while (!isEnded) {
             String userInput = sc.nextLine();
-            String operator = getOperator(userInput);
-            String remainingInput = getRemainingInput(userInput, operator);
+            String operator = InputParser.getOperator(userInput);
+            String remainingInput = InputParser.getRemainingInput(userInput, operator);
             switch (operator) {
             case "list":
                 listTasks();
-                break;
-            case "add":
-                addBasicTask(remainingInput);
                 break;
             case "delete":
                 deleteTask(remainingInput);
@@ -86,87 +180,32 @@ public class ShayBot {
         sc.close();
     }
 
-    private String getOperator(String userInput) {
-        return userInput.split(" ")[0];
-    }
-
-    private String getRemainingInput(String userInput, String operator) {
-        if (userInput.length() > operator.length()) {
-            return userInput.substring(operator.length() + 1);
-        } else {
-            return "";
-        }
-    }
-
     private void addTask(Task task) {
         taskList.addTask(task);
         outputHandler.print(String.format(TASK_ADDITION_MESSAGE, task, taskList.getSize()));
     }
 
-    private void addBasicTask(String task) {
-        Task newTask = new Task(task);
-        addTask(newTask);
-    }
-
     private void addTodoTask(String taskBody) {
-        Task newTask = new TodoTask(taskBody);
+        Task newTask = TodoTask.of(taskBody);
         addTask(newTask);
     }
 
     private void addDeadlineTask(String taskBody) {
         try {
-            String[] taskParameters = parseTaskBody(taskBody);
-            if (taskParameters.length != 3) {
-                throw(new ShayBotException(String.format(ERROR_MESSAGE, taskBody)));
-            } else if (!taskParameters[1].equals("by")) {
-                throw(new ShayBotException(String.format(ERROR_MESSAGE, taskParameters[1])));
-            }
-            Task newTask = new DeadlineTask(taskParameters[0], taskParameters[2]);
+            Task newTask = DeadlineTask.of(taskBody);
             addTask(newTask);
-        } catch (ShayBotException e) {
+        } catch (IncorrectTaskFormatException e) {
             outputHandler.printError(e.getMessage());
         }
     }
 
     private void addEventTask(String taskBody) {
         try {
-            String[] taskParameters = parseTaskBody(taskBody);
-            if (taskParameters.length != 3) {
-                throw(new ShayBotException(String.format(ERROR_MESSAGE, taskBody)));
-            } else if (!taskParameters[1].equals("at")) {
-                throw(new ShayBotException(String.format(ERROR_MESSAGE, taskParameters[1])));
-            }
-            Task newTask = new EventTask(taskParameters[0], taskParameters[2]);
+            Task newTask = EventTask.of(taskBody);
             addTask(newTask);
-        } catch (ShayBotException e) {
+        } catch (IncorrectTaskFormatException e) {
             outputHandler.printError(e.getMessage());
         }
-    }
-
-    private String[] parseTaskBody(String task) {
-        ArrayList<String> parameters = new ArrayList<>(0);
-        String[] parameterList = task.split(" ", -1);
-        StringBuilder curParameter = new StringBuilder();
-        for (String str : parameterList) {
-            if (str.length() == 0) {
-                curParameter.append(" ");
-            } else if (str.charAt(0) == '/') {
-                if (curParameter.length() > 0) {
-                    parameters.add(curParameter.toString());
-                    curParameter = new StringBuilder();
-                }
-                parameters.add(str.substring(1));
-            } else {
-                if (curParameter.length() > 0) {
-                    curParameter.append(" ");
-                }
-                curParameter.append(str);
-            }
-        }
-        if (curParameter.length() > 0) {
-            parameters.add(curParameter.toString());
-        }
-        return parameters.toArray(new String[0]);
     }
 
     private void listTasks() {
@@ -199,5 +238,6 @@ public class ShayBot {
 
     private void endInteraction() {
         outputHandler.print(EXIT_MESSAGE);
+        saveTaskList(taskList);
     }
 }
