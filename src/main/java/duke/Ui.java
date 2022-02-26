@@ -17,7 +17,7 @@ public class Ui {
      */
     public static String showWelcome() {
         return "Hello, traveller! My name in Paimon.\n"
-                + "How can I helping you today?";
+                + "How can I help you today?";
     }
 
     /**
