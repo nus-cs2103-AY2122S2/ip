@@ -1,11 +1,14 @@
 package model;
 
-public class DeadlineTask extends Task{
-    private final String deadlineTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-    public DeadlineTask(String task, String deadlineTime) {
+public class DeadlineTask extends Task{
+    private final LocalDate deadlineTime;
+
+    public DeadlineTask(String task, String deadlineTime) throws DateTimeParseException {
         super(task);
-        this.deadlineTime = deadlineTime;
+        this.deadlineTime = LocalDate.parse(deadlineTime);
     }
 
     @Override

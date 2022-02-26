@@ -1,11 +1,14 @@
 package model;
 
-public class EventTask extends Task{
-    private final String eventTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
-    public EventTask(String task, String eventTime) {
+public class EventTask extends Task{
+    private final LocalDateTime eventTime;
+
+    public EventTask(String task, String eventTime) throws DateTimeParseException {
         super(task);
-        this.eventTime = eventTime;
+        this.eventTime = LocalDateTime.parse(eventTime);
     }
 
     @Override
