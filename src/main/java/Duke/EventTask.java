@@ -8,7 +8,8 @@ class EventTask extends Task{
     private LocalDateTime atEndDT;
     private final static DateTimeFormatter dtFm = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mma");
 
-    public EventTask(String description, boolean isCompleted, LocalDateTime atStartDT, LocalDateTime atEndDT){
+    public EventTask(String description, boolean isCompleted,
+                     LocalDateTime atStartDT, LocalDateTime atEndDT){
         super(description, isCompleted);
         this.atStartDT = atStartDT;
         this.atEndDT = atEndDT;
@@ -32,7 +33,8 @@ class EventTask extends Task{
 
     @Override
     public String toString() {
-        return "[E]"+super.toString() + "(at: " + atStartDT.format(dtFm) + " to " + atEndDT.format(dtFm) + ")";
+        return "[E]"+super.toString() + "(at: " + atStartDT.format(dtFm) +
+                " to " + atEndDT.format(dtFm) + ")";
     }
 
     /**

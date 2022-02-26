@@ -1,6 +1,5 @@
 package Duke;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 class Ui {
@@ -35,7 +34,7 @@ class Ui {
     }
 
     /**
-     * Return completion status of task
+     * Return completion status of task.
      */
     public static String getCompleteMessage(boolean isCompleted){
         return (isCompleted)?completedTaskMsg:notCompletedTaskMsg;
