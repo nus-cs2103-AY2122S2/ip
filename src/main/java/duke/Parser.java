@@ -66,7 +66,7 @@ public class Parser {
             input = input.replaceAll(".* ", "");
             if (input.matches("[0-9]+") &&
                      index <= tasklist.size() && index >= 1) {
-                assert index <= tasklist.size() && index >= 1 : "index not within range";
+                assert index <= tasklist.size() : "index not within range";
                 return command;
             }
             
@@ -97,6 +97,17 @@ public class Parser {
 
             String finalWord = input.substring(input.lastIndexOf(" ") + 1);
             if (finalWord.equals("at")) {
+                return "";
+            }
+            return command;
+        case "doafter":
+            if (!input.contains(" after ")) {
+                throw new Exception("Oops, you need to format doafter tasks "
+                        + "as \"doafter X after Y\" :c");
+            }
+
+            String endWord = input.substring(input.lastIndexOf(" ") + 1);
+            if (endWord.equals("after")) {
                 return "";
             }
             return command;

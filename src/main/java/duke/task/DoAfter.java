@@ -9,16 +9,16 @@ package duke.task;
  * @author  Elumalai Oviya Dharshini
  * @version 1.0
  */
-public class Deadline extends TaskWithDateTime {
+public class DoAfter extends TaskWithDateTime {
 
     /**
-     * Constructor for Deadline specifying description, dateTime string.
+     * Constructor for DoAfter specifying description, dateTime string.
      *
      * @param description description of Deadline
-     * @param by dateTime string associated with Deadline
+     * @param after dateTime string associated with Deadline
      */
-    public Deadline(String description, String by) {
-        super(description, by);
+    public DoAfter(String description, String after) {
+        super(description, after);
     }
 
     /**
@@ -29,8 +29,8 @@ public class Deadline extends TaskWithDateTime {
      */
     @Override
     public String toString() {
-        String s = "[D]" + super.toString();
-        return s.replace(" (at: ", " (by: ");
+        String s = "[A]" + super.toString();
+        return s.replace(" (at: ", " (after: ");
     }
 
     /**
@@ -42,6 +42,6 @@ public class Deadline extends TaskWithDateTime {
      */
     @Override
     public String writeToFile() {
-        return "D | " + super.writeToFile();
+        return "A | " + super.writeToFile();
     }
 }

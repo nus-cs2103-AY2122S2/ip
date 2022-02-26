@@ -1,9 +1,6 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.Todo;
+import duke.task.*;
 
 /**
  * The Duke program implements a simple task bot with CRUD functionality.
@@ -23,12 +20,13 @@ public class Duke {
      * @param input index of task
      * @return generic update message string
      * @throws Exception if an exception occurs in the saving of
-     * data to the file at filePath
+     * data to the file at filePath or NumberFormatException
      */
     public String doHandler(String input) throws Exception {
+
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
-        assert i <= tasks.size() && i >= 1 : "index of item should be within scope of tasklist";
+        assert i <= tasks.size() && i >= 0 : "index of item should be within scope of tasklist";
       
         tasks.get(i).markComplete();
         assert tasks.get(i).getStatusIcon().equals("X") : "task should be marked done";
@@ -43,12 +41,13 @@ public class Duke {
      * @param input index of task
      * @return generic update message string
      * @throws Exception if an exception occurs in the saving of
-     * data to the file at filePath
+     * data to the file at filePath or NumberFormatException
      */
     public String undoHandler(String input) throws Exception {
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
-        assert i <= tasks.size() && i >= 1 : "index of item should be within scope of tasklist";
+        System.out.println("i " + i + " tasks size:" + tasks.size());
+        assert i <= tasks.size() && i >= 0 : "index of item should be within scope of tasklist";
       
         tasks.get(i).markIncomplete();
         assert tasks.get(i).getStatusIcon().equals(" ") : "task should be marked incomplete";
@@ -63,12 +62,12 @@ public class Duke {
      * @param input index of task
      * @return string of list of tasks and deletion message.
      * @throws Exception if an exception occurs in the saving of
-     * data to the file at filePath
+     * data to the file at filePath or NumberFormatException
      */
     public String deleteHandler(String input) throws Exception {
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
-        assert i <= tasks.size() && i >= 1 : "index of item should be within scope of tasklist";
+        assert i <= tasks.size() && i >= 0 : "index of item should be within scope of tasklist";
         tasks.remove(i);
 
         storage.save(tasks);
@@ -148,6 +147,23 @@ public class Duke {
     }
 
     /**
+     * Adds a doAfter task to tasks and returns string about the addition.
+     *
+     * @param input string containing description and dateTime of task
+     * @return  string stating that a DoAfter task has been added.
+     * @throws Exception if an exception occurs in the saving of
+     * data to the file at filePath
+     */
+    public String doAfterHandler(String input) throws Exception {
+        String time = input.replaceAll(".* after ", "");
+        input = input.replaceAll(" after .*", "");
+        DoAfter e = new DoAfter(input, time);
+        tasks.add(e);
+        storage.save(tasks);
+        return Ui.showDoAfterMessage() + e;
+    }
+
+    /**
      * Returns 'EXIT' string to signal program termination.
      *
      * @return goodbye signal
@@ -197,6 +213,8 @@ public class Duke {
                 return deadlineHandler(input);
             case "event":
                 return eventHandler(input);
+            case "doafter":
+                return doAfterHandler(input);
             case "bye":
                 return byeHandler();
             default:
