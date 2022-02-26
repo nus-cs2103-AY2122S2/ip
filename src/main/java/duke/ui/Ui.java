@@ -56,6 +56,14 @@ public class Ui {
     }
 
     /**
+     * Prints a task item with double indentation
+     *
+     * @param task task item
+     */
+    public void showTask(String task) {
+        System.out.println(INDENT + INDENT + task);
+    }
+    /**
      * Prints welcome message
      */
     public void showWelcomeMessage() {

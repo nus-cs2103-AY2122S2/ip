@@ -40,7 +40,7 @@ public class MarkCommand implements Command {
         try {
             tasks.markDone(index, true);
             ui.showMessage("OK. I've marked this task as done:");
-            ui.showMessage(tasks.get(index).toString());
+            ui.showTask(tasks.get(index).toString());
         } catch (IndexOutOfBoundsException e) {
             ui.showErrorMessage("Please enter a valid task. Task " + this.index + " does not exist.");
         }

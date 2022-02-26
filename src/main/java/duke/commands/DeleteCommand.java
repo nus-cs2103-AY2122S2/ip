@@ -39,7 +39,7 @@ public class DeleteCommand implements Command {
     public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
         try {
             Task task = tasks.remove(this.index);
-            ui.showMessage("Noted. I've removed the task:");
+            ui.showMessage("I've removed the task:");
             ui.showMessage(task.toString());
             storage.updateStorage(tasks);
         } catch (IndexOutOfBoundsException e) {

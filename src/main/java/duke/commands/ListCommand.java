@@ -27,7 +27,7 @@ public class ListCommand implements Command {
         } else {
             ui.showMessage("Here are the tasks in your list:");
             for (int i = 1; i <= tasks.size(); i++) {
-                ui.showMessage((i) + ". " + tasks.get(i));
+                ui.showTask((i) + ". " + tasks.get(i));
             }
         }
     }

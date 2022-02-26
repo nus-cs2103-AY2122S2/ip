@@ -33,7 +33,7 @@ public class EventCommand implements DateValidator, Command {
             this.description = description;
             this.date = validDate(date);
         } catch (DateTimeParseException e) {
-            String exceptionMsg = "Please input date in a valid date-time format.";
+            String exceptionMsg = "Please input date in the following format: yyyy-mm-dd";
             throw new DateTimeParseException(exceptionMsg, description.split(" /by ")[1], e.getErrorIndex());
         }
     }
@@ -67,7 +67,7 @@ public class EventCommand implements DateValidator, Command {
         Event event = new Event(this.description, this.date);
         tasks.add(event);
         ui.showMessage("Got it. I've added the deadline task:");
-        ui.showMessage(event.toString());
+        ui.showTask(event.toString());
         ui.showMessage("Now you have " + tasks.size() + " tasks in your list.");
     }
 }

@@ -112,7 +112,7 @@ public class Parser {
         try {
             return Integer.parseInt(st.nextToken());
         } catch (NoSuchElementException e) {
-            throw new DukeException("Maybe try specifyin' what task you want next time? jfc");
+            throw new DukeException("Please specify the task index.");
         }
     }
 
@@ -120,7 +120,7 @@ public class Parser {
         try {
             return st.nextToken();
         } catch (NoSuchElementException e) {
-            throw new DukeException("Find what?? FIND WHAT????? LF NEVER SAY HOW I FKING KNOW");
+            throw new DukeException("Please specify the keyword you would like to search for.");
         }
     }
 
@@ -169,7 +169,7 @@ public class Parser {
         if (!description.isBlank()) {
             return description;
         } else {
-            throw new DukeException("try adding sth? idk just a thot xoxo");
+            throw new DukeException("Please provide a task description");
         }
     }
 }

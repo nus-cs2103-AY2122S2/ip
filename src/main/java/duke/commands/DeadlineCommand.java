@@ -68,7 +68,7 @@ public class DeadlineCommand implements DateValidator, Command {
         Deadline task = new Deadline(this.description, this.deadline);
         tasks.add(task);
         ui.showMessage("Got it. I've added the deadline task:");
-        ui.showMessage(task.toString());
+        ui.showTask(task.toString());
         ui.showMessage("Now you have " + tasks.size() + " tasks in your list.");
     }
 }
