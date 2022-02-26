@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,42 +19,48 @@ import duke.ui.Ui;
  * facilitate connection to the database file e.g., "./src/database.txt".
  */
 public class Storage {
-    private final String databasePath;
+    private static File databaseFile;
 
     /**
      * The sole constructor of the Storage class.
      */
     public Storage() {
-        Path dataFolderAbsPath = Paths.get("src/main/java/duke/data");
-        boolean hasDirectoryExist = Files.exists(dataFolderAbsPath);
-        if (!hasDirectoryExist) {
-            new File(dataFolderAbsPath.toAbsolutePath().toString()).mkdir();
+        File databaseFolder = new File("./data");
+        if (!databaseFolder.exists()) {
+            databaseFolder.mkdir();
         }
 
-        Path dataAbsPath = Paths.get("src/main/java/duke/data/DukeDatabase.txt");
-        boolean hasDataFileExist = Files.exists(dataAbsPath);
-        if (!hasDataFileExist) {
-            new File(dataAbsPath.toAbsolutePath().toString());
+        File databaseFile = new File("./data/DukeDatabase.txt");
+        try {
+            if (!databaseFile.exists()) {
+                databaseFile.createNewFile();
+            }
+        } catch (IOException err) {
+            Ui.showErrorMessage(err, "Storage creation failed");
         }
-
-        this.databasePath = dataAbsPath.toAbsolutePath().toString();
+        System.out.println(databaseFile.getAbsolutePath());
+        this.databaseFile = databaseFile;
     }
 
     /**
      * Aid in the creation of a database file in the case where one was not created.
      */
     public void createDatabaseFile() {
-        Path dataFolderAbsPath = Paths.get("src/main/java/duke/data/");
-        boolean hasDirectoryExist = Files.exists(dataFolderAbsPath);
-        if (!hasDirectoryExist) {
-            new File(dataFolderAbsPath.toString()).mkdir();
+        File databaseFolder = new File("./data");
+        if (!databaseFolder.exists()) {
+            databaseFolder.mkdir();
         }
 
-        Path dataAbsPath = Paths.get("src/main/java/duke/data/DukeDatabase.txt");
-        boolean hasDataFileExist = Files.exists(dataAbsPath);
-        if (!hasDataFileExist) {
-            new File(dataAbsPath.toString());
+        File databaseFile = new File("./data/DukeDatabase.txt");
+        try {
+            if (!databaseFile.exists()) {
+                databaseFile.createNewFile();
+            }
+        } catch (IOException err) {
+            Ui.showErrorMessage(err, "Storage creation failed");
         }
+        System.out.println(databaseFile.getAbsolutePath());
+        this.databaseFile = databaseFile;
     }
 
     /**
@@ -68,7 +71,7 @@ public class Storage {
      * @throws IOException When the FileWriter has an IOException error.
      */
     public void writeToDatabase(String textToAppend, boolean isAppendOrWrite) throws IOException {
-        FileWriter fw = new FileWriter(databasePath, isAppendOrWrite); // Append instead of rewriting over
+        FileWriter fw = new FileWriter(databaseFile, isAppendOrWrite); // Append instead of rewriting over
         fw.write(textToAppend);
         fw.close();
     }
@@ -80,7 +83,7 @@ public class Storage {
      * @return a boolean value indicating the status of writing to the database.
      */
     public boolean hasWriteToDatabase(String textToAdd) {
-        assert !databasePath.equals("") : "The database file could not be found. Try PokeJournal again later";
+        assert databaseFile != null : "The database file could not be found. Try PokeJournal again later";
         try {
             writeToDatabase(textToAdd, false);
         } catch (IOException err) {
@@ -98,7 +101,7 @@ public class Storage {
      * @return a boolean value indicating the status of appending to the database.
      */
     public boolean hasAppendToDatabase(String textToAppend) {
-    assert !databasePath.equals("") : "The database file could not be found. Try PokeJournal again later";
+        assert databaseFile != null : "The database file could not be found. Try PokeJournal again later";
         try {
             writeToDatabase(textToAppend, true);
         } catch (IOException err) {
@@ -116,7 +119,6 @@ public class Storage {
      */
     ArrayList<Tasks> returnsAllTasks() throws FileNotFoundException {
         ArrayList<Tasks> taskList = new ArrayList<Tasks>();
-        File databaseFile = new File(databasePath);
         Scanner sc = new Scanner(databaseFile);
         while (sc.hasNextLine()) {
             String taskData = sc.nextLine();

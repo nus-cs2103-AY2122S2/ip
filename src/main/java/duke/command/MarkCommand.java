@@ -15,7 +15,7 @@ public class MarkCommand extends Commands {
     public static final String SUCCESS_MESSAGE = "";
     public static final String FAILURE_MESSAGE = "";
     private static final boolean IS_EXIT = false;
-    private final String arguments; // In the form of user duke.command
+    private final String arguments;
 
     public MarkCommand(String arguments) {
         this.arguments = arguments;
