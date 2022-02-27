@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Task {
     private final String description;
     private boolean isDone;
@@ -7,12 +9,21 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String isDone, String description) {
+        this.isDone = isDone.equals("1");
+        this.description = description;
+    }
+
     private String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
     private void changeStatusIcon() {
         this.isDone = !isDone;
+    }
+
+    private String getStatusIconFileFormat() {
+        return (isDone ? "1" : "0");
     }
 
     public void markTaskAsDone() {
@@ -31,6 +42,10 @@ public class Task {
             changeStatusIcon();
             System.out.println("OK, I've marked this task as not done yet:\n  " + this);
         }
+    }
+
+    public String fileFormat() {
+        return String.format("%s | %s", getStatusIconFileFormat(), description);
     }
 
     @Override
