@@ -35,9 +35,10 @@ public class Arthur {
             f.getMessage();
         }
     }
-
     /**
-     * Runs the given instructions till "bye" command is given
+     * Runs the given instructions.
+     * @param string The user input command.
+     * @return A string output to be displayed to the user.
      */
     public String run(String string) {
         String result;

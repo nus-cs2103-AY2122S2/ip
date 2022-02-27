@@ -38,16 +38,16 @@ public class Storage {
     /**
      * Gives the file stored in hard drive.
      *
-     * @return The data file
+     * @return The data file.
      */
     public File getTasks() {
         return this.storage;
     }
 
     /**
-     * Appends task to the data file
+     * Appends task to the data file.
      *
-     * @param task The task to be appended
+     * @param task The task to be appended.
      */
     public void addTasks(Task task) {
         try {
@@ -62,39 +62,46 @@ public class Storage {
     /**
      * Edits the tasks in the data file.
      *
-     * @param task The task to be edited
-     * @param id   1 to mark/unmark, 2 to delete the line from file
+     * @param task The task to be edited.
+     * @param id   1 to mark/unmark, 2 to delete the line from file.
      */
     public void editTasks(Task task, int id) throws FileNotFoundException, IOException {
-        StringBuilder tempData = new StringBuilder();
+        StringBuilder result = new StringBuilder();
         // This splits the modified task to help get the task info
-        String[] tempArr = task.toString().split(PLACE_TO_SPLIT_STRING);
+        String[] modTaskInfo = task.toString().split(PLACE_TO_SPLIT_STRING);
+        String modTaskDesc = modTaskInfo[1];
         Scanner sc = new Scanner(storage);
         while (sc.hasNext()) {
             // This is the task stored in the file
-            String curr = sc.nextLine();
-            String[] currArr = curr.split(PLACE_TO_SPLIT_STRING);
+            String currStoredTask = sc.nextLine();
+            String[] currTaskInfo = currStoredTask.split(PLACE_TO_SPLIT_STRING);
+            String currTaskDesc = currTaskInfo[1];
             // Checks if the modified task info matches the stored task
-            if (currArr[1].equals(tempArr[1])) {
-                switch (id) {
-                // For mark/unmark
-                case 1:
-                    tempData.append(task).append("\n");
-                    break;
-                // For delete, by skipping append
-                case 2:
-                    break;
-                default:
-                    break;
-                }
+            if (currTaskDesc.equals(modTaskDesc)) {
+                idHandler(task, id, result);
             } else {
-                tempData.append(curr).append("\n");
+                result.append(currStoredTask).append("\n");
             }
         }
 
-        // Clears all info from stored file. Uses tempData to fill in updated data
+        // Clears all info from stored file. Uses result to fill in updated data
         FileWriter f = new FileWriter(FILE_PATH);
-        f.write(tempData.toString());
+        f.write(result.toString());
         f.close();
+    }
+
+    private void idHandler(Task task, int id, StringBuilder result) {
+        switch (id) {
+        // For mark/unmark
+        case 1:
+            result.append(task).append("\n");
+            break;
+        // For delete, by skipping append
+        case 2:
+            break;
+        default:
+            // Assuming that the id is always 1 or 2 and no other value.
+            assert false : "Id assumption has been breached";
+        }
     }
 }

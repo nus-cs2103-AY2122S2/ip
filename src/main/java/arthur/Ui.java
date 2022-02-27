@@ -19,7 +19,7 @@ public class Ui {
     /**
      * Displays the logo and greetings.
      *
-     * @return A string version of the logo and welcome message
+     * @return A string version of the logo and welcome message.
      */
     public String showWelcome() {
         return WELCOME_MESSAGE;

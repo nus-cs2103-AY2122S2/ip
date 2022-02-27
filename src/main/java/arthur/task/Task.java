@@ -1,16 +1,18 @@
 package arthur.task;
 
 /**
- * A class that creates task objects
+ * A class that creates task objects.
  */
 public class Task {
     private static final String MARKED_OUTPUT_TEMPLATE = "[X] >> ";
     private static final String UNMARKED_OUTPUT_TEMPLATE = "[ ] >> ";
-    private final String description; // Task.Task description
+    // Task.Task description
+    private final String description;
     private boolean isDone;
 
     /**
-     * Constructor for the Task object
+     * Constructs the Task object
+     *
      * @param e String input of the task description
      */
     public Task(String e) {
@@ -31,6 +33,11 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Formats the string representation of the task object.
+     *
+     * @return A formatted string with the task marking and description.
+     */
     @Override
     public String toString() {
         if (this.isDone) {

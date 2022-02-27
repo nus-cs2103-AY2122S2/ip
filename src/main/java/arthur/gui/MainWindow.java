@@ -4,7 +4,6 @@ import arthur.Arthur;
 import arthur.Ui;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -13,25 +12,26 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Provides the layout for the other controls.
+ * Controller for MainWindow.
  */
 public class MainWindow extends AnchorPane {
     private static final int TIME_TO_DELAY = 1;
+    private static final String USER_IMAGE_LOC = "/images/User.png";
+    private static final String ARTHUR_IMAGE_LOC = "/images/Arthur.png";
     @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Arthur arthur;
 
     private final Image userImage = new Image(
-            this.getClass().getResourceAsStream("/images/User.png"));
+            this.getClass().getResourceAsStream(USER_IMAGE_LOC));
     private final Image arthurImage = new Image(
-            this.getClass().getResourceAsStream("/images/Arthur.png"));
+            this.getClass().getResourceAsStream(ARTHUR_IMAGE_LOC));
 
     /**
      * Loads the scrollPane and welcome message upon initialisation.

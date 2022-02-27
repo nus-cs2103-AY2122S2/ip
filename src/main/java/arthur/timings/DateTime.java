@@ -19,6 +19,7 @@ import arthur.task.Task;
  * Handles string conversion to Date and Time objects.
  */
 public class DateTime {
+    private static final String USER_INPUT_DATE_SPLITTER = "-";
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("hh:mma");
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private static final DateFormat STORED_TIME_FORMAT = new SimpleDateFormat("hh:mma");
@@ -32,21 +33,26 @@ public class DateTime {
     private static final String REMINDER_TEMPLATE = "Tasks due today: \n";
     private final String str;
 
+    /**
+     * Constructs the datetime object.
+     */
     public DateTime() {
         this.str = "";
     }
     /**
      * Converts input string to date and time objects.
-     * @param input Formatted user input as string
-     * @throws DateTimeParseException Throws if the date and/or time is not formatted properly
+     *
+     * @param input Formatted user input as string.
+     * @throws DateTimeParseException Thrown when the date and/or time is not formatted properly.
      */
     public DateTime(String input) throws DateTimeParseException {
         // Checks if date is present
         LocalTime time;
-        if (input.contains("-")) {
+        if (input.contains(USER_INPUT_DATE_SPLITTER)) {
             String[] dateTimeArr = input.split(" ");
+            boolean hasDateAndTime = dateTimeArr.length == 2;
             LocalDate date;
-            if (dateTimeArr.length == 2) {
+            if (hasDateAndTime) {
                 date = LocalDate.parse(dateTimeArr[0]);
                 time = LocalTime.parse(dateTimeArr[1]);
                 this.str = date.format(DATE_FORMAT) + " " + time.format(TIME_FORMAT);
@@ -66,6 +72,7 @@ public class DateTime {
 
     /**
      * Checks the date with current date to see if they are the same.
+     *
      * @param tasklist The tasklist with list of tasks info.
      * @return A string of all the tasks due on the current date.
      */
@@ -93,9 +100,10 @@ public class DateTime {
     }
 
     /**
-     * Converts string formatted date in storage file to user input format
-     * @param input Stored string version of date
-     * @return User input version of date
+     * Converts string formatted date in storage file to user input format.
+     *
+     * @param input Stored string version of date.
+     * @return User input version of date.
      */
     public String stringToDateFormat(String input) throws InvalidStoredDataFormat {
         String[] dateTimeArr = input.split(" ");

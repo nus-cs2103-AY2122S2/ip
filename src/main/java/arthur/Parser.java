@@ -4,75 +4,116 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import arthur.exceptions.InvalidInstructionException;
+import arthur.task.Task;
 import arthur.timings.DateTime;
 
 /**
- * Handles decoding of the user commands
+ * Handles decoding of the user commands.
  */
 public class Parser {
     private static final String BYE_MESSAGE = "Bye! \n" + "Have a great day!";
-    private String command;
+    private static final String INCORRECT_COMMAND_MESSAGE = "Please enter the correct command";
+    private static final String INVALID_COMMAND_ERROR_MESSAGE = "Invalid command is executed";
+    private static final int MARKER_IDENTIFIER_FOR_STORAGE = 1;
+    private static final int DELETE_IDENTIFIER_FOR_STORAGE = 2;
+    private final String userInput;
 
     /**
-     * Constructor for the parser object
+     * Constructor for the parser object.
      *
-     * @param inst String instruction to be followed
+     * @param inst String instruction to be followed.
      */
     public Parser(String inst) {
-        this.command = inst;
+        this.userInput = inst;
     }
 
     /**
      * Uses the command string to determine appropriate action.
-     * If input is "list", will execute listOut method. If not, adds
-     * instruction to tasks list.
      *
-     * @param taskList The Tasklist of tasks and operations
-     * @param storage  The object to access data file in storage
-     * @return A string output of the result of execution
+     * @param taskList The Tasklist of tasks and operations.
+     * @param storage  The object to access data file in storage.
+     * @return A string output of the result of execution.
      */
     public String execute(TaskList taskList, Storage storage) throws InvalidInstructionException,
             IndexOutOfBoundsException, FileNotFoundException, IOException {
-        String[] temp = this.command.split(" ", 2); // Helps to isolate the first word
-        assert temp.length >= 1 : "Invalid command is executed";
-        String inst = temp[0];
-        switch (inst) {
+        // Helps to isolate the first word
+        String[] inst = this.userInput.split(" ", 2);
+        assert inst.length >= 1 : INVALID_COMMAND_ERROR_MESSAGE;
+        String command = inst[0];
+        // dest = inst[1]
+        int lastTaskIndex = taskList.tasksSize() - 1;
+        String result;
+        switch (command) {
         case "list":
-            this.command = taskList.listOut();
+            result = taskList.listOut();
             break;
         case "mark":
         case "unmark":
-            this.command = taskList.marker(this.command);
-            storage.editTasks(taskList.getTask(Integer.parseInt(temp[1]) - 1), 1);
+            result = markerHandler(taskList, storage, inst[1]);
             break;
         case "reminder":
-            this.command = DateTime.checkDate(taskList);
+            result = DateTime.checkDate(taskList);
             break;
         case "todo":
-            this.command = taskList.todo(temp[1]);
-            storage.addTasks(taskList.getTask(taskList.tasksSize() - 1));
+            result = todoHandler(taskList, storage, inst[1], lastTaskIndex);
             break;
         case "deadline":
-            this.command = taskList.deadline(temp[1]);
-            storage.addTasks(taskList.getTask(taskList.tasksSize() - 1));
+            result = deadlineHandler(taskList, storage, inst[1], lastTaskIndex);
             break;
         case "event":
-            this.command = taskList.event(temp[1]);
-            storage.addTasks(taskList.getTask(taskList.tasksSize() - 1));
+            result = eventHandler(taskList, storage, inst[1], lastTaskIndex);
             break;
         case "delete":
-            storage.editTasks(taskList.getTask(Integer.parseInt(temp[1]) - 1), 2);
-            this.command = taskList.deleter(Integer.parseInt(temp[1]));
+            result = deleteHandler(taskList, storage, inst[1]);
             break;
         case "find":
-            this.command = taskList.find(temp[1]);
+            result = taskList.find(inst[1]);
             break;
         case "bye":
-            this.command = BYE_MESSAGE;
+            result = BYE_MESSAGE;
             break;
         default:
-            throw new InvalidInstructionException("Please enter the correct command");
+            throw new InvalidInstructionException(INCORRECT_COMMAND_MESSAGE);
         }
-        return this.command;
+        return result;
+    }
+
+    private String markerHandler(TaskList taskList, Storage storage, String desc) throws IOException {
+        String result;
+        int taskIndex = Integer.parseInt(desc) - 1;
+        Task task = taskList.getTask(taskIndex);
+        result = taskList.marker(this.userInput);
+        storage.editTasks(task, MARKER_IDENTIFIER_FOR_STORAGE);
+        return result;
+    }
+
+    private String todoHandler(TaskList taskList, Storage storage, String desc, int lastTaskIndex) {
+        String result;
+        result = taskList.todo(desc);
+        storage.addTasks(taskList.getTask(lastTaskIndex));
+        return result;
+    }
+
+    private String deadlineHandler(TaskList taskList, Storage storage, String desc, int lastTaskIndex) {
+        String result;
+        result = taskList.deadline(desc);
+        storage.addTasks(taskList.getTask(lastTaskIndex));
+        return result;
+    }
+
+    private String eventHandler(TaskList taskList, Storage storage, String desc, int lastTaskIndex) {
+        String result;
+        result = taskList.event(desc);
+        storage.addTasks(taskList.getTask(lastTaskIndex));
+        return result;
+    }
+
+    private String deleteHandler(TaskList taskList, Storage storage, String desc) throws IOException {
+        String result;
+        int givenIndex = Integer.parseInt(desc);
+        int taskIndex = givenIndex - 1;
+        storage.editTasks(taskList.getTask(taskIndex), DELETE_IDENTIFIER_FOR_STORAGE);
+        result = taskList.deleter(givenIndex);
+        return result;
     }
 }

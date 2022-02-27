@@ -5,13 +5,19 @@ package arthur.exceptions;
  * Thrown when input is not a supported instruction.
  */
 public class InvalidInstructionException extends Exception {
+    private static final String UNKNOWN_INSTRUCTION_MESSAGE = "Sorry, I don't know what that means";
+
+    /**
+     * Creates the exception with the default message.
+     */
     public InvalidInstructionException() {
-        super("Sorry, I don't know what that means");
+        super(UNKNOWN_INSTRUCTION_MESSAGE);
     }
 
     /**
-     * A constructor for a custom invalid instruction error message
-     * @param str The message to be displayed
+     * Creates the exception with the provided invalid instruction error message.
+     *
+     * @param str The message to be displayed.
      */
     public InvalidInstructionException(String str) {
         super(str);

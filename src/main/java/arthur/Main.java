@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Arthur using FXML.
+ * Handles the GUI for Arthur using FXML.
  */
 public class Main extends Application {
 
@@ -19,6 +19,10 @@ public class Main extends Application {
     private static final String ICON_LOCATION = "/images/Icon.png";
     private final Arthur arthur = new Arthur();
 
+    /**
+     * Sets the stage for program and runs it.
+     * @param stage The stage on which the program is built on.
+     */
     @Override
     public void start(Stage stage) {
         try {
