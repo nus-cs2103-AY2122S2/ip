@@ -19,7 +19,7 @@ import wonka.task.Todo;
  * Represents a handler to load a save file, or save to a file.
  */
 public class Save {
-    private static final String WONKA_PATHNAME = "src/main/java/wonka/data/wonka.txt";
+    private static final String WONKA_PATHNAME = "data/wonka.txt";
     private final ArrayList<String> inputsToBeProcessed = new ArrayList<>(100);
     private TaskList tasks = new TaskList(100);
     private int count;
@@ -82,7 +82,7 @@ public class Save {
             }
         } catch (FileNotFoundException e) {
             System.out.println("\t Save file not found, creating new save file.");
-            File fileDir = new File("src/main/java/wonka/data");
+            File fileDir = new File("data");
             fileDir.mkdirs();
             File fileToCreate = new File(fileDir, "wonka.txt");
             try {
