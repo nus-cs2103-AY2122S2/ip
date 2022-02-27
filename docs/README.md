@@ -24,6 +24,13 @@ If you can type fast, Wonka can increase your task management efficiency by **at
 Adds a task to be done.  
 Format: `todo DESCRIPTION`
 
+* `DESCRIPTION` should be a basic description of the task, and can be in any format desired by the user.
+
+Examples:
+
+* `todo Test` adds a task with description `Test`.
+* `todo 12345` adds a task with a description `12345`.
+
 ### Adding a task with a deadline: `deadline`
 
 Adds a task with a deadline.  
