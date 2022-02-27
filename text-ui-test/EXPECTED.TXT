@@ -1,7 +1,35 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+	  Hello, I'm
+	      _                  _     
+	     |_|                |_|    
+	      _  __ _ _ ____   ___ ___ 
+	     | |/ _` | '__\ \ / / / __|
+	     | | (_| | |   \ V /| \__ \
+	     | |\__,_|_|    \_/ |_|___/
+	    _/ |                       
+	   |__/                        
+
+	  How should I address you?
+	  Splendid! My pleasure to serve you Sam 
+	  What may I assist you with today, Sam? 
+	______________________________________
+	______________________________________
+	  Noted. I've added this task:
+	    [T][ ] buy coffee
+	  Now you have 1 tasks in the list.
+	  What else may I assist you with today, Sam? 
+	______________________________________
+	______________________________________
+	  Noted. I've added this task:
+	    [E][ ] meet Prof Damith (at: Tue, 2-4pm)
+	  Now you have 2 tasks in the list.
+	  What else may I assist you with today, Sam? 
+	______________________________________
+	______________________________________
+	  Noted. I've added this task:
+	    [D][ ] complete CS2103 Assignment (by: Sunday, 2pm)
+	  Now you have 3 tasks in the list.
+	  What else may I assist you with today, Sam? 
+	______________________________________
+	______________________________________
+	  Goodbye for now. 
 
