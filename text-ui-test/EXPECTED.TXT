@@ -5,3 +5,20 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can i do for you?
+Got it. I've added this task: 
+ [T][ ]  borrow book
+Now you have 1 task on the list
+Got it. I've added this task: 
+ [E][ ]  project meeting  (on: Mon 2-4pm) 
+Now you have 2 task on the list
+Got it. I've added this task: 
+ [D][ ]  do homework  (by: no idea :-p) 
+Now you have 3 task on the list
+Nice! I've marked this task as done: 
+[X]  borrow book
+Here are the tasks in your list:
+1. [T][X]  borrow book
+2. [E][ ]  project meeting  (at: Mon 2-4pm)
+3. [D][ ]  do homework  (by: no idea :-p)
+__________________________________________________________________
