@@ -28,8 +28,6 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
-        InputStream fontStream = this.getClass().getResourceAsStream("/font/Hasklig-Regular.ttf");
-        Font font = Font.loadFont(fontStream, 14);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -39,24 +37,23 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        this.initDialogBox(img);
 
         dialog.setText(text);
-        dialog.setWrapText(true);
+        displayPicture.setImage(img);
+    }
+
+    private void initDialogBox(Image img) {
+        InputStream fontStream = this.getClass().getResourceAsStream("/font/Hasklig-Regular.ttf");
+        Font font = Font.loadFont(fontStream, 14);
+
         dialog.setFont(font);
-        dialog.setStyle("-fx-border-color: #3D8DF3;\n"
-                + "-fx-border-width: 1;\n"
-                + "-fx-border-style: solid;\n"
-                + "-fx-padding: 10 20 10 20;\n"
-                + "-fx-background-color: #3D8DF3;\n"
-                + "-fx-background-radius: 10;\n"
-                + "-fx-border-radius: 10;\n"
-                + "-fx-border-insets: 10px;\n"
-                + "-fx-background-insets: 10px");
+        dialog.setWrapText(true);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
 
         Rectangle clip = new Rectangle(displayPicture.getFitWidth(), displayPicture.getFitHeight());
         clip.setArcWidth(256);
         clip.setArcHeight(256);
-        displayPicture.setImage(img);
         displayPicture.setClip(clip);
     }
 
@@ -65,16 +62,6 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
-        dialog.setStyle("-fx-border-color: #F6F6F6;\n"
-                + "-fx-border-width: 1;\n"
-                + "-fx-border-style: solid;\n"
-                + "-fx-padding: 10 20 10 20;\n"
-                + "-fx-background-color: #F6F6F6;\n"
-                + "-fx-background-radius: 10;\n"
-                + "-fx-border-radius: 10;\n"
-                + "-fx-border-insets: 10px;\n"
-                + "-fx-background-insets: 10px");
-        dialog.setTextFill(Paint.valueOf("BLACK"));
     }
 
     /**
@@ -86,8 +73,20 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         var userDb = new DialogBox(text, img);
-        userDb.setMinHeight(Region.USE_PREF_SIZE);
+        userDb.setUserStyle();
         return userDb;
+    }
+
+    private void setUserStyle() {
+        dialog.setStyle("-fx-border-color: #3D8DF3;\n"
+                + "-fx-border-width: 1;\n"
+                + "-fx-border-style: solid;\n"
+                + "-fx-padding: 10 20 10 20;\n"
+                + "-fx-background-color: #3D8DF3;\n"
+                + "-fx-background-radius: 10;\n"
+                + "-fx-border-radius: 10;\n"
+                + "-fx-border-insets: 10px;\n"
+                + "-fx-background-insets: 10px");
     }
 
     /**
@@ -101,8 +100,21 @@ public class DialogBox extends HBox {
         var dukeDb = (text.isBlank() || text.isEmpty())
                 ? new DialogBox("How can I help?", img)
                 : new DialogBox(text, img);
-        dukeDb.setMinHeight(Region.USE_PREF_SIZE);
         dukeDb.flip();
+        dukeDb.setDukeStyle();
         return dukeDb;
+    }
+
+    private void setDukeStyle() {
+        dialog.setStyle("-fx-border-color: #F6F6F6;\n"
+                + "-fx-border-width: 1;\n"
+                + "-fx-border-style: solid;\n"
+                + "-fx-padding: 10 20 10 20;\n"
+                + "-fx-background-color: #F6F6F6;\n"
+                + "-fx-background-radius: 10;\n"
+                + "-fx-border-radius: 10;\n"
+                + "-fx-border-insets: 10px;\n"
+                + "-fx-background-insets: 10px");
+        dialog.setTextFill(Paint.valueOf("BLACK"));
     }
 }

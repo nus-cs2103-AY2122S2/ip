@@ -21,7 +21,7 @@ public class Ui {
      * @return A string to acknowledge the program is closing.
      */
     public String close() {
-        return "Pleasure to be of service, see you soon! Shutting down in 3 seconds.";
+        return "Pleasure to be of service, see you soon! \nShutting down in 3 seconds.";
     }
 
     /**
