@@ -1,10 +1,9 @@
-# Duke v0.2
+# Enkel v0.2
 
-Latest release: [here](https://github.com/zihaowrez/CS2103_iP/releases/tag/A-Release)
+Latest release: [here](https://github.com/zihaowrez/CS2103_iP/releases/tag/Enkel-v0.2)
 
-Duke v0.2 helps you manage a list of your tasks. Currently, 3 types of tasks are supported: tasks with/without a deadline, and events happening at a specifc time.  
-Duke v0.2 uses command input. Simply enter your command and hit return.  
-Currently, the name of the Duke in this program is "Enkel".
+Enkel v0.2 helps you manage a list of your tasks. Currently, 3 types of tasks are supported: tasks with/without a deadline, and events happening at a specifc time.  
+Enkel v0.2 uses command input. Simply enter your command and hit return.  
 
 ## Syntaxes of Commands
 
