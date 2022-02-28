@@ -1,0 +1,8 @@
+Here are the tasks in your list:
+1. [T][ ] go to the gym
+2. [T][ ] wash dishes
+3. [D][ ] CS2040s Lab (by: Mar 21 2020 11:59 PM)
+4. [D][ ] CS2101 script (by: Feb 18 2022 5:00 PM)
+5. [D][ ] CS2103 Assignment (by: Mar 01 2022 6:00 PM)
+6. [E][ ] movie night (at: Feb 20 2022 10:00 PM)
+7. [E][ ] Career Fair (at: Mar 25 2022 9:00 AM)
