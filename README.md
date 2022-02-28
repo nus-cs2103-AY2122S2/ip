@@ -1,24 +1,32 @@
-# Duke project template
+# Enkel v0.2
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Latest release: [here](https://github.com/zihaowrez/CS2103_iP/releases/tag/Enkel-v0.2)
 
-## Setting up in Intellij
+Enkel v0.2 helps you manage a list of your tasks. Currently, 3 types of tasks are supported: tasks with/without a deadline, and events happening at a specifc time.  
+Enkel v0.2 uses command input. Simply enter your command and hit return.  
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Syntaxes of Commands
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+You can view this by typing `help` to Enkel.  
+All inputs except for `<description>` and `<keyword>` must be in lowercase.
+
+**To add a task:**
+- `todo <description>`
+- `deadline <description> /by <time>`
+- `event <description> /at <time>`
+
+Both `<description>` and `<time>` cannot be omitted.
+Valid time formats: `yyyy-M-d` (e.g. `2022-1-24`) and `yyyy-M-d H:mm` (e.g. `2021-12-15 8:30`)
+
+**To view tasks:**  
+- `list`: displays the whole list  
+- `find <keyword>`: displays tasks containing the keyword in the description
+
+**To modify the list:**  
+- `mark <index>`: marks the task at the given index  
+- `unmark <index>`: unmarks the task at the given index  
+- `edit <index> <syntax of 1, 2, or 3>` (e.g. `edit 3 deadline lab report /by 2022-1-24 17:00`): edits the task at the given index. If the task type is omitted, the original type will be used (you still need to use syntax 1, 2, or 3. e.g. `edit 3 lab report /by 2022-1-24 17:00`)  
+- `delete <index>`: deletes the task of the given index
+
+**To quit the program:**  
+- `bye` or cross it directly
