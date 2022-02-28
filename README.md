@@ -26,13 +26,13 @@ You can view the list of command guide by entering `help`.
 
 Below it's a picture of what it should roughly look like on Windows 10.
 
-![](docs\ug_pics\quick_example.png)
+![exmaple](https://github.com/Rye-Catcher/ip/blob/master/docs/ug_pics/quick_example.png)
 
 And this is a demo for **CLI** (Command-Line Interface) in case you are a *GIGA* turbo-geek.
 
 Note that you can enter `bye` to exit from CLI (you can try this on GUI).
 
-![](docs\ug_pics\quick_example_CLI.png)
+![CLI](https://github.com/Rye-Catcher/ip/blob/master/docs/ug_pics/quick_example_CLI.png)
 
 ### Source code
 
