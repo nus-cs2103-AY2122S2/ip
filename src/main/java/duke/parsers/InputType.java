@@ -13,6 +13,9 @@ public enum InputType {
     UNMARK("unmark"),
     FIND("find"),
     DELETE("delete"),
+    SORTDEADLINE("sortdeadline"),
+    SORTEVENT("sortevent"),
+    SORT("sort"),
     NONE("none");
 
     public final String label;

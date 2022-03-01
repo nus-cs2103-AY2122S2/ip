@@ -3,11 +3,17 @@ package duke.parsers;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.UnknownInputException;
 
+import java.util.Arrays;
+
 /**
  * Handles the parsing of the input.
  * All input should be parsed via InputParser.
  */
 public class InputParser {
+    static private final InputType[] ZERO_VALUE_TYPE = new InputType[]{
+            InputType.LIST, InputType.BYE, InputType.SORT, InputType.SORTEVENT, InputType.SORTDEADLINE};
+    static private final InputType[] SINGLE_VALUE_TYPE = new InputType[]{
+            InputType.TODO, InputType.FIND, InputType.MARK, InputType.UNMARK, InputType.DELETE};
     /**
      * parse the input of string into an InputType and the values of the input.
      * @see InputType
@@ -25,33 +31,42 @@ public class InputParser {
             }
 
             if (input.startsWith(inputType.label)) {
-                if (inputType == InputType.BYE || inputType == InputType.LIST) {
+                boolean isZeroValueType = Arrays.stream(ZERO_VALUE_TYPE).anyMatch(x -> x == inputType);
+                if (isZeroValueType) {
                     value = new String[]{};
-                } else if (inputType == InputType.TODO || inputType == InputType.MARK
-                        || inputType == InputType.UNMARK || inputType == InputType.DELETE || inputType == InputType.FIND) {
-                    try {
-                        String description = input.substring(inputType.label.length() + 1).trim();
-                        if (description.isBlank()) {
-                            throw new EmptyDescriptionException("only blank characters found after command :(");
-                        }
-                        value = new String[]{description};
-                    } catch (StringIndexOutOfBoundsException e) {
-                        throw new EmptyDescriptionException("No additional description :(");
+                    type = inputType;
+                    return new Object[]{type, value};
+                }
+
+                boolean isSingleValueType = Arrays.stream(SINGLE_VALUE_TYPE).anyMatch(x -> x == inputType);
+                if (isSingleValueType) {
+                    String description = input.substring(inputType.label.length()).trim();
+                    if (description.isBlank()) {
+                        throw new EmptyDescriptionException("only blank characters found after command :(");
                     }
-                } else if (inputType == InputType.DEADLINE) {
+                    System.out.println("HAHAHA");
+                    value = new String[]{description};
+                    type = inputType;
+                    return new Object[]{type, value};
+                }
+
+                if (inputType == InputType.DEADLINE) {
                     int datetimeIndex = input.indexOf("/by");
                     String description = input.substring(inputType.label.length() + 1, datetimeIndex - 1).trim();
                     String datetime = input.substring(datetimeIndex + 4).trim();
                     value = new String[]{description, datetime};
-                } else if (inputType == InputType.EVENT) {
+                    type = inputType;
+                    return new Object[]{type, value};
+                }
+
+                if (inputType == InputType.EVENT) {
                     int datetimeIndex = input.indexOf("/at");
                     String description = input.substring(inputType.label.length() + 1, datetimeIndex - 1).trim();
                     String datetime = input.substring(datetimeIndex + 4).trim();
                     value = new String[]{description, datetime};
+                    type = inputType;
+                    return new Object[]{type, value};
                 }
-
-                type = inputType;
-                return new Object[]{type, value};
             }
         }
 

@@ -45,11 +45,25 @@ public class DukeUI {
      */
     public String displayFoundItem(WordListItem[] wordListItems, String keyword) {
         String s = "";
+        int i = 1;
         s += "  Here are the tasks matching '" + keyword + "':\n";
         for (WordListItem wordListItem: wordListItems) {
-            s += "    " + wordListItem +"\n";
+            s += "    " + i + ". "+ wordListItem +"\n";
+            i++;
         }
         s += "  You have " + wordListItems.length + " matching results.";
+        return s;
+    }
+
+    public String displaySortedList(WordListItem[] wordListItems) {
+        String s = "";
+        s += "  Here are the sorted tasks:\n";
+        int i = 1;
+        for (WordListItem wordListItem: wordListItems) {
+            s += "    " + i + ". "+ wordListItem +"\n";
+            i++;
+        }
+        s += "  You have " + wordListItems.length + " sorted results.";
         return s;
     }
 

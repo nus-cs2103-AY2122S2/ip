@@ -100,6 +100,7 @@ public class Duke {
      */
     public String processInput(InputType inputType, String[] value) {
         WordListItem wordListItem;
+        WordListItem[] wordListItems;
         switch(inputType) {
             case LIST:
                 return wordList.toString();
@@ -108,7 +109,7 @@ public class Duke {
             case UNMARK:
                 return wordList.unmarkItem(Integer.parseInt(value[0]));
             case FIND:
-                WordListItem[] wordListItems = wordList.findItems(value[0]);
+                wordListItems = wordList.findItems(value[0]);
                 return ui.displayFoundItem(wordListItems, value[0]);
             case TODO:
                 wordListItem = wordList.storeTodo(value[0], false);
@@ -119,6 +120,17 @@ public class Duke {
             case EVENT:
                 wordListItem = wordList.storeEvent(value[0], DateTimeManager.parseString(value[1]), false);
                 return ui.echoAddedItem(wordListItem, wordList);
+            case SORT:
+                System.out.println("HAHA");
+                wordListItems = wordList.sortedItemsByDescription();
+                return ui.displaySortedList(wordListItems);
+            case SORTEVENT:
+                wordListItems = wordList.sortedEvents();
+                return ui.displaySortedList(wordListItems);
+            case SORTDEADLINE:
+                wordListItems = wordList.sortedDeadlines();
+                System.out.println(wordListItems.length);
+                return ui.displaySortedList(wordListItems);
             case BYE:
                 return BYE_MESSAGE;
             case DELETE:

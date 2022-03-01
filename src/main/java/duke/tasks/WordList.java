@@ -135,6 +135,25 @@ public class WordList {
         wordList.forEach(action);
     }
 
+    public WordListItem[] sortedItemsByDescription() {
+        return wordList.stream().sorted((x, y) -> x.getDescription().compareTo(y.getDescription()))
+                .toArray(WordListItem[]::new);
+    }
+
+    public WordListItem[] sortedDeadlines() {
+        return wordList.stream().filter(x -> x instanceof Deadline)
+                .map(x -> (Deadline) x)
+                .sorted((x, y) -> x.getDatetime().compareTo(y.getDatetime()))
+                .toArray(WordListItem[]::new);
+    }
+
+    public WordListItem[] sortedEvents() {
+        return wordList.stream().filter(x -> x instanceof Event)
+                .map(x -> (Event) x)
+                .sorted((x, y) -> x.getDatetime().compareTo(y.getDatetime()))
+                .toArray(WordListItem[]::new);
+    }
+
     @Override
     public String toString() {
         int i = 1;
