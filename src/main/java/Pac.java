@@ -216,6 +216,9 @@ public class Pac {
     public static void displayList() {
         int i = 1;
         System.out.println(newline);
+        if(tasks.isEmpty()) {
+            System.out.println("There are no tasks left to complete");
+        }
         for (Task task : tasks) {
             System.out.println(i++ +". " + task);;
         }
