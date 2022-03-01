@@ -44,7 +44,6 @@ public class InputParser {
                     if (description.isBlank()) {
                         throw new EmptyDescriptionException("only blank characters found after command :(");
                     }
-                    System.out.println("HAHAHA");
                     value = new String[]{description};
                     type = inputType;
                     return new Object[]{type, value};
