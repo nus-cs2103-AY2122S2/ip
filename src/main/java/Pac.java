@@ -1,5 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class Pac {
     static String logo = " ____     ___    _____\n"
@@ -8,24 +12,35 @@ public class Pac {
             + "|  __/  | | | | | |___\n"
             + "|_|     |_| |_| |_____|\n";
     static String newline = "----------------------------------------------------";
+
     static ArrayList<Task> tasks = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
 
         System.out.println("\n" + newline + "\n" + newline + "\n" + logo);
         System.out.println("Hello there! I'm Pac, your very own Personal Assistant ChatBot.\nHow may I help you?");
         System.out.println(newline + "\n");
 
         Scanner sc = new Scanner(System.in);
+        File file = new File("data/pac.txt");
+        File folder = new File("data/");
+
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+
+        if (!file.exists()) {
+            file.createNewFile();
+        }
 
         while (true) {
             String input = sc.nextLine();
             try {
                 String[] inputArray = input.split(" ", 2);
-                String firstword = inputArray[0].toLowerCase();
+                String firstWord = inputArray[0].toLowerCase();
                 Keyword keyword;
 
-                switch (firstword) {
+                switch (firstWord) {
                     case "bye":
                         keyword = Keyword.BYE;
                         break;
@@ -68,11 +83,18 @@ public class Pac {
                         }
                         try {
                             markTask(Integer.parseInt(inputArray[1]) - 1);
+                            write("data/pac.txt", tasks.get(0).toString());
+                            for (int i = 1; i < tasks.size(); i++) {
+                                append("data/pac.txt", tasks.get(i).toString());
+                            }
                         } catch (NumberFormatException e) {
                             System.out.println(newline + "\nSorry! MARK should be followed by a integer.\n"
                                     + newline + "\n");
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println(newline + "\nSorry! Please mention a valid task number.\n"
+                                    + newline + "\n");
+                        } catch (IOException e) {
+                            System.out.println(newline + "\nSorry! File cannot be written.\n"
                                     + newline + "\n");
                         }
                         break;
@@ -82,11 +104,18 @@ public class Pac {
                         }
                         try {
                             unmarkTask(Integer.parseInt(inputArray[1]) - 1);
+                            write("data/pac.txt", tasks.get(0).toString());
+                            for (int i = 1; i < tasks.size(); i++) {
+                                append("data/pac.txt", tasks.get(i).toString());
+                            }
                         } catch (NumberFormatException e) {
                             System.out.println(newline + "\nSorry! MARK should be followed by a integer.\n"
                                     + newline + "\n");
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println(newline + "\nSorry! Please mention a valid task number.\n"
+                                    + newline + "\n");
+                        } catch (IOException e) {
+                            System.out.println(newline + "\nSorry! File cannot be written.\n"
                                     + newline + "\n");
                         }
                         break;
@@ -94,7 +123,13 @@ public class Pac {
                         if (inputArray.length == 1) {
                             throw new PacException("Please mention a task.");
                         }
-                        addToDo(inputArray[1]);
+                        try {
+                            addToDo(inputArray[1]);
+                            append("data/pac.txt", tasks.get(tasks.size() - 1).toString());
+                        } catch (IOException e) {
+                            System.out.println(newline + "\nSorry! File cannot be written.\n"
+                                    + newline + "\n");
+                        }
                         break;
                     case DEADLINE:
                         if (inputArray.length == 1) {
@@ -102,8 +137,12 @@ public class Pac {
                         }
                         try {
                             addDeadline(inputArray[1]);
+                            append("data/pac.txt", tasks.get(tasks.size() - 1).toString());
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println(newline + "\nSorry! Command format is incorrect.\n"
+                                    + newline + "\n");
+                        } catch (IOException e) {
+                            System.out.println(newline + "\nSorry! File cannot be written.\n"
                                     + newline + "\n");
                         }
                         break;
@@ -113,8 +152,12 @@ public class Pac {
                         }
                         try {
                             addEvent(inputArray[1]);
+                            append("data/pac.txt", tasks.get(tasks.size() - 1).toString());
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println(newline + "\nSorry! Command format is incorrect.\n"
+                                    + newline + "\n");
+                        } catch (IOException e) {
+                            System.out.println(newline + "\nSorry! File cannot be written.\n"
                                     + newline + "\n");
                         }
                         break;
@@ -124,11 +167,18 @@ public class Pac {
                         }
                         try {
                             deleteTask(Integer.parseInt(inputArray[1]) - 1);
+                            write("data/pac.txt", tasks.get(0).toString());
+                            for (int i = 1; i < tasks.size(); i++) {
+                                append("data/pac.txt", tasks.get(i).toString());
+                            }
                         } catch (NumberFormatException e) {
                             System.out.println(newline + "\nSorry! MARK should be followed by a integer.\n"
                                     + newline + "\n");
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println(newline + "\nSorry! Please mention a valid task number.\n"
+                                    + newline + "\n");
+                        } catch (IOException e) {
+                            System.out.println(newline + "\nSorry! File cannot be written.\n"
                                     + newline + "\n");
                         }
                         break;
@@ -139,6 +189,18 @@ public class Pac {
                 System.out.println(newline + "\n" + e.getMessage() + "\n" + newline + "\n");
             }
         }
+    }
+
+    public static  void write(String file, String text) throws IOException{
+        FileWriter fw = new FileWriter(file);
+        fw.write(text);
+        fw.close();
+    }
+
+    public static  void append(String file, String text) throws IOException{
+        FileWriter fw = new FileWriter(file, true);
+        fw.write(text);
+        fw.close();
     }
 
     public static void addToDo(String description) {
@@ -156,22 +218,22 @@ public class Pac {
     }
 
     public static void addDeadline(String input) {
-       try {
-           String[] inputArray = input.split("/");
-           inputArray[1] = inputArray[1].replaceFirst("BY ", "by ");
-           inputArray[1] = inputArray[1].replaceFirst("By ", "by ");
-           inputArray[1] = inputArray[1].replaceFirst("bY ", "by ");
-           inputArray[1] = inputArray[1].split("by ", 2)[1];
-           if (inputArray[1].isBlank()) {
-               throw new PacException("Please enter a valid date or time.");
-           }
-           Task task = new Deadline(inputArray[0], inputArray[1]);
-           tasks.add(task);
-           System.out.println(newline + "\nadded: " + task.toString());
-           System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
-       } catch (PacException e) {
-           System.out.println(newline + "\n" + e.getMessage() + "\n" + newline + "\n");
-       }
+        try {
+            String[] inputArray = input.split("/");
+            inputArray[1] = inputArray[1].replaceFirst("BY ", "by ");
+            inputArray[1] = inputArray[1].replaceFirst("By ", "by ");
+            inputArray[1] = inputArray[1].replaceFirst("bY ", "by ");
+            inputArray[1] = inputArray[1].split("by ", 2)[1];
+            if (inputArray[1].isBlank()) {
+                throw new PacException("Please enter a valid date or time.");
+            }
+            Task task = new Deadline(inputArray[0], inputArray[1]);
+            tasks.add(task);
+            System.out.println(newline + "\nadded: " + task.toString());
+            System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
+        } catch (PacException e) {
+            System.out.println(newline + "\n" + e.getMessage() + "\n" + newline + "\n");
+        }
     }
 
     public static void addEvent(String input) {
