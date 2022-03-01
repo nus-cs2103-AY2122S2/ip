@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Pac {
     static String logo = " ____     ___    _____\n"
@@ -157,39 +159,37 @@ public class Pac {
 
     public static void addDeadline(String input) {
        try {
-           String[] inputArray = input.split("/");
-           inputArray[1] = inputArray[1].replaceFirst("BY ", "by ");
-           inputArray[1] = inputArray[1].replaceFirst("By ", "by ");
-           inputArray[1] = inputArray[1].replaceFirst("bY ", "by ");
-           inputArray[1] = inputArray[1].split("by ", 2)[1];
+           String[] inputArray = input.split("/by", 2);
+           inputArray[1] = inputArray[1].trim();
            if (inputArray[1].isBlank()) {
                throw new PacException("Please enter a valid date or time.");
            }
-           Task task = new Deadline(inputArray[0], inputArray[1]);
+           Task task = new Deadline(inputArray[0], LocalDate.parse(inputArray[1]));
            tasks.add(task);
            System.out.println(newline + "\nadded: " + task.toString());
            System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
        } catch (PacException e) {
            System.out.println(newline + "\n" + e.getMessage() + "\n" + newline + "\n");
+       } catch (DateTimeParseException e) {
+           System.out.println(newline + "\n" + "Please enter in correct format" + "\n" + newline + "\n");
        }
     }
 
     public static void addEvent(String input) {
         try {
-            String[] inputArray = input.split("/");
-            inputArray[1] = inputArray[1].replaceFirst("AT ", "by ");
-            inputArray[1] = inputArray[1].replaceFirst("At ", "by ");
-            inputArray[1] = inputArray[1].replaceFirst("aT ", "by ");
-            inputArray[1] = inputArray[1].split("at ", 2)[1];
+            String[] inputArray = input.split("/at", 2);
+            inputArray[1] = inputArray[1].trim();
             if (inputArray[1].isBlank()) {
                 throw new PacException("Please enter a valid date or time.");
             }
-            Task task = new Event(inputArray[0], inputArray[1]);
+            Task task = new Event(inputArray[0], LocalDate.parse(inputArray[1]));
             tasks.add(task);
             System.out.println(newline + "\nadded: " + task.toString());
             System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
         } catch (PacException e) {
             System.out.println(newline + "\n" + e.getMessage() + "\n" + newline + "\n");
+        } catch (DateTimeParseException e) {
+            System.out.println(newline + "\n" + "Please enter in correct format" + "\n" + newline + "\n");
         }
     }
 
