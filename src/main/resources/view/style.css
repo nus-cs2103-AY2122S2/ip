@@ -1,0 +1,53 @@
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/raleway/v26/1Ptug8zYS_SKggPNyC0ITw.woff2') format('woff2');
+}
+
+.dialog-box {
+    -fx-padding: 10;
+    -fx-background-color: #e5ffcc;
+    -fx-background-radius: 5;
+    -fx-border-color: #d8d8d8;
+    -fx-border-width: 5;
+    -fx-border-radius: 5;
+}
+
+.alfred-dialog-box {
+    -fx-padding: 10;
+    -fx-background-color: #4169e1;
+    -fx-background-radius: 7;
+    -fx-font-family: 'Franklin Gothic Book';
+    -fx-font-weight: 'normal';
+    -fx-font-size: 10pt ;
+    -fx-text-fill: #ffffff;
+}
+
+.user-dialog-box {
+    -fx-padding: 10;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 7;
+    -fx-font-family: 'Franklin Gothic Book';
+    -fx-font-weight: 'normal';
+    -fx-font-size: 10pt ;
+}
+
+.main-window {
+    -fx-background: #ece5dd
+}
+
+.main-window-header {
+    -fx-background-color: #4169e1
+}
+
+.main-window-header-label {
+    -fx-padding: 10;
+    -fx-background-color: #4169e1;
+    -fx-font-family: 'Franklin Gothic Heavy';
+    -fx-font-weight: 'bold';
+    -fx-font-size: 15pt ;
+    -fx-text-fill: #ffffff;
+
+}

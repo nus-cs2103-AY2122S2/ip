@@ -1,0 +1,30 @@
+todo read book
+mark 1
+deadline return book /by wrongDateformat
+deadline return book /by 2021-01-02T10:00:00
+event project meeting /at 2022-11-03T22:00:00
+todo join sports club
+mark 4
+todo borrow book
+deadline return book /by 2021-05-28T09:01:00
+deadline /by withoutname
+event project meeting /at wrongdateformat
+event project meeting /at 2023-05-03T12:43:00
+event /at withoutname
+list
+todo
+todo 
+event without at
+deadline without by
+invalidrandomcommand
+mark
+unmark
+mark invalidnum
+unmark invalidnum
+delete 1
+delete invalidnum
+delete
+find
+find nonexistentthing
+find
+find pro
