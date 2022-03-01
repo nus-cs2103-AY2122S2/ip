@@ -1,4 +1,4 @@
-# User Guide
+# Duked App User Guide
 **Duked App** is a desktop application to manage your tasks efficiently. This application is highly optimized for those who are comfortable using the CLI (typing) in the GUI.
 
 * [Quick start](#quick-start)
