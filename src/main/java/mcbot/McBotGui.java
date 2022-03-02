@@ -1,23 +1,23 @@
 package mcbot;
 
-import mcbot.exception.InvalidCommandException;
-import mcbot.exception.McBotException;
-import mcbot.exception.AnomalyException;
-import mcbot.task.Deadline;
-import mcbot.task.Event;
-import mcbot.task.Task;
-import mcbot.task.ToDo;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import mcbot.exception.AnomalyException;
+import mcbot.exception.InvalidCommandException;
+import mcbot.exception.McBotException;
+import mcbot.task.Deadline;
+import mcbot.task.Event;
+import mcbot.task.Task;
+import mcbot.task.ToDo;
+
 /**
  * McBotGui class for the chat-bot.
  */
 public class McBotGui {
-    protected final String FILE_PATH = "data/tasks.txt";
+    protected final String filePath = "data/tasks.txt";
     protected Storage storage;
     protected TaskList tasks;
     protected Gui gui;
@@ -29,7 +29,7 @@ public class McBotGui {
      */
     public McBotGui() {
         gui = new Gui();
-        storage = new Storage(FILE_PATH);
+        storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (McBotException e) {
@@ -40,48 +40,48 @@ public class McBotGui {
 
     /**
      * Method to get the response based on the input command.
-     * 
+     *
      * @param input is the command given by the user.
      * @return the String response based on the input.
      */
     public String getResponse(String input) {
         Parser parser = new Parser(input);
-            try {
-                String keyCommand = parser.getKeyCommand();
-                switch(keyCommand) {
-                case "hi": 
-                    return gui.welcomeLine();
-                case "bye":
-                    return executeBye();
-                case "list":
-                    return executeList();
-                case "mark":
-                    return executeMark(parser);
-                case "unmark":
-                    return executeUnmark(parser);
-                case "todo":
-                    return executeTodo(parser);
-                case "deadline":
-                    return executeDeadline(parser);
-                case "event":
-                    return executeEvent(parser);
-                case "delete":
-                    return executeDelete(parser);
-                case "find":
-                    return executeFind(parser);
-                default:
-                    throw new InvalidCommandException("I don't understand a word ye're sayin'");
-                }
-            } catch (McBotException e) {
-                return gui.printError(e);
-            } finally {
-                parser.close();
+        try {
+            String keyCommand = parser.getKeyCommand();
+            switch(keyCommand) {
+            case "hi":
+                return gui.welcomeLine();
+            case "bye":
+                return executeBye();
+            case "list":
+                return executeList();
+            case "mark":
+                return executeMark(parser);
+            case "unmark":
+                return executeUnmark(parser);
+            case "todo":
+                return executeTodo(parser);
+            case "deadline":
+                return executeDeadline(parser);
+            case "event":
+                return executeEvent(parser);
+            case "delete":
+                return executeDelete(parser);
+            case "find":
+                return executeFind(parser);
+            default:
+                throw new InvalidCommandException("I don't understand a word ye're sayin'");
             }
+        } catch (McBotException e) {
+            return gui.printError(e);
+        } finally {
+            parser.close();
+        }
     }
 
     /**
      * Method to execute bye command.
-     * 
+     *
      * @return goodbye line.
      */
     private String executeBye() {
@@ -90,7 +90,7 @@ public class McBotGui {
 
     /**
      * Method to execute find. 
-     * 
+     *
      * @param parser to parse the information.
      * @return the task if found any.
      */
@@ -105,7 +105,7 @@ public class McBotGui {
 
     /**
      * Method to execute delete.
-     * 
+     *
      * @param parser to parse the information.
      * @return the deleted task.
      */
@@ -131,7 +131,7 @@ public class McBotGui {
 
     /**
      * Method to execute event.
-     * 
+     *
      * @param parser to parse the information.
      * @return the event task created.
      */
@@ -157,7 +157,7 @@ public class McBotGui {
 
     /**
      * Method to execute deadline.
-     * 
+     *
      * @param parser to parse the information.
      * @return the deadline task created.
      */
@@ -178,7 +178,7 @@ public class McBotGui {
 
     /**
      * Method to execute todo.
-     * 
+     *
      * @param parser to parse the information.
      * @return the todo task created.
      */
@@ -197,7 +197,7 @@ public class McBotGui {
 
     /**
      * Method to execute unmark.
-     * 
+     *
      * @param parser to parse the information.
      * @return the task unmarked.
      */
@@ -227,7 +227,7 @@ public class McBotGui {
 
     /**
      * Method to execute mark.
-     * 
+     *
      * @param parser to parse the information.
      * @return the marked task.
      */
@@ -257,7 +257,7 @@ public class McBotGui {
 
     /**
      * Method to execute list.
-     * 
+     *
      * @return the list of tasks.
      */
     private String executeList() {
@@ -274,7 +274,7 @@ public class McBotGui {
 
     /**
      * Helper method to create event task.
-     * 
+     *
      * @param parser to parse information.
      * @return the event task created.
      * @throws InvalidCommandException when any data is missing.
@@ -294,7 +294,7 @@ public class McBotGui {
 
     /**
      * Helper method to create deadline task.
-     * 
+     *
      * @param parser to parse information.
      * @return the deadline task created.
      * @throws InvalidCommandException when any data is missing.

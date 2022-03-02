@@ -11,28 +11,28 @@ import mcbot.task.Task;
  */
 public class Gui {
     /**
-     * Constructor for Gui. 
+     * Constructor for Gui.
      */
     public Gui() {
     }
 
     /**
      * Method to return the welcome line.
-     * 
+     *
      * @return String to welcome the user.
      */
     public String welcomeLine() {
-        String logo = "\n" +
-                "  __  __    ___      _   \n" +
-                " |  \\/  |__| _ ) ___| |_ \n" +
-                " | |\\/| / _| _ \\/ _ \\  _|\n" +
-                " |_|  |_\\__|___/\\___/\\__|\n";
+        String logo = "\n"
+                + "  __  __    ___      _   \n"
+                + " |  \\/  |__| _ ) ___| |_ \n"
+                + " | |\\/| / _| _ \\/ _ \\  _|\n"
+                + " |_|  |_\\__|___/\\___/\\__|\n";
         return logo + "\n" + "Ahoy! Me name be McBot.\nTell me lad, what do you want?";
     }
 
     /**
      * Method to return loading error if file is not found.
-     * 
+     *
      * @return String to show when file is not found.
      */
     public String showLoadingError() {
@@ -95,7 +95,7 @@ public class Gui {
         int i = 1;
         StringBuilder sb = new StringBuilder("Here are yer tasks boi:\n");
         for (Task task : arrList) {
-            sb.append(i + "." + task + "\n") ;
+            sb.append(i + "." + task + "\n");
             i++;
         }
         return sb.toString();
