@@ -1,0 +1,5 @@
+T : 1 : Learn React : NONE
+E : 0 : BitHacks  : 2022-02-26 : NONE
+D : 0 : Submit iP  : 2022-02-18 : HIGH
+D : 0 : AI project 1  : 2022-02-20 : MEDIUM
+T : 0 : Midterm prep : LOW
