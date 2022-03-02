@@ -116,7 +116,9 @@ public class TaskList {
 
         str.append("You have ")
                 .append(tasks.size())
-                .append(" tasks on your list.");
+                .append(" task")
+                .append(tasks.size() == 1 ? "" : "s")
+                .append(" on your list.");
 
         return str.toString();
     }
