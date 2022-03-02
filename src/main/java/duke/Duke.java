@@ -1,20 +1,22 @@
 package duke;
 
-import java.util.ArrayList;
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 
 public class Duke extends Application {
@@ -30,15 +32,86 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Constructor for Duke object.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/tasks.tx");
         try {
             list = new TaskList(storage.load());
         } catch (IOException e) {
-            System.out.println("error");
+            System.out.print("Error: ");
+            System.out.println(e.getMessage());
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private String handleTodo(String input) {
+        Todo t = new Todo(input.substring(5));
+        list.add(t);
+        String out = ("Got it. I've added: \n" + t.toString() + "\n");
+        out += String.format("Sheesh you've now got %d tasks in the list\n", list.size());
+        return out;
+    }
+
+    /**
+     * Handler for creating a Deadline
+     *
+     * @param out The String to be appended to
+     * @param parsedInput The user's input containing the task description and deadline
+     * @return he string output to be shown to the user
+     * @throws DukeException if  the deadline is not in the correct format
+     */
+    private String handleDeadline(String out, String[] parsedInput) throws DukeException {
+        String[] date = parsedInput[1].split("-");
+        if (date.length != 3) {
+            throw new DukeException("Your deadline should be in the format yyyy-mm-dd");
+        }
+        try {
+            Deadline d = new Deadline(parsedInput[0],
+                    LocalDate.of(Integer.parseInt(date[0]),
+                            Integer.parseInt(date[1]),
+                            Integer.parseInt(date[2])));
+            list.add(d);
+            out += ("Got it. I've added: \n" + d.toString() + "\n");
+            out += String.format("Sheesh you've now got %d tasks in the list\n", list.size());
+        } catch (DateTimeException e) {
+            throw new DukeException("Your date should be in the format yyyy-mm-dd");
+        }
+        return out;
+    }
+
+    private String handleEvent(String[] arr) {
+        Event e = new Event(arr[0], arr[1]);
+        list.add(e);
+        String out = ("Got it. I've added: \n" + e.toString() + "\n");
+        out += String.format("Sheesh you've now got %d tasks in the list\n", list.size());
+        return out;
+    }
+
+    private String handleDelete(int idx) {
+        Task t = list.remove(idx - 1);
+        String out = String.format("Alrighty I've removed this task\n");
+        out += (t.toString() + "\n");
+        out += String.format("K you've now got %d tasks in the list\n", list.size());
+        return out;
+    }
+
+    private String handleHelp() {
+        String out = "Here is a list of commands to help you get started:\n"
+                + "* todo: Adds a task to be done Eg: todo Buy groceries\n"
+                + "* deadline: Adds a task to be done by a certain deadline.\n "
+                + "Use the format yyyy-mm-dd. Eg: deadline Finish studying /by 2022-02-28\n"
+                + "* event: Adds an event occurring at a specific time Eg: event Lecture /at Thursday 2-4pm\n"
+                + "* list: List all the tasks Eg: list\n"
+                + "* mark: Mark a task as done Eg: mark 3\n"
+                + "* unmark: Mark a task as not done Eg: unmark 3\n"
+                + "* delete: Delete a task Eg: delete 4\n"
+                + "* find: Find a task by searching for a substring Eg: find Lecture\n"
+                + "* save: Saves the tasks that have been added in the current session to local storage";
+        return out;
     }
 
     /**
@@ -55,10 +128,7 @@ public class Duke extends Application {
             if (split.length == 1) {
                 throw new DukeException("It looks like you're missing the task description");
             } else {
-                Todo t = new Todo(input.substring(5));
-                list.add(t);
-                out += ("Got it. I've added: \n" + t.toString() + "\n");
-                out += String.format("Sheesh you've now got %d tasks in the list\n", list.size());
+                out = handleTodo(input);
             }
         } else if (command.equals("deadline")) {
             if (split.length == 1) {
@@ -76,14 +146,11 @@ public class Duke extends Application {
             if (split.length == 1) {
                 throw new DukeException("It looks like you're missing the task description");
             } else {
-                String[] arr = input.substring(6).split("/at ");
-                if (arr.length == 1) {
+                String[] parsedInput = input.substring(6).split("/at ");
+                if (parsedInput.length == 1) {
                     throw new DukeException("It seems you haven't included the event time");
                 } else {
-                    Event e = new Event(arr[0], arr[1]);
-                    list.add(e);
-                    out +=  ("Got it. I've added: \n" + e.toString() + "\n");
-                    out += String.format("Sheesh you've now got %d tasks in the list\n", list.size());
+                    out = handleEvent(parsedInput);
                 }
             }
         } else if (command.equals("save")) {
@@ -111,9 +178,9 @@ public class Duke extends Application {
                     out += String.format("Ok boss I've marked task %s as incomplete\n", split[1]);
                 } else {
                     t.makeDone();
-                    out +=  String.format("Woohoo! I've marked task %s as done\n", split[1]);
+                    out += String.format("Woohoo! I've marked task %s as done\n", split[1]);
                 }
-                out +=  (t.toString() + "\n");
+                out += (t.toString() + "\n");
             }
         } else if (command.equals("delete")) {
             if (list.size() == 0) {
@@ -126,11 +193,7 @@ public class Duke extends Application {
                 if (idx > list.size()) {
                     throw new DukeException("The task number you've given is invalid");
                 } else {
-                    Task t = list.get(idx - 1);
-                    list.remove(idx - 1);
-                    out += String.format("Alrighty I've removed this task\n");
-                    out += (t.toString() + "\n");
-                    out += String.format("K you've now got %d tasks in the list\n", list.size());
+                    out = handleDelete(idx);
                 }
             }
         } else if (command.equals("find")) {
@@ -145,45 +208,6 @@ public class Duke extends Application {
             throw new DukeException("I'm not sure what that means");
         }
         assert !out.equals("");
-        return out;
-    }
-
-    private String handleHelp() {
-        String out =  "Here is a list of commands to help you get started:\n"
-                + "* todo: Adds a task to be done Eg: todo Buy groceries\n"
-                + "* deadline: Adds a task to be done by a certain deadline.\n "
-                + "Use the format yyyy-mm-dd. Eg: deadline Finish studying /by 2022-02-28\n"
-                + "* event: Adds an event occurring at a specific time Eg: event Lecture /at Thursday 2-4pm\n"
-                + "* list: List all the tasks Eg: list\n"
-                + "* mark: Mark a task as done Eg: mark 3\n"
-                + "* unmark: Mark a task as not done Eg: unmark 3\n"
-                + "* delete: Delete a task Eg: delete 4\n"
-                + "* find: Find a task by searching for a substring Eg: find Lecture\n"
-                + "* save: Saves the tasks that have been added in the current session to local storage";
-        return out;
-
-    }
-
-    /**
-     * Handler for creating a Deadline
-     *
-     * @param out The String to be appended to
-     * @param parsedInput The user's input containing the task description and deadline
-     * @return he string output to be shown to the user
-     * @throws DukeException if  the deadline is not in the correct format
-     */
-    private String handleDeadline(String out, String[] parsedInput) throws DukeException {
-        String[] date = parsedInput[1].split("-");
-        if (date.length != 3) {
-            throw new DukeException("Your deadline should be in the format yyyy-mm-dd");
-        }
-        Deadline d = new Deadline(parsedInput[0],
-                LocalDate.of(Integer.parseInt(date[0]),
-                        Integer.parseInt(date[1]),
-                        Integer.parseInt(date[2])));
-        list.add(d);
-        out += ("Got it. I've added: \n" + d.toString() + "\n");
-        out += String.format("Sheesh you've now got %d tasks in the list\n", list.size());
         return out;
     }
 

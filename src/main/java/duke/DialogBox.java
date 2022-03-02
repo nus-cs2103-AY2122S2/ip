@@ -13,6 +13,13 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Creates dialog box
+     *
+     * @param l Label to be displayed inside the box
+     * @param iv image
+     * @param isDuke boolean value to  decide whether to display image
+     */
     public DialogBox(Label l, ImageView iv, boolean isDuke) {
         text = l;
         displayPicture = iv;

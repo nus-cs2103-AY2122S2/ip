@@ -31,22 +31,22 @@ public class Storage {
      * @return the tasks in a ArrayList of Task objects
      * @throws IOException if the file doesn't exist
      */
-    ArrayList<Task> load()  throws IOException {
-            ArrayList<Task> list = new ArrayList<>();
-            File data = new File("prince.txt");
-            if (!data.createNewFile()) {
-                Scanner s = new Scanner(data);
-                while (s.hasNext()) {
-                    //read tasks and add to arraylist
-                    String line = s.nextLine();
-                    Task t = new Parser(line).parse();
-                    if (line.substring(4,5).equals("X")) {
-                        t.makeDone();
-                    }
-                    list.add(t);
+    ArrayList<Task> load() throws IOException, DukeException {
+        ArrayList<Task> list = new ArrayList<>();
+        File data = new File("prince.txt");
+        if (!data.createNewFile()) {
+            Scanner s = new Scanner(data);
+            while (s.hasNext()) {
+                //read tasks and add to arraylist
+                String line = s.nextLine();
+                Task t = new Parser(line).parse();
+                if (line.substring(4, 5).equals("X")) {
+                    t.makeDone();
                 }
+                list.add(t);
             }
-            return list;
+        }
+        return list;
     }
 
     boolean store(TaskList list) throws IOException {

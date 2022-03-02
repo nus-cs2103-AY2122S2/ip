@@ -51,10 +51,13 @@ public class TaskList {
     /**
      * Removes the task at that specific index in the list.
      *
-     * @param index the position of the task to be deleted
+     * @param index the position of the task to be deleted.
+     * @return the Task that was deleted.
      */
-    void remove(int index) {
+    Task remove(int index) {
+        Task t = tasks.get(index);
         tasks.remove(index);
+        return t;
     }
 
     /**

@@ -18,7 +18,7 @@ public class Parser {
      * @param string The string to be parsed
      */
     Parser(String string) {
-        this.string =  string;
+        this.string = string;
     }
 
     /**
@@ -27,9 +27,9 @@ public class Parser {
      *
      * @return Task object containing the data specified in the string
      */
-    Task parse() {
+    Task parse() throws DukeException {
         Task t = new Task("null");
-        switch (string.substring(0,3)) {
+        switch (string.substring(0, 3)) {
         case "[T]":
             t = new Todo(string.substring(7));
             break;
@@ -46,11 +46,13 @@ public class Parser {
             String[] arr2 = string.split("\\(at: ");
             t = new Event(arr2[0].substring(7), arr2[1].split("\\)")[0]);
             break;
+        default:
+            throw new DukeException("Storage file is corrupted");
         }
         return t;
     }
 
-    private String monthToInt(String month) {
+    private String monthToInt(String month) throws DukeException {
         String r = "";
         switch (month) {
         case "Jan":
@@ -89,6 +91,8 @@ public class Parser {
         case "Dec":
             r = "12";
             break;
+        default:
+            throw new DukeException("Storage file is corrupted");
 
         }
         return r;

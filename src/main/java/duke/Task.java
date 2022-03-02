@@ -28,7 +28,7 @@ public class Task {
     /**
      * Marks the task as done.
      */
-    public void  makeDone() {
+    public void makeDone() {
         this.isDone = true;
     }
 
@@ -41,7 +41,8 @@ public class Task {
 
     /**
      * {@inheritDoc}
-     * @return the String representation of the Task
+     *
+     * @return the String representation of the Task.
      */
     public String toString() {
         String out = String.format("[%s] %s", this.getStatusIcon(), this.description);
