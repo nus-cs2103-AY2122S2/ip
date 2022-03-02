@@ -1,4 +1,6 @@
-# Ducky project template
+# Ducky
+
+<img width="592" alt="Ui" src="https://user-images.githubusercontent.com/61443625/156412118-9594a743-3d6d-4911-9521-6799d0a0556c.png">
 
 This is a project template for a greenfield Java project. Given below are instructions on how to use it.
 
