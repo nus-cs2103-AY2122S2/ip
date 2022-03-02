@@ -26,6 +26,7 @@ public class ExitCommand extends Command {
      * @param contacts List of contacts.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage, ContactList contacts) {
+        System.exit(0);
         return ui.showExit();
     }
 

@@ -13,6 +13,9 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
 application {
     mainClassName "duke.Launcher"
 }
@@ -26,8 +29,16 @@ test {
 }
 
 javafx {
-    version = "17"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    version = "11"
+    modules = [
+        'javafx.base',
+        'javafx.controls',
+        'javafx.fxml',
+        'javafx.graphics',
+        'javafx.media',
+        'javafx.swing',
+        'javafx.web'
+    ]
 }
 
 dependencies {
