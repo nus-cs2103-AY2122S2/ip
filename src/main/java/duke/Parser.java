@@ -12,7 +12,7 @@ import duke.task.TaskList;
  * time(s) associated with the task.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 1.0
+ * @version 1.1
  */
 public class Parser {
 
@@ -42,6 +42,7 @@ public class Parser {
      * @param input input string to be parsed
      * @return command from input string if input is of a valid format,
      * "" otherwise
+     * @throws Exception if input string is not of an expected format
      */
     public static String parse(String input, TaskList tasklist) throws Exception {
         input = input.trim();
@@ -64,12 +65,12 @@ public class Parser {
         case "delete":
             int index = Integer.parseInt(input);
             input = input.replaceAll(".* ", "");
-            if (input.matches("[0-9]+") &&
-                     index <= tasklist.size() && index >= 1) {
+            if (input.matches("[0-9]+") && index <= tasklist.size()
+                    && index >= 1) {
                 assert index <= tasklist.size() : "index not within range";
                 return command;
             }
-            
+
             throw new Exception("You need to specify the task you want to "
                     + firstWord + " by its index :c");
         case "todo":

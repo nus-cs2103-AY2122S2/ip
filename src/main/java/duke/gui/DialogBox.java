@@ -1,4 +1,7 @@
-package duke;
+package duke.gui;
+
+import java.io.IOException;
+import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,16 +11,12 @@ import javafx.fxml.FXMLLoader;
 
 import javafx.geometry.Pos;
 
-import java.io.IOException;
-
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.Node;
 import javafx.scene.shape.Circle;
-
-import java.util.Collections;
 
 public class DialogBox extends HBox {
     @FXML
@@ -25,7 +24,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img, userType user) {
+    private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -38,11 +37,10 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
 
-        dialog.setStyle("-fx-font-size: 11");
-
         double x = displayPicture.getX() + displayPicture.getFitWidth() / 2;
         double y = displayPicture.getY() + displayPicture.getFitHeight() / 2;
-        double radius = Math.min(displayPicture.getFitWidth(), displayPicture.getFitHeight()) / 2;
+        double radius = Math.min(displayPicture.getFitWidth(),
+                displayPicture.getFitHeight()) / 2;
         displayPicture.setClip(new Circle(x, y, radius));
     }
 
@@ -56,12 +54,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img, userType user) {
-        return new DialogBox(text, img, user);
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img, userType user) {
-        var db = new DialogBox(text, img, user);
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
         return db;
     }

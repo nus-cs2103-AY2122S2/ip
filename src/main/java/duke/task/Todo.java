@@ -4,7 +4,7 @@ package duke.task;
  * Represents a todo - a task with a description and no time limit.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 1.0
+ * @version 1.1
  */
 public class Todo extends Task {
 

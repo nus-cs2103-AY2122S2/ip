@@ -7,7 +7,7 @@ import java.util.List;
  * Represents a collection of tasks.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 1.0
+ * @version 1.1
  */
 public class TaskList {
     private List<Task> tasks;
@@ -91,17 +91,10 @@ public class TaskList {
 
     /**
      * Default toString method that returns list of all tasks.
-     * Note: It appends list of tasks with a string denoting the number
-     * of tasks.
      *
-     * @return formatted string of all Tasks in TaskList and number of
-     * Tasks in TaskList delimited by newlines.
+     * @return formatted string of all Tasks in TaskList delimited by newlines.
      */
     public String toString() {
-        if (tasks.isEmpty()) {
-            return  "You now have 0 tasks on your list.";
-        }
-
         StringBuilder str = new StringBuilder();
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -113,12 +106,6 @@ public class TaskList {
                     .append(tasks.get(i))
                     .append("\n");
         }
-
-        str.append("You have ")
-                .append(tasks.size())
-                .append(" task")
-                .append(tasks.size() == 1 ? "" : "s")
-                .append(" on your list.");
 
         return str.toString();
     }

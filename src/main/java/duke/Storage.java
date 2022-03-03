@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Event;
 import duke.task.Deadline;
 import duke.task.DoAfter;
+import duke.task.Event;
+import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Represents a storage space for tasks on hard-drive.
@@ -19,25 +19,11 @@ import duke.task.TaskList;
  * of tasks to the same file.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 1.0
+ * @version 1.1
  */
 public class Storage {
     private String filePath;
     private ArrayList<Task> tasks;
-
-    /**
-     * Suppresses any unused warnings from a given boolean result.
-     *
-     * @param result variable to suppress warnings from
-     */
-    //@@author Eric Lange-reused
-    //Reused from https://stackoverflow.com/questions/27904329/warning-file-mkdir-is-ignored#answer-54341862
-    // with minor modifications
-    @SuppressWarnings("unused")
-    private static void ignoreResult(boolean result) {
-
-    }
-    //@@author
 
     /**
      * Constructor for Storage.
@@ -97,6 +83,20 @@ public class Storage {
         }
         fileReader.close();
     }
+
+    /**
+     * Suppresses any unused warnings from a given boolean result.
+     *
+     * @param result variable to suppress warnings from
+     */
+    //@@author Eric Lange-reused
+    //Reused from https://stackoverflow.com/questions/27904329/warning-file-mkdir-is-ignored#answer-54341862
+    // with minor modifications
+    @SuppressWarnings("unused")
+    private static void ignoreResult(boolean result) {
+
+    }
+    //@@author
 
     /**
      * Adds Todo to tasks.

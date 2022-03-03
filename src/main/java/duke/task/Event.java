@@ -6,7 +6,7 @@ package duke.task;
  * by Event is YYYY/MM/DD (with * ./| being valid separators) and HHMM.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 1.0
+ * @version 1.1
  */
 public class Event extends TaskWithDateTime {
 

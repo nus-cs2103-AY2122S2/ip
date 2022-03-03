@@ -1,9 +1,9 @@
 package duke.task;
 
 import java.time.DateTimeException;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 import java.util.regex.Matcher;
@@ -16,10 +16,9 @@ import java.util.regex.Pattern;
  * by TaskWithDateTime is YYYY/MM/DD (with ./| being valid separators) and HHMM.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 1.0
+ * @version 1.1
  */
 public class TaskWithDateTime extends Task {
-    private LocalDate day;
     private String dateTime;
     private String originalDateTime;
 
@@ -47,7 +46,7 @@ public class TaskWithDateTime extends Task {
      *
      * @return string with date removed.
      */
-    public String extractDate(){
+    public String extractDate() {
         String regexDate = "\\d{4}[-|/.]\\d{2}[-|/.]\\d{2}";
         Matcher m = Pattern.compile(regexDate).matcher(dateTime);
         String strWithoutDate = dateTime;
@@ -57,7 +56,7 @@ public class TaskWithDateTime extends Task {
             strWithoutDate = strWithoutDate.replace(m.group(0), "");
 
             try {
-                day = LocalDate.parse(m.group(0).replaceAll("[./|]", "-"));
+                LocalDate day = LocalDate.parse(m.group(0).replaceAll("[./|]", "-"));
                 dateTime = dateTime.replace(m.group(0),
                         day.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
             } catch (DateTimeException e) {

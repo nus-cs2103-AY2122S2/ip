@@ -4,7 +4,7 @@ package duke.task;
  * Represents a task and consists of its description and completeness status.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 1.0
+ * @version 1.1
  */
 public class Task {
     private String description;

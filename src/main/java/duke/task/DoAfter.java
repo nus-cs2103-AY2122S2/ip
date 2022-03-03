@@ -7,7 +7,7 @@ package duke.task;
  * and HHMM.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 1.0
+ * @version 1.1
  */
 public class DoAfter extends TaskWithDateTime {
 

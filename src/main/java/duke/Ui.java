@@ -6,7 +6,7 @@ import duke.task.TaskList;
  * Represents a UI class that deals with user input and application output.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 1.0
+ * @version 1.1
  */
 public class Ui {
 
@@ -16,7 +16,7 @@ public class Ui {
      * @return welcome message.
      */
     public static String showWelcome() {
-        return "Hello, traveller! My name in Paimon.\n"
+        return "Hello, traveller! I'm Paimon.\n"
                 + "How can I help you today?";
     }
 
@@ -53,17 +53,34 @@ public class Ui {
      * @return formatted string of tasks
      */
     public static String showListMessage(TaskList tasks) {
-        return "Hmm... Paimon keeps a clear record in her "
-                + "diary.\n" + tasks.toString();
+        StringBuilder str = new StringBuilder();
+        str.append("Hmm... Paimon keeps a clear record in her diary.\n")
+                .append(tasks)
+                .append("You now have ")
+                .append(tasks.size())
+                .append(" task")
+                .append(tasks.size() == 1 ? "" : "s")
+                .append(" on your list.");
+
+        return str.toString();
     }
 
     /**
-     * Returns generic message for task update.
+     * Returns message for task being marked incomplete.
      *
      * @return string stating that task is updated.
      */
-    public static String showUpdateMessage() {
-        return "Task successfully updated.";
+    public static String showUndoMessage() {
+        return "...ah. The task has been updated accordingly.";
+    }
+
+    /**
+     * Returns message for task being completed.
+     *
+     * @return string stating that task is completed.
+     */
+    public static String showDoMessage() {
+        return "Great job! The task has been updated accordingly.";
     }
 
     /**
@@ -73,8 +90,17 @@ public class Ui {
      * @return string of list of tasks and deletion message.
      */
     public static String showDeleteMessage(TaskList tasks) {
-        return "Noted, the task has been scrubbed off the "
-                + "list!\n" + tasks.toString();
+        StringBuilder str = new StringBuilder();
+
+        str.append("Noted, the task has been scrubbed off the list!\n")
+                .append(tasks)
+                .append("You now have ")
+                .append(tasks.size())
+                .append(" task")
+                .append(tasks.size() == 1 ? "" : "s")
+                .append(" on your list.");
+
+        return str.toString();
     }
 
     /**
@@ -92,8 +118,22 @@ public class Ui {
      *
      * @return string stating that matching tasks are found.
      */
-    public static String showFindMessage() {
-        return "Here are the matching tasks in your list:\n";
+    public static String showFindMessage(TaskList foundTasks) {
+        if (foundTasks.size() == 0) {
+            return "Paimon could not find any matching tasks.";
+        }
+        StringBuilder str = new StringBuilder();
+
+        str.append("Here are the matching tasks in your list:\n")
+                .append(foundTasks)
+                .append("There ")
+                .append(foundTasks.size() == 1 ? "is " : "are ")
+                .append(foundTasks.size())
+                .append(" matching task")
+                .append(foundTasks.size() == 1 ? "" : "s")
+                .append(" on your list.");
+
+        return str.toString();
     }
 
     /**
