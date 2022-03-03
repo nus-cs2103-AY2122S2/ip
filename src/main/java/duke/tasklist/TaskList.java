@@ -62,6 +62,10 @@ public class TaskList {
      */
     public String queryTasks (String query) {
         ArrayList<Tasks> filteredData = filterDataSet(query);
+        boolean isNoDataQueried = filteredData.size() < 1;
+        if (isNoDataQueried) {
+            return Ui.returnNoTaskQueried();
+        }
         return Ui.returnQueriedTaskRes(listInPrintFormat(filteredData));
     }
 
@@ -106,7 +110,7 @@ public class TaskList {
      * @return returns a boolean value indicative of the success of marking a task
      */
     public String marksTask(Storage storage, int taskIndexToMark, boolean taskCompletion) {
-        boolean isIndexOutOfBound = taskIndexToMark > fileContentCounterZeroed();
+        boolean isIndexOutOfBound = taskIndexToMark > fileContentCounterZeroed() || taskIndexToMark < 0;
         if (isIndexOutOfBound) {
             return Ui.returnIndexErrorRes();
         }
@@ -141,7 +145,7 @@ public class TaskList {
      * @return a boolean value indicative of the success of marking a task
      */
     private String deletesTask(int taskIndexToDelete, ArrayList<Tasks> taskListToEdit, Storage storage) {
-        boolean isIndexOutOfBound = taskIndexToDelete > fileContentCounterZeroed();
+        boolean isIndexOutOfBound = taskIndexToDelete > fileContentCounterZeroed() || taskIndexToDelete < 0;
         if (isIndexOutOfBound) {
             return Ui.returnDeleteTaskError(taskIndexToDelete);
         }
@@ -189,6 +193,10 @@ public class TaskList {
      * @return A String of all the tasks in the storage.
      */
     public String listsTask() {
+        boolean isNoTaskInDatabase = fileContentCounterZeroed() < 0;
+        if (isNoTaskInDatabase) {
+            return Ui.returnNoTaskRes();
+        }
         return Ui.returnListTaskRes(listInPrintFormat(taskList));
     }
 

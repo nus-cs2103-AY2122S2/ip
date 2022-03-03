@@ -47,8 +47,9 @@ public class DeleteCommand extends Commands {
             return new CommandResult(tasks.deleteTaskHandler(Parser.massConvertBases
                     (Parser.parseToIntArray(trimmedArgument.split(","))), storage));
         } catch (IndexOutOfBoundsException err) {
-            return new CommandResult("Pika, deleting the PokeTask was unsuccessful...\n"
-                    + err);
+            return new CommandResult(Ui.returnUnknownErrorRes());
+        } catch (NumberFormatException err) {
+            return new CommandResult(Ui.returnWrongFormatRes());
         }
     }
 }

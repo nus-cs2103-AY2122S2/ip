@@ -46,8 +46,9 @@ public class MarkCommand extends Commands {
             return new CommandResult(tasks.marksTask(storage, Parser.convertBases(
                     Parser.parseToInt(trimmedArgument)), true));
         } catch (IndexOutOfBoundsException err) {
-            return new CommandResult("Pika, marking the PokeTask was unsuccessful...\n"
-                    + err);
+            return new CommandResult(Ui.returnUnknownErrorRes());
+        } catch (NumberFormatException err) {
+            return new CommandResult(Ui.returnWrongFormatRes());
         }
     }
 }

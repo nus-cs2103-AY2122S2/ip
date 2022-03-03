@@ -33,7 +33,7 @@ public class Parser {
      * @param input Input to be parsed.
      * @return The Integer counterpart of the input.
      */
-    public static Integer parseToInt(String input) {
+    public static Integer parseToInt(String input) throws NumberFormatException {
         return Integer.parseInt(input);
     }
 

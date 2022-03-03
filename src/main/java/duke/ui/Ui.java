@@ -64,15 +64,6 @@ public class Ui {
     }
 
     /**
-     * Let the user know that there is no task to delete.
-     *
-     * @return A String value indicating there is no task to delete.
-     */
-    public static String returnNoTaskRes() {
-        return "Pikaaa, there is no PokeTask to delete";
-    }
-
-    /**
      * Indicate the status of deleting one task.
      *
      * @param input A String value of the print format of the task and its status.
@@ -96,6 +87,31 @@ public class Ui {
 
     public static String returnIndexErrorRes() {
         return "Pika, the task you wanted to edit does not exist. \nWe failed to edit the PokeTask! \nBika";
+    }
+
+    /**
+     * Let the user know that there is no task in the database.
+     *
+     * @return A String value indicating there is no task in the database.
+     */
+    public static String returnNoTaskRes() {
+        return "Pika, you do not have any PokeTask. \nAdd some now, pika";
+    }
+
+    public static String returnNoTaskQueried() {
+        return "Pika, we did not find any relevant PokeTasks.";
+    }
+
+    public static String returnIndexRes() {
+        return "Pika, the task you wanted to edit does not exist. \nWe failed to edit the PokeTask! \nBika";
+    }
+
+    public static String returnWrongFormatRes() {
+        return "Pika, make sure you are typing in the correct format...\n Pika";
+    }
+
+    public static String returnUnknownErrorRes() {
+        return "Pika, make sure you are typing a valid command in the right format...\n Pika";
     }
 
     public static void showErrorMessage(Exception err, String methodName) {

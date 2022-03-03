@@ -48,8 +48,9 @@ public class UnmarkCommand extends Commands {
             return new CommandResult(tasks.marksTask(storage,
                         Parser.convertBases(Parser.parseToInt(trimmedArgument)), false));
         } catch (IndexOutOfBoundsException err) {
-            return new CommandResult("Pika, unmarking the PokeTask was unsuccessful...\n"
-                    + err);
+            return new CommandResult(Ui.returnUnknownErrorRes());
+        } catch (NumberFormatException err) {
+            return new CommandResult(Ui.returnWrongFormatRes());
         }
     }
 }
