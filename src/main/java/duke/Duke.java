@@ -66,7 +66,6 @@ public class Duke {
     public Response undoHandler(String input) throws Exception {
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
-        System.out.println("i " + i + " tasks size:" + tasks.size());
         assert i <= tasks.size() && i >= 0 : "index of item should be within scope of tasklist";
         tasks.get(i).markIncomplete();
         assert tasks.get(i).getStatusIcon().equals(" ") : "task should be marked incomplete";
