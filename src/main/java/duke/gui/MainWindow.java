@@ -20,6 +20,10 @@ import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
+ * Images used in this application are sourced from sticker packs from
+ * https://getstickerpack.com/stickers/genshin-impact-aether and
+ * https://getstickerpack.com/stickers/genshin-impact-paimon-1 by U-KEY.
+ *
  */
 public class MainWindow extends AnchorPane {
     @FXML
