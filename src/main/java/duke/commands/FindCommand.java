@@ -39,10 +39,10 @@ public class FindCommand implements Command {
         for (int i = 1; i <= tasks.size(); i++) {
             if (tasks.get(i).matches(this.keyword)) {
                 if (!foundMatch) {
-                    output += "Here is a list of tasks that match " + this.keyword + ":";
+                    output += "Here is a list of tasks that match " + this.keyword + ":\n";
                     foundMatch = true;
                 }
-                output += counter + ". " + tasks.get(i);
+                output += counter + ". " + tasks.get(i) + "\n";
                 counter++;
             }
         }
