@@ -18,7 +18,7 @@ public class Storage {
     /**
      * Constant file path to file containing stored data.
      */
-    private static final String FILEPATH = "duke/data/tasks.txt";
+    private static final String FILEPATH = "../data/tasks.txt";
 
     /**
      * Loads saved tasks from local file to program

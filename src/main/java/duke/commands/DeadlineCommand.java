@@ -62,13 +62,15 @@ public class DeadlineCommand implements DateValidator, Command {
 
     /**
      * {@inheritDoc}
+     * @return
      */
     @Override
-    public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
+    public String execute(TaskList<Task> tasks, Ui ui, Storage storage) {
+        String output = "";
         Deadline task = new Deadline(this.description, this.deadline);
         tasks.add(task);
-        ui.showMessage("Got it. I've added the deadline task:");
-        ui.showTask(task.toString());
-        ui.showMessage("Now you have " + tasks.size() + " tasks in your list.");
+        output += "Got it. I've added the deadline task:\n " + task + "\n";
+        output += "Now you have " + tasks.size() + " tasks in your list.";
+        return output;
     }
 }

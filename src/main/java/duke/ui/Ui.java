@@ -8,35 +8,6 @@ import java.util.Scanner;
 public class Ui {
 
     /**
-     * Constant defining indent for program outputs
-     */
-    private static final String INDENT = "     ";
-    /**
-     * Constant defining horizontal line printed
-     * before and after program outputs
-     */
-    private static final String LINE = "    ____________________________________________________________";
-
-    /**
-     * Prints a horizontal line
-     */
-    public void showLine() {
-        System.out.println(LINE);
-    }
-
-    /**
-     * Sandwiches a program output between 2 horizontal lines
-     *
-     * @param str the str
-     */
-    public void sandwichMessage(String str) {
-        showLine();
-        System.out.println(INDENT + str);
-        showLine();
-        System.out.println();
-    }
-
-    /**
      * Reads in user input
      *
      * @return User input string
@@ -45,47 +16,27 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
-
-    /**
-     * Prints an indented program output
-     *
-     * @param message Program output to be indented
-     */
-    public void showMessage(String message) {
-        System.out.println(INDENT + message);
-    }
-
-    /**
-     * Prints a task item with double indentation
-     *
-     * @param task task item
-     */
-    public void showTask(String task) {
-        System.out.println(INDENT + INDENT + task);
-    }
     /**
      * Prints welcome message
      */
-    public void showWelcomeMessage() {
-        sandwichMessage("Hello! I'm Duke\n"
-                + INDENT + "What can I do for you?");
+    public String showWelcomeMessage() {
+        return "Hello! I'm Duke\n What can I do for you?\n" +
+                "Please enter a valid command in the following format:\n"
+                + "1. list\n"
+                + "2. todo {task}\n"
+                + "3. deadline {task} /by {task deadline}\n"
+                + "4. event {event name} /at {date}\n"
+                + "5. delete {task index}\n"
+                + "6. mark {task index}\n"
+                + "7. unmark {task index}\n"
+                + "8. find {keyword}";
     }
 
     /**
      * Prints farewell message
      */
-    public void showFarewellMessage() {
-        showMessage("Bye. Hope to see you again soon!");
-    }
-
-    /**
-     * Prints error message when loading tasks
-     * from local disk to program
-     */
-    public void showLoadingError() {
-        showMessage("Whoops! Error loading tasks.");
-        showMessage("Try clearing tasks.txt and trying again?");
-        showMessage("xoxo");
+    public String showFarewellMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -93,7 +44,7 @@ public class Ui {
      *
      * @param errorMessage error message
      */
-    public void showErrorMessage(String errorMessage) {
-        showMessage("ERROR: " + errorMessage);
+    public String showErrorMessage(String errorMessage) {
+        return "ERROR: " + errorMessage;
     }
 }

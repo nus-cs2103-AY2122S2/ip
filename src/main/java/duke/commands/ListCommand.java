@@ -21,14 +21,18 @@ public class ListCommand implements Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
+    public String execute(TaskList<Task> tasks, Ui ui, Storage storage) {
+        String output = "";
+
         if (tasks.size() <= 0) {
-            ui.showMessage("You have 0 tasks so far!");
+            output += "You have 0 tasks so far!";
         } else {
-            ui.showMessage("Here are the tasks in your list:");
+            output += "Here are the tasks in your list:\n";
             for (int i = 1; i <= tasks.size(); i++) {
-                ui.showTask((i) + ". " + tasks.get(i));
+                output += i + ". " + tasks.get(i) + "\n";
             }
         }
+
+        return output;
     }
 }

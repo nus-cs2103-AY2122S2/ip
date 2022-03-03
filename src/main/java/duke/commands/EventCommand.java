@@ -63,11 +63,10 @@ public class EventCommand implements DateValidator, Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
+    public String execute(TaskList<Task> tasks, Ui ui, Storage storage) {
         Event event = new Event(this.description, this.date);
         tasks.add(event);
-        ui.showMessage("Got it. I've added the deadline task:");
-        ui.showTask(event.toString());
-        ui.showMessage("Now you have " + tasks.size() + " tasks in your list.");
+        return "Got it. I've added the deadline task:\n" + event
+                + "Now you have " + tasks.size() + " tasks in your list.";
     }
 }

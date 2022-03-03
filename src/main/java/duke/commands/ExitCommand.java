@@ -21,8 +21,8 @@ public class ExitCommand implements Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
+    public String execute(TaskList<Task> tasks, Ui ui, Storage storage) {
         storage.updateStorage(tasks);
-        ui.showFarewellMessage();
+        return ui.showFarewellMessage();
     }
 }

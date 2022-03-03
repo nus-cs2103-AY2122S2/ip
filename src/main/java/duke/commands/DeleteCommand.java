@@ -36,14 +36,16 @@ public class DeleteCommand implements Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
+    public String execute(TaskList<Task> tasks, Ui ui, Storage storage) {
+        String output = "";
         try {
             Task task = tasks.remove(this.index);
-            ui.showMessage("I've removed the task:");
-            ui.showMessage(task.toString());
+            output += "I've removed the task:\n" + task;
             storage.updateStorage(tasks);
         } catch (IndexOutOfBoundsException e) {
-            ui.showErrorMessage("Could not delete task as it was not found.");
+            output = "Could not delete task as it was not found.";
         }
+
+        return output;
     }
 }

@@ -96,7 +96,7 @@ public class Parser {
         case COMMAND_FIND:
             return new FindCommand(getKeyword(st));
         default:
-            throw new DukeException("Maybe try not trying to break my chatbot? thx xoxo");
+            throw new DukeException("Please input a valid command.");
         }
     }
 

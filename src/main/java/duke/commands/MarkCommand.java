@@ -36,13 +36,16 @@ public class MarkCommand implements Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
+    public String execute(TaskList<Task> tasks, Ui ui, Storage storage) {
+        String output = "";
+
         try {
             tasks.markDone(index, true);
-            ui.showMessage("OK. I've marked this task as done:");
-            ui.showTask(tasks.get(index).toString());
+            output += "OK. I've marked this task as done:\n" + tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
-            ui.showErrorMessage("Please enter a valid task. Task " + this.index + " does not exist.");
+            output = "Please enter a valid task. Task " + this.index + " does not exist.";
         }
+
+        return output;
     }
 }

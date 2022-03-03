@@ -24,5 +24,5 @@ public interface Command {
      * @param ui      the controller for UI interactions
      * @param storage the encapsulated storage object handling local memory
      */
-    void execute(TaskList<Task> tasks, Ui ui, Storage storage);
+    String execute(TaskList<Task> tasks, Ui ui, Storage storage);
 }

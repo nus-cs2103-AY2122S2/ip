@@ -36,11 +36,10 @@ public class TodoCommand implements Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
+    public String execute(TaskList<Task> tasks, Ui ui, Storage storage) {
         Todo todo = new Todo(this.description);
         tasks.add(todo);
-        ui.showMessage("Got it. I've added the to-do task:");
-        ui.showTask(todo.toString());
-        ui.showMessage("Now you have " + tasks.size() + " tasks in your list.");
+        return "Got it. I've added the to-do task:\n" + todo
+                + "\nNow you have " + tasks.size() + " tasks in your list.";
     }
 }

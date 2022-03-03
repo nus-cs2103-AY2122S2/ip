@@ -36,13 +36,15 @@ public class UnmarkCommand implements Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList<Task> tasks, Ui ui, Storage storage) {
+    public String execute(TaskList<Task> tasks, Ui ui, Storage storage) {
+        String output = "";
         try {
             tasks.markDone(index, false);
-            ui.showMessage("OK. I've marked this task as not-yet-done:");
-            ui.showTask(tasks.get(index).toString());
+            output += "OK. I've marked this task as not-yet-done:\n" + tasks.get(index).toString();
         } catch (IndexOutOfBoundsException e) {
-            ui.showErrorMessage("Please enter a valid task. Task " + this.index + " does not exist.");
+            output = "Please enter a valid task. Task " + this.index + " does not exist.";
         }
+
+        return output;
     }
 }
