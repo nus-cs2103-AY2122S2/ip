@@ -87,7 +87,7 @@ Format: `find KEYWORD`
 Examples:
 
 - `find book` shows `todo read book` and `deadline return book by 4th March 2022`
-- `find boo` will also show `todo read book` and `deadline return book by 4th March 2022`<br><br>
+- `find book` will also show `todo read book` and `deadline return book by 4th March 2022`<br><br>
 
 
 ### Update task: `update`
