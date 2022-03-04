@@ -14,7 +14,7 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 
 /**
- * Handles all storage of duke.tasks to a file.
+ * Handles all storage of tasks to a file.
  */
 
 public class Storage {
