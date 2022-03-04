@@ -1,0 +1,16 @@
+list
+mark1
+mark 1
+todo finish cs2103 work
+event IS4241 Tutorial /at 8pm
+list
+deadline finish dissert work /by 2022-01-28
+list
+todo go for a run
+list
+mark 4
+list
+delete 5
+delete 4
+list
+bye
