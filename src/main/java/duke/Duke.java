@@ -5,7 +5,7 @@ import javafx.application.Application;
 
 
 /**
- * duke.Duke Chatbot main method class.
+ * Duke Chatbot main method class.
  */
 
 public class Duke {
