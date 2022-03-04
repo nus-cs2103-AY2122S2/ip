@@ -45,7 +45,7 @@ public class Storage {
     }
 
     /**
-     * Writes all the duke.tasks in the list to the file.
+     * Writes all the tasks in the list to the file.
      *
      * @param tasks list of duke.tasks to write.
      * @throws IOException if io failed.
@@ -59,7 +59,7 @@ public class Storage {
     }
 
     /**
-     * Read entire file, return the duke.tasks as a list of duke.tasks.
+     * Read entire file, return the duke.tasks as a list of tasks.
      *
      * @return list of all duke.tasks in the file.
      * @throws IOException      if file cannot be acessed or created.
