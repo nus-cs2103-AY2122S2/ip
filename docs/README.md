@@ -6,6 +6,7 @@ Duke is a ChatBot that helps you keep track of your tasks.
 2. Download the latest Duke.jar from [here](https://github.com/bryans17/ip/releases).
 3. Copy the file to the directory you want to use as the home directory.
 4. Double click the file to start Duke.
+![Ui.png](https://github.com/bryans17/ip/blob/master/docs/Ui.png)
 
 ## Features
 
