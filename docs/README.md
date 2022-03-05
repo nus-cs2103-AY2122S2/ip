@@ -2,6 +2,9 @@
 Duke is a ChatBot that helps you keep track of your tasks.
 ## Features
 
+### Exit and save tasks
+Exiting the program when you are done using Duke and automatically saves any changes to the disk.
+
 ### Add Tasks
 Add any task of your choice under 3 main categories:
 1) `todo` : general to do tasks.
@@ -144,3 +147,15 @@ Here are your sorted Tasks:
 1. [T][] go to sleep
 2. [E][] event cry myself to sleep (by: Feb 18 2022 23:59)
 ```
+### `bye` - Exit Duke
+Exits the Duke program and saves tasks to to disk.
+
+Note that Duke only saves tasks to the disk when you enter `bye`
+and not when you change any tasks. This is a design decision to save number of file accesses.
+
+Example of usage:
+`bye`
+
+Expected outcome:
+Program closes and your data file is updated.
+
