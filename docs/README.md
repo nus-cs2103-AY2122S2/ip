@@ -14,6 +14,8 @@ Downloading it is as easy as 1, 2, 3:
 2. download ip.jar
 3. you're done, voilà 
 
+# Type in `help` to see the command formats
+
 Here's a sneak peek into the inner-workings of Juke, using [filewriter](https://docs.oracle.com/javase/7/docs/api/java/io/FileWriter.html)
 ```
 private static void writeToFile(String filePath, String textToAdd) throws IOException {
