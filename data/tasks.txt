@@ -1,0 +1,9 @@
+T | 0 | Clean Up Bedroom
+T | 0 | Wash Laundry
+D | 0 | CS3240 G1 | Week 6 Saturday 19 Feb 2pm
+D | 0 | Pay Town Council S&C Charges on AXS app | d/2022-02-15
+D | 0 | CS2102 Week 6 Tutorial Q3b | d/2022-02-15
+E | 0 | CS3230 Midterm Exam | Week 7 Thursday 3 Mar 2pm
+E | 0 | Staycation | d/2022-02-23
+E | 0 | Meet Jason at Jewel for Lunch | d/2022-02-20 t/1200
+E | 0 | CS2102 Project Part 1 Evaluation | d/2022-02-21 t/1700-1730
