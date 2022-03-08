@@ -1,0 +1,13 @@
+hi
+todo test1
+mark
+event kill myself /at tomorrow
+list
+unmark
+mark 1
+mark 2
+list
+unmark 1
+deadline testtest /by 16012022
+list
+bye
