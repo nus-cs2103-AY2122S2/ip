@@ -1,0 +1,41 @@
+list
+todo read book
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+todo go Swimming
+list
+mark 3
+list
+event dancing with someone /at Wed 5-9pm
+deadline do homework /by week 1
+mark 2
+unmark 3
+deadline do homework /by no idea :-p
+list
+mark 1
+mark 3
+mark 5
+list
+todo save someone
+unmark 1
+mark 9
+unmark 10
+give me apples
+todo
+todo find meaning in life
+deadline
+deadline go to the event
+deadline /by
+deadline go to the wishing well /by monday
+list
+event
+event something /at
+event something /at this date
+list
+mark hello
+list
+delete 3
+delete 1
+delete hello
+list
+bye

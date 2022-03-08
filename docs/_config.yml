@@ -1,0 +1,5 @@
+theme: jekyll-theme-architect
+show_downloads: true
+markdown: GFM
+title: Duke
+description: Task management chat bot.
