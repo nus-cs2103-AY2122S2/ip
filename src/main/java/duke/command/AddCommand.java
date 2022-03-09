@@ -1,9 +1,10 @@
 package duke.command;
-import duke.TasksList;
-import duke.Storage;
-import duke.exception.InvalidArgumentException;
 
 import java.util.Arrays;
+
+import duke.Storage;
+import duke.TasksList;
+import duke.exception.InvalidArgumentException;
 
 public class AddCommand extends Command {
     private String[] instruction;
@@ -15,7 +16,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TasksList taskList, Storage storage) throws InvalidArgumentException {
         // execute the command
-        String response =  taskList.addTask(Arrays.asList(instruction));
+        String response = taskList.addTask(Arrays.asList(instruction));
         // save to storage
         new SaveCommand().execute(taskList, storage);
         return response;

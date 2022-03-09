@@ -1,6 +1,7 @@
 package duke.command;
-import duke.TasksList;
+
 import duke.Storage;
+import duke.TasksList;
 import duke.util.Constants;
 
 public class ByeCommand extends Command {

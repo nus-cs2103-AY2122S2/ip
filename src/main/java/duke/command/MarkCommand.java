@@ -1,6 +1,7 @@
 package duke.command;
-import duke.TasksList;
+
 import duke.Storage;
+import duke.TasksList;
 import duke.exception.InvalidIndexException;
 
 public class MarkCommand extends Command {
@@ -14,7 +15,7 @@ public class MarkCommand extends Command {
     public String execute(TasksList taskList, Storage storage) throws InvalidIndexException {
         int taskNum = Integer.parseInt(instruction[1]);
         // execute the command
-        String response =  taskList.mark(taskNum);
+        String response = taskList.mark(taskNum);
         // save to storage
         new SaveCommand().execute(taskList, storage);
         return response;

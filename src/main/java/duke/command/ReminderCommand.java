@@ -1,9 +1,10 @@
 package duke.command;
-import duke.TasksList;
-import duke.Storage;
-import duke.exception.InvalidArgumentException;
 
 import java.util.Arrays;
+
+import duke.Storage;
+import duke.TasksList;
+import duke.exception.InvalidArgumentException;
 
 public class ReminderCommand extends Command {
     private String[] instruction;
