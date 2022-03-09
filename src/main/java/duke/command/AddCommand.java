@@ -8,12 +8,16 @@ import java.util.Arrays;
 public class AddCommand extends Command {
     private String[] instruction;
 
-    AddCommand(String[] instruction) {
+    public AddCommand(String[] instruction) {
         this.instruction = instruction;
     }
 
     @Override
     public String execute(TasksList taskList, Storage storage) throws InvalidArgumentException {
-        return taskList.addTask(Arrays.asList(instruction));
+        // execute the command
+        String response =  taskList.addTask(Arrays.asList(instruction));
+        // save to storage
+        new SaveCommand().execute(taskList, storage);
+        return response;
     }
 }

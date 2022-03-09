@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class ReminderCommand extends Command {
     private String[] instruction;
 
-    ReminderCommand(String[] instruction) {
+    public ReminderCommand(String[] instruction) {
         this.instruction = instruction;
     }
 

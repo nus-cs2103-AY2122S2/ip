@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class FindCommand extends Command {
     private String[] instruction;
 
-    FindCommand(String[] instruction) {
+    public FindCommand(String[] instruction) {
         this.instruction = instruction;
     }
 

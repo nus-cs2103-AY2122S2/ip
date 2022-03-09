@@ -6,13 +6,17 @@ import duke.exception.InvalidIndexException;
 public class UnmarkCommand extends Command {
     private String[] instruction;
 
-    UnmarkCommand(String[] instruction) {
+    public UnmarkCommand(String[] instruction) {
         this.instruction = instruction;
     }
 
     @Override
     public String execute(TasksList taskList, Storage storage) throws InvalidIndexException {
         int taskNum = Integer.parseInt(instruction[1]);
-        return taskList.unmark(taskNum);
+        //execute the command
+        String response = taskList.unmark(taskNum);
+        //save to storage
+        new SaveCommand().execute(taskList, storage);
+        return response;
     }
 }
