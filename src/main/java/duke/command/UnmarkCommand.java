@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TasksList;
 import duke.exception.InvalidIndexException;
+import duke.util.Storage;
+import duke.util.TasksList;
 
 public class UnmarkCommand extends Command {
     private String[] instruction;

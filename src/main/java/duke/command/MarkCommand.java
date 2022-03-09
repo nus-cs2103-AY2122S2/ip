@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TasksList;
 import duke.exception.InvalidIndexException;
+import duke.util.Storage;
+import duke.util.TasksList;
+
 
 public class MarkCommand extends Command {
     private String[] instruction;

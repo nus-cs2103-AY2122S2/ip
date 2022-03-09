@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.util.Constants;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TasksList;
+import duke.util.Ui;
 
 /**
  * Main logic of the bot.

@@ -1,4 +1,6 @@
-package duke;
+package duke.util;
+
+import duke.exception.DukeException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,8 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.util.Constants;
-
 /**
  * Main logic for storing data to filesystem.
  */
@@ -23,11 +23,8 @@ public class Storage {
      * The file is stored in "data/duke.txt".
      *
      * @param storageStrings List of texts to be saved. Each text represents 1 task.
-     * @param taskListString Text from Task.list method. For printing purposes.
-     * @return Response text to be printed.
      */
-    public String exportData(List<String> storageStrings, String taskListString) {
-        String response = "The following tasks will be saved: \n" + taskListString;
+    public void exportData(List<String> storageStrings) throws DukeException {
         Path dir = Paths.get(Constants.DIR_PATH);
         Path store = Paths.get(Constants.STORAGE_PATH);
 
@@ -44,9 +41,9 @@ public class Storage {
                 writer.write(task);
             }
             writer.close();
-            return response;
+
         } catch (IOException e) {
-            return e.getMessage();
+            throw new DukeException("ERROR in saving your data");
         }
 
     }

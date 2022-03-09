@@ -7,7 +7,7 @@ import duke.exception.InvalidArgumentException;
 /**
  * Main abstraction of a Task.
  */
-public class Task {
+public abstract class Task {
     private final String name;
     private boolean isDone;
     //can make isDone final for good practice
