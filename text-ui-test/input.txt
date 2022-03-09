@@ -1,0 +1,9 @@
+todo borrow book
+deadline code Ethlas /by Sunday
+event Ethlas interview /at Zoom, Monday 3pm
+list
+mark 1
+mark 2
+unmark 1
+list
+bye
