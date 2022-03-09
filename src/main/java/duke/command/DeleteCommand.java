@@ -1,8 +1,9 @@
 package duke.command;
 
+import duke.exception.InvalidIndexException;
 import duke.util.Storage;
 import duke.util.TasksList;
-import duke.exception.InvalidIndexException;
+
 
 public class DeleteCommand extends Command {
     private String[] instruction;
