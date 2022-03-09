@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,8 +10,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import duke.util.Constants;
 
 /**
  * Main logic for storing data to filesystem.

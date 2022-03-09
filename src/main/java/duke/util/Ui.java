@@ -1,9 +1,7 @@
-package duke;
+package duke.util;
 
 import java.util.Arrays;
 import java.util.List;
-
-import duke.util.Constants;
 
 /**
  * Main UI logic of the bot.

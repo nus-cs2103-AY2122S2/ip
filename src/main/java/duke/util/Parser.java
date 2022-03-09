@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
@@ -13,7 +13,6 @@ import duke.command.SaveCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
-import duke.util.Constants;
 
 /**
  * Main logic to parse and translate user inputs.
