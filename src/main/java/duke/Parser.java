@@ -1,7 +1,16 @@
 package duke;
 
-import java.util.Arrays;
-
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.ReminderCommand;
+import duke.command.SaveCommand;
+import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.util.Constants;
@@ -28,61 +37,55 @@ public class Parser {
             }
 
             //variables needed for switch case.
-            String response;
-            int taskNum;
+            Command command;
 
             switch(instruction[0]) {
             case "bye":
-                return Constants.BYE;
+                command = new ByeCommand();
+                break;
 
             case "list":
-                response = tasksList.list();
-                return response;
+                command = new ListCommand();
+                break;
 
             case "help":
-                response = Constants.HELP;
-                return response;
+                command = new HelpCommand();
+                break;
 
             case "todo":
             case "event":
             case "deadline":
-                response = tasksList.addTask(Arrays.asList(instruction));
-                break;
-
-            case "save":
-                response = storage.exportData(tasksList.toStorageStrings(), tasksList.list());
+                command = new AddCommand(instruction);
                 break;
 
             case "find":
-                response = tasksList.findMatchingTasks(Arrays.asList(instruction));
-                return response;
+                command = new FindCommand(instruction);
+                break;
 
             case "mark":
-                taskNum = Integer.parseInt(instruction[1]);
-                response = tasksList.mark(taskNum);
+                command = new MarkCommand(instruction);
                 break;
 
             case "unmark":
-                taskNum = Integer.parseInt(instruction[1]);
-                response = tasksList.unmark(taskNum);
+                command = new UnmarkCommand(instruction);
                 break;
 
             case "delete":
-                taskNum = Integer.parseInt(instruction[1]);
-                response = tasksList.deleteTask(taskNum);
+                command = new DeleteCommand(instruction);
                 break;
 
             case "reminder":
-                response = tasksList.getTasksUnder(Arrays.asList(instruction));
-                return response;
+                command = new ReminderCommand(instruction);
+                break;
+
+            case "save":
+                command = new SaveCommand();
+                break;
 
             default:
                 throw new DukeException("Something is wrong!");
             }
-
-            //save after every command
-            storage.exportData(tasksList.toStorageStrings(), tasksList.list());
-            return response;
+            return command.execute(tasksList, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
