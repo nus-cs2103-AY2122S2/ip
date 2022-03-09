@@ -34,7 +34,6 @@ public class Parser {
             if (instruction.length == 0 || !Constants.COMMANDS.contains(instruction[0])) {
                 throw new InvalidCommandException();
             }
-
             //variables needed for switch case.
             Command command;
 
@@ -42,45 +41,35 @@ public class Parser {
             case "bye":
                 command = new ByeCommand();
                 break;
-
             case "list":
                 command = new ListCommand();
                 break;
-
             case "help":
                 command = new HelpCommand();
                 break;
-
             case "todo":
             case "event":
             case "deadline":
                 command = new AddCommand(instruction);
                 break;
-
             case "find":
                 command = new FindCommand(instruction);
                 break;
-
             case "mark":
                 command = new MarkCommand(instruction);
                 break;
-
             case "unmark":
                 command = new UnmarkCommand(instruction);
                 break;
-
             case "delete":
                 command = new DeleteCommand(instruction);
                 break;
-
             case "reminder":
                 command = new ReminderCommand(instruction);
                 break;
-
             case "save":
                 command = new SaveCommand();
                 break;
-
             default:
                 throw new DukeException("Something is wrong!");
             }
