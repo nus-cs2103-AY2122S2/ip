@@ -1,3 +1,8 @@
+# Interface Screenshot
+
+<img width="600" alt="Ui" src="https://github.com/zihaowrez/ip/blob/master/docs/Ui.png">
+
+
 # Enkel v0.2
 
 Latest release: [here](https://github.com/zihaowrez/CS2103_iP/releases/tag/Enkel-v0.2)
