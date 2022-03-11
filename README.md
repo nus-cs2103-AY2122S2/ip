@@ -1,6 +1,6 @@
 # Interface Screenshot
 
-<img width="600" alt="Ui" src="https://github.com/zihaowrez/ip/blob/master/docs/Ui.png">
+<img width="800" alt="Ui" src="https://github.com/zihaowrez/ip/blob/master/docs/Ui.png">
 
 
 # Enkel v0.2
