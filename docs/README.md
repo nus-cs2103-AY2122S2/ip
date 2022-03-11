@@ -25,7 +25,7 @@ Valid time formats: `yyyy-M-d` (e.g. `2022-1-24`) and `yyyy-M-d H:mm` (e.g. `202
 **To modify the list:**  
 - `mark <index>`: marks the task at the given index  
 - `unmark <index>`: unmarks the task at the given index  
-- `edit <index> <syntax of 1, 2, or 3>` (e.g. `edit 3 deadline lab report /by 2022-1-24 17:00`): edits the task at the given index. If the task type is omitted, the original type will be used (you still need to use syntax 1, 2, or 3. e.g. `edit 3 lab report /by 2022-1-24 17:00`)  
+- `edit <index> <syntax of adding a task>` (e.g. `edit 3 deadline lab report /by 2022-1-24 17:00`): edits the task at the given index. If the task type is omitted, the original type will be used (you still need to use the syntax of adding a task). e.g. `edit 3 lab report /by 2022-1-24 17:00`)  
 - `delete <index>`: deletes the task of the given index
 
 **To quit the program:**  
