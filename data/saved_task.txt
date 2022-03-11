@@ -1,0 +1,3 @@
+T | 1 | something
+T | 0 | something
+E | 0 | do something  | Feb 1 2021 1800
