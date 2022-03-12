@@ -5,8 +5,8 @@ manager.
 ## Quick Start
 1. Ensure that Java `11` or above is installed 
 your computer.
-2. Download the latest `arthur.jar` from 
-[here](https://github.com/Vishwanth2210/ip/releases).
+2. Download the latest `duke.jar` from 
+[here](https://github.com/SimJM/ip/releases).
 3. Copy the file to a folder you want to use as the
 home folder for Arthur.
 4. Double-click on the file to start the app. 
