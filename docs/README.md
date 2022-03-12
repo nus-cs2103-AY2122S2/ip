@@ -73,7 +73,7 @@ Expected outcome:
 
 ```
 Alright, I've added a new task:
-    [T][ ] Laundry
+    [T][ ] Call Mom
 You have 3 tasks.
 ```
 
@@ -93,7 +93,7 @@ Expected outcome:
 
 ```
 Alright, I've added a new task:
-    [D][ ] Assignment (By: May 15 2022 3:00PM)
+    [D][ ] Assignment (By: May 15 2022 3:30PM)
 You have 4 tasks.
 ```
 
@@ -166,7 +166,7 @@ Expected outcome:
 
 ```
 Good job! I've marked the following task as completed:
-    [D][X] Assignment (By: May 15 2022 3:00PM)
+    [D][X] Assignment (By: May 15 2022 3:30PM)
 ```
 
 ### `unmark` - Unmarks a task
@@ -185,7 +185,7 @@ Expected outcome:
 
 ```
 Understood. I've unmarked the following task:
-    [D][ ] Assignment (By: May 15 2022 3:00PM)
+    [D][ ] Assignment (By: May 15 2022 3:30PM)
 ```
 
 ### `find` - Finds a task
@@ -230,7 +230,7 @@ Sorting tasks chronologically...
 Here are your current tasks:
     1. [E][ ] Wedding Party (At: Mar 14 2022 8:30PM)
     2. [E][ ] Birthday Party (At: Apr 13 2022 10:00AM)
-    3. [D][ ] Assignment (By: May 15 2022 3:00PM)
+    3. [D][ ] Assignment (By: May 15 2022 3:30PM)
     4. [T][ ] Laundry	
 ```
 
