@@ -1,0 +1,10 @@
+T;false;Hello and welcome to Juke!
+T;false;Use todo to create a simple task.
+D;false;The command deadline creates a deadline at a date specified by '-by'.;1 Jan 2000 00:00
+E;false;event creates an event at a date specified by '-at'.;1 Jan 2000 00:00
+T;false;Use list to lists all tasks.
+T;true;Mark tasks as done or not done with mark and unmark.
+T;false;Delete tasks with delete.
+T;false;Edit tasks with edit. Do specify a description with '-d' or date with 't'.
+T;false;To exit Juke, use command bye.
+T;false;Have fun using Juke! To clear all tasks use delete -a. For addition information check the user guide at spyobird.github.io/ip.
