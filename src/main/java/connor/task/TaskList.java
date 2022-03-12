@@ -152,7 +152,7 @@ public class TaskList {
         String thing = phrases[0].trim();
         String when = phrases[1].trim();
         if (thing.isBlank() || when.isBlank()) {
-            throw new ConnorException(ERROR_EMPTY_TASK_DESC);
+            throw new ConnorException(ERROR_EMPTY_DL_DESC);
         }
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
