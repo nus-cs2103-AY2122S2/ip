@@ -1,0 +1,10 @@
+todo borrow book
+deadline return book /by 2002-02-02
+mark 2
+mark 1
+event attend birthday party /at 2005-05-05
+list
+unmark 2
+delete 3
+list
+bye
