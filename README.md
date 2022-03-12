@@ -17,6 +17,12 @@ To use it,
 - [ ] Run the jar file with java
 - [ ] Add your tasks!
 
+**Ready to use it?**
+
+Find the JAR file here: https://github.com/brelkh/ip/releases/tag/v0.3
+
+Find the User Guide here: https://brelkh.github.io/ip/
+
 Know [Java](https://docs.oracle.com/en/java/)? Feel free to fork it and edit code as you please!
 ```java
 public class Main {
