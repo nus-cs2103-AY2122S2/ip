@@ -1,0 +1,34 @@
+.root {
+        -fx-base: #bfe7ff;
+        -fx-font-family: verdana;
+}
+
+.sendButton:pressed {
+-fx-text-fill: rgb(151, 160, 161);
+-fx-background: brighter-sky-blue;
+-fx-font-size: 11pt;
+}
+
+.sendButton:hover {
+-fx-text-fill: rgb(151, 160, 161);
+-fx-background: brighter-sky-blue;
+}
+
+.sendButton:selected {
+-fx-text-fill: rgb(151, 160, 161);
+-fx-background: rgb(17, 145, 213);
+}
+
+Label {
+-fx-text-fill: white;
+-fx-border-radius: 5 5 5 5;
+-fx-background-radius: 5 5 5 5;
+-fx-border-color: transparent;
+-fx-border-width: 3px;
+-fx-background-color: #747A89;
+-fx-padding: 5;
+-fx-spacing: 8;
+
+}
+
+
