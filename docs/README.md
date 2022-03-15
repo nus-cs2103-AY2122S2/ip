@@ -88,11 +88,11 @@ Syntax:
 
 Example of usage:
 
-`deadline math homework /by 15/3/2022`
+`deadline math homework /by 15/3/2022 2359`
 
 Expected outcome:
 
-Adds a new Deadline `math homework` due by `15/3/2022`
+Adds a new Deadline `math homework` due by `15/3/2022 2359`
 
 ### List all Tasks
 Syntax:
