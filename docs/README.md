@@ -157,3 +157,11 @@ Example of usage:
 Expected outcome:
 
 Unmarks the task at index `1`; i.e. task `1` is rendered incomplete.
+
+## Exit
+Exit the chatbot with a `bye` command
+
+Syntax:
+`bye`
+
+Note: You may also close the chatbot via the close button on the top right corner of the application.
