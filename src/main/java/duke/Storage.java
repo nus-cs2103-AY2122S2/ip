@@ -87,15 +87,15 @@ public class Storage {
      * @param tasks an arrayList of current tasks
      */
     public static void storeTasks(ArrayList<Task> tasks) {
-        File file = new File(fileDir);         //Saving the changes back to file
-        try {         //if prev file exists, delete it and replace with new empty file
+        File file = new File(fileDir); //Saving the changes back to file
+        try { //if prev file exists, delete it and replace with new empty file
             if (!file.exists()) {
                 file.mkdir();
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        try {         //Writing to empty txt file
+        try { //Writing to empty txt file
             writeToFile(tasks);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
@@ -126,14 +126,14 @@ public class Storage {
      */
     public static String taskText(Task t) {
         String s = "";
-        if (t instanceof Todo) {            //Identify task type
+        if (t instanceof Todo) { //Identify task type
             s += "T~";
         } else if (t instanceof Deadline) {
             s += "D~";
         } else if (t instanceof Event) {
             s += "E~";
         }
-        if (t.getDone()) {            //Identify if task is done
+        if (t.getDone()) { //Identify if task is done
             s += "X~";
         } else {
             s += " ~";

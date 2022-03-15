@@ -6,10 +6,10 @@ package duke;
 public class Parser {
 
     // String messages for printing/output
-    private final String BYE_MSG = "~BYE!~ Come back to Duke anytime";
-    private final String RESET_MSG = "List of tasks has been resetted";
-    private final String INVALID_CMD = "You have entered an invalid instruction";
-    private final String MISSING_DATETIME = "Description of deadline must include a date/time!";
+    private final String byeMsg = "~BYE!~ Come back to Duke anytime";
+    private final String resetMsg = "List of tasks has been resetted";
+    private final String invalidCmd = "You have entered an invalid instruction";
+    private final String missingDatetime = "Description of deadline must include a date/time!";
 
     /**
      * Empty constructor for the Parser class
@@ -26,13 +26,13 @@ public class Parser {
      */
     public boolean takeInput(String input, TaskList taskList) throws DukeException {
         if (input.equals("bye")) {
-            System.out.println(BYE_MSG);
+            System.out.println(byeMsg);
             return true;
         } else if (input.equals("list")) { //Check if input == list
             taskList.printList();
         } else if (input.equals("reset")) { //Instruction to reset the arraylist
             taskList.reset();
-            System.out.println(RESET_MSG);
+            System.out.println(resetMsg);
         } else if (input.contains("unmark") || input.contains("delete") || input.contains("mark")) {
             cliModifyTasks(input, taskList);
         } else if (input.contains("find")) { //input is find
@@ -70,7 +70,7 @@ public class Parser {
                 } else if (instr.equals("delete")) {
                     taskList.deleteTask(index);
                 } else {
-                    throw new DukeException(INVALID_CMD);
+                    throw new DukeException(invalidCmd);
                 }
             } catch (DukeException e) {
                 System.out.println(e);
@@ -95,7 +95,7 @@ public class Parser {
         if (command.equals("find")) {
             taskList.find(text);
         } else {
-            throw new DukeException(INVALID_CMD);
+            throw new DukeException(invalidCmd);
         }
     }
 
@@ -106,8 +106,8 @@ public class Parser {
      * @throws DukeException on empty task name, missing date and time, duplicate task
      */
     public void cliAddTasks(String input, TaskList taskList) throws DukeException {
-        String[] stringArray = input.split(" ", 2);         //input is a new type of task
-        if (stringArray.length < 2) {         //task has no task detail/name
+        String[] stringArray = input.split(" ", 2); //input is a new type of task
+        if (stringArray.length < 2) { //task has no task detail/name
             throw new DukeException("Description of task cannot be empty!");
         }
         assert stringArray.length >= 2;
@@ -132,7 +132,7 @@ public class Parser {
         } else if (taskType.equals("deadline")) {
             String[] stringSplit = taskDetails.split("/by");
             if (stringSplit.length < 2) {
-                throw new DukeException(MISSING_DATETIME + " Missed out a /by?");
+                throw new DukeException(missingDatetime + " Missed out a /by?");
             }
             String details = stringSplit[0].trim();
             String dateTime = stringSplit[1].trim();
@@ -140,7 +140,7 @@ public class Parser {
         } else if (taskType.equals("event")) {
             String[] splitString = taskDetails.split("/at");
             if (splitString.length < 2) {
-                throw new DukeException(MISSING_DATETIME + " Missed out a /at?");
+                throw new DukeException(missingDatetime + " Missed out a /at?");
             }
             String details = splitString[0].trim();
             String dateTime = splitString[1].trim();
@@ -174,12 +174,12 @@ public class Parser {
     public String guiTakeInput(String input, TaskList taskList) throws DukeException {
         if (input.equals("bye")) {
             Storage.storeTasks(taskList.getTasks());
-            return BYE_MSG;
+            return byeMsg;
         } else if (input.equals("list")) { //Check if input == list
             return taskList.guiPrintList();
         } else if (input.equals("reset")) { //Instruction to reset the arraylist
             taskList.reset();
-            return RESET_MSG;
+            return resetMsg;
         } else if (input.contains("unmark") || input.contains("delete") || input.contains("mark")) {
             return markUnmarkDelete(input, taskList);
         } else if (input.contains("find")) { //input is find
@@ -230,7 +230,7 @@ public class Parser {
         } else if (cmd.equals("delete")) {
             return taskList.guiDeleteTask(index);
         } else {
-            throw new DukeException(INVALID_CMD);
+            throw new DukeException(invalidCmd);
         }
     }
 
@@ -251,7 +251,7 @@ public class Parser {
         if (command.equals("find")) {
             return taskList.guiFind(text);
         } else {
-            throw new DukeException(INVALID_CMD);
+            throw new DukeException(invalidCmd);
         }
     }
 
@@ -263,7 +263,7 @@ public class Parser {
      * @throws DukeException for invalid commands/commands without their required details
      */
     public String parseNewTask(String[] stringArray, TaskList taskList) throws DukeException {
-        if (stringArray.length < 2) {         //task has no task detail/name
+        if (stringArray.length < 2) { //task has no task detail/name
             throw new DukeException("Description of task cannot be empty!");
         }
         String taskType = stringArray[0];
@@ -274,7 +274,7 @@ public class Parser {
         } else if (taskType.equals("deadline")) {
             String[] stringSplit = taskDetails.split("/by");
             if (stringSplit.length < 2) {
-                throw new DukeException(MISSING_DATETIME + " Missed out a /by?");
+                throw new DukeException(missingDatetime + " Missed out a /by?");
             }
             String details = stringSplit[0].trim();
             String dateTime = stringSplit[1].trim();
@@ -282,7 +282,7 @@ public class Parser {
         } else if (taskType.equals("event")) {
             String[] splitString = taskDetails.split("/at");
             if (splitString.length < 2) {
-                throw new DukeException(MISSING_DATETIME + " Missed out a /at?");
+                throw new DukeException(missingDatetime + " Missed out a /at?");
             }
             String details = splitString[0].trim();
             String dateTime = splitString[1].trim();
