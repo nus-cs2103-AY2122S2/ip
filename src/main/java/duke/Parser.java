@@ -33,7 +33,7 @@ class Parser {
      * @return the Command object that can be executed.
      * @throws NoTimeGivenException if the user types the wrong format of time.
      */
-    public static Command parse(String userInput, TaskList taskList) throws DukeException {
+    public static Command parse(String userInput, TaskList taskList) throws DukeException, NumberFormatException {
         String[] words = userInput.split(" ");
         String firstWord = words[0];
         int taskNo;

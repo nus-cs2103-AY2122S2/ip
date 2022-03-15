@@ -10,6 +10,7 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import duke.dukeexception.DukeIndexOutOfBoundException;
 /**
  * provides abstraction to reading and writing tasklist record to local directory.
  */
@@ -57,7 +58,11 @@ class Storage {
                     }
                     taskList.addTask(curTask);
                     if (isFinished.equals("1")) {
-                        taskList.markFinished(taskList.size());
+                        try {
+                            taskList.markFinished(taskList.size());
+                        } catch (DukeIndexOutOfBoundException e) {
+                            System.out.println("save data corrupted");
+                        }
                     }
                 });
 

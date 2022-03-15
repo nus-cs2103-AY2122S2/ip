@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.TaskList;
+import duke.dukeexception.DukeIndexOutOfBoundException;
 
 public class CommandUnmark extends Command {
     private String response;
@@ -14,7 +15,7 @@ public class CommandUnmark extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws DukeIndexOutOfBoundException {
         String change = taskList.unmarkFinished(taskNo);
         response = change;
     }

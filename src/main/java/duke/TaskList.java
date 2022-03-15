@@ -2,6 +2,8 @@ package duke;
 
 import java.util.ArrayList;
 
+import duke.dukeexception.DukeIndexOutOfBoundException;
+
 /**
  * Encapsulates a list of a {@link Task}
  */
@@ -31,7 +33,10 @@ public class TaskList {
      * @param num the task to be deleted
      * @return the deleted task
      */
-    public Task deleteTask(int num) {
+    public Task deleteTask(int num) throws DukeIndexOutOfBoundException {
+        if (isInvalid(num)) {
+            throw new DukeIndexOutOfBoundException();
+        }
         Task deletee = tasks.get(num - 1);
         tasks.remove(num - 1);
         return deletee;
@@ -57,7 +62,10 @@ public class TaskList {
      * @param num index of the list to mark finished, with 1 based indexing
      * @return the response to the user when the job is done
      */
-    public String markFinished(int num) {
+    public String markFinished(int num) throws DukeIndexOutOfBoundException {
+        if (isInvalid(num)) {
+            throw new DukeIndexOutOfBoundException();
+        }
         tasks.get(num - 1).finished();
         return Response.RESPONSE_MARKDONE + "\n" + tasks.get(num - 1).toString();
     }
@@ -68,7 +76,10 @@ public class TaskList {
      * @param num index of the list to unmark finished, with 1 based indexing
      * @return the response to the user when the job is done
      */
-    public String unmarkFinished(int num) {
+    public String unmarkFinished(int num) throws DukeIndexOutOfBoundException {
+        if (isInvalid(num)) {
+            throw new DukeIndexOutOfBoundException();
+        }
         tasks.get(num - 1).notFinished();
         return Response.RESPONSE_MARKDONE + "\n" + tasks.get(num - 1).toString();
     }
@@ -108,5 +119,9 @@ public class TaskList {
 
     public Task get(int i) {
         return tasks.get(i);
+    }
+
+    private boolean isInvalid(int index) {
+        return index > this.size() || index < 1;
     }
 }
