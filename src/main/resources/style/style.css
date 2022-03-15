@@ -1,0 +1,5 @@
+#dialogContainer {
+    -fx-background-image: url("../images/bg.jpg");
+    -fx-background-width: 600;
+    -fx-background-repeat: repeat;
+}

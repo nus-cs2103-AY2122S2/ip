@@ -1,0 +1,9 @@
+E|1|buy books|2019-10-15|18:00|20:00
+T|1|buy food 
+E|1|feed your dog|2019-10-10|18:00|20:00
+D|1|help your family|2019-10-10|18:00
+T|1|kill yourself 
+D|1|return book|2019-10-15|18:00
+T|0|buy food 
+T|0|buy food tonight 
+D|0|buy more more food|2020-10-10|18:00
