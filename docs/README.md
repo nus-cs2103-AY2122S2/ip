@@ -12,24 +12,26 @@ Bob is a personal desktop task manager.
 4. Double-click the file to start the app.
 5. Type the command in the command box and press Enter or the `Send` button on the bottom right to execute it.
 6. Type the "Commands" command to see a list of all available commands and what they do!
-7. Refer to the [Features](https://github.com/justinekoh/ip/blob/master/docs/README.md#features) below for details of each command.
+7. Refer to the [Features](https://github.com/justinekoh/ip/blob/master/docs/README.md#features) below for details of
+   each command.
 
 ---
 
 ## Command summary
 
-| Action    | Format                              |
-|-----------|-------------------------------------|
-| Commands  | `commands`                          |
-| List      | `list`                              |
-| Todo      | `todo [DESCRIPTION]`                |
-| Event     | `event [DESCRIPTION] /at [TIME]`    |
-| Deadline  | `deadline [DESCRIPTION] /by [TIME]` |
-| Mark      | `mark [INDEX]`                      |
-| Unmark    | `unmark [INDEX]`                    |
-| Find      | `find [KEYWORD] `                   |
-| Delete    | `delete [INDEX]`                    |
-| Archive   | `archive`                           |
+| Action   | Format                              |
+|----------|-------------------------------------|
+| Commands | `commands`                          |
+| List     | `list`                              |
+| Todo     | `todo [DESCRIPTION]`                |
+| Event    | `event [DESCRIPTION] /at [TIME]`    |
+| Deadline | `deadline [DESCRIPTION] /by [TIME]` |
+| Mark     | `mark [INDEX]`                      |
+| Unmark   | `unmark [INDEX]`                    |
+| Find     | `find [KEYWORD] `                   |
+| Delete   | `delete [INDEX]`                    |
+| Archive  | `archive`                           |
+| Bye      | `bye`                               |
 
 ![Sample run](https://justinekoh.github.io/ip/Ui.png)
 ---
@@ -131,10 +133,17 @@ Examples:
 
 ### Archiving the current task list - `Archive`
 
-Saves all current entries in the task list in the file `bob_archive.txt` in the same directory that `bob.jar` is saved in.  
+Saves all current entries in the task list in the file `bob_archive.txt` in the same directory that `bob.jar` is saved
+in.  
 Removes all entries from the list afterwards.
 
 Format: `archive`
+
+### Exiting the application - `Bye`
+
+Exits the application. All data currently present will be available the next time the application is run.
+
+Format: `bye`
 
 --- 
 
