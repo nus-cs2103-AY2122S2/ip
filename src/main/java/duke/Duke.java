@@ -1,8 +1,9 @@
 package duke;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.ByteArrayOutputStream;
+
 
 /**
  * Duke Chat Bot that allows users to track tasks.
@@ -10,8 +11,7 @@ import java.io.ByteArrayOutputStream;
  * @author Benjamin Koh
  */
 
-public class Duke  {
-
+public class Duke {
     private static TaskList taskList;
 
     /**
@@ -38,7 +38,7 @@ public class Duke  {
 
     String getResponse(String input) {
         input = input.toLowerCase().trim();
-        assert (!input.equals("")): "Hello! Please supply an input!";
+        assert (!input.equals("")) : "Hello! Please supply an input!";
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             PrintStream printStream = new PrintStream(outputStream);

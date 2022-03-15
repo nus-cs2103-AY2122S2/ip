@@ -50,6 +50,7 @@ public class Parser {
             break;
         case("bye"):
             handleExit();
+            break;
         default:
             handleUnknownCommand();
         }

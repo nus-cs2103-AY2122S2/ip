@@ -40,7 +40,7 @@ class UnknownCommandException extends DukeException {
      */
 
     @Override
-    public String toString(){
+    public String toString() {
         return "    OH NO! :(" + this.message;
     }
 }
@@ -92,7 +92,7 @@ class InvalidInputException extends DukeException {
      */
 
     @Override
-    public String toString(){
+    public String toString() {
         return "    OH NO! :(" + this.message;
     }
 }

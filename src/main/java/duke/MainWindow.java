@@ -33,8 +33,8 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hey CU-TEA!\n" +
-                        "I am Squishybot, the friendly milk bubble tea :3\n"
+                DialogBox.getDukeDialog("Hey CU-TEA!\n"
+                        + "I am Squishybot, the friendly milk bubble tea :3\n"
                         + "How may I help you?", dukeImage));
     }
 

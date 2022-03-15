@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class TaskList {
     private static ArrayList<Task> taskList;
-//    private int taskListSize;
 
     /**
      * Constructor for a new instance of a TaskList
@@ -18,7 +17,6 @@ public class TaskList {
 
     public TaskList() {
         this.taskList = new ArrayList<>();
-//        this.taskListSize = 0;
     }
 
     /**

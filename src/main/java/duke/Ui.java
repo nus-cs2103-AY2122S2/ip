@@ -7,6 +7,8 @@ package duke;
  */
 
 public class Ui {
+    public static final String BLANK_LINE = "    ________________________________\n";
+
     private static final String logo =
             " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -24,8 +26,6 @@ public class Ui {
             + "    ________________________________\n"
             + "     Bye. Hope to see you again soon!" + "\n"
             + "    ________________________________\n";
-
-    public static final String BLANK_LINE = "    ________________________________\n";
 
     /**
      * Welcomes the User
@@ -54,13 +54,13 @@ public class Ui {
         if (taskList.getSize() < 1) {
             System.out.println("\n" + "     This list is empty! Let's add a task!" + "\n");
         }
-            System.out.println("\n");
-            for (int i = 1; i < taskList.getSize() + 1; i++) {
-                Task curr = taskList.get(i - 1);
-                String toPrint = "     " + i + "." + curr;
-                System.out.println(toPrint);
-            }
-            System.out.println("\n");
+        System.out.println("\n");
+        for (int i = 1; i < taskList.getSize() + 1; i++) {
+            Task curr = taskList.get(i - 1);
+            String toPrint = "     " + i + "." + curr;
+            System.out.println(toPrint);
+        }
+        System.out.println("\n");
     }
 
     /**
@@ -99,7 +99,7 @@ public class Ui {
      */
 
     public static void printTodo(String todoString, TaskList taskList) {
-        String temp = "\n" +  "     Got it. I've added this task: \n" + "       [T][ ] " + todoString
+        String temp = "\n" + "     Got it. I've added this task: \n" + "       [T][ ] " + todoString
                 + "\n" + "     Now you have " + taskList.getSize() + " task(s) in the list.\n";
         System.out.println(temp);
     }
@@ -113,9 +113,9 @@ public class Ui {
      */
 
     public static void printDeadline(String deadlineName, String deadlineTime, TaskList taskList) {
-        String temp = "\n"  + "     Got it. I've added this task: \n" + "       [D][ ]" + deadlineName +
-                "(by:" + deadlineTime + ")" + "\n" +
-                "     Now you have " + taskList.getSize() + " task(s) in the list.\n";
+        String temp = "\n" + "     Got it. I've added this task: \n" + "       [D][ ]" + deadlineName
+                + "(by:" + deadlineTime + ")" + "\n"
+                + "     Now you have " + taskList.getSize() + " task(s) in the list.\n";
         System.out.println(temp);
     }
 
@@ -128,9 +128,9 @@ public class Ui {
      */
 
     public static void printEvent(String eventName, String eventTime, TaskList taskList) {
-        String temp = "\n"  + "     Got it. I've added this task: \n" + "       [E][ ]" + eventName +
-                "(at: " + eventTime + ")" + "\n" +
-                "     Now you have " + taskList.getSize() + " task(s) in the list.\n";
+        String temp = "\n" + "     Got it. I've added this task: \n" + "       [E][ ]" + eventName
+                + "(at: " + eventTime + ")" + "\n"
+                + "     Now you have " + taskList.getSize() + " task(s) in the list.\n";
         System.out.println(temp);
     }
 
@@ -148,6 +148,12 @@ public class Ui {
         System.out.println("     Noted. I've removed this task: " + "\n" + "     " + deleteTask
                 + "\n" + "     Now you have " + taskList.getSize() + " task(s) in the list.\n");
     }
+
+    /**
+     * Finds a specific task and print it out.
+     *
+     * @param listString list of all tasks
+     */
 
     public static void printFind(StringBuilder listString) {
         if (listString.length() == 0) {

@@ -1,12 +1,16 @@
 package duke;
 
-import java.io.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
-import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 /**
  * The Storage class, which entails methods to initialise, load and save the taskList file.
@@ -15,9 +19,15 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Storage {
-    private String filePath;
+
     public static final String DATA_FOLDER_PATH = "./data";
     public static final String TASKLIST_FILE_PATH = "./data/duke.text";
+
+    /**
+     * Initialise file for storage
+     *
+     * @throws IOException when input is invalid
+     */
 
     public static void initialise() throws IOException {
         File folder = new File(DATA_FOLDER_PATH);
@@ -71,7 +81,8 @@ public class Storage {
             } else if (taskLetter.equals("D")) {
                 int deadlineAtIndex = descriptionWithTime.indexOf(" (by: ");
                 String deadlineDesc = descriptionWithTime.substring(0, deadlineAtIndex);
-                String deadlineDate = descriptionWithTime.substring(deadlineAtIndex + 6, descriptionWithTimeIndex).trim();
+                String deadlineDate = descriptionWithTime.substring(deadlineAtIndex + 6,
+                        descriptionWithTimeIndex).trim();
                 LocalDateTime deadlineTime = LocalDateTime.parse(deadlineDate, displayFormat);
                 taskToAdd = new Deadline(deadlineDesc, deadlineTime.format(inputFormat));
             } else {
@@ -91,7 +102,7 @@ public class Storage {
      * @throws IOException when input or output has issues
      */
 
-    public static void saveToFile(TaskList taskList ) throws IOException {
+    public static void saveToFile(TaskList taskList) throws IOException {
         StringBuilder listString = new StringBuilder();
         for (int i = 0; i < taskList.getSize(); i++) {
             Task t = taskList.get(i);
