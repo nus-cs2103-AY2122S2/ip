@@ -26,7 +26,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (parsedBy != null) {
-            String date =  parsedBy.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            String date =  parsedBy.format(DateTimeFormatter.ofPattern("yyyy MM dd"));
             return "[D]" + "[" + this.getStatusIcon() + "] " + description + " (by: " + date + ")";
         } else {
             return "[D]" + "[" + this.getStatusIcon() + "] " + description + " (by: " + by + ")";
