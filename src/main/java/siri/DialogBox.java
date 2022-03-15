@@ -66,7 +66,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Create a DialogBox object to show startUp Message.
+     * Creates a DialogBox object to show startUp Message.
      *
      * @param msg that is shown during start up.
      * @param img image to be used for start up.
