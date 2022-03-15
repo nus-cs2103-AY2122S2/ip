@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Represents a command object.
+ */
 public abstract class Command {
 
     /**

@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.IOException;
-
 public class ListCommand extends Command {
 
     /**
