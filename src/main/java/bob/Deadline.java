@@ -53,6 +53,6 @@ public class Deadline extends bob.Task {
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(),
-                by.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm a")));
+                by.format(DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a")));
     }
 }

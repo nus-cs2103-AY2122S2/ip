@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ToDoTest {
-    private final String VALID_DESCRIPTION = "This is a valid ToDo instance.";
+    private static final String VALID_DESCRIPTION = "This is a valid ToDo instance.";
 
     @Test
     public void constructor_emptyDescription_throwsIllegalArgumentException() {

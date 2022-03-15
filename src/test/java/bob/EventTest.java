@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class EventTest {
-    private static final String VALID_TIME = "2022-09-09T09:09:00";
+    private static final String VALID_TIME = "2022-09-09T23:09:00";
     private static final String INVALID_TIME = "invalid time";
     private static final String VALID_DESCRIPTION = "This is a valid description.";
     private static final String INVALID_DESCRIPTION = "";
@@ -42,8 +42,8 @@ public class EventTest {
         Assertions.assertEquals(validTrueEvent.generateSavedEntry(), validTrueEventSavedEntry);
         Assertions.assertEquals(validFalseEvent.generateSavedEntry(), validFalseEventSavedEntry);
 
-        final String validTrueEventToString = "[E][X] " + VALID_DESCRIPTION + " (at: Sep 9 2022, 09:09 am)";
-        final String validFalseEventToString = "[E][ ] " + VALID_DESCRIPTION + " (at: Sep 9 2022, 09:09 am)";
+        final String validTrueEventToString = "[E][X] " + VALID_DESCRIPTION + " (at: Sep 9 2022, 11:09 pm)";
+        final String validFalseEventToString = "[E][ ] " + VALID_DESCRIPTION + " (at: Sep 9 2022, 11:09 pm)";
 
         Assertions.assertEquals(validTrueEvent.toString(), validTrueEventToString);
         Assertions.assertEquals(validFalseEvent.toString(), validFalseEventToString);

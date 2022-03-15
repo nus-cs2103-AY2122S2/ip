@@ -19,7 +19,7 @@ public class Parser {
         assert tasks != null;
         try {
             String command = userInput.split(" ")[0].strip().toLowerCase();
-            boolean tasksIsDiff = false;
+            boolean isTasksDiff = false;
 
             switch (command) {
             case "list":
@@ -31,26 +31,26 @@ public class Parser {
                 //fallthrough
             case "delete":
                 response = update(command, userInput, tasks);
-                tasksIsDiff = true;
+                isTasksDiff = true;
                 break;
             case "todo":
                 response = newToDo(userInput, tasks);
-                tasksIsDiff = true;
+                isTasksDiff = true;
                 break;
             case "deadline":
                 response = newDeadline(userInput, tasks);
-                tasksIsDiff = true;
+                isTasksDiff = true;
                 break;
             case "event":
                 response = newEvent(userInput, tasks);
-                tasksIsDiff = true;
+                isTasksDiff = true;
                 break;
             case "find":
                 response = find(userInput, tasks);
                 break;
             case "archive":
                 response = archive(tasks);
-                tasksIsDiff = true;
+                isTasksDiff = true;
                 break;
             case "commands":
                 response = getCommands();
@@ -59,7 +59,7 @@ public class Parser {
                 response = Ui.invalidCommand(command);
             }
 
-            if (tasksIsDiff) {
+            if (isTasksDiff) {
                 assert storage != null;
                 storage.writeTaskListToFile(tasks);
             }

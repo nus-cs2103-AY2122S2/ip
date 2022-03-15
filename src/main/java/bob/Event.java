@@ -54,6 +54,6 @@ public class Event extends bob.Task {
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(),
-                time.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm a")));
+                time.format(DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a")));
     }
 }
