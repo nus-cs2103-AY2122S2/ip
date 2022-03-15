@@ -16,6 +16,9 @@ public class Storage {
     public static final String DATA_FOLDER_PATH = "./data";
     public static final String TASKLIST_FILE_PATH = "./data/duke.txt";
 
+    public static final DateTimeFormatter TIME_DISPLAY_FORMAT = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
+    public static final DateTimeFormatter TIME_INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
     /**
      * Initializes the folder and file if they do not exist.
      */
@@ -71,22 +74,18 @@ public class Storage {
             Task taskToAdd;
             char taskType = taskString.charAt(3);
             boolean isDone = (taskString.charAt(6) == 'X');
-            DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
-            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             if (taskType == 'E') { // task is an event
                 int indexOfDate = descWithDate.indexOf("(at: ");
                 String desc = descWithDate.substring(0, indexOfDate);
-                String date = descWithDate.substring(
-                        indexOfDate + 4, descWithDate.length() - 1).trim(); // Dec-31-2022 2359
-                LocalDateTime at = LocalDateTime.parse(date, displayFormat);
-                taskToAdd = new Event(desc, at.format(inputFormat));
+                String date = descWithDate.substring(indexOfDate + 4, descWithDate.length() - 1).trim();
+                LocalDateTime at = LocalDateTime.parse(date, TIME_DISPLAY_FORMAT);
+                taskToAdd = new Event(desc, at.format(TIME_INPUT_FORMAT));
             } else if (taskType == 'D') { // task is a deadline
                 int indexOfDate = descWithDate.indexOf("(by: ");
                 String desc = descWithDate.substring(0, indexOfDate);
-                String date = descWithDate.substring(
-                        indexOfDate + 4, descWithDate.length() - 1).trim(); // Dec-31-2022 2359
-                LocalDateTime by = LocalDateTime.parse(date, displayFormat);
-                taskToAdd = new Deadline(desc, by.format(inputFormat));
+                String date = descWithDate.substring(indexOfDate + 4, descWithDate.length() - 1).trim();
+                LocalDateTime by = LocalDateTime.parse(date, TIME_DISPLAY_FORMAT);
+                taskToAdd = new Deadline(desc, by.format(TIME_INPUT_FORMAT));
             } else { // task is a todo
                 taskToAdd = new Todo(descWithDate);
             }
