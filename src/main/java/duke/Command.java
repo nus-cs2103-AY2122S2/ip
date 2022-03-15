@@ -31,6 +31,7 @@ public class Command {
      * Marks the specified task.
      *
      * @param index index of the specified task to mark.
+     * @throws IOException if unable to save file.
      */
     public static void markCommand(int index) throws IOException {
         if (index > TaskList.getTasks().size()) {
@@ -47,6 +48,7 @@ public class Command {
      * Unmarks the specified task.
      *
      * @param index index of the specified task to unmark.
+     * @throws IOException if unable to save file.
      */
     public static void unmarkCommand(int index) throws IOException {
         if (index > TaskList.getTasks().size()) {
@@ -63,6 +65,7 @@ public class Command {
      * Adds a Todo to the TaskList.
      *
      * @param input the user's input to the bot.
+     * @throws IOException if unable to save file.
      */
     public static void todoCommand(String input) throws IOException {
         String desc = input.replaceFirst("todo", "").trim();
@@ -86,6 +89,7 @@ public class Command {
      * Adds an event to the TaskList.
      *
      * @param input the user's input to the bot.
+     * @throws IOException if unable to save file.
      */
     public static void eventCommand(String input) throws IOException {
         if (!input.contains("/at")) {
@@ -117,6 +121,7 @@ public class Command {
      * Adds a Deadline to the TaskList.
      *
      * @param input the user's input to the bot.
+     * @throws IOException if unable to save file.
      */
     public static void deadlineCommand(String input) throws IOException {
         if (!input.contains("/by")) {
@@ -151,6 +156,7 @@ public class Command {
      * Deletes the specified task.
      *
      * @param index index of the specified task to delete.
+     * @throws IOException if unable to save file.
      */
     public static void deleteCommand(int index) throws IOException {
         if (index > TaskList.getTasks().size()) {
