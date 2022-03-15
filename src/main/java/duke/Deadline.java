@@ -84,7 +84,7 @@ public class Deadline extends Task {
             } else if (this.time == null) {
                 return -1;
             } else {
-                return d1.time.compareTo(this.time);
+                return this.time.compareTo(d1.time);
             }
         }
         return compare;

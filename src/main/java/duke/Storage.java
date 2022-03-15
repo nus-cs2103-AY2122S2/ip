@@ -44,45 +44,20 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(dukeFile);
-
             while (s.hasNext()) {
-                String currLine = s.nextLine();
-                String[] currLineArr = currLine.split("\\|");
-
-                switch (currLineArr[0]) {
+                String currentLine = s.nextLine();
+                String[] currentLineArr = currentLine.split("\\|");
+                switch (currentLineArr[0]) {
                 case "T":
-                    Task toDoTask = new ToDo(currLineArr[2]);
-
-                    if (currLineArr[1].equals("X")) {
-                        toDoTask.markDone();
-                    }
-
+                    Task toDoTask = loadToDo(currentLineArr);
                     tasks.add(toDoTask);
                     break;
                 case "D":
-                    LocalDate currDate = LocalDate.parse(currLineArr[3], Task.YEAR_FORMAT);
-                    LocalTime currTime = currLineArr.length < 5 ? null : LocalTime.parse(currLineArr[4],
-                        Task.TIME_FORMAT);
-
-                    Task deadlineTask = currTime == null ? new Deadline(currLineArr[2], currDate) : new Deadline(
-                        currLineArr[2], currDate, currTime);
-
-                    if (currLineArr[1].equals("X")) {
-                        deadlineTask.markDone();
-                    }
-
+                    Task deadlineTask = loadDeadline(currentLineArr);
                     tasks.add(deadlineTask);
                     break;
                 case "E":
-                    LocalDate dateForEvent = LocalDate.parse(currLineArr[3], Task.YEAR_FORMAT);
-                    LocalTime beginTime = LocalTime.parse(currLineArr[4], Task.TIME_FORMAT);
-                    LocalTime endTime = LocalTime.parse(currLineArr[5], Task.TIME_FORMAT);
-                    Task eventTask = new Event(currLineArr[2], dateForEvent, beginTime, endTime);
-
-                    if (currLineArr[1].equals("X")) {
-                        eventTask.markDone();
-                    }
-
+                    Task eventTask = loadEvent(currentLineArr);
                     tasks.add(eventTask);
                     break;
                 default:
@@ -91,18 +66,44 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            if (!dukeFolder.exists()) {
-                dukeFolder.mkdirs();
-            }
-
-            if (!dukeFile.exists()) {
-                dukeFile.createNewFile();
-            }
-
+            checkIfFolderExists();
+            checkIfFileExists();
             throw new DukeException("Pardon me! But the file was not found");
         }
-
         return tasks;
+    }
+    private ToDo loadToDo(String[] currentLineArr) {
+        ToDo toDoTask = new ToDo(currentLineArr[2]);
+
+        if (currentLineArr[1].equals("X")) {
+            toDoTask.markDone();
+        }
+        return toDoTask;
+    }
+    private Deadline loadDeadline(String[] currentLineArr) {
+        LocalDate currDate = LocalDate.parse(currentLineArr[3], Task.YEAR_FORMAT);
+        LocalTime currTime = currentLineArr.length < 5 ? null : LocalTime.parse(currentLineArr[4],
+            Task.TIME_FORMAT);
+
+        Deadline deadlineTask = currTime == null ? new Deadline(currentLineArr[2], currDate) : new Deadline(
+            currentLineArr[2], currDate, currTime);
+
+        if (currentLineArr[1].equals("X")) {
+            deadlineTask.markDone();
+        }
+        return deadlineTask;
+    }
+
+    private Event loadEvent(String[] currentLineArr) {
+        LocalDate dateForEvent = LocalDate.parse(currentLineArr[3], Task.YEAR_FORMAT);
+        LocalTime beginTime = LocalTime.parse(currentLineArr[4], Task.TIME_FORMAT);
+        LocalTime endTime = LocalTime.parse(currentLineArr[5], Task.TIME_FORMAT);
+        Event eventTask = new Event(currentLineArr[2], dateForEvent, beginTime, endTime);
+
+        if (currentLineArr[1].equals("X")) {
+            eventTask.markDone();
+        }
+        return eventTask;
     }
 
     /**
@@ -134,6 +135,24 @@ public class Storage {
             }
         } catch (IOException e) {
             throw new DukeException("INTERNAL ERROR: File cannot be accessed. Check directory.");
+        }
+    }
+
+    /**
+     * Checks if dukeFolder exists. If not, create the folder.
+     */
+    private void checkIfFolderExists() {
+        if (!dukeFolder.exists()) {
+            dukeFolder.mkdirs();
+        }
+    }
+
+    /**
+     * Checks if dukeFile exists. If not, create the folder.
+     */
+    private void checkIfFileExists() throws IOException {
+        if (!dukeFile.exists()) {
+            dukeFile.createNewFile();
         }
     }
 
