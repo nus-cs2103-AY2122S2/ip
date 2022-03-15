@@ -31,7 +31,7 @@ public class Duke {
     }
 
     /**
-     * method to run the application and start taking inputs
+     * A method to run the application and start taking inputs
      */
     public void run() {
         ui.startUp();
@@ -52,7 +52,7 @@ public class Duke {
     }
 
     /**
-     * point of entry for the application
+     * The point of entry for the application
      *
      * @param args
      */

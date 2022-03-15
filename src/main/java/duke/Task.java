@@ -6,7 +6,7 @@ package duke;
 public class Task {
     //Attributes of a task
     private String taskName;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructor for task, always initialised to be not done
@@ -15,7 +15,7 @@ public class Task {
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -24,7 +24,7 @@ public class Task {
      * @param done boolean dictating whether task is done or undone
      */
     public void setDone(boolean done) {
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
@@ -33,7 +33,7 @@ public class Task {
      * @return boolean value of whether task is or is not done
      */
     public boolean getDone() {
-        return this.done;
+        return this.isDone;
     }
 
     public String getTaskName() {

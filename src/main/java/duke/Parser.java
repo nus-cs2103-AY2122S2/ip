@@ -17,7 +17,7 @@ public class Parser {
     public Parser() {}
 
     /**
-     * Method to take in the input that is passed by the user and makes sense of what to do from the input
+     * A method to take in the input that is passed by the user and makes sense of what to do from the input
      *
      * @param input String input by the user
      * @param taskList Current taskList
