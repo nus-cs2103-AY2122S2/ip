@@ -43,6 +43,9 @@ public class TaskList {
         assertTaskListNotNull();
         StringBuilder stringBuilder = new StringBuilder();
         boolean hasResults = false;
+        if (term.trim().isEmpty()) {
+            return "Sorry, the search term cannot be empty.";
+        }
         for (Task t : Storage.taskList) {
             if (t.getDescription().contains(term)) {
                 hasResults = true;

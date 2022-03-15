@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 /**
@@ -17,6 +19,17 @@ public class Parser {
         assert !input.isEmpty() : "Input cannot be left blank.";
     }
 
+    boolean isDateValid(String date) {
+        boolean isValid = true;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            LocalDate parsedDate = LocalDate.parse(date.trim(), formatter);
+        } catch (Exception e) {
+            isValid = false;
+        }
+        return isValid;
+    }
+
     String getCommandThroughRegex(String regex) {
         String command = "";
         if (regex.equalsIgnoreCase("/by")) {
@@ -29,7 +42,6 @@ public class Parser {
 
         return command;
     }
-
 
     ParsedAnswer parseInputWithRegex(String regex, String[] inputToParse) {
         String command = getCommandThroughRegex(regex);
@@ -48,7 +60,7 @@ public class Parser {
             try {
                 String[] eventParseBy = inputToParse[1].split(regex);
                 ParsedAnswer pa;
-                if (eventParseBy.length <= 1) {
+                if (eventParseBy.length <= 1 || !isDateValid(eventParseBy[1])) {
                     pa = new ParsedAnswer("error", -1);
                     pa.setDesc("Please check that your input format is correct.");
                 } else {
@@ -96,7 +108,6 @@ public class Parser {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
             ParsedAnswer pa = new ParsedAnswer("error", -1);
             pa.setDesc("Format error. Please try again.");
             return pa;

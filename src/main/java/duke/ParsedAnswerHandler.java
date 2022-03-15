@@ -3,6 +3,8 @@ package duke;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * This class receives a ParsedAnswer object and execute commands based on information
@@ -96,6 +98,7 @@ public class ParsedAnswerHandler {
                         ev.getDescription() +
                         "," +
                         ev.getAt() + '\n';
+
                 String eventResult = "Successfully added event to list.";
                 return writeTaskToFile(eventTask, eventResult);
 
@@ -145,7 +148,7 @@ public class ParsedAnswerHandler {
                         Storage.taskList.add(idx, updatedTask);
                         s.save();
                     } else if (!pa.getDesc().isEmpty() && pa.getDate().isEmpty()) {
-                       Event updatedTask = new Event(pa.getDesc(), currentTask.getAt());
+                        Event updatedTask = new Event(pa.getDesc(), currentTask.getAt());
                         Storage.taskList.remove(idx);
                         Storage.taskList.add(idx, updatedTask);
                         s.save();
