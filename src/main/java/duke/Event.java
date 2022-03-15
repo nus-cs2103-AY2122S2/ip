@@ -4,6 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.ArrayList;
 
 /**
  * Class for event related tasks.
@@ -94,5 +95,37 @@ public class Event extends Task {
                 + this.time + " "
                 + this.tag.toString() + ")"
                 + "\n");
+    }
+
+    /**
+     * Loads an event task from the hard disk.
+     *
+     * @param todoList List of tasks in the hard disk.
+     * @param taskDescription Event task description.
+     * @param taskStatus Current completion status of the task.
+     * @param taskContents Important content details of a task including date and time.
+     */
+    public static void loadEventTask(ArrayList<Task> todoList, String taskDescription,
+                                     String taskStatus, String[] taskContents) {
+        String dateAndTimeEvent = taskContents[3];
+        String eventDateString = dateAndTimeEvent.split(" ")[0];
+        String eventTimeString = dateAndTimeEvent.split(" ")[1];
+
+        // event date and time
+        LocalTime eventTime = LocalTime.parse(eventTimeString);
+        LocalDate eventDate = LocalDate.parse(eventDateString);
+
+        // creating event task
+        Event eventTask = new Event(taskDescription, eventDate, eventTime);
+
+        // check if task is completed
+        if (taskStatus.equals("0")) {
+            eventTask.markAsNotDone();
+        } else {
+            eventTask.markAsDone();
+        }
+
+        // add eventTask to todoList
+        todoList.add(eventTask);
     }
 }

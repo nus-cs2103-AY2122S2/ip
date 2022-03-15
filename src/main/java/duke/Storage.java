@@ -6,8 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -57,7 +55,7 @@ public class Storage {
     /**
      * Returns an ArrayList of tasks from disk.
      *
-     * @return ArrayList of tasks
+     * @return ArrayList of tasks.
      * @throws FileNotFoundException
      */
     public ArrayList<Task> load() throws FileNotFoundException {
@@ -75,61 +73,13 @@ public class Storage {
 
             switch (taskType) {
             case "T":
-                Todo todoTask = new Todo(taskDescription);
-
-                // check if task is completed
-                if (taskStatus.equals("0")) {
-                    todoTask.markAsNotDone();
-                } else {
-                    todoTask.markAsDone();
-                }
-
-                // add todoTask to todoList
-                todoList.add(todoTask);
+                Todo.loadTodoTask(todoList, taskDescription, taskStatus);
                 break;
             case "D":
-                String dateAndTime = taskContents[3];
-                String date = dateAndTime.split(" ")[0];
-                String time = dateAndTime.split(" ")[1];
-
-                // deadline date and time
-                LocalTime deadlineTime = LocalTime.parse(time);
-                LocalDate deadlineDate = LocalDate.parse(date);
-
-                // creating deadline task
-                Deadline deadlineTask = new Deadline(taskDescription, deadlineDate, deadlineTime);
-
-                // check if task is completed
-                if (taskStatus.equals("0")) {
-                    deadlineTask.markAsNotDone();
-                } else {
-                    deadlineTask.markAsDone();
-                }
-
-                // add deadlineTask to todoList
-                todoList.add(deadlineTask);
+                Deadline.loadDeadlineTask(todoList, taskDescription, taskStatus, taskContents);
                 break;
             case "E":
-                String dateAndTimeEvent = taskContents[3];
-                String eventDateString = dateAndTimeEvent.split(" ")[0];
-                String eventTimeString = dateAndTimeEvent.split(" ")[1];
-
-                // event date and time
-                LocalTime eventTime = LocalTime.parse(eventTimeString);
-                LocalDate eventDate = LocalDate.parse(eventDateString);
-
-                // creating event task
-                Event eventTask = new Event(taskDescription, eventDate, eventTime);
-
-                // check if task is completed
-                if (taskStatus.equals("0")) {
-                    eventTask.markAsNotDone();
-                } else {
-                    eventTask.markAsDone();
-                }
-
-                // add eventTask to todoList
-                todoList.add(eventTask);
+                Event.loadEventTask(todoList, taskDescription, taskStatus, taskContents);
                 break;
             default:
                 break;

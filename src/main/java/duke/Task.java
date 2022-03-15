@@ -11,7 +11,7 @@ public class Task {
     /**
      * Constructs a Task object.
      *
-     * @param description
+     * @param description Description of a task.
      */
     public Task(String description) {
         this.description = description;
@@ -21,8 +21,8 @@ public class Task {
     /**
      * Constructs a task object.
      *
-     * @param description
-     * @param tag
+     * @param description Description of a task.
+     * @param tag Optional tag of the task.
      */
     public Task(String description, Tag tag) {
         this.description = description;
@@ -68,6 +68,12 @@ public class Task {
         return (isDone ? "[✅] " : "[ ] ") + this.description;
     }
 
+    /**
+     * Tags a Task.
+     *
+     * @param taskTag A task tag.
+     * @return Task object with the respective tag.
+     */
     public Task tag(Tag taskTag) {
         return new Task(description, taskTag);
     }
