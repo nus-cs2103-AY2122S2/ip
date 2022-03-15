@@ -1,9 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * The Parser class, containing the parsing logic for the bot.

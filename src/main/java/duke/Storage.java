@@ -76,15 +76,13 @@ public class Storage {
             if (taskType == 'E') { // task is an event
                 int indexOfDate = descWithDate.indexOf("(at: ");
                 String desc = descWithDate.substring(0, indexOfDate);
-                String date = descWithDate.substring(
-                        indexOfDate + 4, descWithDate.length() - 1).trim(); // Dec-31-2022 2359
+                String date = descWithDate.substring(indexOfDate + 4, descWithDate.length() - 1).trim();
                 LocalDateTime at = LocalDateTime.parse(date, displayFormat);
                 taskToAdd = new Event(desc, at.format(inputFormat));
             } else if (taskType == 'D') { // task is a deadline
                 int indexOfDate = descWithDate.indexOf("(by: ");
                 String desc = descWithDate.substring(0, indexOfDate);
-                String date = descWithDate.substring(
-                        indexOfDate + 4, descWithDate.length() - 1).trim(); // Dec-31-2022 2359
+                String date = descWithDate.substring(indexOfDate + 4, descWithDate.length() - 1).trim();
                 LocalDateTime by = LocalDateTime.parse(date, displayFormat);
                 taskToAdd = new Deadline(desc, by.format(inputFormat));
             } else { // task is a todo
