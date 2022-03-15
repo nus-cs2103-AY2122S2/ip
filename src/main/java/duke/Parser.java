@@ -2,7 +2,6 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 
 /**
  * This class is responsible for parsing user inputs and
@@ -90,6 +89,9 @@ public class Parser {
                 pa.setType("Event");
             } else if (Storage.taskList.get(index) instanceof ToDos) {
                 pa.setType("Todo");
+                pa.setDesc(parsedContent[1]);
+                pa.setDate("");
+                return pa;
             }
 
             String[] parsedDescAndDate = parsedContent[1].split("/date");

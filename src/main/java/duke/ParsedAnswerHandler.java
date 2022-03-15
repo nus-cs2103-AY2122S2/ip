@@ -3,8 +3,6 @@ package duke;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * This class receives a ParsedAnswer object and execute commands based on information
@@ -120,10 +118,10 @@ public class ParsedAnswerHandler {
             case "update":
                 int idx = pa.getIndex();
                 Storage s = new Storage();
+                Task updatedTask = null;
 
                 if (pa.getType().equals("Deadline")) {
                     Deadline currentTask = (Deadline) Storage.taskList.get(idx);
-                    Deadline updatedTask = null;
                     if (pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
                         updatedTask = new Deadline(currentTask.getDescription(), pa.getDate());
                     } else if (!pa.getDesc().isEmpty() && pa.getDate().isEmpty()) {
@@ -131,13 +129,10 @@ public class ParsedAnswerHandler {
                     } else if (!pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
                         updatedTask = new Deadline(pa.getDesc(), pa.getDate());
                     }
-                    Storage.taskList.remove(idx);
-                    Storage.taskList.add(idx, updatedTask);
                 }
 
                 if (pa.getType().equals("Event")) {
                     Event currentTask = (Event) Storage.taskList.get(idx);
-                    Event updatedTask = null;
                     if (pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
                         updatedTask = new Event(currentTask.getDescription(), pa.getDate());
                     } else if (!pa.getDesc().isEmpty() && pa.getDate().isEmpty()) {
@@ -145,19 +140,16 @@ public class ParsedAnswerHandler {
                     } else if (!pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
                         updatedTask = new Event(pa.getDesc(), pa.getDate());
                     }
-
-                    Storage.taskList.remove(idx);
-                    Storage.taskList.add(idx, updatedTask);
                 }
 
                 if (pa.getType().equals("Todo")) {
                     if (!pa.getDesc().isEmpty()) {
-                        ToDos updatedTask = new ToDos(pa.getDesc());
-                        Storage.taskList.remove(idx);
-                        Storage.taskList.add(idx, updatedTask);
+                        updatedTask = new ToDos(pa.getDesc());
                     }
                 }
-                
+
+                Storage.taskList.remove(idx);
+                Storage.taskList.add(idx, updatedTask);
                 s.save();
                 return "Update successful";
         }

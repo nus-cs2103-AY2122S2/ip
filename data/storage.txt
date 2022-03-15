@@ -1,5 +1,5 @@
-T,1,hello
+T,1,/date
 T,1,lol
 E,1,asdf , 2023-01-01
 E,1,lol, 2002-01-02
-D,1,come babe , 2032-05-07
+D,1,yeah, 2032-05-07
