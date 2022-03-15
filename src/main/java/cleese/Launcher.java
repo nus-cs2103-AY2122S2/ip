@@ -7,7 +7,8 @@ import javafx.application.Application;
  */
 public class Launcher {
     /**
-     * Main method which initializes the Cleese class, and launches the GUI for the application.
+     * Launches Cleese class
+     * Opens the GUI for the application.
      * @param args
      */
     public static void main(String[] args) {

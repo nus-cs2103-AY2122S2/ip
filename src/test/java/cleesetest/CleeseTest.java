@@ -1,4 +1,4 @@
-package CleeseTest;
+package cleesetest;
 
 import cleese.Parser;
 import cleese.Storage;
