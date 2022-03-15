@@ -68,7 +68,14 @@ public class Task {
         return (isDone ? "[✅] " : "[ ] ") + this.description;
     }
 
+    /**
+     * Tags a Task.
+     *
+     * @param taskTag A task tag.
+     * @return Task object with the respective tag.
+     */
     public Task tag(Tag taskTag) {
         return new Task(description, taskTag);
     }
+
 }
