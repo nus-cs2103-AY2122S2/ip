@@ -10,7 +10,6 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for AddCommand
-     *
      * @param task to be added to the task list
      */
     public AddCommand(Task task) {
@@ -20,11 +19,10 @@ public class AddCommand extends Command {
 
     /**
      * Execute add command
-     *
      * @param taskList a list to store all tasks
      * @param ui to display output
      * @param storage to store task
-     * @throws ExceptionHandler
+     * @throws ExceptionHandler to handle exceptions
      * @throws IOException
      */
     @Override
@@ -38,7 +36,6 @@ public class AddCommand extends Command {
 
     /**
      * Method to check for exit command
-     *
      * @return A boolean to check if an exit command is entered
      */
     public static boolean isExit() {

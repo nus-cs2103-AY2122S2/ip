@@ -1,7 +1,7 @@
 T|0|read book 
-T|0|buy bread 
 E|0|project meeting |02/12/2019 1800
 E|0|project meeting |02/12/2019 1800
 D|1|return book |05/12/2019 1300
 E|0|project meeting |01/01/2022 2200
 D|0|chinese project submission |01/01/2022 2200
+T|0|rawhhh 

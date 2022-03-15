@@ -44,7 +44,6 @@ public class Deadline extends Task {
 
     /**
      * Overriding ToString method
-     *
      * @return Deadline String
      */
     @Override
