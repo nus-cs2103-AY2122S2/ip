@@ -1,6 +1,8 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.IncorrectFormatException;
 import duke.exceptions.WrongDateFormatException;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
@@ -74,18 +76,28 @@ public class AddCommand extends Command {
                 added = new ToDo(input);
                 break;
             case "event":
-                processedInput = input.split("/at ", 2);
+                processedInput = input.split("/at", 2);
+                if(processedInput.length != 2) {
+                    throw new IncorrectFormatException();
+                }
                 details = processedInput[0];
-                time = processedInput[1];
-                assert time != null;
+                if(details.isEmpty()){
+                    throw new EmptyDescriptionException(type);
+                }
+                time = processedInput[1].trim();
                 LocalDateTime date = LocalDateTime.parse(time, formatter);
                 added = new Event(details, date);
                 break;
             case "deadline":
-                processedInput = input.split("/by ", 2);
+                processedInput = input.split("/by", 2);
+                if(processedInput.length != 2) {
+                    throw new IncorrectFormatException();
+                }
                 details = processedInput[0];
-                time = processedInput[1];
-                assert time != null;
+                if(details.isEmpty()){
+                    throw new EmptyDescriptionException(type);
+                }
+                time = processedInput[1].trim();
                 LocalDateTime deadline = LocalDateTime.parse(time, formatter);
                 added = new Deadline(details, deadline);
                 break;
