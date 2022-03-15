@@ -19,14 +19,21 @@ public class UpdateEventCommand implements Command {
 
     /**
      * Constructor taking the index and the new start/end timing in YYYY/MM/DD HHMM format.
-     * @param index
-     * @param start
-     * @param end
+     * @param input
      */
-    public UpdateEventCommand(int index, String start, String end) {
+    public UpdateEventCommand(String input) throws DukeException {
+        String[] splitted = input.split(" ");
+        if (splitted.length != 8) {
+            throw new DukeException("Invalid format for update event time. \n" +
+                    "Correct format: update event time <index> " +
+                    "<FROM YYYY-MM-DD> <FROM HHMM> <TO YYYY-MM-DD> <TO HHMM>\n");
+        }
+        int index = Integer.valueOf(splitted[3]);
+        String newStartTime = splitted[4] + " " + splitted[5];
+        String newEndTime = splitted[6] + " " + splitted[7];
         this.index = index;
-        this.start = start;
-        this.end = end;
+        this.start = newStartTime;
+        this.end = newEndTime;
 
     }
 

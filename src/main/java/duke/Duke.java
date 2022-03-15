@@ -10,7 +10,6 @@ import javafx.application.Application;
  * can then be run.
  */
 
-
 public class Duke {
     public static Storage storage;
     public static TaskList tasks;

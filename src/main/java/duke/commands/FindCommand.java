@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.tasks.TaskList;
 
 /**
@@ -10,10 +11,18 @@ public class FindCommand implements Command {
 
     /**
      * Constructor for the Find command, which takes in the relevant keyword.
-     * @param keyword
+     * @param input
      */
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(String input) throws DukeException {
+        String[] splitted = input.split(" ");
+        if (splitted.length != 2) {
+            throw new DukeException("Invalid format for find. \n" +
+                    "Correct format: find <KEYWORD>\n" +
+                    "Example: find library\n" +
+                    "This will print any tasks that have keyword library in them."
+            );
+        }
+        this.keyword = splitted[1];
     }
 
     @Override

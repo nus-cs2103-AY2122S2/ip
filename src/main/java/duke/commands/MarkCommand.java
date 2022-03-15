@@ -14,10 +14,23 @@ public class MarkCommand implements Command {
 
     /**
      * Constructor for Mark Command, takes the index to mark as done.
-     * @param index
+     * @param input
      */
-    public MarkCommand(int index) {
-        this.index = index;
+    public MarkCommand(String input) throws DukeException {
+        String[] splitted = input.split(" ");
+        if (splitted.length != 2) {
+            throw new DukeException("Invalid format for mark. \n" +
+                    "Correct format: mark <INDEX>\n" +
+                    "Example: mark 3"
+            );
+        }
+        if (!splitted[1].matches("\\d+$")) {
+            throw new DukeException("Invalid format for mark. \n" +
+                    "Correct format: mark <INDEX>\n" +
+                    "Example: mark 3"
+            );
+        }
+        this.index = Integer.valueOf(splitted[1]);
     }
 
     @Override

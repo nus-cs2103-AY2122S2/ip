@@ -19,10 +19,26 @@ public class UpdateNameCommand implements Command {
 
     /**
      * Constructor taking the relevant Index and the new name.
-     * @param index
-     * @param newName
+     * @param input
      */
-    public UpdateNameCommand(int index, String newName) {
+    public UpdateNameCommand(String input) throws DukeException {
+        String[] splitted = input.split(" ");
+        if (splitted.length <= 3) {
+            throw new DukeException("Invalid format for update name. \n" +
+                    "Correct format: update name <index> <newname>\n" +
+                    "Example: update name 3 Borrow Book\n changes the name of the Task at index 3" +
+                    " to Borrow Book."
+            );
+        }
+        int index = Integer.valueOf(splitted[2]);
+        String newName = "";
+        for (int i = 3; i < splitted.length; i++) {
+            newName += splitted[i] + " ";
+        }
+        newName = newName.trim();
+        if (newName.equals("")) {
+            throw new DukeException("Provided name cannot be empty!");
+        }
         this.index = index;
         this.newName = newName;
     }

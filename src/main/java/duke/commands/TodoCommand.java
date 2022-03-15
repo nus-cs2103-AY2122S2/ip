@@ -14,10 +14,10 @@ public class TodoCommand implements Command {
 
     /**
      * Constructor which takes in the relevant Todo.
-     * @param toAdd
+     * @param input
      */
-    public TodoCommand(Todo toAdd) {
-        this.toAdd = toAdd;
+    public TodoCommand(String input) {
+        this.toAdd = new Todo(input.split("todo")[1].trim());
     }
 
     /**

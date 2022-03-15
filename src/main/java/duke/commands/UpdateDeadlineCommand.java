@@ -19,12 +19,20 @@ public class UpdateDeadlineCommand implements Command {
 
     /**
      * Constructor which takes in the relevant index and deadline.
-     * @param index
-     * @param deadline
+     * @param input
      */
-    public UpdateDeadlineCommand(int index, String deadline) {
+    public UpdateDeadlineCommand(String input) throws DukeException {
+        String[] splitted = input.split(" ");
+        if (splitted.length != 5) {
+            throw new DukeException("Invalid format for update deadline. \n" +
+                    "Correct format: update deadline <index> <YYYY-MM-DD> <HHMM>\n" +
+                    "Example: update deadline 3 2012-04-03 1500\n changes the deadline of the Task at index 3" +
+                    " to 3rd April 2012 3PM.");
+        }
+        int index = Integer.valueOf(splitted[2]);
+        String newDeadline = splitted[3] + " " + splitted[4];
         this.index = index;
-        this.deadline = deadline;
+        this.deadline = newDeadline;
     }
 
     @Override

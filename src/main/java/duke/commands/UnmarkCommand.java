@@ -15,10 +15,23 @@ public class UnmarkCommand implements Command {
 
     /**
      * Constructor for UnmarkCommand, to mark a task as Undone.
-     * @param index
+     * @param input
      */
-    public UnmarkCommand(int index) {
-        this.index = index;
+    public UnmarkCommand(String input) throws DukeException {
+        String[] splitted = input.split(" ");
+        if (splitted.length != 2) {
+            throw new DukeException("Invalid format for unmark. \n" +
+                    "Correct format: unmark <INDEX>\n" +
+                    "Example: unmark 3"
+            );
+        }
+        if (!splitted[1].matches("\\d+$")) {
+            throw new DukeException("Invalid format for unmark. \n" +
+                    "Correct format: unmark <INDEX>\n" +
+                    "Example: unmark 3"
+            );
+        }
+        this.index = Integer.valueOf(splitted[1]);
     }
 
     @Override

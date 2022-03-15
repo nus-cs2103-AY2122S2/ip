@@ -14,10 +14,23 @@ public class DeleteCommand implements Command {
 
     /**
      * Constructor for Delete Command which takes in the index to delete.
-     * @param index
+     * @param input
      */
-    public DeleteCommand(int index) {
-        this.index = index;
+    public DeleteCommand(String input) throws DukeException {
+        String[] splitted = input.split(" ");
+        if (splitted.length != 2) {
+            throw new DukeException("Invalid format for delete. \n" +
+                    "Correct format: delete <INDEX>\n" +
+                    "Example: delete 3"
+            );
+        }
+        if (!splitted[1].matches("\\d+$")) {
+            throw new DukeException("Invalid format for delete. \n" +
+                    "Correct format: delete <INDEX>\n" +
+                    "Example: delete 3"
+            );
+        }
+        this.index = Integer.valueOf(splitted[1]);
     }
 
     @Override
