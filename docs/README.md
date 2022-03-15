@@ -49,7 +49,6 @@ Manage your Deadlines!
 ## Usage
 
 ### Add a Todo
-
 Adds a new todo `<todo-name>`
 
 Syntax:
@@ -65,7 +64,6 @@ Expected outcome:
 Adds a new Todo task `buy milk`.
 
 ### Add an Event
-
 Adds a new event `<event-name>` at `dd/MM/yyyy HHmm`
 
 Syntax:
@@ -82,7 +80,6 @@ Adds a new Event `wedding` at `11/12/2022 1830`.
 
 
 ### Add a Deadline
-
 Adds a Deadline `<deadline-name>` due by `dd/MM/yyyy HHmm`
 
 Syntax:
@@ -98,7 +95,6 @@ Expected outcome:
 Adds a new Deadline `math homework` due by `15/3/2022`
 
 ### List all Tasks
-
 Syntax:
 
 `list`
@@ -132,3 +128,32 @@ Example of usage:
 Expected outcome:
 
 Deletes the task at index `2` from the list of tasks
+
+### Mark
+Mark a task at `<index>` as completed
+
+Syntax:
+
+`mark <index>`
+
+Example of usage:
+
+`mark 1`
+
+Expected outcome:
+Marks the task at index `1` as completed.
+
+## Unmark
+Unmark a task at `<index>` to render it as incomplete.
+
+Syntax:
+
+`unmark <index>`
+
+Example of usage:
+
+`unmark 1`
+
+Expected outcome:
+
+Unmarks the task at index `1`; i.e. task `1` is rendered incomplete.
