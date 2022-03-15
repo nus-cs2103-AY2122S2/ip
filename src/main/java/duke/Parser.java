@@ -1,8 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 /**
  * Class that specifically deals with input from the user and calls the respective class and methods
  */
@@ -109,21 +106,27 @@ public class Parser {
      * @throws DukeException on empty task name, missing date and time, duplicate task
      */
     public void cliAddTasks(String input, TaskList taskList) throws DukeException {
-        //input is a new type of task
-        //identify type of task
-        String[] stringArray = input.split(" ", 2);
-
-        //task has no task detail/name
-        if (stringArray.length < 2) {
+        String[] stringArray = input.split(" ", 2);         //input is a new type of task
+        if (stringArray.length < 2) {         //task has no task detail/name
             throw new DukeException("Description of task cannot be empty!");
         }
-
         assert stringArray.length >= 2;
         String taskType = stringArray[0];
         String taskDetails = stringArray[1];
+        Task newTask = getTask(taskType, taskDetails, taskList);
+        taskList.addTask(newTask);
+    }
 
+    /**
+     * Abstracted method for obtaining the task type and adding it the taskList
+     * @param taskType Type of task
+     * @param taskDetails Details provided following the task
+     * @param taskList the TaskList
+     * @return the new task created
+     * @throws DukeException
+     */
+    public Task getTask(String taskType, String taskDetails, TaskList taskList) throws DukeException {
         Task newTask = new Task("");
-
         if (taskType.equals("todo")) {
             newTask = new Todo(taskDetails);
         } else if (taskType.equals("deadline")) {
@@ -143,14 +146,22 @@ public class Parser {
             String dateTime = splitString[1].trim();
             newTask = new Event(details, dateTime);
         }
+        checkRepeat(newTask, taskList);
+        return newTask;
+    }
 
-        for (Task t : taskList.getTasks()) {
-            if (t.toString().equals(newTask.toString())) {
+    /**
+     * Checks for repeated task within the task list
+     * @param t task to check for
+     * @param taskList TaskList to check
+     * @throws DukeException if there is already and existing task with the same name and details
+     */
+    public void checkRepeat(Task t, TaskList taskList) throws DukeException {
+        for (Task t1 : taskList.getTasks()) {
+            if (t.toString().equals(t1.toString())) {
                 throw new DukeException("This task already exists!");
             }
         }
-
-        taskList.addTask(newTask);
     }
 
     /**
@@ -170,29 +181,36 @@ public class Parser {
             taskList.reset();
             return RESET_MSG;
         } else if (input.contains("unmark") || input.contains("delete") || input.contains("mark")) {
-            //Check if input == unmark or delete or mark
-            String[] splitString = input.split("\\s+");
-            String instr = splitString[0];
-            if (splitString.length < 2) {
-                return "Did you miss out the index in your input?";
-            } else {
-                assert splitString.length >= 2;
-                try {
-                    int index = Integer.parseInt(splitString[1]);
-                    return modifyTasks(instr, index, taskList);
-                } catch (DukeException e) {
-                    return e.toString();
-                }
-            }
+            return markUnmarkDelete(input, taskList);
         } else if (input.contains("find")) { //input is find
             String[] splitString = input.split(" ", 2);
             return parseFind(splitString, taskList);
         } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
-            //input is a new type of task
             String[] stringArray = input.split(" ", 2);
             return parseNewTask(stringArray, taskList);
         } else {
             throw new DukeException("No such task type");
+        }
+    }
+
+    /**
+     * Abstracted task to modify the existing tasks using mark, unmark and delete
+     * @param input the input instruction
+     * @param taskList the TaskList
+     * @return a string after passing in to modifyTasks()
+     */
+    public String markUnmarkDelete(String input, TaskList taskList) {
+        String[] splitString = input.split("\\s+");
+        String instr = splitString[0];
+        if (splitString.length < 2) {
+            return "Did you miss out the index in your input?";
+        } else {
+            try {
+                int index = Integer.parseInt(splitString[1]);
+                return modifyTasks(instr, index, taskList);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
         }
     }
 
@@ -245,18 +263,12 @@ public class Parser {
      * @throws DukeException for invalid commands/commands without their required details
      */
     public String parseNewTask(String[] stringArray, TaskList taskList) throws DukeException {
-        //task has no task detail/name
-        if (stringArray.length < 2) {
+        if (stringArray.length < 2) {         //task has no task detail/name
             throw new DukeException("Description of task cannot be empty!");
         }
-
-        assert stringArray.length >= 2;
         String taskType = stringArray[0];
         String taskDetails = stringArray[1];
-
         Task newTask = new Task("");
-
-        //identify new task
         if (taskType.equals("todo")) {
             newTask = new Todo(taskDetails);
         } else if (taskType.equals("deadline")) {
@@ -276,13 +288,7 @@ public class Parser {
             String dateTime = splitString[1].trim();
             newTask = new Event(details, dateTime);
         }
-
-        for (Task t : taskList.getTasks()) {
-            if (t.toString().equals(newTask.toString())) {
-                throw new DukeException("This task already exists!");
-            }
-        }
-
+        checkRepeat(newTask, taskList);
         return taskList.guiAddTask(newTask);
     }
 }

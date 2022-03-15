@@ -39,41 +39,46 @@ public class Storage {
             Scanner fileScanner = new Scanner(file); // create a Scanner using the File as the source
             while (fileScanner.hasNextLine()) {
                 String[] taskLine = fileScanner.nextLine().split("~");
-                Task task;
                 String taskType = taskLine[0];
-                try {
-                    if (taskType.equals("T")) {
-                        task = new Todo(taskLine[2]);
-                        assert task instanceof Todo;
-                    } else if (taskType.equals("D")) {
-                        String dateTime = taskLine[3];
-                        //Time is added
-                        if (taskLine.length == 5) {
-                            dateTime += " " + taskLine[4];
-                        }
-                        task = new Deadline(taskLine[2], dateTime);
-                        assert task instanceof Deadline;
-                    } else if (taskType.equals("E")) {
-                        String dateTime = taskLine[3];
-                        //Time is added
-                        if (taskLine.length == 5) {
-                            dateTime += " " + taskLine[4];
-                        }
-                        task = new Event(taskLine[2], dateTime);
-                        assert task instanceof Event;
-                    } else {
-                        throw new DukeException("Invalid task was read");
-                    }
-                    if (taskLine[1].equals("X")) {
-                        task.setDone(true);
-                    }
-                    list.addTaskNoPrint(task);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
+                readLine(taskType, taskLine, list);
             }
         }
         return list;
+    }
+
+    /**
+     * Abstracted task for load function
+     * @param taskType the type of task being read
+     * @param taskLine the task details
+     * @param list the TaskList
+     */
+    public void readLine(String taskType, String[] taskLine, TaskList list) {
+        Task task;
+        try {
+            if (taskType.equals("T")) {
+                task = new Todo(taskLine[2]);
+            } else if (taskType.equals("D")) {
+                String dateTime = taskLine[3];
+                if (taskLine.length == 5) {
+                    dateTime += " " + taskLine[4];
+                }
+                task = new Deadline(taskLine[2], dateTime);
+            } else if (taskType.equals("E")) {
+                String dateTime = taskLine[3];
+                if (taskLine.length == 5) {
+                    dateTime += " " + taskLine[4];
+                }
+                task = new Event(taskLine[2], dateTime);
+            } else {
+                throw new DukeException("Invalid task was read");
+            }
+            if (taskLine[1].equals("X")) {
+                task.setDone(true);
+            }
+            list.addTaskNoPrint(task);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -82,19 +87,15 @@ public class Storage {
      * @param tasks an arrayList of current tasks
      */
     public static void storeTasks(ArrayList<Task> tasks) {
-        //Saving the changes back to file
-        File file = new File(fileDir);
-        //if prev file exists, delete it and replace with new empty file
-        try {
+        File file = new File(fileDir);         //Saving the changes back to file
+        try {         //if prev file exists, delete it and replace with new empty file
             if (!file.exists()) {
                 file.mkdir();
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-
-        //Writing to empty txt file
-        try {
+        try {         //Writing to empty txt file
             writeToFile(tasks);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
@@ -111,40 +112,58 @@ public class Storage {
         PrintWriter printWriter = new PrintWriter(fileWriter);
         for (Task t: tasks) {
             String taskToAppend = "";
-
-            //Identify task type
-            if (t instanceof Todo) {
-                taskToAppend += "T~";
-            } else if (t instanceof Deadline) {
-                taskToAppend += "D~";
-            } else if (t instanceof Event) {
-                taskToAppend += "E~";
-            }
-
-            //Identify if task is done
-            if (t.getDone()) {
-                taskToAppend += "X~";
-            } else {
-                taskToAppend += " ~";
-            }
-            taskToAppend += t.getTaskName() + "~";
-            if (t instanceof Deadline) {
-                Deadline tempTask = (Deadline) t;
-                String date = tempTask.getDate().toString();
-                if (tempTask.getTime() != null) {
-                    date += "~" + tempTask.getTime().toString();
-                }
-                taskToAppend += date.trim();
-            } else if (t instanceof Event) {
-                Event tempTask = (Event) t;
-                String date = tempTask.getDate().toString();
-                if (tempTask.getTime() != null) {
-                    date += "~" + tempTask.getTime().toString();
-                }
-                taskToAppend += date.trim();
-            }
+            taskToAppend += taskText(t);
+            taskToAppend += getDateTime(t);
             printWriter.println(taskToAppend);
         }
         printWriter.close();
+    }
+
+    /**
+     * Abstracted function for writeToFile function that appends task type, task done status and task name
+     * @param t task to check for
+     * @return string containing task type, task done status and task name
+     */
+    public static String taskText(Task t) {
+        String s = "";
+        if (t instanceof Todo) {            //Identify task type
+            s += "T~";
+        } else if (t instanceof Deadline) {
+            s += "D~";
+        } else if (t instanceof Event) {
+            s += "E~";
+        }
+        if (t.getDone()) {            //Identify if task is done
+            s += "X~";
+        } else {
+            s += " ~";
+        }
+        s += t.getTaskName() + "~";
+        return s;
+    }
+
+    /**
+     * Abstracted function for writeToFile function that extracts date and time from a task
+     * @param t the task to check
+     * @return string containing the date and time if they exist
+     */
+    public static String getDateTime(Task t) {
+        String s = "";
+        if (t instanceof Deadline) {
+            Deadline tempTask = (Deadline) t;
+            String date = tempTask.getDate().toString();
+            if (tempTask.getTime() != null) {
+                date += "~" + tempTask.getTime().toString();
+            }
+            s += date.trim();
+        } else if (t instanceof Event) {
+            Event tempTask = (Event) t;
+            String date = tempTask.getDate().toString();
+            if (tempTask.getTime() != null) {
+                date += "~" + tempTask.getTime().toString();
+            }
+            s += date.trim();
+        }
+        return s;
     }
 }
