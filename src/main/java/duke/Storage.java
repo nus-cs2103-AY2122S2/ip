@@ -65,21 +65,18 @@ public class Storage {
             if (taskLetter.equals("E")) {
                 int eventAtIndex = descriptionWithTime.indexOf(" (at:");
                 String eventDesc = descriptionWithTime.substring(0, eventAtIndex);
-                int eventDateIndex = eventAtIndex + 5;
-                String eventDate = descriptionWithTime.substring(eventDateIndex, descriptionWithTimeIndex).trim();
+                String eventDate = descriptionWithTime.substring(eventAtIndex + 5, descriptionWithTimeIndex).trim();
                 LocalDateTime eventTime = LocalDateTime.parse(eventDate, displayFormat);
                 taskToAdd = new Event(eventDesc, eventTime.format(inputFormat));
             } else if (taskLetter.equals("D")) {
                 int deadlineAtIndex = descriptionWithTime.indexOf(" (by: ");
                 String deadlineDesc = descriptionWithTime.substring(0, deadlineAtIndex);
-                int deadlineDateIndex = deadlineAtIndex + 6;
-                String deadlineDate = descriptionWithTime.substring(deadlineDateIndex, descriptionWithTimeIndex).trim();
+                String deadlineDate = descriptionWithTime.substring(deadlineAtIndex + 6, descriptionWithTimeIndex).trim();
                 LocalDateTime deadlineTime = LocalDateTime.parse(deadlineDate, displayFormat);
                 taskToAdd = new Deadline(deadlineDesc, deadlineTime.format(inputFormat));
             } else {
                 taskToAdd = new Todo(descriptionWithTime);
             }
-
             if (isDone) {
                 taskToAdd.markAsDone();
             }

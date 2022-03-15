@@ -13,7 +13,8 @@ public class Deadline extends Task {
     protected LocalDateTime by;
 
     /**
-     * Constructor for a new instance of Deadline, which entails the name of the Deadline, and the Date & Time of the Deadline
+     * Constructor for a new instance of Deadline, which entails the name of the Deadline, and the Date & Time of the
+     * Deadline
      *
      * @param taskName Name of the deadline
      * @param by Date & Time of the deadline

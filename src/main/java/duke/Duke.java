@@ -3,8 +3,6 @@ package duke;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.ByteArrayOutputStream;
-import java.util.Scanner;
-
 
 /**
  * Duke Chat Bot that allows users to track tasks.
@@ -55,6 +53,8 @@ public class Duke  {
             System.setOut(oldStream);
             return outputStream.toString();
         } catch (DukeException | IOException e) {
+            System.out.println(e);
+        } catch (RuntimeException e) {
             System.out.println(e);
         }
         return "Invalid input.";
