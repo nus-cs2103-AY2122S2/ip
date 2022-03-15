@@ -1,5 +1,7 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.WrongDateFormatException;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -7,6 +9,11 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 import duke.ui.Ui;
+
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Class which handles the adding of commands to task list
@@ -54,32 +61,39 @@ public class AddCommand extends Command {
      * @param storage To deal with saving of task list
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         assert tasks != null;
         this.tasks = tasks;
         String[] processedInput;
-        String time;
+        String time = null;
         String details;
-        switch (type) {
-        case "todo":
-            added = new ToDo(input);
-            break;
-        case "event":
-            processedInput = input.split("/at ", 2);
-            details = processedInput[0];
-            time = processedInput[1];
-            assert time != null;
-            added = new Event(details, time);
-            break;
-        case "deadline":
-            processedInput = input.split("/by ", 2);
-            details = processedInput[0];
-            time = processedInput[1];
-            assert time != null;
-            added = new Deadline(details, time);
-            break;
-        default:
-            break;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        try {
+            switch (type) {
+            case "todo":
+                added = new ToDo(input);
+                break;
+            case "event":
+                processedInput = input.split("/at ", 2);
+                details = processedInput[0];
+                time = processedInput[1];
+                assert time != null;
+                LocalDateTime date = LocalDateTime.parse(time, formatter);
+                added = new Event(details, date);
+                break;
+            case "deadline":
+                processedInput = input.split("/by ", 2);
+                details = processedInput[0];
+                time = processedInput[1];
+                assert time != null;
+                LocalDateTime deadline = LocalDateTime.parse(time, formatter);
+                added = new Deadline(details, deadline);
+                break;
+            default:
+                break;
+            }
+        } catch (DateTimeParseException e) {
+            throw new WrongDateFormatException(time);
         }
         this.tasks.add(added);
         storage.saveFile(tasks);

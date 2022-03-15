@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -15,10 +16,9 @@ public class Event extends Task {
      * @param detail details of the task
      * @param date date of which the task is due
      */
-    public Event(String detail, String date) {
+    public Event(String detail, LocalDateTime date) {
         super(detail);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        this.date = LocalDateTime.parse(date, formatter);
+        this.date = date;
     }
 
     /**
@@ -52,10 +52,8 @@ public class Event extends Task {
      * Updates the date of the task
      */
     @Override
-    public void updateDate(String update) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        LocalDateTime updateddate = LocalDateTime.parse(update, formatter);
-        this.date = updateddate;
+    public void updateDate(LocalDateTime update) {
+        this.date = update;
     }
 
     /**

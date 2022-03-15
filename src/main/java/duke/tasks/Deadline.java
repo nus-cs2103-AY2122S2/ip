@@ -1,5 +1,6 @@
 package duke.tasks;
 
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -7,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * Class for deadline type task
  * stores the due date of the task
  */
-public class Deadline extends Task {
+public class Deadline extends Task{
     private LocalDateTime deadline;
 
     /**
@@ -15,10 +16,9 @@ public class Deadline extends Task {
      * @param detail details of the task
      * @param deadline date of which the task is due
      */
-    public Deadline(String detail, String deadline) {
+    public Deadline(String detail, LocalDateTime deadline) {
         super(detail);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        this.deadline = LocalDateTime.parse(deadline, formatter);
+        this.deadline = deadline;
     }
 
     /**
@@ -52,9 +52,8 @@ public class Deadline extends Task {
      * Updates the date of the task
      */
     @Override
-    public void updateDate(String update) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        this.deadline = LocalDateTime.parse(update, formatter);
+    public void updateDate(LocalDateTime update) {
+        this.deadline = update;
     }
 
     /**

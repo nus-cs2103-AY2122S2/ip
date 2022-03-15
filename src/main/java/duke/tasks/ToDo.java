@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
+
 /**
  * Class for todo type tasks
  */
@@ -43,7 +45,7 @@ public class ToDo extends Task {
      * Does nothing since todo has no date
      */
     @Override
-    public void updateDate(String update) {
+    public void updateDate(LocalDateTime update) {
     }
 
     /**

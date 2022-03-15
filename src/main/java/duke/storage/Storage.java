@@ -3,6 +3,8 @@ package duke.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import duke.tasks.Deadline;
@@ -23,11 +25,11 @@ public class Storage {
     }
 
     /**
-     * Creates the required directory and file if it does not exsist
+     * Creates the required directory and file if it does not exist
      * if not, loads the correct task data stored in the text file and returns the tasklist
      *
      * @return Tasklist loaded from the text file
-     * @throws IOException
+     * @throws IOException error from loading file
      */
     public TaskList load() throws IOException {
         //load files
@@ -46,6 +48,8 @@ public class Storage {
             String detail;
             String date;
             Task toAdd = null;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            LocalDateTime parsedDate;
             while (s.hasNext()) {
                 String input = s.nextLine();
                 String[] inputSplit = input.split(" \\| ", 3);
@@ -60,13 +64,15 @@ public class Storage {
                     inputSplit = inputSplit[2].split(" \\| ");
                     detail = inputSplit[0];
                     date = inputSplit[1];
-                    toAdd = new Event(detail, date);
+                    parsedDate = LocalDateTime.parse(date, formatter);
+                    toAdd = new Event(detail, parsedDate);
                     break;
                 case "D":
                     inputSplit = inputSplit[2].split(" \\| ");
                     detail = inputSplit[0];
                     date = inputSplit[1];
-                    toAdd = new Deadline(detail, date);
+                    parsedDate = LocalDateTime.parse(date, formatter);
+                    toAdd = new Deadline(detail, parsedDate);
                     break;
                 default:
                     break;

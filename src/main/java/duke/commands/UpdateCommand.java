@@ -1,10 +1,15 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.WrongDateFormatException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class UpdateCommand extends Command{
     private TaskList tasks;
@@ -22,7 +27,7 @@ public class UpdateCommand extends Command{
         assert processedInput.length == 3;
         index = Integer.parseInt(processedInput[0])-1;
         type = processedInput[1];
-        update = processedInput[2];
+        update = processedInput[2].trim();
     }
 
     /**
@@ -51,16 +56,22 @@ public class UpdateCommand extends Command{
      * @param storage To deal with saving of task list
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         this.tasks = tasks;
         Task toUpdate = tasks.get(index);
-        switch (type) {
-        case "detail":
-            toUpdate.updateDetail(update);
-            break;
-        case "time":
-            toUpdate.updateDate(update);
-            break;
+        try {
+            switch (type) {
+            case "detail":
+                toUpdate.updateDetail(update);
+                break;
+            case "time":
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                LocalDateTime formatUpdate = LocalDateTime.parse(update, formatter);
+                toUpdate.updateDate(formatUpdate);
+                break;
+            }
+        } catch (DateTimeParseException e) {
+            throw new WrongDateFormatException(update);
         }
         this.tasks.set(index, toUpdate);
         storage.saveFile(this.tasks);

@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
+
 /**
  * base abstract class from which all tasks inherit from
  * handles basic functionality such as marking and unmarking as done
@@ -33,7 +35,7 @@ public abstract class Task {
     /**
      * Abstract method to update Date of the task
      */
-    public abstract void updateDate(String Update);
+    public abstract void updateDate(LocalDateTime Update);
 
     /**
      * Abstract method to update Detail of the task

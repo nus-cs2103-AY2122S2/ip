@@ -42,6 +42,7 @@ public class Parser {
         case "unmark":
         case "delete":
             String detail = inputSplit[1];
+            detail.trim();
             if (!isInteger(detail)) {
                 throw new IncorrectValueException();
             }
