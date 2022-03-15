@@ -6,7 +6,7 @@ import java.util.Scanner;
  * class that takes care of ui
  */
 public class Ui {
-    private Scanner scanner;
+    private final Scanner scanner;
     private String currMessage = "";
 
     public Ui() {

@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -27,9 +30,13 @@ public class Storage {
      *
      * @return a list of tasks loaded from files
      */
-    public List<Task> load() {
+    public List<Task> load() throws IOException {
         List<Task> tempList = new ArrayList<>();
         File file = new File(filePath);
+        Path path = Paths.get(filePath);
+        if (path.getParent() != null) {
+            Files.createDirectories(path.getParent().getFileName());
+        }
         try {
             Scanner fileScanner = new Scanner(file);
             while (fileScanner.hasNextLine()) {
@@ -42,7 +49,7 @@ public class Storage {
                 } else if (token[0].equals("D")) {
                     tempList.add(new Deadline(token[2], token[1], LocalDateTime.parse(token[3], dtf)));
                 } else if (token[0].equals("E")) {
-                    tempList.add(new Event(token[2], token[1], token[3]));
+                    tempList.add(new Event(token[2], token[1], LocalDateTime.parse(token[3], dtf)));
                 } else {
                     throw new ExceptionHandler("Invalid task type");
                 }

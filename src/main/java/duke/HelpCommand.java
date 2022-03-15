@@ -14,8 +14,8 @@ public class HelpCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.println("todo <taskname> : Adds a todo task to the tasklist");
-        ui.println("event <taskname> /by <location> : Adds an event task to the task list");
-        ui.println("deadline <taskname> /at dd/mm/yyyy HHmm : Adds a deadline task to the task list");
+        ui.println("event <taskname> /at <location> : Adds an event task to the task list");
+        ui.println("deadline <taskname> /by dd/mm/yyyy HHmm : Adds a deadline task to the task list");
         ui.println("list : Displays the task list");
         ui.println("done <index> : Marks a task at <index> as done");
         ui.println("delete <index> : Deletes a task at <index>");

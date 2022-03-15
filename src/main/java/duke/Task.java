@@ -4,10 +4,10 @@ import java.time.format.DateTimeFormatter;
  * parent class for task
  */
 public class Task {
+    protected static final DateTimeFormatter outDtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     protected String d;
     protected String type;
     protected boolean isDone;
-    protected final DateTimeFormatter outDtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
      * constructor for Task

@@ -115,10 +115,10 @@ Shows a list of commands.
 **Expected outcome:**
 ```
 todo <taskname> : Adds a todo task to the tasklist
-event <taskname> /by <location> : Adds an event task to the task list
-deadline <taskname> /at dd/mm/yyyy HHmm : Adds a deadline task to the task list
+event <taskname> /at dd/mm/yyyy HHmm : Adds an event task to the task list
+deadline <taskname> /by dd/mm/yyyy HHmm : Adds a deadline task to the task list
 list : Displays the task list
-done <index> : Marks a task at <index> as done
+mark <index> : Marks a task at <index> as done
 delete <index> : Deletes a task at <index>
 find <keyword> : Displays all tasks with <keyword>
 bye : Exits the program

@@ -45,11 +45,11 @@ public class Deadline extends Task {
     /**
      * Overriding ToString method
      *
-     * @return
+     * @return Deadline String
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + due.format(outDtf) + ")";
+        return "[D]" + super.toString() + " (by: " + getDue() + ")";
     }
 
 }

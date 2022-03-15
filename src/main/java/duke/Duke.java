@@ -33,7 +33,7 @@ public class Duke extends Application {
      *
      * @param filePath path to source file
      */
-    public Duke(String filePath) {
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
@@ -61,8 +61,8 @@ public class Duke extends Application {
     }
 
 
-    public static void main(String[] args) {
-        new Duke("/Users/gigi/Desktop/CS2103T/duke.txt").run();
+    public static void main(String[] args) throws IOException {
+        new Duke("duke.txt").run();
     }
 
     @Override
