@@ -1,24 +1,56 @@
-# Duke project template
+# Duke project
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is a chatbot with basic functionality to add, remove, update and delete tasks. It has a basic GUI written with JavaFX.
+It saves added tasks to a file called `duke.txt` within the same folder, and loads from this file if it already exists.
 
-## Setting up in Intellij
+## Adding a Task
+There are three types of Tasks: Todo, Deadline and Event.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+To add a Todo: `todo <TASKNAME>`<br>
+Example: `todo borrow book` adds the task `borrow book` to Duke.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+To add a Deadline: `deadline <TASKNAME> /by <DEADLINE>`<br>
+The format for `DEADLINE` is `YYYY-MM-DD HHMM`.<br>
+Example: `deadline read book /by 2012-12-12 1530` adds a deadline to 
+`read book` by `12th December 2012, 3:30PM`.
+
+To add an Event: `event <TASKNAME> /at <STARTDATE> <ENDDATE>`<br>
+The format for `STARTDATE` and `ENDDATE` is both `YYYY-MM-DD HHMM`.<br>
+Example: `event house warming /at 2012-12-12 1530 2012-12-12 1700` adds an event
+for `housewarming` which takes place from `12th December 2012, 3:30PM` to `12th December 2012, 5PM`.
+
+## Removing a Task
+To remove a task, type `delete <taskID>`.<br>
+Example: `delete 3` deletes the task at index 3 if it exists.
+
+## Viewing Tasks
+To view your list of tasks, simply type `list`.
+
+## Marking and Unmarking tasks
+To mark a task as done, type `mark <taskID>`.    
+To unmark a task as done, type `unmark <taskID>`.  
+Example: `mark 3` or `unmark 3` either marks or unmarks the task at index 3 respectively.
+
+## Finding tasks
+To find a task that has a name containing the specific keyword, type `find <keyword>`.  
+Example: `find library` returns all the tasks that contain the keyword `library`.
+
+## Update task name
+To update a task's name, type `update name <taskID> <NEWNAME>`.
+Example: `update name 3 Borrow Book` updates the task name at index 3 to `Borrow Book`.
+
+## Update deadline
+To update a Deadline, type `update deadline <taskID> <NEWDEADLINE>`<br>
+You only can use this command on tasks that are of `Deadline` type.<br>
+The format for `NEWDEADLINE` is `YYYY-MM-DD HHMM`.<br>
+Example: `update deadline 5 2012-12-12 0400` updates the deadline at index 5 to `12th December 2012, 4AM`.
+
+## Update event time
+To update an Event timing, type `update event time <taskID> <STARTTIMING> <ENDTIMING>`<br>
+You only can use this command on tasks that are of `Event` type.<br>
+The format for `STARTTIMING` and `ENDTIMING` is `YYYY-MM-DD HHMM`.<br>
+Example: `update event time 4 2012-12-12 0400 2013-01-01 0600` updates the event at index 4
+to start on `12th December 2012, 4AM` and end on `1st January 2013, 6AM`.
+
+## Exit and save tasks
+To exit and save current tasks, simply type `bye`.
