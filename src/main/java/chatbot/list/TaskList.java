@@ -23,10 +23,11 @@ import chatbot.task.ToDo;
  * Represents a list of Tasks managed by ChatBot for the user.
  */
 public class TaskList extends ChatBotList<Task> {
-
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
+    private static final String DEADLINE_KEYWORD = "by";
+    private static final String EVENT_KEYWORD = "at";
 
     private final Set<String> validTypes =
             Stream.of(TODO, DEADLINE, EVENT).collect(Collectors.toCollection(HashSet::new));
@@ -56,6 +57,46 @@ public class TaskList extends ChatBotList<Task> {
     public String add(String[] titleArgs, String[] timestampArgs)
         throws ChatBotException {
         String type = titleArgs[0];
+        handleAddErrorMessages(type, titleArgs, timestampArgs);
+
+        String title = combineArgs(titleArgs);
+        String other = combineArgs(timestampArgs);
+        Task task;
+        Timestamp timestamp;
+
+        switch (type) {
+        case DEADLINE:
+            if (!timestampArgs[0].equals(DEADLINE_KEYWORD)) {
+                throw new ChatBotException(
+                        "The correct format for adding a deadline is "
+                                + "deadline <name of task> /by <date or timestamp of task>"
+                );
+            }
+            timestamp = new Timestamp(other);
+            task = new Deadline(title, timestamp);
+            break;
+        case EVENT:
+            if (!timestampArgs[0].equals(EVENT_KEYWORD)) {
+                throw new ChatBotException(
+                        "The correct format for adding an event is "
+                                + "event <name of task> /at <date or timestamp of task>"
+                );
+            }
+            timestamp = new Timestamp(other);
+            task = new Event(title, timestamp);
+            break;
+        default:
+            throw new ChatBotException();
+        }
+        insert(task);
+        return String.format(
+                "This %s has been added to your task list!%n             %d. %s",
+                type, getNumItems(), task
+        );
+    }
+
+    private void handleAddErrorMessages(String type, String[] titleArgs, String[] timestampArgs)
+            throws ChatBotException {
         if (!validTypes.contains(type)) {
             throw new ChatBotException();
         }
@@ -68,6 +109,11 @@ public class TaskList extends ChatBotList<Task> {
             );
         }
         if (timestampArgs.length <= 1) {
+            String keyword = type.equals(DEADLINE) ? DEADLINE_KEYWORD : EVENT_KEYWORD;
+            if (timestampArgs.length == 1 && !timestampArgs[0].equals(keyword)) {
+                throw new ChatBotException(String.format("You need to include /%s in your command to add a %s "
+                        + "traveller!", keyword, type));
+            }
             throw new ChatBotException(
                     String.format(
                             "You need to key in %s traveller!",
@@ -78,45 +124,6 @@ public class TaskList extends ChatBotList<Task> {
             );
         }
 
-        String title = combineArgs(titleArgs);
-        String other = combineArgs(timestampArgs);
-
-        switch (type) {
-        case DEADLINE:
-            if (!timestampArgs[0].equals("by")) {
-                throw new ChatBotException(
-                        "The correct format for adding a deadline is "
-                                + "deadline <name of task> /by <date or timestamp of task>"
-                    );
-            } else {
-                Timestamp by = new Timestamp(other);
-                Deadline deadline = new Deadline(title, by);
-                insert(deadline);
-                return String.format(
-                    "This deadline has been added to your task list!%n             %d. %s",
-                    getNumItems(),
-                    deadline
-                );
-            }
-        case EVENT:
-            if (!timestampArgs[0].equals("at")) {
-                throw new ChatBotException(
-                        "The correct format for adding an event is "
-                                + "event <name of task> /at <date or timestamp of task>"
-                );
-            } else {
-                Timestamp at = new Timestamp(other);
-                Event event = new Event(title, at);
-                insert(event);
-                return String.format(
-                    "This event has been added to your task list!%n             %d. %s",
-                    getNumItems(),
-                    event
-                );
-            }
-        default:
-            throw new ChatBotException();
-        }
     }
 
     /**

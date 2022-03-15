@@ -3,6 +3,8 @@ package chatbot.util;
 import java.util.Random;
 
 import chatbot.list.ChatBotList;
+import chatbot.list.ContactList;
+import chatbot.list.TaskList;
 
 
 /**
@@ -114,5 +116,13 @@ public class Ui {
         }
         guide = guide.concat("\n");
         return guide;
+    }
+
+    public String createTaskResponse(String message, TaskList taskList) {
+        return message.concat("\n").concat(printNumItems(taskList));
+    }
+
+    public String createContactResponse(String message, ContactList contactList) {
+        return message.concat("\n").concat(printNumItems(contactList));
     }
 }
