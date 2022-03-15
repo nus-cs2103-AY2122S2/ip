@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "narcibot.Narcibot"
+    mainClassName = "narcibot.Launcher"
 }
 
 shadowJar {

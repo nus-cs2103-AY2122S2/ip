@@ -35,6 +35,10 @@ public class TaskList {
         }
     }
 
+    public TaskList() {
+        list = new ArrayList<>();
+    }
+
     /**
      * Stores the tasks into the file given by fileWriter.
      *

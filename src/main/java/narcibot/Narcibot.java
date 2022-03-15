@@ -45,6 +45,7 @@ public class Narcibot extends Application {
             taskList = new TaskList(storage.load());
         } catch (IOException e) {
             ui.noFile();
+            taskList = new TaskList();
         }
     }
 
@@ -157,12 +158,6 @@ public class Narcibot extends Application {
                 break;
             }
         }
-
-        try {
-                taskList.store(storage.store());
-        } catch (IOException e) {
-            System.out.println("File not found");
-        }
     }
 
     private boolean command(String[] command) {
@@ -173,6 +168,8 @@ public class Narcibot extends Application {
                     throw new IncorrectFormatException("Please enter only one word for this command");
                 }
                 ui.bye();
+                taskList.store(storage.store());
+                System.exit(0);
                 return true;
             case "list":
                 if (command.length != 1) {
@@ -250,7 +247,7 @@ public class Narcibot extends Application {
             }
         }  catch (NumberFormatException e) {
             System.out.println("Are you even trying to specify a task? Please enter in digits if you're wondering.");
-        } catch (IncorrectFormatException e) {
+        } catch (IncorrectFormatException | IOException e) {
             System.out.println(e.getMessage());
         }
         return false;
