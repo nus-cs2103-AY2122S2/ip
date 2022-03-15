@@ -1,29 +1,39 @@
 # User Guide
 
-## Features 
+## Features
 
-### Feature-ABC
+### Keep track of your tasks with BroDuke.
 
-Description of the feature.
+Create, delete, and mark your todos/deadlines/events.
 
-### Feature-XYZ
+### Search through your tasks easily.
 
-Description of the feature.
+Just use the find command with a search phrase.
+
+### Maintain your list of tasks in storage between sessions.
+
+Save data will be saved at {duke_directory}/data/duke.txt
 
 ## Usage
 
-### `Keyword` - Describe action
+All commands are text-based and should be typed into the input field. Here are some example commands:
 
-Describe the action and its outcome.
+### `todo` - create a new todo
 
-Example of usage: 
+Example usage:
 
-`keyword (optional arguments)`
+`todo (description)`
 
-Expected outcome:
+### `deadline` - create a new task with a deadline
 
-Description of the outcome.
+Example usage:
 
-```
-expected output
-```
+`deadline (description) /by (yyyy-mm-dd)`
+
+### `mark` - mark a task as completed
+
+Example usage:
+
+`mark (task number)`
+
+### For a comprehensive list of all features, use the `help` command.
