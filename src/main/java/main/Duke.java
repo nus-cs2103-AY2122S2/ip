@@ -90,6 +90,8 @@ public class Duke {
 
     /**
      * Main function that is run on startup of the bot.
+     * 
+     * @param  args      Arguments for main function
      */
     public static void main(String[] args) {
         new Duke().run();

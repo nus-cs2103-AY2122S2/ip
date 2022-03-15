@@ -109,8 +109,7 @@ public class Parser {
         String wrongDateTimeFormat = "Sorry Sir, the date/time needs to be in the format: YYYY-MM-DD HH:MM";
         LocalDate taskDate;
         LocalTime taskTime;
-        if (type.equals("deadline") || type.equals("d")
-                || type.equals("event") || type.equals("e")) { // is a deadline/event task
+        if (type.equals("deadline") || type.equals("d") || type.equals("event") || type.equals("e")) { 
             String[] inputStringArray = inputText.split(" /by ");
             try {
                 String[] taskNameArray = inputStringArray[0].split(" ");
@@ -154,7 +153,6 @@ public class Parser {
             }
             newTask = new Todo(taskName);
         }
-
         return newTask;
     }
 

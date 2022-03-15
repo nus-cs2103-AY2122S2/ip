@@ -14,8 +14,10 @@ public class ParserTextUi {
     private static final String UNRECOGNIZED_COMMAND = "Sorry Sir, I do not understand that command.";
     private static final String NOT_VALID_NUMBER = "Please enter a valid number Sir.";
     private static final String COMMAND_REQUIRES_NUMBER = "Sorry Sir, this command requires a number.";
-    private static final String MISSING_TASK_INFO = "Sorry Sir, the <%s> command cannot be empty.";
     private static final String BYE_MESSAGE = "Farewell Sir. May you have a wonderful day.";
+    private static final String MISSING_DATE_TIME = "Sorry Sir, the description of <%s> is missing a date/time.";
+    private static final String MISSING_TASK_INFO = "Sorry Sir, the <%s> command cannot be empty.";
+    private static final String WRONG_DATE_TIME_FORMAT = "Sorry Sir, the date/time needs to be in the format: YYYY-MM-DD HH:MM";
     /**
     * Displays the farewell message to the user.
     */
@@ -108,72 +110,104 @@ public class ParserTextUi {
     */
     public static Task createNewTaskFromInput(String type, String inputText) throws DukeException {
         Task newTask;
-        String taskName;
-        String taskDateTime;
-        String missingDateTime = "Sorry Sir, the description of <" + type + "> is missing a date/time.";
-        String missingTaskInfo = "Sorry Sir, the <" + type + "> command cannot be empty.";
-        String wrongDateTimeFormat = "Sorry Sir, the date/time needs to be in the format: YYYY-MM-DD HH:MM";
-
         if (type.equals("deadline")) { // is a deadline task
-            String[] inputStringArray = inputText.split(" /by ");
-            try {
-                taskName = inputStringArray[0].substring(9);
-            } catch (StringIndexOutOfBoundsException exception) {
-                throw new DukeException(missingTaskInfo);
-            }
-            try {
-                taskDateTime = inputStringArray[1];
-            } catch (Exception ArrayIndexOutOfBoundsException) {
-                throw new DukeException(missingDateTime);
-            }
-            try {
-                String[] taskDateTimeArray = taskDateTime.split(" ");
-                LocalDate taskDate = LocalDate.parse(taskDateTimeArray[0]);
-                LocalTime taskTime = null;
-                if (taskDateTimeArray.length > 1) {
-                    taskTime = LocalTime.parse(taskDateTimeArray[1]);
-                }
-                newTask = new Deadline(taskName, taskDate, taskTime);
-            } catch (DateTimeParseException exception) {
-                throw new DukeException(wrongDateTimeFormat);
-            }
-
+            newTask = createDeadlineFromInput(inputText);
         } else if (type.equals("event")) { // is an event task
-            String[] inputStringArray = inputText.split(" /at ");
-            try {
-                taskName = inputStringArray[0].substring(6);
-            } catch (StringIndexOutOfBoundsException exception) {
-                throw new DukeException(missingTaskInfo);
-            }
-            try {
-                taskDateTime = inputStringArray[1];
-            } catch (Exception ArrayIndexOutOfBoundsException) {
-                throw new DukeException(missingDateTime);
-            }
-            try {
-                String[] taskDateTimeArray = taskDateTime.split(" ");
-                LocalDate taskDate = LocalDate.parse(taskDateTimeArray[0]);
-                LocalTime taskTime = null;
-                if (taskDateTimeArray.length > 1) {
-                    taskTime = LocalTime.parse(taskDateTimeArray[1]);
-                }
-                newTask = new Event(taskName, taskDate, taskTime);
-            } catch (DateTimeParseException exception) {
-                throw new DukeException(wrongDateTimeFormat);
-            }
-
+            newTask = createEventFromInput(inputText);
         } else { // is a to-do task
-            try {
-                taskName = inputText.substring(5);
-            } catch (StringIndexOutOfBoundsException exception) {
-                throw new DukeException(missingTaskInfo);
-            }
-            newTask = new Todo(taskName);
+            newTask = createTodoFromInput(inputText);
         }
-
         return newTask;
     }
-
+    /**
+    * Returns the Deadline created from the user inputText.
+    *
+    * @param    inputText     input of the user
+    * @return                 the created Deadline
+    * @throws   DukeException throws a DukeException
+    * @see      Task
+    */
+    private static Task createDeadlineFromInput(String inputText) throws DukeException {
+        Task newTask;
+        String taskName;
+        String taskDateTime;
+        String[] inputStringArray = inputText.split(" /by ");
+        try {
+            taskName = inputStringArray[0].substring(9);
+        } catch (StringIndexOutOfBoundsException exception) {
+            throw new DukeException(String.format(MISSING_TASK_INFO, "deadline"));
+        }
+        try {
+            taskDateTime = inputStringArray[1];
+        } catch (Exception ArrayIndexOutOfBoundsException) {
+            throw new DukeException(String.format(MISSING_DATE_TIME, "deadline"));
+        }
+        try {
+            String[] taskDateTimeArray = taskDateTime.split(" ");
+            LocalDate taskDate = LocalDate.parse(taskDateTimeArray[0]);
+            LocalTime taskTime = null;
+            if (taskDateTimeArray.length > 1) {
+                taskTime = LocalTime.parse(taskDateTimeArray[1]);
+            }
+            newTask = new Deadline(taskName, taskDate, taskTime);
+        } catch (DateTimeParseException exception) {
+            throw new DukeException(WRONG_DATE_TIME_FORMAT);
+        }
+        return newTask;
+    }
+    /**
+    * Returns the Event created from the user inputText.
+    *
+    * @param    inputText     input of the user
+    * @return                 the created Event
+    * @throws   DukeException throws a DukeException
+    * @see      Task
+    */
+    private static Task createEventFromInput(String inputText) throws DukeException {
+        Task newTask;
+        String taskName;
+        String taskDateTime;
+        String[] inputStringArray = inputText.split(" /at ");
+        try {
+            taskName = inputStringArray[0].substring(6);
+        } catch (StringIndexOutOfBoundsException exception) {
+            throw new DukeException(String.format(MISSING_TASK_INFO, "event"));
+        }
+        try {
+            taskDateTime = inputStringArray[1];
+        } catch (Exception ArrayIndexOutOfBoundsException) {
+            throw new DukeException(String.format(MISSING_DATE_TIME, "event"));
+        }
+        try {
+            String[] taskDateTimeArray = taskDateTime.split(" ");
+            LocalDate taskDate = LocalDate.parse(taskDateTimeArray[0]);
+            LocalTime taskTime = null;
+            if (taskDateTimeArray.length > 1) {
+                taskTime = LocalTime.parse(taskDateTimeArray[1]);
+            }
+            newTask = new Event(taskName, taskDate, taskTime);
+        } catch (DateTimeParseException exception) {
+            throw new DukeException(WRONG_DATE_TIME_FORMAT);
+        }
+        return newTask;
+    }
+    /**
+    * Returns the Todo created from the user inputText.
+    *
+    * @param    inputText     input of the user
+    * @return                 the created Todo
+    * @throws   DukeException throws a DukeException
+    * @see      Task
+    */
+    private static Task createTodoFromInput(String inputText) throws DukeException {
+        String taskName;
+        try {
+            taskName = inputText.substring(5);
+        } catch (StringIndexOutOfBoundsException exception) {
+            throw new DukeException(String.format(MISSING_TASK_INFO, "todo"));
+        }
+        return new Todo(taskName);
+    }
     /**
     * Returns the integer index of the Task in the ArrayList from user input String,
     * after processing the inputText String from the user.

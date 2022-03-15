@@ -3,7 +3,6 @@ package tasks;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-// import java.time.temporal.ChronoUnit;
 
 /**
 * A Event class extending the Task class to create a task for the user to do.

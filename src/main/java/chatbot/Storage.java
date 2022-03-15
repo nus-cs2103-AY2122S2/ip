@@ -44,12 +44,10 @@ public class Storage {
     * @throws DukeException throws a DukeException
     */
     public void saveData(TaskList taskList) throws DukeException {
-        // create a directory if it doesn't exist
         File dataFile = new File(this.fileDirectory);
-        if (!dataFile.exists()) {
+        if (!dataFile.exists()) { // create a directory if it doesn't exist
             dataFile.mkdirs();
         }
-
         try {
             FileWriter fileWriter = new FileWriter(this.filePath, false);
             PrintWriter printWriter = new PrintWriter(fileWriter);
@@ -60,37 +58,26 @@ public class Storage {
                     dataEntry += task.getIsDone() ? "/;DONE" : "/;NOT_DONE";
                     dataEntry += "/;" + task.getTaskName();
                     dataEntry += "\n";
-
                 } else if (task instanceof Deadline) {
                     Deadline deadline = (Deadline) task;
                     dataEntry += "Deadline";
                     dataEntry += deadline.getIsDone() ? "/;DONE" : "/;NOT_DONE";
                     dataEntry += "/;" + deadline.getTaskName();
                     dataEntry += "/;" + deadline.getDate();
-                    if (deadline.getTime() == null) {
-                        dataEntry += "/;" + "null";
-                    } else {
-                        dataEntry += "/;" + deadline.getTime();
-                    }
+                    dataEntry += deadline.getTime() == null ? "/;" + "null" : "/;" + deadline.getTime();
                     dataEntry += "\n";
-
                 } else if (task instanceof Event) {
                     Event event = (Event) task;
                     dataEntry += "Event";
                     dataEntry += event.getIsDone() ? "/;DONE" : "/;NOT_DONE";
                     dataEntry += "/;" + event.getTaskName();
                     dataEntry += "/;" + event.getDate();
-                    if (event.getTime() == null) {
-                        dataEntry += "/;" + "null";
-                    } else {
-                        dataEntry += "/;" + event.getTime();
-                    }
+                    dataEntry += event.getTime() == null ? "/;" + "null" : "/;" + event.getTime();
                     dataEntry += "\n";
                 }
                 printWriter.printf(dataEntry);
             }
             printWriter.close();
-
         } catch (IOException exception) {
             throw new DukeException(UNREADABLE_FILE);
         }
@@ -104,7 +91,7 @@ public class Storage {
     */
     public void loadData(TaskList taskList) throws DukeException {
         try {
-            // File directory = new File("./");
+            // File directory = new File("./"); // used to check directory java starts at
             // System.out.println(directory.getAbsolutePath()); // used to check directory java starts at
 
             // check if there is a file at all

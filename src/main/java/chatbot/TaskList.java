@@ -106,18 +106,18 @@ public class TaskList {
     public String markTask(int taskIndex, String type) throws DukeException {
         String reply = "";
         // check command
-        boolean markAsDone = false; // default is "unmark"
+        boolean isMarkedAsDone = false; // default is "unmark"
         if (type.equals("mark") || type.equals("m")) {
-            markAsDone = true;
+            isMarkedAsDone = true;
         }
         if (taskIndex >= this.taskList.size()) { // invalid integer input
             throw new DukeException(NO_SUCH_TASK);
         }
 
         Task task = this.taskList.get(taskIndex);
-        task.markTask(markAsDone);
+        task.markTask(isMarkedAsDone);
 
-        if (markAsDone) {
+        if (isMarkedAsDone) {
             reply += "Very well Sir, I have marked this task as complete: ";
         } else {
             reply += "Very well Sir, I have marked this task as incomplete: ";
