@@ -120,44 +120,34 @@ public class ParsedAnswerHandler {
             case "update":
                 int idx = pa.getIndex();
                 Storage s = new Storage();
+
                 if (pa.getType().equals("Deadline")) {
                     Deadline currentTask = (Deadline) Storage.taskList.get(idx);
+                    Deadline updatedTask = null;
                     if (pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
-                        Deadline updatedTask = new Deadline(currentTask.getDescription(), pa.getDate());
-                        Storage.taskList.remove(idx);
-                        Storage.taskList.add(idx, updatedTask);
-                        s.save();
+                        updatedTask = new Deadline(currentTask.getDescription(), pa.getDate());
                     } else if (!pa.getDesc().isEmpty() && pa.getDate().isEmpty()) {
-                        Deadline updatedTask = new Deadline(pa.getDesc(), currentTask.getBy());
-                        Storage.taskList.remove(idx);
-                        Storage.taskList.add(idx, updatedTask);
-                        s.save();
+                       updatedTask = new Deadline(pa.getDesc(), currentTask.getBy());
                     } else if (!pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
-                        Deadline updatedTask = new Deadline(pa.getDesc(), pa.getDate());
-                        Storage.taskList.remove(idx);
-                        Storage.taskList.add(idx, updatedTask);
-                        s.save();
+                        updatedTask = new Deadline(pa.getDesc(), pa.getDate());
                     }
+                    Storage.taskList.remove(idx);
+                    Storage.taskList.add(idx, updatedTask);
                 }
 
                 if (pa.getType().equals("Event")) {
                     Event currentTask = (Event) Storage.taskList.get(idx);
+                    Event updatedTask = null;
                     if (pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
-                        Event updatedTask = new Event(currentTask.getDescription(), pa.getDate());
-                        Storage.taskList.remove(idx);
-                        Storage.taskList.add(idx, updatedTask);
-                        s.save();
+                        updatedTask = new Event(currentTask.getDescription(), pa.getDate());
                     } else if (!pa.getDesc().isEmpty() && pa.getDate().isEmpty()) {
-                        Event updatedTask = new Event(pa.getDesc(), currentTask.getAt());
-                        Storage.taskList.remove(idx);
-                        Storage.taskList.add(idx, updatedTask);
-                        s.save();
+                        updatedTask = new Event(pa.getDesc(), currentTask.getAt());
                     } else if (!pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
-                        Event updatedTask = new Event(pa.getDesc(), pa.getDate());
-                        Storage.taskList.remove(idx);
-                        Storage.taskList.add(idx, updatedTask);
-                        s.save();
+                        updatedTask = new Event(pa.getDesc(), pa.getDate());
                     }
+
+                    Storage.taskList.remove(idx);
+                    Storage.taskList.add(idx, updatedTask);
                 }
 
                 if (pa.getType().equals("Todo")) {
@@ -165,13 +155,12 @@ public class ParsedAnswerHandler {
                         ToDos updatedTask = new ToDos(pa.getDesc());
                         Storage.taskList.remove(idx);
                         Storage.taskList.add(idx, updatedTask);
-                        s.save();
                     }
                 }
-
+                
+                s.save();
                 return "Update successful";
         }
-
-        return "-1";
+        return "An unexpected error has occurred.";
     }
 }

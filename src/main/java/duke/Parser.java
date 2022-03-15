@@ -93,14 +93,22 @@ public class Parser {
             }
 
             String[] parsedDescAndDate = parsedContent[1].split("/date");
+
             if (parsedDescAndDate.length == 1) {
                 pa.setDesc(parsedDescAndDate[0]);
                 pa.setDate("");
                 return pa;
             } else if (parsedDescAndDate.length > 1) {
                 pa.setDesc(parsedDescAndDate[0]);
-                pa.setDate(parsedDescAndDate[1]);
-                return pa;
+                if (isDateValid(parsedDescAndDate[1])) {
+                    pa.setDate(parsedDescAndDate[1]);
+                    return pa;
+                } else {
+                    ParsedAnswer pError = new ParsedAnswer("error", -1);
+                    pError.setDesc("Format error. Please try again.");
+                    return pError;
+                }
+
             } else {
                 ParsedAnswer pError = new ParsedAnswer("error", -1);
                 pError.setDesc("Format error. Please try again.");
@@ -112,7 +120,6 @@ public class Parser {
             pa.setDesc("Format error. Please try again.");
             return pa;
         }
-
     }
 
     public ParsedAnswer parse() {
