@@ -6,7 +6,7 @@ package duke.task;
  */
 public class Task {
     private final String description;
-    private boolean completed;
+    private boolean isCompleted;
     private final char type;
 
     /**
@@ -20,7 +20,7 @@ public class Task {
         assert description.length() > 0 : "Task[Task] description must contain data.";
 
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
         this.type = type;
     }
 
@@ -39,7 +39,7 @@ public class Task {
      * @return Task completed.
      */
     public boolean getCompleted() {
-        return this.completed;
+        return this.isCompleted;
     }
 
     /**
@@ -48,7 +48,7 @@ public class Task {
      * @return X marks task is completed.
      */
     public String getStatusIcon() {
-        return (this.completed) ? "X" : " ";
+        return (this.isCompleted) ? "X" : " ";
     }
 
     /**
@@ -66,7 +66,7 @@ public class Task {
      * @param setCompleted setCompleted is whether task is done.
      */
     public void setCompleted(boolean setCompleted) {
-        this.completed = setCompleted;
+        this.isCompleted = setCompleted;
     }
 
     /**
