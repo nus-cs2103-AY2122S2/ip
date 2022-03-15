@@ -17,7 +17,7 @@ class DeadlineTest {
     }
 
     @Test
-    void toData() {
+    void testToData() {
         assertEquals("D:0:read book:2001-11-09",
                 new Deadline("read book", LocalDate.of(2001, 11, 9)).toData());
     }

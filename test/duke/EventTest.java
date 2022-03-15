@@ -16,7 +16,7 @@ class EventTest {
     }
 
     @Test
-    void toData() {
+    void testToData() {
         assertEquals("E:0:read book:2001-11-09",
                 new Event("read book", LocalDate.of(2001, 11, 9)).toData());
     }
