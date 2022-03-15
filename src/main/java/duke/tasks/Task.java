@@ -1,4 +1,4 @@
-package duke;
+package duke.tasks;
 
 /**
  * Represents a Task. A <code>Task</code> object corresponds to
@@ -12,13 +12,21 @@ public class Task {
     private String type;
     private String extension = "";
 
-
+    /**
+     * Constructor for a Task which does not have an extension.
+     * @param name
+     * @param type
+     */
     public Task(String name, String type) {
         this.name = name;
         this.completed = false;
         this.type = type;
     }
-
+    /**
+     * Constructor for a Task which has an extension.
+     * @param name
+     * @param type
+     */
     public Task(String name, String type, String extension) {
         this.name = name;
         this.completed = false;
@@ -48,9 +56,6 @@ public class Task {
         this.name = name;
     }
 
-    public void setExtension(String extension) {
-        this.extension = extension;
-    }
 
     /**
      * Converts a string to compact format to be saved in the file
@@ -65,10 +70,11 @@ public class Task {
         }
     }
 
-    @Override
+
     /**
      * @return the name of the task, along with an [X] if completed, [] otherwise
      */
+    @Override
     public String toString() {
         if (completed) {
             return "[X] " + this.name;

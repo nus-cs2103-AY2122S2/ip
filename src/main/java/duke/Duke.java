@@ -1,5 +1,8 @@
 package duke;
 
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 import javafx.application.Application;
 
 /**
@@ -9,8 +12,8 @@ import javafx.application.Application;
 
 
 public class Duke {
-    protected static Storage storage;
-    protected static TaskList tasks;
+    public static Storage storage;
+    public static TaskList tasks;
 
     public Duke(String filepath) {
         storage = new Storage(filepath);
@@ -18,10 +21,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke("../../../data/duke.txt");
+        Duke duke = new Duke("duke.txt");
         assert !(duke == null) : "Duke should not be null";
         Application.launch(Ui.class, args);
-        System.out.println("Hello");
         Duke.storage.save(Duke.tasks);
 
     }

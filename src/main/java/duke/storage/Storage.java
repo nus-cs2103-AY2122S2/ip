@@ -1,4 +1,10 @@
-package duke;
+package duke.storage;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -72,10 +78,17 @@ public class Storage {
                         if (completed) toAdd.setDone();
                     }
                     if (firstToken.equals("E")) {
-                        String timing = splitted[3];
-                        Event toAdd = new Event(name, timing);
-                        ls.add(toAdd);
-                        if (completed) toAdd.setDone();
+                        String startTiming = splitted[3].split(" ")[0] + " " + splitted[3].split(" ")[1];
+                        String endTiming = splitted[3].split(" ")[2] + " " + splitted[3].split(" ")[3];
+
+                        try {
+                            Event toAdd = new Event(name, startTiming.trim(), endTiming.trim());
+                            ls.add(toAdd);
+                            if (completed) toAdd.setDone();
+                        } catch (Exception e) {
+                            System.out.println("Could not load event successfully.");
+                        }
+
                     }
                 }
             }
