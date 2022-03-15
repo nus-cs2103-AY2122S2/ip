@@ -1,0 +1,11 @@
+todo read a book
+deadline homework /by 8pm
+event tutorial /at 3pm - 4pm
+list
+mark 2
+list
+mark 3
+list
+unmark 2
+list
+bye
