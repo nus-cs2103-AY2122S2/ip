@@ -22,11 +22,7 @@ public class Parser {
             Ui.exit();
             break;
         case "list":
-            if (TaskList.getTasks().size() == 0) {
-                System.out.println(Ui.getBorder() + "The list is empty. Why not add some tasks?\n" + Ui.getBorder());
-            } else {
-                Command.listCommand();
-            }
+            Command.listCommand();
             break;
         case "mark": {
             int index = Integer.parseInt(arr[1]);

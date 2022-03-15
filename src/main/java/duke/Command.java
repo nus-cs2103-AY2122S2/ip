@@ -15,12 +15,16 @@ public class Command {
      * Lists out all tasks in the TaskList.
      */
     public static void listCommand() {
-        StringBuilder listString = new StringBuilder();
-        for (int i = 0; i < TaskList.getTasks().size(); i++) {
-            Task t = TaskList.getTasks().get(i);
-            listString.append(i + 1).append(".").append(t.toString()).append("\n");
+        if (TaskList.getTasks().size() == 0) {
+            System.out.println(Ui.getBorder() + "The list is empty. Why not add some tasks?\n" + Ui.getBorder());
+        } else {
+            StringBuilder listString = new StringBuilder();
+            for (int i = 0; i < TaskList.getTasks().size(); i++) {
+                Task t = TaskList.getTasks().get(i);
+                listString.append(i + 1).append(".").append(t.toString()).append("\n");
+            }
+            System.out.println(Ui.getBorder() + listString + Ui.getBorder());
         }
-        System.out.println(Ui.getBorder() + listString + Ui.getBorder());
     }
 
     /**
@@ -164,7 +168,7 @@ public class Command {
      *
      * @param input the user's input to the bot.
      */
-    public static void findCommand(String input) throws IOException {
+    public static void findCommand(String input) {
         String desc = input.replaceFirst("find", "").trim();
         Pattern pattern = Pattern.compile("\\b" + desc + "\\b");
         StringBuilder listString = new StringBuilder();
