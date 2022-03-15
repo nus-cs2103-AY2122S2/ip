@@ -21,7 +21,7 @@ public class Event extends Task {
     }
 
     public static String contentTimeDivder() {
-        return "/at ";
+        return "/at";
     }
 
     /**

@@ -58,12 +58,12 @@ class Parser {
         case "deadline":
             String deadlineContent = extractContent(words, Deadline.contentTimeDivder());
             String[] separateTime = userInput.split(Deadline.contentTimeDivder());
-            String dateString = separateTime[1];
+            String dateString = separateTime[1].trim();
             LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
             return new CommandDeadline(taskList, deadlineContent, date);
         case "event":
             String eventContent = extractContent(words, Event.contentTimeDivder());
-            String timeString = userInput.split(Event.contentTimeDivder())[1];
+            String timeString = userInput.split(Event.contentTimeDivder())[1].trim();
             LocalDate time = LocalDate.parse(timeString, DateTimeFormatter.ISO_DATE);
             return new CommandEvent(taskList, eventContent, time);
         case "delete":

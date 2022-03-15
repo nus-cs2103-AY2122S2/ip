@@ -42,6 +42,6 @@ public class Deadline extends Task {
     }
 
     public static String contentTimeDivder() {
-        return "/by ";
+        return "/by";
     }
 }
