@@ -1,0 +1,44 @@
+blablabla
+guide
+list
+todo sometodo
+todo
+list
+deadline somedeadline /by 24/04/2022
+deadline
+deadline /by
+deadline somedeadline1 /by tomorrow
+deadline somedeadline2 /by 
+deadline somedeadline3 /at 24/04/2022
+deadline somedeadline4 tomorrow
+list
+event someevent /at 23/03/2022 1800
+event
+event /at
+event someevent1 /at 6pm tomorrow
+event someevent2 /at
+event someevent3 /by 6pm tomorrow
+event someevent4 6pm tomorrow
+list
+mark 2
+unmark 3
+mark 2
+mark 1
+mark someevent
+mark 4
+mark
+mark 1 2 3 4
+list
+delete 1
+list
+delete
+delete 1 2 3
+delete 3
+delete somedeadline
+list
+delete 1
+delete 1
+list
+delete 1
+mark 1
+bye

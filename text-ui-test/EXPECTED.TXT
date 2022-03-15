@@ -1,7 +1,510 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+**********************************************************************************************************************
 
+Innkeeper: Greetings, traveller!
+
+Innkeeper: I'm the innkeeper and im here to help you with whatever you need.
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: Sorry traveller! I can't quite understand what you mean by that!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: Here is a list of commands that you can use traveller!
+
+             1. list                                                            View your task list
+             2. get <date*>                                                     View the tasks that you have on the specified date
+             3. todo <name of task>                                             Add a todo to your task list
+             4. deadline <name of task> /by <date* or timestamp* of task>       Add a deadline to your task list
+             5. event <name of task> /at <date* or timestamp* of task>          Add an event to your task list
+             6. mark <index of task>                                            Mark a task as completed in your task list
+             7. unmark <index of task>                                          Unmark a task in your task list
+             8. bye                                                             Exit the program
+
+             * date format is d/M/YYYY                                          eg; 24/4/2022
+             * timestamp format is d/M/YYYY HHmm                                eg; 23/3/2022 1800
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: Your task list is empty traveller! Add some tasks first!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: This todo has been added to your task list!
+
+             [T][ ] sometodo
+
+Innkeeper: You now have 1 task!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: You need to key in the title of your todo traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: Here you go!
+
+             1. [T][ ] sometodo
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: This deadline has been added to your task list!
+
+             [D][ ] somedeadline (by: 24 April 2022)
+
+Innkeeper: You now have 2 tasks!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: You need to key in the title as well as due date and time of your deadline traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: You need to key in the title of your deadline traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: That's an invalid date format traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: You need to key in the due date and time of your deadline traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: The correct format for adding a deadline is deadline <name of task> /by <date or timestamp of task>
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: You need to include /by in your command to add a deadline traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: Here you go!
+
+             1. [T][ ] sometodo
+             2. [D][ ] somedeadline (by: 24 April 2022)
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: This event has been added to your task list!
+
+             [E][ ] someevent (at: 23 March 2022, 6:00 PM)
+
+Innkeeper: You now have 3 tasks!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: You need to key in the title and timestamp of your event traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: You need to key in the title of your event traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: That's an invalid date format traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: You need to key in the timestamp of your event traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: The correct format for adding an event is event <name of task> /at <date or timestamp of task>
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: You need to include /at in your command to add an event traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: Here you go!
+
+             1. [T][ ] sometodo
+             2. [D][ ] somedeadline (by: 24 April 2022)
+             3. [E][ ] someevent (at: 23 March 2022, 6:00 PM)
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: This task has been marked as completed in your task list!
+
+             [D][X] somedeadline (by: 24 April 2022)
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: This task has not been completed yet! No need to unmark it.
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: This task was already completed! No need to mark it again.
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: This task has been marked as completed in your task list!
+
+             [T][X] sometodo
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: You should mark and unmark tasks using their index rather than title traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: This is an invalid task index traveller! You can type list to check all task indexes!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: You need to key in the index of the task you wish to mark or unmark traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: That's too many inputs traveller! You only need to key in the index of the task you wish to mark or unmark!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: Here you go!
+
+             1. [T][X] sometodo
+             2. [D][X] somedeadline (by: 24 April 2022)
+             3. [E][ ] someevent (at: 23 March 2022, 6:00 PM)
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: This task has successfully been removed from your task list!
+
+             [T][X] sometodo
+
+Innkeeper: You now have 2 tasks!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: Here you go!
+
+             1. [D][X] somedeadline (by: 24 April 2022)
+             2. [E][ ] someevent (at: 23 March 2022, 6:00 PM)
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: You need to key in the index of the task you wish to delete traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: That's too many inputs traveller! You only need to key in the index of the task you wish to delete!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: This is an invalid task index traveller! You can type list to check all task indexes!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: You should delete tasks using their index rather than title traveller!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: Here you go!
+
+             1. [D][X] somedeadline (by: 24 April 2022)
+             2. [E][ ] someevent (at: 23 March 2022, 6:00 PM)
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: This task has successfully been removed from your task list!
+
+             [D][X] somedeadline (by: 24 April 2022)
+
+Innkeeper: You now have 1 task!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: This task has successfully been removed from your task list!
+
+             [E][ ] someevent (at: 23 March 2022, 6:00 PM)
+
+Innkeeper: You now have 0 tasks!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: Your task list is empty traveller! Add some tasks first!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: Your task list is empty traveller! Add some tasks first before attempting to delete!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: Your task list is empty traveller! Add some tasks first before attempting to mark or unmark!
+
+Innkeeper: You can type guide for a list of valid commands to use!
+
+**********************************************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+**********************************************************************************************************************
+
+You: 
+Innkeeper: Goodbye traveller! Hope to see you again soon!
+
+**********************************************************************************************************************

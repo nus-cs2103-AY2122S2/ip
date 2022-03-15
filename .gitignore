@@ -15,3 +15,13 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Everything below this point was added by Vijay
+
+# Binary files
+*.class
+
+# Save directories
+/tasks
+/contacts
+
