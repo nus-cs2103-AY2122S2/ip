@@ -18,7 +18,11 @@ public class Ui {
     /** Returns the list of all the tasks that are currently being tracked by Cleese*/
     public String listResponse(TaskList taskList) {
         assert taskList != null : "taskList was not passed into function";
-        return String.format(taskList.toString());
+        if (taskList.size() == 0) {
+            return "Sir I'm afraid you have no tasks right now";
+        } else {
+            return String.format(taskList.toString());
+        }
     }
 
     /** Returns acknowledgment message as well as task that user has marked as done */
@@ -58,8 +62,10 @@ public class Ui {
     /** Returns the help message that is shown to the user to help in using Cleese */
     public String helpResponse() {
         return String.format("Not to worry sir, the commands are\n"
-                                + "Task Creation: todo, event, deadline\n"
-                                + "Task State: list, mark, unmark, delete, find\n"
-                                + "Navigation: bye");
+                                + "Make Tasks:      todo | event | deadline\n"
+                                + "Remove Tasks: delete\n"
+                                + "Mark Tasks:      mark | unmark\n"
+                                + "View Tasks:      list | find\n"
+                                + "Exit:                 bye");
     }
 }

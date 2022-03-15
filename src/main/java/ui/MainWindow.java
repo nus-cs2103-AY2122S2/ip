@@ -33,8 +33,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String welcomeMessage = String.format("Good day Sir, this is Cleese, your virtual butler!\n"
-                                                + "And just how may I help you today?");
+        String welcomeMessage = String.format("Good day Sir, I'm Cleese, your virtual butler!\n"
+                                                + "And just how may I help you today?\n\n"
+                                                + "Type 'help' to view all available commands ");
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
     }
 

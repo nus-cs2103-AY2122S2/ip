@@ -60,7 +60,7 @@ Example of usage: `todo [task description]`
 
 Deadline tasks can be marked and unmarked. They also have a date time to be completed by.
 
-The format of deadline should be ‘YYYY-MM-DD HH:MM’
+The format of deadline should be ‘YYYY-MM-DD HHMM’
 
 Example of usage: `deadline [task description] /by [date time]`
 
@@ -68,7 +68,7 @@ Example of usage: `deadline [task description] /by [date time]`
 
 Event tasks can be marked and unmarked. They also have a date time they are scheduled at.
 
-The format of deadline should be ‘YYYY-MM-DD HH:MM’
+The format of deadline should be ‘YYYY-MM-DD HHMM’
 
 Example of usage: `event [task description] /at [date time]`
 
