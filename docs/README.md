@@ -14,6 +14,9 @@
 - Add and delete contacts
 - Save contact information such as name, phone number and birthday
 
+## Example
+![Ui](Ui.png)
+
 ## Usage
 
 ### 1. `todo` - Add a todo to your task list
@@ -119,7 +122,7 @@ Expected outcome:
 
 Example of usage:
 
-`delete 1`
+`delete task 1`
 
 Expected outcome:
 
