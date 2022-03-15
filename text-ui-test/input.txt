@@ -1,0 +1,15 @@
+todo eat lunch
+deadline eat lunch /by sunday
+event lunch meeting /at sunday 2-10pm
+list
+todo eat lunch
+deadline eat lunch /by sunday
+event lunch meeting /at sunday 2-10pm
+mark 1
+mark 3
+mark 5
+unmark 3
+list
+delete 3
+list
+bye
