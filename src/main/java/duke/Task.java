@@ -33,6 +33,7 @@ public class Task {
      * @return whether the current task is done.
      */
     public boolean mark(boolean isDone) {
+        this.isDone = isDone;
         return this.isDone;
     }
 
