@@ -43,7 +43,7 @@ public class Storage {
     }
 
     /**
-     * Read the file content.
+     * Reads the file content.
      * @return A scanner to read the content of a file.
      * @throws TsohgException If something wrong happens.
      */
@@ -57,7 +57,7 @@ public class Storage {
     }
 
     /**
-     * Clear the content of the file.
+     * Clears the content of the file.
      * @throws TsohgException If something wrong happens.
      */
     public void clear() throws TsohgException {

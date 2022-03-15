@@ -20,7 +20,7 @@ public abstract class Task {
     }
 
     /**
-     * Check if the name of the task contains the keyword.
+     * Checks if the name of the task contains the keyword.
      * @param keyword The keyword.
      * @return True if the name contains the keyword else false.
      */
