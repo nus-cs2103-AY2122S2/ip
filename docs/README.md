@@ -48,65 +48,82 @@ Manage your Deadlines!
 
 ## Usage
 
-### `Todo <your-todo>` - Adds a new todo `<your-todo>`
+### Add a Todo
 
-Adds a new todo `<your-todo>`
+Adds a new todo `<todo-name>`
+
+Syntax:
+
+`todo <todo-name>`
 
 Example of usage: 
 
-`Todo <your todo>`
+`todo buy milk`
 
 Expected outcome:
 
-Adds a new Todo task.
+Adds a new Todo task `buy milk`.
 
-### `Event <your-Event>` - Adds a new Event `<your-event>`
+### Add an Event
 
-Adds a new event
+Adds a new event `<event-name>` at `dd/MM/yyyy HHmm`
+
+Syntax:
+
+`event <event-name> /at dd/MM/yyyy HHmm`
 
 Example of usage:
 
-`<your-event> /at dd/MM/yyyy HHmm`
+`event wedding /at 11/12/2022 1830`
 
 Expected outcome:
 
-Adds a new event.
+Adds a new Event `wedding` at `11/12/2022 1830`.
 
-### `Deadline <your-deadline>` - Adds a new Deadline `<your-deadline>`
 
-Adds a new Deadline
+### Add a Deadline
+
+Adds a Deadline `<deadline-name>` due by `dd/MM/yyyy HHmm`
+
+Syntax:
+
+`deadline <your-deadline> /by dd/MM/yyyy HHmm`
 
 Example of usage:
 
-`<your-deadline> /by dd/MM/yyyy HHmm`
+`deadline math homework /by 15/3/2022`
 
 Expected outcome:
 
-Adds a new Deadline.
+Adds a new Deadline `math homework` due by `15/3/2022`
 
 ### List all Tasks
 
-Example of usage:
+Syntax:
 
-```list```
+`list`
 
 Expected Outcome:
 
 Lists all tasks saved in the chatbot.
 
 ### Find
+Find task(s) matching a `<search term>` fully or partially.
 
 Example of usage:
 
-```find <search term>```
+`find <search term>`
 
 Expected outcome:
 
-List of task(s) matching search term fully or partially.
+List of task(s) matching `search term` fully or partially.
 
 ### Delete <task index>
+Deletes a task at a specified `<index>`
 
-Deletes a task at index i
+Syntax:
+
+`delete <index>`
 
 Example of usage:
 
@@ -114,4 +131,4 @@ Example of usage:
 
 Expected outcome:
 
-Deletes the task at index 2 of the list of tasks
+Deletes the task at index `2` from the list of tasks
