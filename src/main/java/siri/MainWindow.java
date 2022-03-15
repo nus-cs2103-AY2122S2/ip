@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        boolean toQuit = false;
+        boolean isEndedByUser = false;
         if (siri.checkInitialised() == false) {
             dialogContainer.getChildren().add(
                     DialogBox.setStartUpMessage(siri.getStartUpString(), siriImage)
@@ -72,10 +72,10 @@ public class MainWindow extends AnchorPane {
 
         if (response == "Bye!!") {
             response = this.siri.exitApp();
-            toQuit = true;
+            isEndedByUser = true;
         }
 
-        if (toQuit == true) {
+        if (isEndedByUser == true) {
             try {
                 TimeUnit.SECONDS.sleep(2);
                 Platform.exit();
