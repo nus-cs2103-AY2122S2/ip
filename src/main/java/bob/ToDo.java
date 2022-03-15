@@ -9,7 +9,7 @@ public class ToDo extends bob.Task {
      *
      * @param description Description of the ToDo instance.
      */
-    public ToDo(String description) {
+    public ToDo(String description) throws IllegalArgumentException {
         super(description);
     }
 
@@ -19,7 +19,7 @@ public class ToDo extends bob.Task {
      * @param description Description of the ToDo instance.
      * @param isDone      Status of the ToDo instance.
      */
-    public ToDo(String description, boolean isDone) {
+    public ToDo(String description, boolean isDone) throws IllegalArgumentException {
         super(description, isDone);
     }
 

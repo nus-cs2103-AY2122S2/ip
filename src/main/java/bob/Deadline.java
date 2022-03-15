@@ -16,7 +16,7 @@ public class Deadline extends bob.Task {
      * @param description Description of the Deadline instance.
      * @param by          A string representing deadline in parseable format.
      */
-    public Deadline(String description, String by) throws DateTimeParseException {
+    public Deadline(String description, String by) throws DateTimeParseException, IllegalArgumentException {
         super(description);
         this.by = LocalDateTime.parse(by);
     }
@@ -28,7 +28,8 @@ public class Deadline extends bob.Task {
      * @param by          A string representing deadline in parseable format.
      * @param isDone      Status of the Deadline instance.
      */
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String by, boolean isDone)
+            throws DateTimeParseException, IllegalArgumentException {
         super(description, isDone);
         this.by = LocalDateTime.parse(by);
     }
@@ -52,6 +53,6 @@ public class Deadline extends bob.Task {
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(),
-                by.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                by.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm a")));
     }
 }

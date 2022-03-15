@@ -63,7 +63,7 @@ public class Parser {
                 assert storage != null;
                 storage.writeTaskListToFile(tasks);
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (InsufficientArgumentsException | ArrayIndexOutOfBoundsException e) {
             response = Ui.insufficientArgs();
         } catch (IndexOutOfBoundsException e) {
             response = Ui.noSuchItem();
@@ -71,6 +71,8 @@ public class Parser {
             response = Ui.invalidInt();
         } catch (DateTimeParseException e) {
             response = Ui.invalidTimeFormat();
+        } catch (IllegalArgumentException e) {
+            response = Ui.insufficientArgs();
         }
 
         return response;
@@ -81,23 +83,30 @@ public class Parser {
         return tasks.update(command, idx);
     }
 
-    private static String newToDo(String userInput, TaskList tasks) {
-        Task newTodo = new ToDo(userInput.split(" ", 2)[1]);
+    private static String newToDo(String userInput, TaskList tasks) throws IllegalArgumentException {
+        String todoDesc = userInput.split(" ", 2)[1].trim();
+        Task newTodo = new ToDo(todoDesc);
         return tasks.add(newTodo);
     }
 
-    private static String newEvent(String userInput, TaskList tasks) {
+    private static String newEvent(String userInput, TaskList tasks) throws InsufficientArgumentsException {
         String time = userInput.split("/at ")[1];
         String eventDesc = userInput.split("/at ")[0].strip();
+        if (!eventDesc.contains(" ")) {
+            throw new InsufficientArgumentsException("Insufficient arguments provided!");
+        }
         eventDesc = eventDesc.substring(eventDesc.indexOf(" ")).strip();
 
         Task newEvent = new Event(eventDesc, time);
         return tasks.add(newEvent);
     }
 
-    private static String newDeadline(String userInput, TaskList tasks) {
+    private static String newDeadline(String userInput, TaskList tasks) throws InsufficientArgumentsException {
         String by = userInput.split("/by ")[1];
-        String deadlineDesc = userInput.split("/by ")[0];
+        String deadlineDesc = userInput.split("/by ")[0].strip();
+        if (!deadlineDesc.contains(" ")) {
+            throw new InsufficientArgumentsException("Insufficient arguments provided!");
+        }
         deadlineDesc = deadlineDesc.substring(deadlineDesc.indexOf(" ")).strip();
 
         Task newDeadline = new Deadline(deadlineDesc, by);

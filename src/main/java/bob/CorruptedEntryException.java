@@ -1,7 +1,7 @@
 package bob;
 
 /**
- * Thrown when a Duke saved file cannot be parsed correctly.
+ * Thrown when a Bob saved file cannot be parsed correctly.
  */
 
 public class CorruptedEntryException extends Exception {

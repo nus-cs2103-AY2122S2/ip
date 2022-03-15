@@ -12,7 +12,10 @@ public abstract class Task {
      *
      * @param description Description of the Task.
      */
-    public Task(String description) {
+    public Task(String description) throws IllegalArgumentException {
+        if (description.isEmpty()) {
+            throw new IllegalArgumentException("Empty description!");
+        }
         this.description = description;
         this.isDone = false;
     }
@@ -23,7 +26,10 @@ public abstract class Task {
      * @param description Description of the Task.
      * @param isDone      Boolean value describing status of the Task.
      */
-    protected Task(String description, boolean isDone) {
+    protected Task(String description, boolean isDone) throws IllegalArgumentException {
+        if (description.isEmpty()) {
+            throw new IllegalArgumentException("Empty description!");
+        }
         this.description = description;
         this.isDone = isDone;
     }

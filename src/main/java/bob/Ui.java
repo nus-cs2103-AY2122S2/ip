@@ -49,6 +49,7 @@ public class Ui {
                 + "    8. Find KEYWORD: returns a list of entries that contains KEYWORD.\n"
                 + "    9. Archive: moves all existing entries to another file and clears the current list.\n"
                 + "    10. Commands: returns a list of supported commands with descriptions.\n"
+                + "    11. Bye: exits the program.\n"
                 + Ui.printLine();
     }
 
@@ -188,7 +189,7 @@ public class Ui {
      */
     public static String invalidTimeFormat() {
         return Ui.printLine()
-                + "Please input the time in the correct format! yyyy-mm-ddThh:mm:ss\n"
+                + "Please input the time in the correct format! yyyy-mm-ddThh:mm\n"
                 + Ui.printLine();
     }
 

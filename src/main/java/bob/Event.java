@@ -16,7 +16,8 @@ public class Event extends bob.Task {
      * @param description Description of the Event instance.
      * @param time        A string representing time in parseable format.
      */
-    public Event(String description, String time) throws DateTimeParseException {
+    public Event(String description, String time)
+            throws DateTimeParseException, IllegalArgumentException {
         super(description);
         this.time = LocalDateTime.parse(time);
     }
@@ -28,7 +29,8 @@ public class Event extends bob.Task {
      * @param time        A string representing time in parseable format.
      * @param isDone      Status of the Event instance.
      */
-    public Event(String description, String time, boolean isDone) throws DateTimeParseException {
+    public Event(String description, String time, boolean isDone)
+            throws DateTimeParseException, IllegalArgumentException {
         super(description, isDone);
         this.time = LocalDateTime.parse(time);
     }
@@ -52,6 +54,6 @@ public class Event extends bob.Task {
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(),
-                time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                time.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm a")));
     }
 }
