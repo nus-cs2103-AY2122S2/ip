@@ -35,7 +35,8 @@ public class Duke {
      * @return String containing the response based on user input.
      */
     String getResponse(String input) {
-        input = input.toLowerCase().trim();
+        input = input.trim();
+        String output;
         assert (!input.equals("")): "Please enter an input.";
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -49,10 +50,10 @@ public class Duke {
 
             System.out.flush();
             System.setOut(oldStream);
-            return outputStream.toString();
+            output = outputStream.toString();
         } catch (DukeException | IOException e) {
-            System.out.println(e);
+            output = e.toString();
         }
-        return "Invalid input.";
+        return output;
     }
 }
