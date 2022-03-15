@@ -1,10 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
-
-import com.sun.glass.ui.PlatformFactory;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;

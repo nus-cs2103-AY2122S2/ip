@@ -20,17 +20,21 @@ public class Storage {
         }
     }
 
+    void createNewStorageFile() {
+        try {
+            Files.createDirectories(Paths.get(this.homeDir + "/data"));
+            File myObj = new File(this.homeDir + "/data/storage.txt");
+            myObj.createNewFile();
+
+        } catch (IOException e) {
+            System.out.println("Load failed.");
+        }
+    }
+
     void load() {
         boolean directoryExists = new java.io.File(this.homeDir + "/data").exists();
         if (!directoryExists) {
-            try {
-                Files.createDirectories(Paths.get(this.homeDir + "/data"));
-                File myObj = new File(this.homeDir + "/data/storage.txt");
-                myObj.createNewFile();
-
-            } catch (IOException e) {
-                System.out.println("Load failed.");
-            }
+            createNewStorageFile();
         } else {
             // parse the content in the file and add tasks into the arraylist.
             try {
@@ -89,50 +93,35 @@ public class Storage {
             File file = new File(filePath);
             file.createNewFile();
             for (Task t : Storage.taskList) {
+                StringBuilder sb = new StringBuilder();
                 if (t instanceof Event) {
-                    StringBuilder sb = new StringBuilder();
                     sb.append("E,");
                     if (t.isDone()) {
                         sb.append("0,");
                     } else {
                         sb.append("1,");
                     }
-                    sb.append(t.getDescription());
-                    sb.append(",");
-                    sb.append(((Event) t).getAt());
-                    sb.append("\n");
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
-                    writer.write(sb.toString());
-                    writer.close();
+                    sb.append(t.getDescription()).append(",").append(((Event) t).getAt()).append("\n");
                 } else if (t instanceof Deadline) {
-                    StringBuilder sb = new StringBuilder();
                     sb.append("D,");
                     if (t.isDone()) {
                         sb.append("0,");
                     } else {
                         sb.append("1,");
                     }
-                    sb.append(t.getDescription());
-                    sb.append(",");
-                    sb.append(((Deadline) t).getBy());
-                    sb.append("\n");
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
-                    writer.write(sb.toString());
-                    writer.close();
+                    sb.append(t.getDescription()).append(",").append(((Deadline) t).getBy()).append("\n");
                 } else {
-                    StringBuilder sb = new StringBuilder();
                     sb.append("T,");
                     if (t.isDone()) {
                         sb.append("0,");
                     } else {
                         sb.append("1,");
                     }
-                    sb.append(t.getDescription());
-                    sb.append("\n");
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
-                    writer.write(sb.toString());
-                    writer.close();
+                    sb.append(t.getDescription()).append("\n");
                 }
+                BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
+                writer.write(sb.toString());
+                writer.close();
             }
         } catch (IOException e) {
             System.out.println("Error saving file.");
