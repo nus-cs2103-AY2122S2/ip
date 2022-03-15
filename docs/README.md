@@ -155,6 +155,7 @@ Expected input format:
 Example of usage:
 
 `update 1/detail/return book`
+`update 1/time/18/03/2022 1800`
 
 Expected outcome:
 ```

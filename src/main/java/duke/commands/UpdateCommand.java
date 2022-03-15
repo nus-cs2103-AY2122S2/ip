@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -17,7 +18,7 @@ public class UpdateCommand extends Command{
      * @param input detail to update and updated detail
      */
     public UpdateCommand(String input) {
-        String[] processedInput = input.split("/");
+        String[] processedInput = input.split("/",3);
         assert processedInput.length == 3;
         index = Integer.parseInt(processedInput[0])-1;
         type = processedInput[1];

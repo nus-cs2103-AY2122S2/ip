@@ -65,14 +65,14 @@ public class AddCommand extends Command {
             added = new ToDo(input);
             break;
         case "event":
-            processedInput = input.split("/at", 2);
+            processedInput = input.split("/at ", 2);
             details = processedInput[0];
             time = processedInput[1];
             assert time != null;
             added = new Event(details, time);
             break;
         case "deadline":
-            processedInput = input.split("/by", 2);
+            processedInput = input.split("/by ", 2);
             details = processedInput[0];
             time = processedInput[1];
             assert time != null;

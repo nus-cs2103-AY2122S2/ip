@@ -17,7 +17,7 @@ public class Event extends Task {
      */
     public Event(String detail, String date) {
         super(detail);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" d/M/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         this.date = LocalDateTime.parse(date, formatter);
     }
 
@@ -27,7 +27,7 @@ public class Event extends Task {
      */
     @Override
     public String getDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" d/M/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         return date.format(formatter);
     }
 
@@ -53,8 +53,9 @@ public class Event extends Task {
      */
     @Override
     public void updateDate(String update) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" d/M/yyyy HHmm");
-        this.date = LocalDateTime.parse(update, formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        LocalDateTime updateddate = LocalDateTime.parse(update, formatter);
+        this.date = updateddate;
     }
 
     /**

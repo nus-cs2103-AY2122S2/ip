@@ -17,7 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String detail, String deadline) {
         super(detail);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" d/M/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         this.deadline = LocalDateTime.parse(deadline, formatter);
     }
 
@@ -27,7 +27,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" d/M/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         return deadline.format(formatter);
     }
 
@@ -53,7 +53,7 @@ public class Deadline extends Task {
      */
     @Override
     public void updateDate(String update) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" d/M/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         this.deadline = LocalDateTime.parse(update, formatter);
     }
 
