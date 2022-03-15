@@ -87,7 +87,7 @@ Expected outcome: Application will reply if the task has been successfully added
 
 ### `deadline` - Adds a task of type deadline into the list
 
-Command: `deadline <description> /by <YYYY/MM/DD>`
+Command: `deadline <description> /by <YYYY-MM-DD>`
 
 Adds a task of type deadline into the task list.
 
@@ -100,21 +100,21 @@ Ensure the keyword `/by` is used, and a whitespace follows after the command, ta
 Example of usage ✅:
 
 ```
-deadline Finish CS2103T iP Project /by 2022/02/18
+deadline Finish CS2103T iP Project /by 2022-02-18
 
-deadline Submit CS2105 Assignment /by 2022/02/25
+deadline Submit CS2105 Assignment /by 2022-02-25
 ```
 
 Negative examples of usage ❌:
 
 ```
-deadline Finish CS2103T iP Project \by 2022/02/18 
+deadline Finish CS2103T iP Project \by 2022-02-18 
 - Incorrect use of keyword '/by'
 
-deadline Finish CS2103T iP Project/by 2022/02/18  
+deadline Finish CS2103T iP Project/by 2022-02-18  
 - Incorrect use of whitespace
 
-deadline Finish CS2103T iP Project /by 2022/13/18 
+deadline Finish CS2103T iP Project /by 2022-13-18 
 - Incorrect use of date format
 ```
 
@@ -124,7 +124,7 @@ Expected outcome: Application will reply if the task has been successfully added
 
 ### `event` - Adds a task of type deadline into the list
 
-Command: `event <description> /by <YYYY/MM/DD>`
+Command: `event <description> /by <YYYY-MM-DD>`
 
 Adds a task of type event into the task list.
 
@@ -137,23 +137,23 @@ Ensure the keyword `/by` is used, and a whitespace follows after the command, ta
 Example of usage ✅:
 
 ```
-event CS2105 Midterms /at 2022/03/03
+event CS2105 Midterms /at 2022-03-03
 
-event Sports Club Day /at 2022/04/15
+event Sports Club Day /at 2022-04-15
 
-event Bob's Birthday /at 2022/03/21
+event Bob's Birthday /at 2022-03-21
 ```
 
 Negative examples of usage ❌:
 
 ```
-event  CS2105 Midterms \at 2022/03/03
+event  CS2105 Midterms \at 2022-03-03
 - Incorrect use of keyword '/at'
 
-event  CS2105 Midterms/at 2022/03/03
+event  CS2105 Midterms/at 2022-03-03
 - Incorrect use of whitespace
 
-event  CS2105 Midterms /at 2022/13/03
+event  CS2105 Midterms /at 2022-13-03
 - Incorrect use of date format
 ```
 
