@@ -127,6 +127,8 @@ public class Duke extends Application {
         userInput.clear();
 
         if (isGoodbye) {
+            // solution adapted from 
+            // https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
