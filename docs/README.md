@@ -1,7 +1,7 @@
 # Duke project
 
 This is a chatbot with basic functionality to add, remove, update and delete tasks. It has a basic GUI written with JavaFX.
-
+It saves added tasks to a file called `duke.txt` within the same folder, and loads from this file if it already exists.
 
 ## Adding a Task
 There are three types of Tasks: Todo, Deadline and Event.
@@ -51,3 +51,6 @@ You only can use this command on tasks that are of `Event` type.<br>
 The format for `STARTTIMING` and `ENDTIMING` is `YYYY-MM-DD HHMM`.<br>
 Example: `update event time 4 2012-12-12 0400 2013-01-01 0600` updates the event at index 4
 to start on `12th December 2012, 4AM` and end on `1st January 2013, 6AM`.
+
+## Exit and save tasks
+To exit and save current tasks, simply type `bye`.
