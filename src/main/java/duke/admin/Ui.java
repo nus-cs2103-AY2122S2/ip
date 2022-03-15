@@ -47,24 +47,6 @@ public class Ui {
                 + "\nNow you have " + tasks.getNumberOfTasks() + " tasks in the list.";
     }
 
-    // /**
-    //  * Prints out a message to let the user know which task has
-    //  * just been marked as done.
-    //  * @param task the task that has just been marked as done
-    //  */
-    // public static String showMarkedMessage(Task task) {
-    //     return "Nice! I've marked this task as done:\n" + task.toString();
-    // }
-
-    // /**
-    //  * Prints out a message to let the user know which task has
-    //  * just been marked as not yet done.
-    //  * @param task the task that has just been marked as not yet done
-    //  */
-    // public static String showUnmarkedMessage(Task task) {
-    //     return "OK, I've marked this task as not done yet:\n" + task.toString();
-    // }
-
     /**
      * Returns a string to inform the user that the mark is changed.
      * @param task task to be changed
@@ -84,7 +66,6 @@ public class Ui {
 
             return messagePrefix + taskDescription;
         }
-
     }
 
     /**

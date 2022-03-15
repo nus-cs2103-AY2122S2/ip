@@ -16,7 +16,6 @@ public class ChangeMarkCommand extends Command {
      * @param isMarkRequest whether the command wants to mark the task or unmark the task
      */
     public ChangeMarkCommand(int index, boolean isMarkRequest) {
-        assert index > 0;
         this.index = index;
         this.isMarkRequest = isMarkRequest;
     }

@@ -92,51 +92,10 @@ public class Storage {
 
             while (dataLine != null) {
                 if (dataLineCounter == index) {
-                    int startCharIndex = 0;
-
                     if (typeOfTask.equals("D") || typeOfTask.equals("E")) {
-                        switch (typeOfUpdate) {
-                        case "description":
-                            int numOfCharsBeforeDescription = 12;
-                            int numOfCharsAfterDescription = 21;
-
-                            String prefix = dataLine.substring(startCharIndex, numOfCharsBeforeDescription);
-                            String suffix = dataLine.substring(dataLine.length() - numOfCharsAfterDescription);
-
-                            dataLine = prefix + updateValue + suffix;
-                            break;
-                        case "date":
-                            int numOfCharsFromDate = 16;
-                            int numOfCharsAfterDate = 6;
-                            int indexOfDate = dataLine.length() - numOfCharsFromDate;
-
-                            String dateToBeUpdated = dataLine.substring(indexOfDate,
-                                    dataLine.length() - numOfCharsAfterDate);
-
-                            dataLine = dataLine.replaceFirst(dateToBeUpdated, updateValue);
-                            break;
-                        case "time":
-                            int numOfCharsFromTime = 5;
-
-                            String timeToBeUpdated = dataLine.substring(dataLine.length() - numOfCharsFromTime);
-
-                            dataLine = dataLine.replaceFirst(timeToBeUpdated, updateValue);
-                            break;
-                        default:
-                            break;
-                        }
+                        dataLine = updateNonToDoTask(typeOfUpdate, dataLine, updateValue);
                     } else if (typeOfTask.equals("T")) {
-                        switch (typeOfUpdate) {
-                        case "description":
-                            int numOfCharsBeforeDescription = 12;
-
-                            String prefix = dataLine.substring(startCharIndex, numOfCharsBeforeDescription);
-
-                            dataLine = prefix + updateValue;
-                            break;
-                        default:
-                            break;
-                        }
+                        dataLine = updateToDoTask(typeOfUpdate, dataLine, updateValue);
                     }
                 }
 
@@ -155,6 +114,114 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("Cannot update edits in save file!! D:");
         }
+    }
+
+    /**
+     * Updates the non-"To Do" tasks stored in the storage file
+     * @param typeOfUpdate whether description, date or time should be updated
+     * @param original original To Do task to be updated
+     * @param updateValue value to be updated to
+     * @return updated non-"To Do" task to be stored formatted as a String
+     */
+    private String updateNonToDoTask(String typeOfUpdate, String original, String updateValue) {
+        String updatedString = "";
+
+        switch (typeOfUpdate) {
+        case "description":
+            updatedString = updateDescription(original, updateValue);
+            break;
+        case "date":
+            updatedString = updateDate(original, updateValue);
+            break;
+        case "time":
+            updatedString = updateTime(original, updateValue);
+            break;
+        default:
+            break;
+        }
+
+        return updatedString;
+    }
+
+    /**
+     * Updates the To Do tasks stored in the storage file
+     * @param typeOfUpdate should be description only
+     * @param original original To Do task to be updated
+     * @param updateValue value to be updated to
+     * @return updated To Do task to be stored formatted as a String
+     */
+    private String updateToDoTask(String typeOfUpdate, String original, String updateValue) {
+        String updatedString = "";
+
+        switch (typeOfUpdate) {
+        case "description":
+            updatedString = updateToDoDescription(original, updateValue);
+            break;
+        default:
+            break;
+        }
+
+        return updatedString;
+    }
+
+    /**
+     * Replaces the description in the original task stored in the storage file
+     * @param original original task stored in the storage file
+     * @param updateValue description to be updated to
+     * @return updated task to be stored formatted as a String
+     */
+    private String updateDescription(String original, String updateValue) {
+        int numOfCharsBeforeDescription = 12;
+        int numOfCharsAfterDescription = 21;
+
+        String prefix = original.substring(0, numOfCharsBeforeDescription);
+        String suffix = original.substring(original.length() - numOfCharsAfterDescription);
+
+        return prefix + updateValue + suffix;
+    }
+
+    /**
+     * Replaces the description of the to do task stored within the storage file
+     * @param original original task stored in the storage file
+     * @param updateValue description to be updated to
+     * @return updated task to be stored formatted as a String
+     */
+    private String updateToDoDescription(String original, String updateValue) {
+        int numOfCharsBeforeDescription = 12;
+
+        String prefix = original.substring(0, numOfCharsBeforeDescription);
+
+        return prefix + updateValue;
+    }
+
+    /**
+     * Replaces the date of the tasks stored within the storage file
+     * @param original original task stored in the storage file
+     * @param updateValue date to be updated to
+     * @return updated task to be stored formatted as a String
+     */
+    private String updateDate(String original, String updateValue) {
+        int numOfCharsFromDate = 16;
+        int numOfCharsAfterDate = 6;
+        int indexOfDate = original.length() - numOfCharsFromDate;
+
+        String dateToBeUpdated = original.substring(indexOfDate, original.length() - numOfCharsAfterDate);
+
+        return original.replaceFirst(dateToBeUpdated, updateValue);
+    }
+
+    /**
+     * Replaces the time of the tasks stored within the storage file
+     * @param original original task stored in the storage file
+     * @param updateValue time to be updated to
+     * @return updated task to be stored formatted as a String
+     */
+    private String updateTime(String original, String updateValue) {
+        int numOfCharsFromTime = 5;
+
+        String timeToBeUpdated = original.substring(original.length() - numOfCharsFromTime);
+
+        return original.replaceFirst(timeToBeUpdated, updateValue);
     }
 
     /**

@@ -35,66 +35,62 @@ public class Parser {
         }
 
         switch (action) {
-        case "list":
-            if (descriptionExists) {
-                throw new DukeException("There should not be anything else after list.");
-            } else {
-                return new ListCommand();
-            }
-        case "mark":
+        case "list": //List tasks function
+            return new ListCommand();
+        case "mark": //Mark tasks function
             if (!(descriptionExists)) {
                 throw new DukeException("I don't know what to mark!! :-(");
             } else {
                 int index = Integer.parseInt(description) - 1;
                 return new ChangeMarkCommand(index, true);
             }
-        case "unmark":
+        case "unmark": //Unmark tasks function
             if (!(descriptionExists)) {
                 throw new DukeException("I don't know what to unmark!! :-(");
             } else {
                 int index = Integer.parseInt(description) - 1;
                 return new ChangeMarkCommand(index, false);
             }
-        case "todo":
+        case "todo": //Add To Do task function
             if (!(descriptionExists)) {
                 throw new DukeException("The description of a todo cannot be empty.");
             } else {
                 return new AddCommand("T", description);
             }
-        case "deadline":
+        case "deadline": //Add Deadline task function
             if (!(descriptionExists)) {
                 throw new DukeException("The description of a deadline cannot be empty.");
             } else {
                 return new AddCommand("D", description);
             }
-        case "event":
+        case "event": //Add Event task function
             if (!(descriptionExists)) {
                 throw new DukeException("The description of an event cannot be empty.");
             } else {
                 return new AddCommand("E", description);
             }
-        case "delete":
+        case "delete": //Deletes task function
             if (!(descriptionExists)) {
                 throw new DukeException("I don't know what to delete!! :-(");
             } else {
                 int index = Integer.parseInt(description) - 1;
                 return new DeleteCommand(index);
             }
-        case "bye":
+        case "bye": //Exit function
             return new ExitCommand();
-        case "find":
+        case "find": //Find task function
             if (!(descriptionExists)) {
                 throw new DukeException("The keyword to search for cannot be empty.");
             } else {
                 return new FindCommand(description);
             }
-        case "update":
+        case "update": //Update task function
             if (!(descriptionExists)) {
                 throw new DukeException("Improper format to request for an update.");
             } else {
                 return new UpdateCommand(description);
             }
-        case "clone":
+        case "clone": //Clone task function
             if (!(descriptionExists)) {
                 throw new DukeException("I don't know which task to clone!");
             } else {
