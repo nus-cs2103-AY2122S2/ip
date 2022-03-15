@@ -1,0 +1,31 @@
+todo housework
+list
+deadline CS3230/by 2020-12-13
+list
+event CCA meeting/at 2014-02-03
+list
+mark 1
+list
+unmark 1
+list
+delete 1
+list
+todo
+todo CS2040
+todo CS2100
+todo wash cloth
+mark 1
+deadline
+deadline CS2040
+deadline CS2040/
+deadline CS2040/byw
+deadline CS2040/by
+event
+event CS2040
+event CS2040/
+event CS2040/atw
+event CS2040/at
+find CS
+find CS2040
+find meeting
+bye
