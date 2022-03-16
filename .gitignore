@@ -21,3 +21,4 @@ date/*
 */.*
 src/main/java/META-INF/*
 *.jar
+gradle/*
