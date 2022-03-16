@@ -16,7 +16,7 @@ public class Ui {
     public static final String STR_PADDING = "  ";
 
     /**
-     * Close string.
+     * Returns a string to inform the user that the application would be closing.
      *
      * @return A string to acknowledge the program is closing.
      */
@@ -188,7 +188,7 @@ public class Ui {
     }
 
     private String showHelpDelete() {
-        return "Delete command: [NOTE] you can see the entry number using `list`\n"
+        return "Delete command: [NOTE] you can see the entry number using list\n"
                 + "  delete <entry number>\n\n";
     }
 

@@ -8,15 +8,15 @@ import duke.DukeException;
 
 public class Deadline extends Task {
 
-    /** The `Date` of when this `Deadline` is held. */
+    /** The Date of when this Deadline is held. */
     private final Date date;
 
     /**
      * Instantiates a new Deadline.
      *
      * @param taskName the task name/description
-     * @param date       the date of when this `Deadline` is due
-     * @throws DukeException if the `String` representation of the date does not follow the format
+     * @param date       the date of when this Deadline is due
+     * @throws DukeException if the String representation of the date does not follow the format
      */
     public Deadline(String taskName, String date) throws DukeException {
         super(taskName);
@@ -31,9 +31,9 @@ public class Deadline extends Task {
      * Instantiates a new Deadline.
      *
      * @param taskName the task name/description
-     * @param date       the date of when this `Deadline` is due
-     * @param isMarked the is `Deadline` has been marked/completed
-     * @throws DukeException if the `String` representation of the date does not follow the format
+     * @param date       the date of when this Deadline is due
+     * @param isMarked the is Deadline has been marked/completed
+     * @throws DukeException if the String representation of the date does not follow the format
      */
     public Deadline(String taskName, String date, String isMarked) throws DukeException {
         super(taskName);
@@ -50,9 +50,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the `String` representation of a `Deadline`.
+     * Returns the String representation of a Deadline.
      *
-     * @return the `String` representation of a `Deadline`
+     * @return the String representation of a Deadline
      */
     @Override
     public String toString() {
@@ -61,9 +61,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the `String` representation of a `Deadline` that is written to the local data file.
+     * Returns the String representation of a Deadline that is written to the local data file.
      *
-     * @return the `String` representation of a `Deadline` that is written to the local data file
+     * @return the String representation of a Deadline that is written to the local data file
      */
     public String toFile() {
         String markStatus = super.isMarked ? "1" : "0";

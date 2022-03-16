@@ -10,9 +10,9 @@ import duke.Ui;
 public class ClearCommand extends Command {
 
     /**
-     * Clears the `TaskList` that is in memory.
+     * Clears the TaskList that is in memory.
      *
-     * @param tasks   the tasks in `TaskList`
+     * @param tasks   the tasks in TaskList
      * @param ui      the UI that the user interacts with
      * @param storage the storage that is used to read/write to the local file
      * @return string to inform the user that the list has been cleared

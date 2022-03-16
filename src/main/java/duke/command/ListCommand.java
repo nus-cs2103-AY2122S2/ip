@@ -9,8 +9,8 @@ import duke.Ui;
  */
 public class ListCommand extends Command {
     /**
-     * Prints out the content of `TaskList` with its respective entry numbers.
-     * @param tasks   the tasks in `TaskList`
+     * Prints out the content of TaskList with its respective entry numbers.
+     * @param tasks   the tasks in TaskList
      * @param ui      the UI that the user interacts with
      * @param storage the storage that is used to read/write to the local file
      * @return the entries of the list in string format

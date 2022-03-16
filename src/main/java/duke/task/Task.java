@@ -2,9 +2,9 @@ package duke.task;
 
 public abstract class Task {
 
-    /** The name/description of the `Task`. */
+    /** The name/description of the Task. */
     protected String taskName;
-    /** Indicates if the `Task` has been completed. */
+    /** Indicates if the Task has been completed. */
     protected boolean isMarked;
 
     /**
@@ -20,7 +20,7 @@ public abstract class Task {
     /**
      * Sets {@link #isMarked} according to whether the input equals to "mark".
      *
-     * @param status indicating if the `Task` needs to be marked or unmarked
+     * @param status indicating if the Task needs to be marked or unmarked
      */
     public void setMarked(String status) {
         this.isMarked = status.equals("mark");
@@ -39,9 +39,9 @@ public abstract class Task {
     }
 
     /**
-     * Returns the String representation of a `Task`.
+     * Returns the String representation of a Task.
      *
-     * @return the String representation of a `Task`
+     * @return the String representation of a Task
      */
     @Override
     public String toString() {
@@ -49,9 +49,9 @@ public abstract class Task {
     }
 
     /**
-     * Returns the String representation of a `Task` that is written to the local data file.
+     * Returns the String representation of a Task that is written to the local data file.
      *
-     * @return the String representation of a `Task` that is written to the local data file
+     * @return the String representation of a Task that is written to the local data file
      */
     public abstract String toFile();
 }

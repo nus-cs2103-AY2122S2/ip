@@ -8,15 +8,15 @@ import duke.DukeException;
 
 public class Event extends Task {
 
-    /** The `Date` of when this `Event` is held. */
+    /** The Date of when this Event is held. */
     private final Date date;
 
     /**
      * Instantiates a new Event.
      *
      * @param taskName the task name/description
-     * @param date       the date of when this `Event` is held
-     * @throws DukeException if the `String` representation of the date does not follow the format
+     * @param date       the date of when this Event is held
+     * @throws DukeException if the String representation of the date does not follow the format
      */
     public Event(String taskName, String date) throws DukeException {
         super(taskName);
@@ -31,9 +31,9 @@ public class Event extends Task {
      * Instantiates a new Event.
      *
      * @param taskName the task name/description
-     * @param date       the date of when this `Event` is held
-     * @param isMarked the is `Event` has been marked/completed
-     * @throws DukeException if the `String` representation of the date does not follow the format
+     * @param date       the date of when this Event is held
+     * @param isMarked the is Event has been marked/completed
+     * @throws DukeException if the String representation of the date does not follow the format
      */
     public Event(String taskName, String date, String isMarked) throws DukeException {
         super(taskName);
@@ -50,9 +50,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the `String` representation of an `Event`.
+     * Returns the String representation of an Event.
      *
-     * @return the `String` representation of an `Event`
+     * @return the String representation of an Event
      */
     @Override
     public String toString() {
@@ -61,9 +61,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the `String` representation of an `Event` that is written to the local data file.
+     * Returns the String representation of an Event that is written to the local data file.
      *
-     * @return the `String` representation of an `Event` that is written to the local data file
+     * @return the String representation of an Event that is written to the local data file
      */
     public String toFile() {
         String markStatus = super.isMarked ? "1" : "0";

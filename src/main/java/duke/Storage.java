@@ -37,9 +37,9 @@ public class Storage {
     }
 
     /**
-     * Reads list the {@link #dataFile} and returns a `List` used to populate `TaskList`.
+     * Reads list the {@link #dataFile} and returns a List used to populate TaskList.
      *
-     * @return the content of {@link #dataFile} in a `List`
+     * @return the content of {@link #dataFile} in a List
      * @throws DukeException if {@link #dataFile} could not be located or read
      */
     public List<String> read() throws DukeException {
@@ -60,9 +60,9 @@ public class Storage {
     }
 
     /**
-     * Stores the content of `TaskList` into {@link #dataFile}.
+     * Stores the content of TaskList into {@link #dataFile}.
      *
-     * @param tasks the `TaskList` containing this instance's `Task`
+     * @param tasks the TaskList containing this instance's Task
      * @return true if this method runs successfully
      * @throws DukeException if {@link #dataFile} could not be located or written to
      */

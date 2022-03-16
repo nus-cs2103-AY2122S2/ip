@@ -11,9 +11,9 @@ import duke.Ui;
 public class ExitCommand extends Command {
 
     /**
-     * Writes this `TaskList` into the local file and closes the `Ui`.
+     * Writes this TaskList into the local file and closes the Ui.
      *
-     * @param tasks   the tasks in `TaskList`
+     * @param tasks   the tasks in TaskList
      * @param ui      the UI that the user interacts with
      * @param storage the storage that is used to read/write to the local file
      * @return string to inform the user that the app is going to close.

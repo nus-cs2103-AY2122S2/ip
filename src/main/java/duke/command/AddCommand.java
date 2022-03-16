@@ -28,9 +28,9 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds the task into this `TaskList` and prints out a message to show what has been added.
+     * Adds the task into this TaskList and prints out a message to show what has been added.
      *
-     * @param tasks   the tasks in `TaskList`
+     * @param tasks   the tasks in TaskList
      * @param ui      the UI that the user interacts with
      * @param storage the storage that is used to read/write to the local file
      * @return string to inform the user that the specific task has been added.

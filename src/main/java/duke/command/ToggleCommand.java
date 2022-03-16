@@ -18,8 +18,8 @@ public class ToggleCommand extends Command {
     /**
      * Instantiates a new Toggle command.
      *
-     * @param cmd         to indicate whether to `mark` or `unmark` a `Task`
-     * @param entryNumber the entry number of the `Task` to `mark` or `unmark`
+     * @param cmd         to indicate whether to mark or unmark a Task
+     * @param entryNumber the entry number of the Task to mark or unmark
      */
     public ToggleCommand(String cmd, String entryNumber) {
         this.cmd = cmd;
@@ -27,9 +27,9 @@ public class ToggleCommand extends Command {
     }
 
     /**
-     * Sets the status the `Task` according to the {@link #cmd}.
+     * Sets the status the Task according to the {@link #cmd}.
      *
-     * @param tasks   the tasks in `TaskList`
+     * @param tasks   the tasks in TaskList
      * @param ui      the UI that the user interacts with
      * @param storage the storage that is used to read/write to the local file
      * @return the associated message to show that the TaskList is empty, or if the command has been marked/unmarked.

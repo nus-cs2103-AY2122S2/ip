@@ -7,7 +7,7 @@ import javafx.application.Application;
  */
 public class Launcher {
     /**
-     * The entry point of application.
+     * Launches the application with the given {@code args}.
      *
      * @param args the input arguments
      */

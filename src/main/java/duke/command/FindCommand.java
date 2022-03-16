@@ -27,7 +27,7 @@ public class FindCommand extends Command {
     /**
      * Displays a list of events that match the keyword given by the user.
      *
-     * @param tasks   the tasks in `TaskList`
+     * @param tasks   the tasks in TaskList
      * @param ui      the UI that the user interacts with
      * @param storage the storage that is used to read/write to the local file
      * @return list of events that match the keyword given by the user, if any

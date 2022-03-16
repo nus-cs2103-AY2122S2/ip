@@ -23,9 +23,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns the String representation of a `ToDo`.
+     * Returns the String representation of a ToDo.
      *
-     * @return the String representation of a `ToDo`
+     * @return the String representation of a ToDo
      */
     @Override
     public String toString() {
@@ -33,9 +33,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns the String representation of a `ToDo` that is written to the local data file.
+     * Returns the String representation of a ToDo that is written to the local data file.
      *
-     * @return the String representation of a `ToDo` that is written to the local data file
+     * @return the String representation of a ToDo that is written to the local data file
      */
     public String toFile() {
         String markStatus = super.isMarked ? "1" : "0";

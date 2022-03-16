@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
     /**
      * Deletes/removes the specified task and prints a message upon its completion.
      *
-     * @param tasks   the tasks in `TaskList`
+     * @param tasks   the tasks in TaskList
      * @param ui      the UI that the user interacts with
      * @param storage the storage that is used to read/write to the local file
      * @return string to indicate that the specified task has been removed from the list.
