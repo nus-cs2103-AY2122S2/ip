@@ -1,5 +1,10 @@
 package arthur;
 
+import static arthur.commons.Messages.DATE_TIME_ERROR_MESSAGE;
+import static arthur.commons.Messages.FILE_NOT_FOUND_ERROR_MESSAGE;
+import static arthur.commons.Messages.IO_ISSUE_MESSAGE;
+import static arthur.commons.Messages.VALID_NUM_ERROR;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -10,13 +15,6 @@ import arthur.exceptions.InvalidInstructionException;
 import arthur.exceptions.InvalidStoredDataFormat;
 
 public class Arthur {
-    private static final String DATE_TIME_ERROR_MESSAGE = "Please enter the date/time in format: "
-            + "yyyy-mm-dd HH:mm \n" + "You can also enter time or date only";
-    private static final String VALID_NUM_ERROR = "Please enter a valid number!";
-    private static final String IO_ISSUE_MESSAGE = "Sorry, there seems to be an Issue. \n"
-            + "Please restart and try again";
-    private static final String FILE_NOT_FOUND_ERROR_MESSAGE = "The file can't be found. \n"
-            + "Please restart and try again.";
     private final Storage storage;
     private TaskList tasks;
 

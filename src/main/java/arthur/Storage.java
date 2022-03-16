@@ -1,5 +1,9 @@
 package arthur;
 
+import static arthur.commons.Messages.IO_FILE_ISSUE_MESSAGE;
+import static arthur.commons.Messages.IO_ISSUE_MESSAGE;
+import static arthur.commons.Prefixs.TASK_INFO_SPLIT_LOC;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,11 +17,6 @@ import arthur.task.Task;
  */
 public class Storage {
     private static final String FILE_PATH = "data/Tasks.txt";
-    private static final String IO_ISSUE_MESSAGE = "Sorry, there seems to be an Issue. \n"
-            + "Please restart and try again";
-    private static final String IO_FILE_ISSUE_MESSAGE = "Sorry, there seems to be an Issue "
-            + "with adding the task to the file. \n" + "Please restart and try again";
-    private static final String PLACE_TO_SPLIT_STRING = " >> ";
     private final File storage;
 
     /**
@@ -68,13 +67,13 @@ public class Storage {
     public void editTasks(Task task, int id) throws FileNotFoundException, IOException {
         StringBuilder result = new StringBuilder();
         // This splits the modified task to help get the task info
-        String[] modTaskInfo = task.toString().split(PLACE_TO_SPLIT_STRING);
+        String[] modTaskInfo = task.toString().split(TASK_INFO_SPLIT_LOC);
         String modTaskDesc = modTaskInfo[1];
         Scanner sc = new Scanner(storage);
         while (sc.hasNext()) {
             // This is the task stored in the file
             String currStoredTask = sc.nextLine();
-            String[] currTaskInfo = currStoredTask.split(PLACE_TO_SPLIT_STRING);
+            String[] currTaskInfo = currStoredTask.split(TASK_INFO_SPLIT_LOC);
             String currTaskDesc = currTaskInfo[1];
             // Checks if the modified task info matches the stored task
             if (currTaskDesc.equals(modTaskDesc)) {

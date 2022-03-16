@@ -1,5 +1,25 @@
 package arthur;
 
+import static arthur.commons.Messages.DEADLINE_MISSING_DATE_MESSAGE;
+import static arthur.commons.Messages.DELETE_REPLY_TEMPLATE;
+import static arthur.commons.Messages.EVENT_MISSING_DATE_TIME_MESSAGE;
+import static arthur.commons.Messages.FIND_REPLY_TEMPLATE;
+import static arthur.commons.Messages.INVALID_TASK_NUMBER_MESSAGE;
+import static arthur.commons.Messages.LIST_OUT_EMPTY_LIST_TEMPLATE;
+import static arthur.commons.Messages.LIST_OUT_REPLY_TEMPLATE;
+import static arthur.commons.Messages.MARK_REPLY_TEMPLATE;
+import static arthur.commons.Messages.NEW_DEADLINE_REPLY_TEMPLATE;
+import static arthur.commons.Messages.NEW_EVENT_REPLY_TEMPLATE;
+import static arthur.commons.Messages.NEW_TODO_REPLY_TEMPLATE;
+import static arthur.commons.Messages.UNMARK_REPLY_TEMPLATE;
+import static arthur.commons.Prefixs.DEADLINE_REPLACE_WITH;
+import static arthur.commons.Prefixs.DEADLINE_SPLIT_LOC;
+import static arthur.commons.Prefixs.DEADLINE_TO_REPLACE;
+import static arthur.commons.Prefixs.EVENT_REPLACE_WITH;
+import static arthur.commons.Prefixs.EVENT_SPLIT_LOC;
+import static arthur.commons.Prefixs.EVENT_TO_REPLACE;
+import static arthur.commons.Prefixs.TASK_INFO_SPLIT_LOC;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,26 +36,6 @@ import arthur.timings.DateTime;
  * Handles the list of tasks and operations on it.
  */
 public class TaskList {
-    private static final String INVALID_TASK_NUMBER_MESSAGE = "Invalid task number. Please try again";
-    private static final String DEADLINE_MISSING_DATE_MESSAGE = "Please add the deadline date";
-    private static final String EVENT_MISSING_DATE_TIME_MESSAGE = "Please add the event Date and/or Time";
-    private static final String LIST_OUT_REPLY_TEMPLATE = "Here are the tasks in your list: \n";
-    private static final String LIST_OUT_EMPTY_LIST_TEMPLATE = "You have no tasks in your list!";
-    private static final String MARK_REPLY_TEMPLATE = "Good job! Task.Task Completed \n";
-    private static final String UNMARK_REPLY_TEMPLATE = "Alright, I will unmark this \n";
-    private static final String NEW_TODO_REPLY_TEMPLATE = "Added a new Task. Todo task: \n";
-    private static final String NEW_DEADLINE_REPLY_TEMPLATE = "Added a new Task. Deadline task: \n";
-    private static final String NEW_EVENT_REPLY_TEMPLATE = "Added a new Task. Event task: \n";
-    private static final String DELETE_REPLY_TEMPLATE = "Successfully removed this task: \n";
-    private static final String FIND_REPLY_TEMPLATE = "Here are the matching tasks in your list: \n";
-    private static final String DEADLINE_SPLIT_LOC = "/by ";
-    private static final String EVENT_SPLIT_LOC = "/at ";
-    private static final String PLACE_TO_SPLIT_TASK_FOR_INFO = " >> ";
-    private static final String DEADLINE_TO_REPLACE = "\\(By:";
-    private static final String DEADLINE_REPLACE_WITH = "/by";
-    private static final String EVENT_TO_REPLACE = "\\(At:";
-    private static final String EVENT_REPLACE_WITH = "/at";
-
     private final ArrayList<Task> taskList;
     private final Storage storage;
 
@@ -186,7 +186,7 @@ public class TaskList {
             Scanner sc = new Scanner(storage.getTasks());
             while (sc.hasNext()) {
                 String currTask = sc.nextLine();
-                String taskInfo = currTask.split(PLACE_TO_SPLIT_TASK_FOR_INFO)[1];
+                String taskInfo = currTask.split(TASK_INFO_SPLIT_LOC)[1];
                 char taskType = currTask.charAt(1);
                 char marking = currTask.charAt(4);
                 int lastTaskIndex = taskList.size() - 1;

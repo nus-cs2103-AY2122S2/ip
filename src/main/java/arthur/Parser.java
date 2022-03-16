@@ -1,5 +1,9 @@
 package arthur;
 
+import static arthur.commons.Messages.BYE_REPLY_TEMPLATE;
+import static arthur.commons.Messages.INCORRECT_COMMAND_MESSAGE;
+import static arthur.commons.Messages.INVALID_COMMAND_ERROR_MESSAGE;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -11,9 +15,6 @@ import arthur.timings.DateTime;
  * Handles decoding of the user commands.
  */
 public class Parser {
-    private static final String BYE_MESSAGE = "Bye! \n" + "Have a great day!";
-    private static final String INCORRECT_COMMAND_MESSAGE = "Please enter the correct command";
-    private static final String INVALID_COMMAND_ERROR_MESSAGE = "Invalid command is executed";
     private static final int MARKER_IDENTIFIER_FOR_STORAGE = 1;
     private static final int DELETE_IDENTIFIER_FOR_STORAGE = 2;
     private final String userInput;
@@ -70,7 +71,7 @@ public class Parser {
             result = taskList.find(inst[1]);
             break;
         case "bye":
-            result = BYE_MESSAGE;
+            result = BYE_REPLY_TEMPLATE;
             break;
         default:
             throw new InvalidInstructionException(INCORRECT_COMMAND_MESSAGE);
