@@ -43,36 +43,29 @@ public class Storage {
         if (!directoryExists) {
             createNewStorageFile();
         } else {
-            // parse the content in the file and add tasks into the arraylist.
             try {
                 FileInputStream fis = new FileInputStream(this.homeDir + "/data/storage.txt");
                 Scanner sc = new Scanner(fis);
                 while(sc.hasNextLine()) {
                     String[] parsedTaskFromFile = sc.nextLine().split(",");
                     if (parsedTaskFromFile.length > 0) {
-                        Task t = null;
+                        Task t = new Task("placeholder");
                         String taskType = parsedTaskFromFile[0];
                         switch (taskType) {
                             case "T":
                                 t = new ToDos(parsedTaskFromFile[2]);
-                                if (Integer.parseInt(parsedTaskFromFile[1]) == 0) {
-                                   t.markAsDone();
-                                }
                                 break;
 
                             case "E":
                                 t = new Event(parsedTaskFromFile[2], parsedTaskFromFile[3]);
-                                if (Integer.parseInt(parsedTaskFromFile[1]) == 0) {
-                                    t.markAsDone();
-                                }
                                 break;
 
                             case "D":
                                 t = new Deadline(parsedTaskFromFile[2], parsedTaskFromFile[3]);
-                                if (Integer.parseInt(parsedTaskFromFile[1]) == 0) {
-                                    t.markAsDone();
-                                }
                                 break;
+                        }
+                        if (Integer.parseInt(parsedTaskFromFile[1]) == 0) {
+                            t.markAsDone();
                         }
                         taskList.add(t);
                     }
