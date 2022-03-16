@@ -50,38 +50,31 @@ public class Storage {
                 while(sc.hasNextLine()) {
                     String[] parsedTaskFromFile = sc.nextLine().split(",");
                     if (parsedTaskFromFile.length > 0) {
+                        Task t = null;
                         String taskType = parsedTaskFromFile[0];
                         switch (taskType) {
                             case "T":
-                                ToDos td = new ToDos(parsedTaskFromFile[2]);
+                                t = new ToDos(parsedTaskFromFile[2]);
                                 if (Integer.parseInt(parsedTaskFromFile[1]) == 0) {
-                                   td.markAsDone();
-                                } else {
-                                    td.markAsUndone();
+                                   t.markAsDone();
                                 }
-                                taskList.add(td);
                                 break;
 
                             case "E":
-                                Event ev = new Event(parsedTaskFromFile[2], parsedTaskFromFile[3]);
+                                t = new Event(parsedTaskFromFile[2], parsedTaskFromFile[3]);
                                 if (Integer.parseInt(parsedTaskFromFile[1]) == 0) {
-                                    ev.markAsDone();
-                                } else {
-                                    ev.markAsUndone();
+                                    t.markAsDone();
                                 }
-                                taskList.add(ev);
                                 break;
 
                             case "D":
-                                Deadline dl = new Deadline(parsedTaskFromFile[2], parsedTaskFromFile[3]);
+                                t = new Deadline(parsedTaskFromFile[2], parsedTaskFromFile[3]);
                                 if (Integer.parseInt(parsedTaskFromFile[1]) == 0) {
-                                    dl.markAsDone();
-                                } else {
-                                    dl.markAsUndone();
+                                    t.markAsDone();
                                 }
-                                taskList.add(dl);
                                 break;
                         }
+                        taskList.add(t);
                     }
                 }
                 sc.close();

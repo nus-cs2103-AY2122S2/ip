@@ -116,7 +116,6 @@ public class Parser {
             String[] parsedContent = parsedInput[1].split(" ", 2);
             int index = Integer.parseInt(parsedContent[0]) - 1;
             ParsedAnswer pa = new ParsedAnswer("update", index);
-            System.out.println(index);
             if (Storage.taskList.get(index) instanceof Deadline) {
                 pa.setType("Deadline");
             } else if (Storage.taskList.get(index) instanceof Event) {
