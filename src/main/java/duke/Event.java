@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * A type of Task that represents a task that will happen at a certain date.
+ */
 public class Event extends Task {
     protected String at;
 

@@ -29,6 +29,12 @@ public class Parser {
         return isValid;
     }
 
+    /**
+     * A string value is returned depending on what value of regex is being passed to the function.
+     * This string value represents one of the three possible command types.
+     * @param regex
+     * @return either a String value of "deadline", "event", or "todo"
+     */
     String getCommandThroughRegex(String regex) {
         String command = "";
         if (regex.equalsIgnoreCase("/by")) {
@@ -41,6 +47,16 @@ public class Parser {
 
         return command;
     }
+
+    /**
+     * regex determines what command type is being asked of.
+     * inputToParse is the input that is being passed in by the user.
+     * Depending on the command type, the input will be parsed differently.
+     *
+     * @param regex
+     * @param inputToParse
+     * @return
+     */
 
     ParsedAnswer parseInputWithRegex(String regex, String[] inputToParse) {
         String command = getCommandThroughRegex(regex);
@@ -75,6 +91,14 @@ public class Parser {
             }
         }
     }
+
+    /**
+     * This method is responsible for creating a ParsedAnswer corresponding to the update command.
+     * A separate method is specially created because of how different the update command is
+     * compared to the other commands.
+     * @param inputToParse
+     * @return ParsedAnswer
+     */
 
     ParsedAnswer parseUpdate(String inputToParse) {
         try {
@@ -125,7 +149,8 @@ public class Parser {
     }
 
     /**
-     * Parses a user input to create a ParsedAnswer object that will be returned by the function.
+     * Parses a user input and depending on the cases
+     * a ParsedAnswer object is created and is returned by the function for the ParsedAnswerHandler class to process.
      * @return ParsedAnswer
      */
     public ParsedAnswer parse() {

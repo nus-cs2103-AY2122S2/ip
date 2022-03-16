@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * A type of Task that represents a task that must be done before a certain date.
+ */
 public class Deadline extends Task {
 
     protected String by;

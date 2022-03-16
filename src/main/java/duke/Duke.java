@@ -17,6 +17,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+/**
+ * Main class that is responsible for displaying the GUI.
+ */
+
 public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -104,14 +108,6 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
@@ -130,6 +126,12 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Gets an input and pass the input to the parser.
+     * The parser will then parse the input and execute the command.
+     * @param input
+     * @return String
+     */
     private String getResponse(String input) {
         Parser p = new Parser(input);
         ParsedAnswer pa = p.parse();
