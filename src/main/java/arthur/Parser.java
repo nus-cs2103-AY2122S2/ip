@@ -40,8 +40,8 @@ public class Parser {
         String[] inst = this.userInput.split(" ", 2);
         assert inst.length >= 1 : INVALID_COMMAND_ERROR_MESSAGE;
         String command = inst[0];
-        // dest = inst[1]
-        int lastTaskIndex = taskList.tasksSize() - 1;
+        // Task description in inst[1]
+        int newTaskIndex = taskList.tasksSize();
         String result;
         switch (command) {
         case "list":
@@ -55,13 +55,13 @@ public class Parser {
             result = DateTime.checkDate(taskList);
             break;
         case "todo":
-            result = todoHandler(taskList, storage, inst[1], lastTaskIndex);
+            result = todoHandler(taskList, storage, inst[1], newTaskIndex);
             break;
         case "deadline":
-            result = deadlineHandler(taskList, storage, inst[1], lastTaskIndex);
+            result = deadlineHandler(taskList, storage, inst[1], newTaskIndex);
             break;
         case "event":
-            result = eventHandler(taskList, storage, inst[1], lastTaskIndex);
+            result = eventHandler(taskList, storage, inst[1], newTaskIndex);
             break;
         case "delete":
             result = deleteHandler(taskList, storage, inst[1]);
