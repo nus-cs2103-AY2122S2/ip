@@ -81,7 +81,7 @@ public class Timestamp {
     }
 
     /**
-     * Convert Timestamp into a String format appropriate for being saved in the save file.
+     * Converts this Timestamp into a String format appropriate for being saved in the save file.
      *
      * @return The formatted save string.
      */

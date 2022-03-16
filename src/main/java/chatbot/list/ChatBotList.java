@@ -38,7 +38,7 @@ public abstract class ChatBotList<T> {
     }
 
     /**
-     * Insert an item into the list.
+     * Inserts an item into the list.
      *
      * @param t The item to insert.
      */
@@ -51,7 +51,7 @@ public abstract class ChatBotList<T> {
     }
 
     /**
-     * Delete an item from the list.
+     * Deletes an item from the list.
      *
      * @param index The index of the task to be deleted.
      * @return The response to be outputted by the UI.
@@ -75,7 +75,7 @@ public abstract class ChatBotList<T> {
     }
 
     /**
-     * Get an item from the list.
+     * Gets an item from the list.
      *
      * @param index The index of the desired item.
      * @return The desired item.
@@ -85,7 +85,7 @@ public abstract class ChatBotList<T> {
     }
 
     /**
-     * Get the size of the list.
+     * Gets the size of the list.
      *
      * @return The number of items in the list.
      */
@@ -94,7 +94,7 @@ public abstract class ChatBotList<T> {
     }
 
     /**
-     * Get the type of the list.
+     * Gets the type of the list.
      *
      * @return "task" if TaskList, else "contact" if ContactList.
      */
@@ -103,7 +103,7 @@ public abstract class ChatBotList<T> {
     }
 
     /**
-     * Get whether the list is empty or not.
+     * Gets whether the list is empty or not.
      *
      * @return True if list is empty, else false.
      */
@@ -112,7 +112,7 @@ public abstract class ChatBotList<T> {
     }
 
     /**
-     * Get the list of items.
+     * Gets the list of items.
      *
      * @return The list.
      */
@@ -133,7 +133,7 @@ public abstract class ChatBotList<T> {
     }
 
     /**
-     * Check if the input index is a valid one or not.
+     * Checks if the input index is a valid one or not.
      *
      * @param index The index to verify.
      * @return True if the index is invalid, else false.
@@ -144,7 +144,7 @@ public abstract class ChatBotList<T> {
     }
 
     /**
-     * Filter the list based on a given condition.
+     * Filters the list based on a given condition.
      *
      * @param condition The filter condition.
      * @return The filtered list.
