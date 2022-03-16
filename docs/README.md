@@ -10,10 +10,10 @@ You can download the app [here](https://github.com/B1LLP4RK/ip). Image below sho
 ## commands
 1. `todo {task name}`
     - adds a task to the tasklist
-2. `event {event name} \at {when}`
+2. `event {event name} /at {when}`
     - adds a task that starts at a time to the tasklist
     - time must be specified in YYYY-MM-DD
-3. `deadline {event name} \by {when}`
+3. `deadline {event name} /by {when}`
     - adds a task that is due at a particular time to the tasklist
     - time must be specified in YYYY-MM-DD
 4. `mark {task number}`/`unmark {task number}`
