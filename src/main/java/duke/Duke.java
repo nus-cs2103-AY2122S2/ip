@@ -2,8 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.dukeexception.DukeException;
-import duke.dukeexception.DukeIndexOutOfBoundException;
-import duke.dukeexception.NoTimeGivenException;
+import duke.parser.Parser;
 
 /**
  * The main logic of Duke
@@ -29,10 +28,6 @@ class Duke {
             return response;
         } catch (NumberFormatException e) {
             return "mark command must precede with a decimal number!";
-        } catch (DukeIndexOutOfBoundException e) {
-            return e.getMessage();
-        } catch (NoTimeGivenException e) {
-            return "specify the time please\n";
         } catch (DukeException e) {
             return e.getMessage();
         }
