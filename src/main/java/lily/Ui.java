@@ -203,7 +203,7 @@ public class Ui {
     }
 
     /**
-     * Tell the user that Lily did not understand the command.
+     * Informs the user that Lily did not understand the command.
      * 
      * @param sentence The user's input.
      */

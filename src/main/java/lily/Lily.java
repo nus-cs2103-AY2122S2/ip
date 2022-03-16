@@ -76,9 +76,6 @@ public class Lily extends Application {
             stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setLily(new Lily());
 
-            // TODO: Make this work
-            // greet the user and list their task list if they have one saved.
-            // MainWindow.display(ui.showWelcome(tasks));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
