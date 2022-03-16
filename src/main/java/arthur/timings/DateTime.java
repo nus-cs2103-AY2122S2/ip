@@ -1,5 +1,8 @@
 package arthur.timings;
 
+import static arthur.commons.Messages.REMINDER_NO_TASKS_TEMPLATE;
+import static arthur.commons.Messages.REMINDER_TEMPLATE;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,7 +33,6 @@ public class DateTime {
     private static final DateFormat USER_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final DateFormat USER_DATE_TIME_FORMAT = new SimpleDateFormat(
             "yyyy-MM-dd HH:mm");
-    private static final String REMINDER_TEMPLATE = "Tasks due today: \n";
     private final String str;
 
     /**
@@ -79,6 +81,7 @@ public class DateTime {
     public static String checkDate(TaskList tasklist) {
         StringBuilder result = new StringBuilder(REMINDER_TEMPLATE);
         String currDate = LocalDate.now().format(DATE_FORMAT);
+        boolean hasTaskToRemind = false;
         for (int i = 0; i < tasklist.tasksSize(); i++) {
             Task currTask = tasklist.getTask(i);
             if (currTask instanceof Deadline) {
@@ -86,17 +89,22 @@ public class DateTime {
                 boolean isSame = taskTiming.str.equals(currDate);
                 if (isSame) {
                     result.append(currTask).append("\n");
+                    hasTaskToRemind = true;
                 }
-            } else if (currTask instanceof Event) {
+            }
+            if (currTask instanceof Event) {
                 DateTime taskTiming = ((Event) currTask).getTiming();
                 String taskDate = taskTiming.str.substring(0, 11);
                 boolean isSame = taskDate.equals(currDate);
                 if (isSame) {
                     result.append(currTask).append("\n");
+                    hasTaskToRemind = true;
                 }
             }
         }
-        return result.toString();
+        return hasTaskToRemind
+                ? result.toString()
+                : REMINDER_NO_TASKS_TEMPLATE;
     }
 
     /**
