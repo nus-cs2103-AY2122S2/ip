@@ -1,7 +1,61 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+____________________________________________________________
+↜(╰ •ω• )╯ψ Hello there! I'm lucifer.lucifer.
+What is it you desire today?
+____________________________________________________________
+____________________________________________________________
+added sleep
+____________________________________________________________
+____________________________________________________________
+Got it. I have added this to your desires:
+[T][ ] gym
+Currently you have 2 things yet to be desired
+____________________________________________________________
+____________________________________________________________
+Got it. I have added this to your desires:
+[T][ ] drink water
+Currently you have 3 things yet to be desired
+____________________________________________________________
+____________________________________________________________
+Got it. I have added this to your desires:
+[D][ ] return (by: Sunday)
+Currently you have 4 things yet to be desired
+____________________________________________________________
+____________________________________________________________
+Got it. I have added this to your desires:
+[E][ ] project (at: Mon 2-4pm)
+Currently you have 5 things yet to be desired
+____________________________________________________________
+Here are the desires in your list:
+ 1. [ ] sleep
+ 2. [T][ ] gym
+ 3. [T][ ] drink water
+ 4. [D][ ] return (by: Sunday)
+ 5. [E][ ] project (at: Mon 2-4pm)
+____________________________________________________________
+My my, you've got to specify your desire love
+( • ∀•)–Ψ Let me help you with an example:
+deadline return book /by Sunday
+Please try again my dear!
+To check on known commands, type:
+!help
+My Dear, that's more than your current desires!
+Please give me a valid number so I can grant your desires.
+To check your current total tasks,type:
+list
+____________________________________________________________
+Alright love, here are the list of desires I can grant:
+	list	 :I will show you what your current desires are.
+	delete	 :I will remove this desires from your current list.
+	todo (desire)	 :I will add this desire to your todo list.
+	event (desire) /at (date & time)	 :I will add this desire to your list with the date & time.
+	deadline (desire) /by (date & time)	 :I will add this desire to your list with its deadline.
+	mark (number)	 :I can mark this desire in your list as done.
+	mark (number)	 :I can unmark this desire in your list as not done.
+	bye	: I will end our lovely little conversation for now
+Now let's let back to what we are doing now shall we? ψ👿🔱⸸
+____________________________________________________________
+____________________________________________________________
+（￣ｗ￣）Ψ Oh no! I hate to see you go:(
+Have I granted your desires?
+Please come back again!
+____________________________________________________________
