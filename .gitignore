@@ -13,15 +13,8 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
-*.class
-text-ui-test/test1.in
-date/*
-*/.*
-src/main/java/META-INF/*
-*.jar
-*/*.jar
-gradle/*
-.github/*
 
+/.github/
+/gradle/
+/data/
+/src/main/java/META-INF/
