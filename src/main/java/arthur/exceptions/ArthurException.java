@@ -53,7 +53,7 @@ public class ArthurException {
     private static void checkDescription(String[] instruction)
             throws EmptyDescriptionException, InvalidInstructionException {
         String command = instruction[0];
-        // Desc = instruction[1]
+        // Desc is in instruction[1]
         boolean isSingleInstruction = command.equals("list") || command.equals("bye")
                 || command.equals("find") || command.equals("reminder");
         if (!isSingleInstruction) {

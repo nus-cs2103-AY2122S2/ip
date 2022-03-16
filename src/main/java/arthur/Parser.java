@@ -40,7 +40,7 @@ public class Parser {
         String[] inst = this.userInput.split(" ", 2);
         assert inst.length >= 1 : INVALID_COMMAND_ERROR_MESSAGE;
         String command = inst[0];
-        // Task description in inst[1]
+        // Task description in inst[1], if any
         int newTaskIndex = taskList.tasksSize();
         String result;
         switch (command) {

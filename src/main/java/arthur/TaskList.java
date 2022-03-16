@@ -20,6 +20,7 @@ public class TaskList {
     private static final String DEADLINE_MISSING_DATE_MESSAGE = "Please add the deadline date";
     private static final String EVENT_MISSING_DATE_TIME_MESSAGE = "Please add the event Date and/or Time";
     private static final String LIST_OUT_REPLY_TEMPLATE = "Here are the tasks in your list: \n";
+    private static final String LIST_OUT_EMPTY_LIST_TEMPLATE = "You have no tasks in your list!";
     private static final String MARK_REPLY_TEMPLATE = "Good job! Task.Task Completed \n";
     private static final String UNMARK_REPLY_TEMPLATE = "Alright, I will unmark this \n";
     private static final String NEW_TODO_REPLY_TEMPLATE = "Added a new Task. Todo task: \n";
@@ -55,6 +56,9 @@ public class TaskList {
      * @return A string version of the list formatted with numbering.
      */
     public String listOut() {
+        if (taskList.isEmpty()) {
+            return LIST_OUT_EMPTY_LIST_TEMPLATE;
+        }
         StringBuilder temp = new StringBuilder(LIST_OUT_REPLY_TEMPLATE);
         int taskNum = 1;
 
