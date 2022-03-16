@@ -53,7 +53,6 @@ public class Ui {
      */
     public void displayCommandMessage(TaskList tasks, Storage storage) throws DukeException, IOException {
         System.out.println(askForCommand());
-        //parseUserInput(tasks, storage);
     }
 
     /** Returns a pre-made command message to users  */

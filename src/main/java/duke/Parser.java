@@ -278,8 +278,7 @@ public class Parser {
             return successMessage.toString();
         } catch (IllegalArgumentException i) {
             return i.getMessage();
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return e.getMessage();
         }
     }

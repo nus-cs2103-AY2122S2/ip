@@ -46,7 +46,6 @@ public class Deadline extends Task {
 
     /**
      * Setting Deadline object's date it should end by.
-     *
      * @param date provided in the format of "yyyy/MM/dd" by user
      */
     public void setLocalDate(String date) {
@@ -55,17 +54,13 @@ public class Deadline extends Task {
         setBy(localDate);
     }
 
-    /**
-     * Converting LocalDate variable to String.
-     */
+    /**  Converting LocalDate variable to String. **/
     public String convertLocalDateToString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MMMM/dd");
         return by.format(formatter);
     }
 
-    /**
-     * Producing a user-friendly view of a Deadline Task's information.
-     */
+    /** Producing a user-friendly view of a Deadline Task's information. **/
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();

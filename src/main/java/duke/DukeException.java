@@ -14,6 +14,7 @@ public class DukeException extends Exception {
 
     /**
      * Sets the message param as the message when encountering DukeException
+     *
      * @param msg is the message displayed when handling DukeException
      */
     public DukeException(String msg) {
@@ -22,6 +23,7 @@ public class DukeException extends Exception {
 
     /**
      * Call to obtain the provided message for this DukeException
+     *
      * @return message that is provided for DukeException
      */
     public String getMessage() {
