@@ -248,16 +248,21 @@ public class TaskList {
 
     /**
      * Finds tasks matching the given str.
+     * Both the input string case and stored task description case is ignored.
      *
      * @param str Used to find task similar to this input.
      * @return A string of all the matching tasks.
      */
     public String find(String str) {
         StringBuilder temp = new StringBuilder(FIND_REPLY_TEMPLATE);
+        String refTaskText = str.toLowerCase();
+        String currTaskText;
         int taskNum = 1;
 
         for (Task currTask : taskList) {
-            if (currTask.toString().contains(str)) {
+            String currTaskString = currTask.toString();
+            currTaskText = currTaskString.toLowerCase();
+            if (currTaskText.contains(refTaskText)) {
                 temp.append(taskNum).append(". ").append(currTask).append("\n");
                 taskNum++;
             }

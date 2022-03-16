@@ -57,7 +57,7 @@ Deletes the task number 2 from the list.
 ### `find`
 
 Finds and lists all the tasks from the list that 
-matches the provided keyword (case-sensitive)
+matches the provided keyword (case-insensitive)
 
 Example of usage:
 `find code`
