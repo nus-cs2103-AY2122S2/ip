@@ -21,7 +21,8 @@ public class Duke {
 
     /**
      * Creates a duke.Duke object with tasks loaded
-     * @param filePath
+     *
+     * @param filePath path to data stored
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
@@ -36,6 +37,7 @@ public class Duke {
 
     /**
      * Returns welcome message
+     *
      * @return welcome message
      */
     public String getWelcome() {
@@ -45,6 +47,7 @@ public class Duke {
     /**
      * Returns response from user input
      * executes user input as a command
+     *
      * @param input for desired command
      * @return response from running command
      */

@@ -19,6 +19,7 @@ import duke.tasks.ToDo;
 public class Storage {
     private final String filePath;
     private final TaskList tasks = new TaskList();
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -48,7 +49,6 @@ public class Storage {
             String detail;
             String date;
             Task toAdd = null;
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             LocalDateTime parsedDate;
             while (s.hasNext()) {
                 String input = s.nextLine();

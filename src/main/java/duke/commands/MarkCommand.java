@@ -19,6 +19,7 @@ public class MarkCommand extends Command {
 
     /**
      * returns the modified task list after command execution
+     *
      * @return TaskList
      */
     @Override
@@ -38,6 +39,7 @@ public class MarkCommand extends Command {
     /**
      * executes the Mark command
      * Marks the task stored at index as done
+     *
      * @param tasks tasks list to be modified
      * @param ui to help with printing of messages
      * @param storage To deal with saving of task list

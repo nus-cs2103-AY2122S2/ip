@@ -7,6 +7,8 @@ import duke.ui.Ui;
 
 /**
  * Abstract class from which all commands inherit from
+ * contains the method execute, endsProgram and getList
+ * to be overwritten for inheritance
  */
 public abstract class Command {
     public static final String INDENT = "     ";

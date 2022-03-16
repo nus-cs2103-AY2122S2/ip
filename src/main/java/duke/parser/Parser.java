@@ -23,6 +23,7 @@ public class Parser {
 
     /**
      * processes the users input into respective command
+     *
      * @param input Users input to be processed
      * @return Corresponding command if valid input
      * @throws DukeException if input is invalid or missing details
@@ -89,6 +90,7 @@ public class Parser {
 
     /**
      * checks input string is a valid string of integers
+     *
      * @param input String input to be checked
      * @return true if input is all integers false is not
      */

@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
      * Constructor for delete command
      * deletes a task based using index provided by user
      *
-     * @param deleteIndex
+     * @param deleteIndex Non zeroed index of item to be deleted
      */
     public DeleteCommand(int deleteIndex) {
         this.deleteIndex = deleteIndex - 1;

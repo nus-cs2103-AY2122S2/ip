@@ -8,6 +8,7 @@ public class IncorrectValueException extends DukeException {
 
     /**
      * returns error message from exception
+     *
      * @return String containing details of error
      */
     @Override

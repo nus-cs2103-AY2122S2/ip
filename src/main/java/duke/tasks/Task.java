@@ -13,7 +13,8 @@ public abstract class Task {
 
     /**
      * Constructor for the base Task class
-     * @param detail
+     *
+     * @param detail detail of task
      */
     public Task(String detail) {
         this.detail = detail;
@@ -22,23 +23,29 @@ public abstract class Task {
 
     /**
      * Abstract getter method for String representation of type of task
-     * @return
+     *
+     * @return type of Task
      */
     public abstract String getType();
 
     /**
      * Abstract method to get Date of the task
-     * @return
+     *
+     * @return Date of the task in String
      */
     public abstract String getDate();
 
     /**
-     * Abstract method to update Date of the task
+     * Abstract method to update date of the task
+     *
+     * @param Update new date to be updated to
      */
     public abstract void updateDate(LocalDateTime Update);
 
     /**
-     * Abstract method to update Detail of the task
+     * Abstract method to update detail of the task
+     *
+     * @param update new detail to be updated to
      */
     public abstract void updateDetail(String update);
 
@@ -57,7 +64,8 @@ public abstract class Task {
     }
 
     /**
-     * Getter function for the detail of the task
+     * Getter for the detail of the task
+     *
      * @return String of the task details
      */
     public String getDetail() {
@@ -66,6 +74,7 @@ public abstract class Task {
 
     /**
      * Returns the status of the task 1 if done 0 if not done
+     *
      * @return 1 or 0 representing status of the task
      */
     public String getMark() {

@@ -17,6 +17,7 @@ public class TaskList {
 
     /**
      * returns size of list
+     *
      * @return size of the list
      */
     public int size() {
@@ -25,6 +26,7 @@ public class TaskList {
 
     /**
      * Adds the task to list
+     *
      * @param task to be added to list
      */
     public void add(Task task) {
@@ -33,6 +35,7 @@ public class TaskList {
 
     /**
      * Removes the task from the index
+     *
      * @param index to remove from zero-indexed
      */
     public void remove(int index) {
@@ -41,6 +44,7 @@ public class TaskList {
 
     /**
      * Gets the task from the index and returns it
+     *
      * @param index of the list to get from zero-indexed
      * @return task located at the index
      */
@@ -50,6 +54,7 @@ public class TaskList {
 
     /**
      * Replaces the task at the index with the new task
+     *
      * @param index of the task to be replaced
      * @param task to replace at index
      */

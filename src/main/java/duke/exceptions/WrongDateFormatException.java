@@ -1,5 +1,8 @@
 package duke.exceptions;
 
+/**
+ * Exception class when date is wrongly formatted
+ */
 public class WrongDateFormatException extends DukeException {
     private String type;
 
@@ -9,6 +12,7 @@ public class WrongDateFormatException extends DukeException {
 
     /**
      * returns error message from exception
+     *
      * @return String containing details of error
      */
     @Override

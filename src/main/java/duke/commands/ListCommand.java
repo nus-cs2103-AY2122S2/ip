@@ -14,6 +14,7 @@ public class ListCommand extends Command {
 
     /**
      * returns the modified task list after command execution
+     *
      * @return TaskList
      */
     @Override
@@ -23,6 +24,7 @@ public class ListCommand extends Command {
 
     /**
      * returns true boolean if command execution ends program
+     *
      * @return true if it ends main program
      */
     @Override
@@ -33,6 +35,7 @@ public class ListCommand extends Command {
     /**
      * executes the list command
      * Lists out all tasks stored in the task list
+     *
      * @param tasks tasks list to be modified
      * @param ui to help with printing of messages
      * @param storage To deal with saving of task list

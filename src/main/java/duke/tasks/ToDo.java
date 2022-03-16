@@ -9,6 +9,7 @@ public class ToDo extends Task {
 
     /**
      * Constructor for ToDo task
+     *
      * @param detail details of task to be added
      */
     public ToDo(String detail) {
@@ -17,6 +18,7 @@ public class ToDo extends Task {
 
     /**
      * Returns the due date of the task
+     *
      * @return Date if applicable
      */
     @Override
@@ -26,6 +28,7 @@ public class ToDo extends Task {
 
     /**
      * returns a string representation for the type of task
+     *
      * @return String representing the type of task
      */
     @Override
@@ -50,6 +53,7 @@ public class ToDo extends Task {
 
     /**
      * returns string representation of Task with mark status date and detail
+     *
      * @return String representation of Task
      */
     @Override

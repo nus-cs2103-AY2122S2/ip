@@ -20,6 +20,7 @@ public class UpdateCommand extends Command{
     /**
      * Constructor for Update Command class
      * Creates correct Task based on user input and adds to task list
+     *
      * @param input detail to update and updated detail
      */
     public UpdateCommand(String input) {
@@ -32,6 +33,7 @@ public class UpdateCommand extends Command{
 
     /**
      * returns the modified task list after command execution
+     *
      * @return TaskList
      */
     @Override
@@ -41,6 +43,7 @@ public class UpdateCommand extends Command{
 
     /**
      * returns true boolean if command execution ends program
+     *
      * @return true if it ends main program
      */
     @Override
@@ -51,6 +54,7 @@ public class UpdateCommand extends Command{
     /**
      * executes the bye command
      * Prints bye message and saves the tasks created from the program loop to a text file
+     *
      * @param tasks   tasks list to be modified
      * @param ui      to help with printing of messages
      * @param storage To deal with saving of task list

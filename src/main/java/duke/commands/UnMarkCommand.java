@@ -18,7 +18,8 @@ public class UnMarkCommand extends Command {
     }
 
     /**
-     * returns the modified task list after command execution
+     * returns the modified task list after command
+     *
      * @return TaskList
      */
     @Override
@@ -28,6 +29,7 @@ public class UnMarkCommand extends Command {
 
     /**
      * returns true boolean if command execution ends program
+     *
      * @return true if it ends main program
      */
     @Override
@@ -38,6 +40,7 @@ public class UnMarkCommand extends Command {
     /**
      * executes the UnMark command
      * Marks the task stored at index as not done
+     * 
      * @param tasks tasks list to be modified
      * @param ui to help with printing of messages
      * @param storage To deal with saving of task list

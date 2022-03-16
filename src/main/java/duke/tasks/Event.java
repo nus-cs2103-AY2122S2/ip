@@ -42,6 +42,8 @@ public class Event extends Task {
 
     /**
      * Updates the details of the task
+     *
+     * @param update new details to update to
      */
     @Override
     public void updateDetail(String update) {
@@ -50,6 +52,8 @@ public class Event extends Task {
 
     /**
      * Updates the date of the task
+     *
+     * @param update new date to update to
      */
     @Override
     public void updateDate(LocalDateTime update) {
@@ -58,6 +62,7 @@ public class Event extends Task {
 
     /**
      * returns string representation of Task with mark status date and detail
+     *
      * @return String representation of Task
      */
     @Override
