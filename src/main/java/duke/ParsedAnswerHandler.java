@@ -118,7 +118,7 @@ public class ParsedAnswerHandler {
             case "update":
                 int idx = pa.getIndex();
                 Storage s = new Storage();
-                Task updatedTask = null;
+                Task updatedTask = Storage.taskList.get(idx);
 
                 if (pa.getType().equals("Deadline")) {
                     Deadline currentTask = (Deadline) Storage.taskList.get(idx);
