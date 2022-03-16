@@ -28,6 +28,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Concat each task in the task list into a single string.
+     * This string is considered as the list of all the tasks stored by the application so far.
+     * @return String
+     */
+
     static String list() {
         assertTaskListNotNull();
         ArrayList<Task> taskArrayList = Storage.taskList;

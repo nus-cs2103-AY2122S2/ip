@@ -20,6 +20,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a new directory with the storage file that will store the tasks.
+     */
     void createNewStorageFile() {
         try {
             Files.createDirectories(Paths.get(this.homeDir + "/data"));
@@ -31,6 +34,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the tasks stored in the storage file to the application.
+     * If storage file not found, a new one will be created by {@code createNewStorageFile()}
+     */
     void load() {
         boolean directoryExists = new java.io.File(this.homeDir + "/data").exists();
         if (!directoryExists) {
@@ -84,6 +91,10 @@ public class Storage {
         }
     }
 
+
+    /**
+     * Saves the task to the storage file each time a task is entered by the user.
+     */
     void save() {
         File myObj = new File(this.homeDir + "/data/storage.txt");
         myObj.delete();

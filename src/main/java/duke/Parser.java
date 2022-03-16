@@ -124,6 +124,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a user input to create a ParsedAnswer object that will be returned by the function.
+     * @return ParsedAnswer
+     */
     public ParsedAnswer parse() {
         assertInputNotEmpty();
         String[] parsedString = input.toLowerCase().split(" ", 2);
