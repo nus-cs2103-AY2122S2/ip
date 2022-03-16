@@ -1,4 +1,7 @@
 package juke;
+
+import java.util.ArrayList;
+
 /**
  * Represents the deadline tasks input by the user
  */
@@ -67,22 +70,31 @@ public class Deadline extends Task {
         String date = deadLine.split(" ")[1].split("-")[0];
         String month = digitMonth_to_AlphabeticalMonth(deadLine.split(" ")[1].split("-")[1]);
         String year = deadLine.split(" ")[1].split("-")[2];
-        String time = Integer.toString(Integer.parseInt(deadLine.split(" ")[2]) % 1200);
+        int timeHours = Math.round(Integer.parseInt(deadLine.split(" ")[2])/100);
+        int timeMinutes = Integer.parseInt(deadLine.split(" ")[2]) - timeHours*100;
+        String time = "";
         if (month == "notValidMonth") {
             return month;
         } else if (Integer.parseInt(date) < 1 || Integer.parseInt(date) > 31) {
             return "notValidDate";
         } else {
-            if (time.length() < 4) {
-                int digitsLeft = 4 - time.length();
-                while (digitsLeft > 0) {
-                    time += "0";
-                    digitsLeft--;
-                }
-                time += "pm";
+            if (deadLine.split(" ")[2].length() < 4 ||
+                    !(timeHours <= 23 && timeHours >= 00) ||
+                    !(timeMinutes <= 59 && timeMinutes >= 00)) {
+                return "notValidTime";
             } else {
-                time += "am";
+                if (timeHours == 0) {
+                    time += 12 + ":" + String.format("%02d",timeMinutes) + "am";
+                } else if (timeHours == 12) {
+                    time += 12 + ":" + String.format("%02d",timeMinutes) + "pm";
+                } else if (timeHours <= 12) {
+                    time += timeHours + ":" + String.format("%02d",timeMinutes) + "am";
+                } else {
+                    time += timeHours - 12 + ":" + String.format("%02d",timeMinutes) + "pm";
+                }
             }
+
+        }
 
 
             String finalDescription = taskAtHand
@@ -90,5 +102,44 @@ public class Deadline extends Task {
                     + time + ")";
             return "[D]" + "[" + super.getStatusIcon() + "] " + finalDescription;
         }
+
+        public static boolean isDeadline(String[] splittedString) {
+            return splittedString[0].equals("deadline");
+        }
+
+        public static String executeDeadline(ArrayList<Task> itemList, String[] splittedString, String reply, Outputs op) {
+            if (splittedString.length < 5 || !splittedString[3].contains("-")) { //invalid deadline command
+                return op.border +
+                        "     ☹ OOPS!!! The details of deadline cannot be empty.\n" +
+                        op.instructions +
+                        op.border;
+            } else { //valid deadline command
+                Task deadlineTask = new Deadline(reply, "");
+                if (deadlineTask.getDescription() == "notValidMonth") {
+                    return op.border +
+                            "     Oops, you've entered an invalid month! \n" +
+                            op.instructions +
+                            op.border;
+                } else if (deadlineTask.getDescription() == "notValidDate") {
+                    return op.border +
+                            "     Oops, you've entered an invalid date! \n" +
+                            op.instructions +
+                            op.border;
+                } else if (deadlineTask.getDescription() == "notValidTime") {
+                    return op.border +
+                            "     Oops, you've entered an invalid time! \n" +
+                            op.instructions +
+                            op.border;
+                }else {
+                    itemList.add(deadlineTask);
+                    return op.border +
+                            "     Got it. I've added this task: \n" +
+                            "       " + deadlineTask.getDescription() + "\n" +
+                            "     Now you have " + itemList.size() + " tasks in the list.\n" +
+                            op.instructions +
+                            op.border;
+                }
+            }
+        }
     }
-}
+

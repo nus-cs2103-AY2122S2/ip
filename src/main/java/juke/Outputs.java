@@ -28,7 +28,6 @@ public class Outputs {
 //                    "     * Note for [date&time]: enter it strictly in the following format    *\n" +
 //                    "     *    dd/mm/yyyy [24h] | eg: 31-12-1969 1830                          *\n" +
 //                    "     **********************************************************************\n" +
-//                    "\n";
 
     String help =
                                 "COMMANDS | FORMAT                                                  \n" +
@@ -41,7 +40,7 @@ public class Outputs {
     String firstPrompt =                 "     Hello! I'm Juke\n" +
             "     What can I do for you?\n";
 
-    String border = "    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n";
-
+//    String border = "    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n";
+    String border = "\n" + "\n";
 
 }

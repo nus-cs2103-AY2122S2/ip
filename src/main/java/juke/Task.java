@@ -36,22 +36,10 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    /**
-     * Task is marked as done, isDone becomes true
-     * @param
-     * @return
-     * @throws
-     */
     public void markAsDone() {
         this.isDone = true;
     }
 
-    /**
-     * Task is marked as not done, isDone becomes false
-     * @param
-     * @return
-     * @throws
-     */
     public void markAsUndone() {
         this.isDone = false;
     }
