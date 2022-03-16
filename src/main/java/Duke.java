@@ -23,6 +23,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private final String END_MESSAGE = "Sayonara~";
 
 
     public Duke(String filePath) {
@@ -38,6 +39,15 @@ public class Duke {
 
     public void run() {
         this.ui.initUi();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        Parser parser = new Parser();
+        String parserOutput = "";
+        while (!parserOutput.equals(END_MESSAGE)) {
+            String input = br.readLine();
+            parserOutput = parser.parse(input, this.storage);
+            System.out.println();
+        }
     }
     /**
      * Prints line break.
