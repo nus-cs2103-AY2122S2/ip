@@ -51,6 +51,7 @@ public class Parser {
             taskNo = Integer.parseInt(words[1]);
             return new CommandUnmark(taskList, taskNo);
         case "todo":
+            checkArgNumber(words, 2);
             String todoContent = words[1];
             for (int i = 2; i < words.length; i++) {
                 todoContent = todoContent + " " + words[i];
@@ -106,6 +107,12 @@ public class Parser {
         if (words.length > num) {
             throw new DukeTooManyArgException();
         } else if (words.length < num) {
+            throw new DukeTooLittleArgException();
+        }
+    }
+
+    private static void checkMinArgNumber(String[] words, int min) throws DukeTooLittleArgException {
+        if (words.length < min) {
             throw new DukeTooLittleArgException();
         }
     }
