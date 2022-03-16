@@ -16,6 +16,7 @@ public class Messages {
     public static final String NEW_EVENT_REPLY_TEMPLATE = "Added a new Task. Event task: \n";
     public static final String DELETE_REPLY_TEMPLATE = "Successfully removed this task: \n";
     public static final String FIND_REPLY_TEMPLATE = "Here are the matching tasks in your list: \n";
+    public static final String FIND_NO_TASKS_TEMPLATE = "No matching tasks found";
     public static final String BYE_REPLY_TEMPLATE = "Bye! \n" + "Have a great day!";
 
     // Missing information messages

@@ -3,6 +3,7 @@ package arthur;
 import static arthur.commons.Messages.DEADLINE_MISSING_DATE_MESSAGE;
 import static arthur.commons.Messages.DELETE_REPLY_TEMPLATE;
 import static arthur.commons.Messages.EVENT_MISSING_DATE_TIME_MESSAGE;
+import static arthur.commons.Messages.FIND_NO_TASKS_TEMPLATE;
 import static arthur.commons.Messages.FIND_REPLY_TEMPLATE;
 import static arthur.commons.Messages.INVALID_TASK_NUMBER_MESSAGE;
 import static arthur.commons.Messages.LIST_OUT_EMPTY_LIST_TEMPLATE;
@@ -257,6 +258,7 @@ public class TaskList {
         StringBuilder temp = new StringBuilder(FIND_REPLY_TEMPLATE);
         String refTaskText = str.toLowerCase();
         String currTaskText;
+        boolean hasFoundTask = false;
         int taskNum = 1;
 
         for (Task currTask : taskList) {
@@ -265,9 +267,12 @@ public class TaskList {
             if (currTaskText.contains(refTaskText)) {
                 temp.append(taskNum).append(". ").append(currTask).append("\n");
                 taskNum++;
+                hasFoundTask = true;
             }
         }
-        return temp.toString();
+        return hasFoundTask
+                ? temp.toString()
+                : FIND_NO_TASKS_TEMPLATE;
     }
 
     /**
