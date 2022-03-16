@@ -63,8 +63,13 @@ public class Parser {
         if (regex.equalsIgnoreCase("none")) {
             try {
                 String desc = inputToParse[1];
+                if (desc.trim().isEmpty()) {
+                    ParsedAnswer pa = new ParsedAnswer("error", -1);
+                    pa.setDesc("The description cannot be empty!");
+                    return pa;
+                }
                 ParsedAnswer pa = new ParsedAnswer(command, -1);
-                pa.setDesc(desc);
+                pa.setDesc(desc.stripLeading());
                 return pa;
             } catch (Exception e) {
                 ParsedAnswer pa = new ParsedAnswer("error", -1);
@@ -80,7 +85,12 @@ public class Parser {
                     pa.setDesc("Please check that your input format is correct.");
                 } else {
                     pa = new ParsedAnswer(command, -1);
-                    pa.setDesc(eventParseBy[0]);
+                    if (eventParseBy[0].trim().isEmpty()) {
+                        ParsedAnswer pa_err = new ParsedAnswer("error", -1);
+                        pa_err.setDesc("The description cannot be empty!");
+                        return pa_err;
+                    }
+                    pa.setDesc(eventParseBy[0].stripLeading());
                     pa.setDate(eventParseBy[1]);
                 }
                 return pa;
