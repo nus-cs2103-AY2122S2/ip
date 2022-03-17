@@ -80,7 +80,7 @@ Example:
 - `find homework`
 
 ### Update task
-Can update either only the task description or only the date or both. <br/>
+Can update either only the task description or both. <br/>
 
 Format: <br/>
 
@@ -90,13 +90,6 @@ Update only task description
 
 Example:
 - `update 3 study for quiz`
-
-Update only date
-- `update TASK_INDEX /date YYYY-MM-DD`
-- TASK_INDEX and YYYY-MM-DD cannot be empty.
-
-Example:
-- `update 3 /date 2022-05-01`
 
 Update both task description and date
 - `update TASK_INDEX TASK_DESC /date YYYY-MM-DD`
