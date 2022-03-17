@@ -24,8 +24,6 @@ public class Duke {
      * @throws IOException
      */
     public String reply(String userInput) throws IOException {
-        Ui ui = new Ui();
-        ui.greet();
 
         // initializing variable
         boolean isBye = false;
@@ -45,6 +43,21 @@ public class Duke {
             e.printStackTrace();
         }
 
+        return Duke.runDukeCommand(isBye, userInput, taskLists, storage);
+    }
+
+    /**
+     * Runs duke commands based on user input.
+     *
+     * @param isBye whether the command is bye.
+     * @param userInput user input to duke.
+     * @param taskLists list of task in the hard disk.
+     * @param storage hard disk.
+     * @return String result of executing command.
+     * @throws IOException
+     */
+    public static String runDukeCommand(boolean isBye, String userInput,
+                                        TaskList taskLists, Storage storage) throws IOException {
         while (!isBye) {
             if (userInput.equals("bye")) {
                 return "Bye. See you again next time! Have a nice day 😊!";
@@ -54,12 +67,6 @@ public class Duke {
                 String userCommand = userInputs[0];
                 String userInputTask = String.join(" ",
                         Arrays.copyOfRange(userInputs, 1, userInputs.length));
-
-                try {
-                    Parser.userCommandValidator(userCommand);
-                } catch (DukeException e) {
-                    return "OOPS!!! I'm sorry, but I don't know what that means.";
-                }
 
                 switch (userCommand) {
                 case "list":
