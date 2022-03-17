@@ -190,7 +190,7 @@ public class TaskList {
                 String taskInfo = currTask.split(TASK_INFO_SPLIT_LOC)[1];
                 char taskType = currTask.charAt(1);
                 char marking = currTask.charAt(4);
-                int lastTaskIndex = taskList.size() - 1;
+                int lastTaskIndex = taskList.size();
                 taskCreator(taskInfo, taskType);
 
                 if (marking == 'X') {
