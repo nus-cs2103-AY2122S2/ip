@@ -9,7 +9,7 @@
    * Open command prompt in the folder with `duke.jar` and run `java -jar duke.jar`.
 5. Type the proper command format according to the specifications.
 
-![Image of Duke](ui.png)
+![Image of Duke](Ui.png)
 
 ---
 ## Feature Summary
@@ -45,6 +45,10 @@ Show a list of available commands for Duke.
 
 **Format**: `help`
 
+**Expected outcome:** <br>
+![Image of Help command](Help.png)
+
+
 ---
 ### Add todo task : `todo`
 Adds a todo task in the todolist.
@@ -54,45 +58,61 @@ Adds a todo task in the todolist.
 **Example:**
 * `todo run 15km`
 
+**Expected outcome:** <br>
+![Image of todo command](Todo.png)
+
 ---
 ### Add event task: `event`
 Adds an event task in the todolist. Not putting `TIME` will give it a default time of 11.59pm.
 
 **Format:** `event DESCRIPTION /at DATE [TIME]` <br>
-`DATE` format: `yy-mm-dd` <br>
-`TIME` format: `hhmm` 
+Format of `DATE`: `yy-mm-dd` <br>
+Format of `TIME`: `hhmm` 
 
 **Example:** 
 * `event Swim meet /at 2022-02-18`,
 * `event Swim meet /at 2022-02-18 1520`
+
+**Expected outcome:** <br>
+![Image of event command](Event.png)
 
 ---
 ### Add deadline task: `todo`
 Adds a deadline task in the todolist. Not putting `TIME` will give it a default time of 11.59pm.
 
 **Format:** `deadline DESCRIPTION /at DATE [TIME]` <br>
-`DATE` format: `yy-mm-dd` <br>
-`TIME` format: `hhmm` 
+Format of `DATE`:  `yyyy-mm-dd` <br>
+Format of `TIME`: `hhmm` 
 
 **Example:**
 * `deadline Finish CS3240 assignment /by 2022-02-18`, 
 * `deadline Finish CS3240 assignment /by 2022-02-18 1520`
 
+**Expected outcome:** <br>
+![Image of Help command](Deadline.png)
+
 ---
 ### List all tasks: `list`
 Lists all the tasks.
 
-**Format:** `list`
+**Format:** `list` 
+
+**Expected outcome:** <br>
+![Image of List command](List.png)
 
 ---
 ### Delete a task: `delete`
 Delete a task from the tasklist.
 
-**Format:** `delete TASK_INDEX`
+**Format:** `delete TASK_INDEX`<br>
 `TASK_INDEX` format: Has to be a number, it's respective to the ordering shown in the tasklist from `list` command.
 
-**Example:** 
+**Example of usage:** 
 * `delete 2`
+
+**Expected outcome:** <br>
+![Image of delete command](Delete.png)
+
 
 ---
 ### Find tasks by keyword: `find`
@@ -105,23 +125,30 @@ even if the keyword is partially written.
 * `find assignment`
 * `find assign`
 
+**Expected outcome:** <br>
+![Image of find command](Find.png)
+
 ---
 ### Mark tasks as done: `mark`
 Mark task as done.
 
-**Format:** `mark TASK_INDEX`
+**Format:** `mark TASK_INDEX` <br>
 `TASK_INDEX` format: Has to be a number, it's respective to the ordering shown in the tasklist 
 from `list` command. <br>
+
 **Example:** 
 * `mark 1`
 * `mark 2`
 
+**Expected outcome:** <br>
+![Image of mark command](Mark.png)
+
 ---
 
 ### Unmark tasks as undone: `unmark`
-Unmark task as done.
+Unmark task as undone.
 
-**Format:** `unmark TASK_INDEX`
+**Format:** `unmark TASK_INDEX` <br>
 `TASK_INDEX` format: Has to be a number, it's respective to the ordering shown in the tasklist
 from `list` command.
 
@@ -129,15 +156,18 @@ from `list` command.
 * `unmark 1`, 
 * `unmark 2`
 
+**Expected outcome:** <br>
+![Image of unmark command](Unmark.png)
+
 ---
 
 ### Exiting the program: `bye`
-Close the application.
+Closes the application.
 
 **Format:** `bye` 
 
-**Example:** 
-* `bye`
+**Expected outcome:** <br>
+![Image of unmark command](Bye.png)
 
 ---
 
