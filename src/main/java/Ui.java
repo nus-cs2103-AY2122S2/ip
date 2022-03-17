@@ -21,4 +21,5 @@ public class Ui {
         System.out.println(this.lineBreak);
     }
 
+
 }

@@ -7,8 +7,8 @@ public class DateTime {
         this.dateTime = LocalDateTime.of(Integer.parseInt(dateTimeArr[0])
                 , Integer.parseInt(dateTimeArr[1])
                 , Integer.parseInt(dateTimeArr[2])
-                , Integer.parseInt(dateTimeArr[3].substring(0, 2))
-                , Integer.parseInt(dateTimeArr[3].substring(2)));
+                , Integer.parseInt(dateTimeArr[3])
+                , Integer.parseInt(dateTimeArr[4]));
     }
 
     @Override
@@ -24,5 +24,19 @@ public class DateTime {
                 + this.dateTime.getYear() + " "
                 + this.dateTime.getHour()  + ":"
                 + minutes;
+    }
+
+    public String dateTimeForStorage() {
+        String toBeStored = "";
+        toBeStored = this.dateTime.getYear()
+                + "-"
+                + this.dateTime.getMonthValue()
+                + "-"
+                + this.dateTime.getDayOfMonth()
+                + "-"
+                + this.dateTime.getHour()
+                + "-"
+                + this.dateTime.getMinute();
+        return toBeStored;
     }
 }

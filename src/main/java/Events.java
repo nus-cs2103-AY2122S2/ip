@@ -13,8 +13,12 @@ public class Events extends Task {
         this.duration = duration;
     }
 
+    public String getDateTimeForStorage() {
+        return this.duration.dateTimeForStorage();
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.duration.toString() + ")";
+        return "[E]" + super.toString() + " (at: " + this.duration.toString() + ")";
     }
 }

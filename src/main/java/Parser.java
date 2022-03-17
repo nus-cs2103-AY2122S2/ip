@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Arrays;
 
 public class Parser {
@@ -22,7 +23,7 @@ public class Parser {
         tasklist.addTask(task);
     }
 
-    public String parse(String input, TaskList tasklist, Storage storage) throws DukeException {
+    public String parse(String input, TaskList tasklist, Storage storage) throws DukeException, IOException {
         String[] inputArr = input.trim().split(" ", 2); // split first word from body
         switch(inputArr[0]) {
         case "todo":
@@ -46,6 +47,7 @@ public class Parser {
                 throw new DukeException("deadline when end?");
             }
             Deadlines newDeadline = new Deadlines(getDescription(inputArr), getDateTime(inputArr));
+            addToTaskList(newDeadline, tasklist);
             return ADD_SUCCESS + newDeadline;
 
         case "list":

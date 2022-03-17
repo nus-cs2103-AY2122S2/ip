@@ -32,7 +32,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            System.out.println(e.getMessage());
             tasks = new TaskList();
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -49,7 +49,7 @@ public class Duke {
             try {
                 String input = br.readLine();
                 parserOutput = parser.parse(input, this.tasks, this.storage);
-                System.out.println();
+                System.out.println(parserOutput);
             } catch (DukeException e) {
                System.out.println(e.getMessage());
             } catch (IOException e) {
@@ -57,37 +57,8 @@ public class Duke {
             }
         }
     }
-    /**
-     * Prints line break.
-     * @return void
-     */
-    private static final void printLineBreak() {
-        System.out.println(LINE_BREAK);
-    }
-
-    /**
-     * Prints Master List
-     * @param bw BufferedWriter from main to print out the Master List.
-     * @throws java.io.IOException If an I/O error occurs. Only takes in string.
-     */
-
-
 
     public static void main(String[] args) {
-
-
-
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        printLineBreak();
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-
-
-
+        new Duke("/tasks.txt").run();
     }
 }

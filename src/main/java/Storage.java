@@ -9,9 +9,13 @@ import java.util.Scanner;
 
 public class Storage {
     private String filePath;
+    private Path path;
 
     Storage(String filePath) {
         this.filePath = filePath;
+        String home =  System.getProperty("user.home"); // base directory
+        // following code should give me [HOME_DIRECTORY]/Desktop/iP/data
+        this.path = java.nio.file.Paths.get(home,"Desktop", "iP", "data");
     }
 
     private Task convertStringToTask(String description) {
@@ -50,13 +54,10 @@ public class Storage {
         return tempTask;
     }
 
-    public ArrayList<Task> load() throws IOException {
-        String home =  System.getProperty("user.home"); // base directory
-        // following code should give me [HOME_DIRECTORY]/Desktop/iP/data
-        java.nio.file.Path path = java.nio.file.Paths.get(home,"Desktop", "iP", "data");
+    public ArrayList<Task> load() throws IOException, DukeException {
         ArrayList<Task> masterList = new ArrayList<>();
         try {
-            File dukeStore = new File(path + this.filePath);
+            File dukeStore = new File(this.path + this.filePath);
             Scanner fileReader = new Scanner(dukeStore);
             while (fileReader.hasNextLine()) {
                 masterList.add(convertStringToTask(fileReader.nextLine()));
@@ -68,13 +69,15 @@ public class Storage {
                 new File("data").mkdir();
             }
             new File(path + "/duke.txt").createNewFile();
+            throw new DukeException("File not found. Creating new file...");
         }
 
         return masterList;
     }
 
-    public void saveAllTask(TaskList tasklist) throws IOException {
-        FileWriter fw = new FileWriter(this.filePath);
+    public void saveAllTasks(TaskList tasklist) throws IOException {
+        File dukeStore = new File(this.path + this.filePath);
+        FileWriter fw = new FileWriter(dukeStore);
         for (int i = 0; i < tasklist.size(); i++) {
             fw.write(taskToString(tasklist.get(i)));
             fw.write("\n");
@@ -97,12 +100,16 @@ public class Storage {
             toReturn += "0|";
         }
         toReturn += task.description.trim();
-        if (task instanceof Deadlines || task instanceof Events) {
-            String[] durationArr = task.toString().split("[:)]");
-            String duration = durationArr[1].split(" ")[1];
+        if (task instanceof Deadlines) {
+            String duration = ((Deadlines) task).getDateTimeForStorage();
+            toReturn += "|" + duration;
+        } else if (task instanceof Events) {
+            String duration = ((Events) task).getDateTimeForStorage();
             toReturn += "|" + duration;
         }
         return toReturn;
     }
+
+
 
 }

@@ -28,7 +28,7 @@ public class TaskList {
         String toPrint = LIST_INIT;
         for (int i = 0; i < masterList.size(); i++) {
             Task currTask = masterList.get(i);
-            toPrint += currTask + "\n";
+            toPrint += "\t" + (i + 1) + ". " + currTask + "\n";
         }
         return toPrint;
     }
