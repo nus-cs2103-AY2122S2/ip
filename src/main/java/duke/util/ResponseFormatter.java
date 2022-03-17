@@ -1,6 +1,7 @@
 package duke.util;
 
 import static duke.commons.core.CliComponents.TEXT_BAR_LINE;
+import static duke.commons.core.Messages.MESSAGE_EMPTY_TASK_LIST;
 
 import java.util.List;
 
@@ -91,6 +92,10 @@ public final class ResponseFormatter {
      * @param tasks List of tasks to be printed
      */
     public static String printList(List<Task> tasks) {
+        if (tasks.isEmpty()) {
+            return MESSAGE_EMPTY_TASK_LIST;
+        }
+
         StringBuilder sb = new StringBuilder();
         sb.append(TEXT_BAR_LINE).append("\n");
         sb.append("Here are the tasks in your list:").append("\n");
