@@ -62,12 +62,12 @@ public class TaskList {
      */
     public String handleMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
-        if (!isValidIndex(number)) {
-            try {
+        try {
+            if (!isValidIndex(number)) {
                 throw new DukeException(MESSAGE_INVALID_INDEX);
-            } catch (DukeException e) {
-                return ResponseFormatter.printDukeException(e, "Please try again:");
             }
+        } catch (DukeException e) {
+            return ResponseFormatter.printDukeException(e, "Please try again:");
         }
 
         Task curr = tasks.get(number - 1);
@@ -83,12 +83,12 @@ public class TaskList {
      */
     public String handleUnMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
-        if (!isValidIndex(number)) {
-            try {
+        try {
+            if (!isValidIndex(number)) {
                 throw new DukeException(MESSAGE_INVALID_INDEX);
-            } catch (DukeException e) {
-                return ResponseFormatter.printDukeException(e, "Please try again:");
             }
+        } catch (DukeException e) {
+            return ResponseFormatter.printDukeException(e, "Please try again:");
         }
         Task curr = tasks.get(number - 1);
         assert curr != null : "Invalid Task that is marked as Done!";
@@ -171,12 +171,12 @@ public class TaskList {
      */
     public String handleDelete(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
-        if (!isValidIndex(number)) {
-            try {
+        try {
+            if (!isValidIndex(number)) {
                 throw new DukeException(MESSAGE_INVALID_INDEX);
-            } catch (DukeException e) {
-                return ResponseFormatter.printDukeException(e, "Please try again:");
             }
+        } catch (DukeException e) {
+            return ResponseFormatter.printDukeException(e, "Please try again:");
         }
 
         Task curr = tasks.get(number - 1);
