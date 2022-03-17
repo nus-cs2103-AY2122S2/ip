@@ -22,7 +22,7 @@ public abstract class Command {
     }
 
     /**
-     * Execution of a command behavior.
+     * Executes command behavior.
      *
      * @param input User input
      * @param taskList User tasklist.

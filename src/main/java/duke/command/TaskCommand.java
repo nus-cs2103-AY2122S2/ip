@@ -25,7 +25,7 @@ public abstract class TaskCommand extends Command {
     }
 
     /**
-     * Get description of the task after the command keyword.
+     * Gets description of the task after the command keyword.
      *
      * <p>Get task description without the command keyword.
      * Calls the super class, Command, getTaskDescriptor, but this
@@ -40,7 +40,7 @@ public abstract class TaskCommand extends Command {
     }
 
     /**
-     * Add new task into task list, update save and print.
+     * Adds new task into task list, update save and print.
      *
      * <p>Updates the task list and output the added task through
      * the UI</p>
