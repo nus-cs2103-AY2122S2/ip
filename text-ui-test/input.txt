@@ -1,0 +1,6 @@
+todo read book
+list
+deadline return book /by 2pm
+todo take bath
+event party /at NUS
+bye
