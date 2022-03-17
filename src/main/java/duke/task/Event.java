@@ -8,6 +8,8 @@ import duke.util.DateTimeCustomFormatter;
  * Represents an Event object
  */
 public class Event extends Task {
+    public static final String TASK_NAME = "Event";
+
     private LocalDateTime metaInfo;
 
     /**

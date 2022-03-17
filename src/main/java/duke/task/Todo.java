@@ -4,6 +4,8 @@ package duke.task;
  * Represents a Todo object
  */
 public class Todo extends Task {
+    public static final String TASK_NAME = "Todo";
+
     /**
      * Default Constructor
      *

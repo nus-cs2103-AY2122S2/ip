@@ -1,5 +1,7 @@
 package duke.task;
 
+import static duke.commons.core.Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +89,7 @@ public class TaskList {
     public String handleTodo(String[] inputArray, String originalInput) {
         try {
             if (inputArray.length <= 1) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION, Todo.TASK_NAME));
             }
         } catch (DukeException e) {
             return ResponseFormatter.printDukeException(e, "Please try again:");
@@ -101,7 +103,15 @@ public class TaskList {
      * @param originalInput Original user input captured as a String
      * @return response
      */
-    public String handleDeadline(String originalInput) {
+    public String handleDeadline(String[] inputArray, String originalInput) {
+        try {
+            if ((inputArray.length <= 1) || (originalInput.split("/by").length == 1)) {
+                throw new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION, Deadline.TASK_NAME));
+            }
+        } catch (DukeException e) {
+            return ResponseFormatter.printDukeException(e, "Please try again:");
+        }
+
         String metaInfo = originalInput.split("/by")[1];
         String strippedCommand = originalInput.substring(8);
         Task curr;
@@ -118,7 +128,15 @@ public class TaskList {
      * @param originalInput Original user input captured as a String
      * @return response
      */
-    public String handleEvent(String originalInput) {
+    public String handleEvent(String[] inputArray, String originalInput) {
+        try {
+            if ((inputArray.length <= 1) || (originalInput.split("/by").length == 1)) {
+                throw new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION, Event.TASK_NAME));
+            }
+        } catch (DukeException e) {
+            return ResponseFormatter.printDukeException(e, "Please try again:");
+        }
+
         String metaInfo = originalInput.split("/at")[1];
         String strippedCommand = originalInput.substring(5);
         Task curr;

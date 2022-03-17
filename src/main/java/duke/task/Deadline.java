@@ -9,6 +9,8 @@ import duke.util.DateTimeCustomFormatter;
  * Represents a Deadline object
  */
 public class Deadline extends Task {
+    public static final String TASK_NAME = "Deadline";
+
     private LocalDateTime metaInfo;
 
     /**
@@ -46,7 +48,6 @@ public class Deadline extends Task {
     public String toString() {
         return super.toString() + "(by:" + DateTimeCustomFormatter.getStringFromDate(this.metaInfo) + ")";
     }
-
 
     /**
      * @return String representation of this task to be saved to file
