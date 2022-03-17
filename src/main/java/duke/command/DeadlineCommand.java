@@ -22,7 +22,7 @@ public class DeadlineCommand extends TaskCommand {
 
     private static final String TASK_FORMAT_WRONG =
             "Did you remember to put in the deadline after /by? Or did u remember to add /by?";
-    private static final String DATE_FORMAT_WRONG = "Date format maybe wrong. yy-mm-dd";
+    private static final String DATE_FORMAT_WRONG = "Date format maybe wrong. yyyy-mm-dd";
     private static final String TIME_FORMAT_WRONG = "Time format wrong. HHmm";
 
     private static final String INPUT_TIME_FORMAT = "HHmm";
@@ -50,7 +50,7 @@ public class DeadlineCommand extends TaskCommand {
      * @return Deadline response.
      * @throws DukeException If no task descriptor or
      * deadline task format is wrong (no /by)
-     * or date format is wrong (yy-mm-dd)
+     * or date format is wrong (yyyy-mm-dd)
      * or time format is wrong (HHmm)
      */
     @Override
@@ -67,7 +67,7 @@ public class DeadlineCommand extends TaskCommand {
             throw new DukeException(TASK_FORMAT_WRONG);
         }
 
-        // parse the date in yy-mm-dd
+        // parse the date in yyyy-mm-dd
         LocalDate localDate = parseDateFromStr(dateTime[0]);
 
         // check if user input a time, if not use default time

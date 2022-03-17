@@ -66,7 +66,7 @@ Adds a todo task in the todolist.
 Adds an event task in the todolist. Not putting `TIME` will give it a default time of 11.59pm.
 
 **Format:** `event DESCRIPTION /at DATE [TIME]` <br>
-Format of `DATE`: `yy-mm-dd` <br>
+Format of `DATE`: `yyyy-mm-dd` <br>
 Format of `TIME`: `hhmm` 
 
 **Example:** 

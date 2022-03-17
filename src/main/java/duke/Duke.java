@@ -29,7 +29,7 @@ import duke.util.Storage;
  * Duke chatbot behavior and data.
  */
 public class Duke {
-    public static final String GREETING = "HELLO CHILD. WHAT DO YOU WISH TO CHAT ABOUT?? /help TO TELL ME!";
+    public static final String GREETING = "HELLO CHILD. WHAT DO YOU WISH TO CHAT ABOUT?? Type 'help' TO TELL ME!";
 
     //file paths
     private static final String STORAGE_FILE_NAME = "data.txt";
