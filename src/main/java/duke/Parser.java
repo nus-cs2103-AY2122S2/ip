@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -71,6 +72,42 @@ public class Parser {
     }
 
     /**
+     * Validates the date and time of deadline command.
+     *
+     * @param userInputTask
+     * @throws DukeException
+     */
+    static void parserDeadlineDateTimeValidator(String userInputTask) throws DukeException {
+        // splitting deadline into description and by
+        String[] deadlineTaskArr = userInputTask.split(" /by ");
+        String[] byAndTime = deadlineTaskArr[1].split(" ");
+        String by = byAndTime[0];
+        assert !by.isEmpty() : "Date is not empty and is required.";
+
+        try {
+            String deadlineTaskTime = byAndTime[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Deadline time is required");
+        }
+
+        String deadlineTime = byAndTime[1];
+
+        // handle error when time is not in the hh:mm 24hr clock format
+        try {
+            LocalTime.parse(deadlineTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Time must be in the hh:mm 24hr format");
+        }
+
+        // handle error when there is invalid deadline date format
+        try {
+            Parser.deadlineDateFormatValidator(by);
+        } catch (DukeException e) {
+            throw new DukeException("OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
+        }
+    }
+
+    /**
      * Manages deadline command.
      *
      * @param taskLists list of tasks.
@@ -120,6 +157,41 @@ public class Parser {
             Parser.eventAtDateTimeValidator(userInputTask);
         } catch (DukeException e) {
             throw new DukeException("Event tasks can only have one at date and time.");
+        }
+    }
+
+    /**
+     * Validates the date and time of event command.
+     *
+     * @param userInputTask
+     * @throws DukeException
+     */
+    static void parserEventDateTimeValidator(String userInputTask) throws DukeException {
+        // splitting event into description and dateTime
+        String[] eventTaskArr = userInputTask.split(" /at ");
+        String[] eventDateAndTime = eventTaskArr[1].split(" ");
+        String eventDate = eventDateAndTime[0];
+
+        try {
+            String eventTime = eventDateAndTime[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Event time is required");
+        }
+
+        String eventTime = eventDateAndTime[1];
+
+        // handle error when time is not in the hh:mm 24hr clock format
+        try {
+            LocalTime.parse(eventTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Time must be in the hh:mm 24hr format");
+        }
+
+        // handle error when there is invalid deadline date format
+        try {
+            Parser.eventDateFormatValidator(eventDate);
+        } catch (DukeException e) {
+            throw new DukeException("OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
         }
     }
 
