@@ -47,4 +47,10 @@ public class Task {
     public String getDescription() {
         return "";
     }
+
+    public String getParsedDescription() {
+        return "";
+    }
+
+
 }

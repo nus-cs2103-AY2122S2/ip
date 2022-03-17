@@ -17,6 +17,7 @@ public class Deadline extends Task {
         super(description, tag);
     }
 
+
     /**
      * Super constructor to the task class
      *
@@ -55,6 +56,10 @@ public class Deadline extends Task {
 
     }
 
+    public String getParsedDescription() {
+        return this.description;
+    }
+
     /**
      * Returns deadline task in string format
      *
@@ -64,43 +69,47 @@ public class Deadline extends Task {
      * @throws
      */
     public String getDescription() {
-        String newReply = super.description.replace("deadline ", "");
-        String taskAtHand = newReply.split("/")[0];
-        String deadLine = newReply.split("/")[1].replace("by ", "by: ");
-        String date = deadLine.split(" ")[1].split("-")[0];
-        String month = digitMonth_to_AlphabeticalMonth(deadLine.split(" ")[1].split("-")[1]);
-        String year = deadLine.split(" ")[1].split("-")[2];
-        int timeHours = Math.round(Integer.parseInt(deadLine.split(" ")[2])/100);
-        int timeMinutes = Integer.parseInt(deadLine.split(" ")[2]) - timeHours*100;
-        String time = "";
-        if (month == "notValidMonth") {
-            return month;
-        } else if (Integer.parseInt(date) < 1 || Integer.parseInt(date) > 31) {
-            return "notValidDate";
-        } else {
-            if (deadLine.split(" ")[2].length() < 4 ||
-                    !(timeHours <= 23 && timeHours >= 00) ||
-                    !(timeMinutes <= 59 && timeMinutes >= 00)) {
-                return "notValidTime";
+        if (super.description.contains("/by")) {
+            String newReply = super.description.replace("deadline ", "");
+            String taskAtHand = newReply.split("/")[0];
+            String deadLine = newReply.split("/")[1].replace("by ", "by: ");
+            String date = deadLine.split(" ")[1].split("-")[0];
+            String month = digitMonth_to_AlphabeticalMonth(deadLine.split(" ")[1].split("-")[1]);
+            String year = deadLine.split(" ")[1].split("-")[2];
+            int timeHours = Math.round(Integer.parseInt(deadLine.split(" ")[2]) / 100);
+            int timeMinutes = Integer.parseInt(deadLine.split(" ")[2]) - timeHours * 100;
+            String time = "";
+            if (month == "notValidMonth") {
+                return month;
+            } else if (Integer.parseInt(date) < 1 || Integer.parseInt(date) > 31) {
+                return "notValidDate";
             } else {
-                if (timeHours == 0) {
-                    time += 12 + ":" + String.format("%02d",timeMinutes) + "am";
-                } else if (timeHours == 12) {
-                    time += 12 + ":" + String.format("%02d",timeMinutes) + "pm";
-                } else if (timeHours <= 12) {
-                    time += timeHours + ":" + String.format("%02d",timeMinutes) + "am";
+                if (deadLine.split(" ")[2].length() < 4 ||
+                        !(timeHours <= 23 && timeHours >= 00) ||
+                        !(timeMinutes <= 59 && timeMinutes >= 00)) {
+                    return "notValidTime";
                 } else {
-                    time += timeHours - 12 + ":" + String.format("%02d",timeMinutes) + "pm";
+                    if (timeHours == 0) {
+                        time += 12 + ":" + String.format("%02d", timeMinutes) + "am";
+                    } else if (timeHours == 12) {
+                        time += 12 + ":" + String.format("%02d", timeMinutes) + "pm";
+                    } else if (timeHours <= 12) {
+                        time += timeHours + ":" + String.format("%02d", timeMinutes) + "am";
+                    } else {
+                        time += timeHours - 12 + ":" + String.format("%02d", timeMinutes) + "pm";
+                    }
                 }
-            }
 
-        }
+            }
 
 
             String finalDescription = taskAtHand
                     + "(" + "by " + date + " " + month + " " + year + ", "
                     + time + ")";
             return "[D]" + "[" + super.getStatusIcon() + "] " + finalDescription;
+        } else {
+            return "[D]" + "[" + super.getStatusIcon() + "] " + super.description;
+        }
         }
 
         public static boolean isDeadline(String[] splittedString) {

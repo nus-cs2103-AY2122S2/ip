@@ -63,39 +63,43 @@ public class Event extends Task {
      * @throws
      */
     public String getDescription() {
-        String newReply = super.description.replace("event ", "");
-        String taskAtHand = newReply.split("/")[0];
-        String deadLine = newReply.split("/")[1].replace("at ", "at: ");
-        String date = deadLine.split(" ")[1].split("-")[0];
-        String month = digitMonth_to_AlphabeticalMonth(deadLine.split(" ")[1].split("-")[1]);
-        String year = deadLine.split(" ")[1].split("-")[2];
-        int timeHours = Math.round(Integer.parseInt(deadLine.split(" ")[2]) / 100);
-        int timeMinutes = Integer.parseInt(deadLine.split(" ")[2]) - timeHours * 100;
-        String time = "";
-        if (month == "notValidMonth") {
-            return month;
-        } else if (Integer.parseInt(date) < 1 || Integer.parseInt(date) > 31) {
-            return "notValidDate";
-        } else {
-            if (deadLine.split(" ")[2].length() < 4 ||
-                    !(timeHours <= 23 && timeHours >= 00) ||
-                    !(timeMinutes <= 59 && timeMinutes >= 00)) {
-                return "notValidTime";
+        if (super.description.contains("/at")) {
+            String newReply = super.description.replace("event ", "");
+            String taskAtHand = newReply.split("/")[0];
+            String deadLine = newReply.split("/")[1].replace("at ", "at: ");
+            String date = deadLine.split(" ")[1].split("-")[0];
+            String month = digitMonth_to_AlphabeticalMonth(deadLine.split(" ")[1].split("-")[1]);
+            String year = deadLine.split(" ")[1].split("-")[2];
+            int timeHours = Math.round(Integer.parseInt(deadLine.split(" ")[2]) / 100);
+            int timeMinutes = Integer.parseInt(deadLine.split(" ")[2]) - timeHours * 100;
+            String time = "";
+            if (month == "notValidMonth") {
+                return month;
+            } else if (Integer.parseInt(date) < 1 || Integer.parseInt(date) > 31) {
+                return "notValidDate";
             } else {
-                if (timeHours == 0) {
-                    time += 12 + ":" + String.format("%02d", timeMinutes) + "am";
-                } else if (timeHours == 12) {
-                    time += 12 + ":" + String.format("%02d", timeMinutes) + "pm";
-                } else if (timeHours <= 12) {
-                    time += timeHours + ":" + String.format("%02d", timeMinutes) + "am";
+                if (deadLine.split(" ")[2].length() < 4 ||
+                        !(timeHours <= 23 && timeHours >= 00) ||
+                        !(timeMinutes <= 59 && timeMinutes >= 00)) {
+                    return "notValidTime";
                 } else {
-                    time += timeHours - 12 + ":" + String.format("%02d", timeMinutes) + "pm";
+                    if (timeHours == 0) {
+                        time += 12 + ":" + String.format("%02d", timeMinutes) + "am";
+                    } else if (timeHours == 12) {
+                        time += 12 + ":" + String.format("%02d", timeMinutes) + "pm";
+                    } else if (timeHours <= 12) {
+                        time += timeHours + ":" + String.format("%02d", timeMinutes) + "am";
+                    } else {
+                        time += timeHours - 12 + ":" + String.format("%02d", timeMinutes) + "pm";
+                    }
                 }
-            }
 
+            }
+            String finalDescription = taskAtHand + "(" + "at " + date + " " + month + " " + year + ", " + time + ")";
+            return "[E]" + "[" + super.getStatusIcon() + "] " + finalDescription;
+        } else {
+            return "[E]" + "[" + super.getStatusIcon() + "] " + super.description;
         }
-        String finalDescription = taskAtHand + "(" + "at " + date + " " + month + " " + year + ", " + time + ")";
-        return "[E]" + "[" + super.getStatusIcon() + "] " + finalDescription;
     }
 
     public static boolean isEvent(String[] splittedString) {
