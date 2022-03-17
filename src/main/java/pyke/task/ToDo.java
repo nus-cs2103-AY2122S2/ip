@@ -7,9 +7,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Formats the to-do class to a style used in local files for saving
+     * Formats the to-do class to a style used in local files for saving.
      *
-     * @return the formatted string for saving
+     * @return the formatted string for saving.
      */
     @Override
     public String toSavedFile() {
@@ -17,9 +17,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Formats the to-do class to a style used for output
+     * Formats the to-do class to a style used for output.
      *
-     * @return the formatted string for output
+     * @return the formatted string for output.
      */
     @Override
     public String toString() {

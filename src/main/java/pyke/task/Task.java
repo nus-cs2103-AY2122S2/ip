@@ -5,9 +5,9 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * The default constructor
+     * Constructs a Task class.
      *
-     * @param description
+     * @param description the description of the task.
      */
     public Task(String description) {
         if (description == null) {
@@ -28,10 +28,11 @@ public class Task {
     public boolean hasKeyword(String keyword) {
         return description.contains(keyword);
     }
+
     /**
-     * Formats the task class to a style used in local files for saving
+     * Formats the task class to a style used in local files for saving.
      *
-     * @return the formatted string for saving
+     * @return the formatted string for saving.
      */
     public String toSavedFile() {
         if (this.isDone) {
@@ -42,9 +43,9 @@ public class Task {
     }
 
     /**
-     * Formats the task class to a style used for output
+     * Formats the task class to a style used for output.
      *
-     * @return the formatted string for output
+     * @return the formatted string for output.
      */
     @Override
     public String toString() {

@@ -7,10 +7,10 @@ public class Deadline extends Task {
     protected LocalDate by;
 
     /**
-     * The default constructor
+     * Constructs a Deadline class.
      *
-     * @param description
-     * @param by
+     * @param description the description of the deadline.
+     * @param by the time of the deadline.
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -21,9 +21,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Formats the deadline class to a style used in local files for saving
+     * Formats the deadline class to a style used in local files for saving.
      *
-     * @return the formatted string for saving
+     * @return the formatted string for saving.
      */
     @Override
     public String toSavedFile() {
@@ -31,9 +31,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Formats the deadline class to a style used for output
+     * Formats the deadline class to a style used for output.
      *
-     * @return the formatted string for output
+     * @return the formatted string for output.
      */
     @Override
     public String toString() {

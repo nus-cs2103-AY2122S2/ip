@@ -7,10 +7,10 @@ public class Event extends Task {
     protected LocalDate eventTime;
 
     /**
-     * The default constructor
+     * Constructs an Event class.
      *
-     * @param description
-     * @param eventTime
+     * @param description the description of the event.
+     * @param eventTime the time of the event.
      */
     public Event(String description, LocalDate eventTime) {
         super(description);
@@ -21,9 +21,9 @@ public class Event extends Task {
     }
 
     /**
-     * Formats the event class to a style used in local files for saving
+     * Formats the event class to a style used in local files for saving.
      *
-     * @return the formatted string for saving
+     * @return the formatted string for saving.
      */
     @Override
     public String toSavedFile() {
@@ -31,9 +31,9 @@ public class Event extends Task {
     }
 
     /**
-     * Formats the event class to a style used for output
+     * Formats the event class to a style used for output.
      *
-     * @return the formatted string for output
+     * @return the formatted string for output.
      */
     @Override
     public String toString() {

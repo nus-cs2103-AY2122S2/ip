@@ -18,10 +18,10 @@ public class AddEventCommand extends Command {
     private String eventTime;
 
     /**
-     * The default constructor
+     * Constructs an AddEventCommand.
      *
-     * @param taskName
-     * @param eventTime
+     * @param taskName the name of the task.
+     * @param eventTime the time of the event.
      */
     public AddEventCommand(String taskName, String eventTime) {
         this.taskName = taskName;
@@ -29,15 +29,15 @@ public class AddEventCommand extends Command {
     }
 
     /**
-     * Execute a command that adds an event task.
+     * Executes a command that adds an event task.
      * Then it will write the list to the local file and output certain info about this operation.
      *
-     * @param taskList the class store the tasks info
-     * @param ui the interface for output information
-     * @param storage in charge of file IO
-     * @throws PykeException
-     * @throws DateTimeParseException if the input dates are not in the correct format for parsing
-     * @throws IOException if there is an error when writing to the local file
+     * @param taskList the class store the tasks info.
+     * @param ui the interface for output information.
+     * @param storage in charge of file IO.
+     * @throws PykeException if the task name if empty.
+     * @throws DateTimeParseException if the input dates are not in the correct format for parsing.
+     * @throws IOException if there is an error when writing to the local file.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage)
             throws PykeException, DateTimeParseException, IOException {
@@ -70,9 +70,9 @@ public class AddEventCommand extends Command {
         }
     }
     /**
-     * To know if this command will exit the program
+     * Knows if this command will exit the program.
      *
-     * @return true if this method will exit the program
+     * @return true if this method will exit the program.
      */
     public boolean isExit() {
         return false;

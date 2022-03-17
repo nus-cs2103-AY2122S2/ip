@@ -46,11 +46,11 @@ public class Parser {
     }
     /**
      * Parses the commands into a string of tokens.
-     * Then dispatch the commands according to the first word
+     * Then dispatch the commands according to the first word.
      *
-     * @param command inputed by the user
-     * @return the dispatched command
-     * @throws InvalidCommandException if the command cannot be recognized
+     * @param command entered by the user.
+     * @return the dispatched command.
+     * @throws InvalidCommandException if the command cannot be recognized.
      */
     public Command parseCommand(String command) throws InvalidCommandException {
         String[] tokenList = command.split(" ");

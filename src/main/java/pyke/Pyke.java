@@ -36,10 +36,10 @@ public class Pyke {
 
 
     /**
-     * Initializes the ui component
+     * Initializes the ui component.
      * It will load the local file into taskList.
      *
-     * @return the message to be sent after initialization
+     * @return the message to be sent after initialization.
      */
     public String uiInit() {
         try {
@@ -51,11 +51,11 @@ public class Pyke {
     }
 
     /**
-     * Returns runtime processing command component for GUI application
-     * For an input given, it will evaluate and run the command and return corresponding results
+     * Returns runtime processing command component for GUI application.
+     * For an input given, it will evaluate and run the command and return corresponding results.
      *
-     * @param input the user input received from GUI controller
-     * @return the corresponding output from running the input command
+     * @param input the user input received from GUI controller.
+     * @return the corresponding output from running the input command.
      */
     public String processCommand(String input) {
         try {
@@ -82,7 +82,6 @@ public class Pyke {
     /**
      * The main body of the chat box. Will receive commands and do things accordingly
      */
-
     public void run() {
         ui.sayGreeting();
         boolean isExit = false;

@@ -12,12 +12,12 @@ public class FindCommand extends Command {
     }
 
     /**
-     * This method will execute a find command. It will search in evey task description for the keywords
-     * If that task contains the keyword, it will be printed out
+     * Executes a find command. It will search in evey task description for the keywords.
+     * If that task contains the keyword, it will be printed out.
      *
-     * @param taskList the class store the tasks info
-     * @param ui the interface for output information
-     * @param storage in charge of file IO
+     * @param taskList the class store the tasks info.
+     * @param ui the interface for output information.
+     * @param storage in charge of file IO.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (taskList.isEmpty()) {
@@ -61,9 +61,9 @@ public class FindCommand extends Command {
     }
 
     /**
-     * To know if this command will exit the program
+     * Knows if this command will exit the program.
      *
-     * @return true if this method will exit the program
+     * @return true if this method will exit the program.
      */
     public boolean isExit() {
         return false;

@@ -20,10 +20,10 @@ public class Ui {
     }
 
     /**
-     * Converts the plain output text to chat-box style with indentation for output
+     * Converts the plain output text to chat-box style with indentation for output.
      *
-     * @param text : String (output text)
-     * @return chat-box style output text : String
+     * @param text : String (output text).
+     * @return chat-box style output text : String.
      */
     private String convertToChatBox(String text) {
         /*
@@ -36,16 +36,16 @@ public class Ui {
     }
 
     /**
-     * reads a line of String from users' input
+     * Reads a line of String from users' input.
      *
-     * @return the command in String
+     * @return the command in String.
      */
     public String getCommand() {
         return scanner.nextLine();
     }
 
     /**
-     * The duke logo
+     * Prints the duke logo.
      */
     public void showLogo() {
         String logo = " ____        _        \n"
@@ -66,18 +66,18 @@ public class Ui {
         System.out.println(convertToChatBox(HELP));
     }
     /**
-     * Outputs text in a chat-box style
+     * Outputs text in a chat-box style.
      *
-     * @param text the original text for output
+     * @param text the original text for output.
      */
     public void outputText(String text) {
         System.out.println(convertToChatBox(text));
     }
 
     /**
-     * Outputs exception information in a chat-box style
+     * Outputs exception information in a chat-box style.
      *
-     * @param exceptionInfo the original info about exceptions
+     * @param exceptionInfo the original info about exceptions.
      */
     public void outputException(String exceptionInfo) {
         System.out.println(convertToChatBox(exceptionInfo));

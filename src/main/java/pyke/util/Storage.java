@@ -19,10 +19,10 @@ public class Storage {
     private static java.nio.file.Path filePath;
 
     /**
-     * The default constructor
+     * Constructs a Storage class.
      *
-     * @param dir the file directory
-     * @param fileName
+     * @param dir the file directory.
+     * @param fileName the file name.
      */
     public Storage(String dir, String fileName) {
         fileDir = Paths.get(".", dir);
@@ -56,11 +56,11 @@ public class Storage {
     }
     /**
      * Initializes the taskList by the local file.
-     * If such file or directory does not exist, it will attempt to create one
+     * If such file or directory does not exist, it will attempt to create one.
      *
-     * @param taskList the class that stores info and operations about taskss
-     * @throws IOException if there is an error when reading file
-     * @throws DateTimeParseException if the dates format in local file is not standard
+     * @param taskList the class that stores info and operations about tasks.
+     * @throws IOException if there is an error when reading file.
+     * @throws DateTimeParseException if the dates format in local file is not standard.
      */
     public void init(TaskList taskList) throws IOException, DateTimeParseException {
         if (!Files.exists(fileDir)) {
@@ -91,10 +91,10 @@ public class Storage {
     }
 
     /**
-     * Writes every task in a taskList into a local file
+     * Writes every task in a taskList into a local file.
      *
-     * @param taskList the class that stores all tasks
-     * @throws IOException if there is an error when writing to local files
+     * @param taskList the class that stores all tasks.
+     * @throws IOException if there is an error when writing to local files.
      */
     public void saveFile(TaskList taskList) throws IOException {
         BufferedWriter writer = Files.newBufferedWriter(filePath);

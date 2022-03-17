@@ -17,10 +17,10 @@ public class AddDeadlineCommand extends Command {
     private String ddl;
 
     /**
-     * The default constructor for Deadine class
+     * Constructs a Deadline class.
      *
-     * @param taskName
-     * @param ddl the deadline for the task in String format
+     * @param taskName the name of the task.
+     * @param ddl the deadline for the task in String format.
      */
     public AddDeadlineCommand(String taskName, String ddl) {
         this.taskName = taskName;
@@ -32,9 +32,9 @@ public class AddDeadlineCommand extends Command {
      * Then it will write the list to the local file
      * and output certain info about this operation.
      *
-     * @param taskList the class store the tasks info
-     * @param ui the interface for output information
-     * @param storage in charge of file IO
+     * @param taskList the class store the tasks info.
+     * @param ui the interface for output information.
+     * @param storage in charge of file IO.
      * @throws PykeException
      * @throws DateTimeParseException if the input dates are not in the correct format for parsing
      * @throws IOException if there is an error when writing to the local file
@@ -72,9 +72,9 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * Knows if this command will exit the program
+     * Knows if this command will exit the program.
      *
-     * @return true if this method will exit the program
+     * @return true if this method will exit the program.
      */
     public boolean isExit() {
         return false;
