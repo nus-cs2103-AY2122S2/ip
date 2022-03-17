@@ -111,6 +111,8 @@ public class Parser {
      */
 
     ParsedAnswer parseUpdate(String inputToParse) {
+        // this method is particularly long because of the bugs that needed to be fixed quickly
+        // it is a technical debt that should be settled someday
         try {
             String[] parsedInput = inputToParse.split(" " , 2);
             String[] parsedContent = parsedInput[1].split(" ", 2);
@@ -121,26 +123,39 @@ public class Parser {
             } else if (Storage.taskList.get(index) instanceof Event) {
                 pa.setType("Event");
             } else if (Storage.taskList.get(index) instanceof ToDos) {
-                pa.setType("Todo");
-                pa.setDesc(parsedContent[1]);
-                pa.setDate("");
-                return pa;
+                if (!parsedContent[1].trim().isEmpty()) {
+                    pa.setType("Todo");
+                    pa.setDesc(parsedContent[1].stripLeading());
+                    pa.setDate("");
+                    return pa;
+                } else {
+                    ParsedAnswer pError = new ParsedAnswer("error", -1);
+                    pError.setDesc("Description cannot be empty!");
+                    return pError;
+                }
             }
 
             String[] parsedDescAndDate = parsedContent[1].split("/date");
 
             if (parsedDescAndDate.length == 1) {
-                pa.setDesc(parsedDescAndDate[0]);
-                pa.setDate("");
-                return pa;
+                if (!parsedDescAndDate[0].trim().isEmpty()) {
+                    pa.setDesc(parsedDescAndDate[0].stripLeading());
+                    pa.setDate("");
+                    return pa;
+                } else {
+                    ParsedAnswer pError = new ParsedAnswer("error", -1);
+                    pError.setDesc("Description cannot be empty!");
+                    return pError;
+                }
+
             } else if (parsedDescAndDate.length > 1) {
-                pa.setDesc(parsedDescAndDate[0]);
-                if (isDateValid(parsedDescAndDate[1])) {
+                if (isDateValid(parsedDescAndDate[1]) && !parsedDescAndDate[0].trim().isEmpty()) {
+                    pa.setDesc(parsedDescAndDate[0].stripLeading());
                     pa.setDate(parsedDescAndDate[1]);
                     return pa;
                 } else {
                     ParsedAnswer pError = new ParsedAnswer("error", -1);
-                    pError.setDesc("Format error. Please try again.");
+                    pError.setDesc("Either your date is wrong or your description cannot be empty!");
                     return pError;
                 }
 
