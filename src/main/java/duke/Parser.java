@@ -12,6 +12,26 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
+    public static final String EVENT_INVALID_INPUT = "\n" + Ui.BLANK_LINE
+            + "    Please input the 'event' command in the following format:\n"
+            + "    event <description> /at <time>\n" + Ui.BLANK_LINE;
+
+    public static final String EVENT_INVALID_NAME = "\n" + Ui.BLANK_LINE
+            + "    Event name description cannot be empty!\n" + Ui.BLANK_LINE;
+
+    public static final String EVENT_INVALID_TIME = "\n" + Ui.BLANK_LINE
+            + "    Event time cannot be empty!\n" + Ui.BLANK_LINE;
+
+    public static final String DEADLINE_INVALID_INPUT = "\n" + Ui.BLANK_LINE
+            + "    Please input the 'deadline' command in the following format:\n"
+            + "    deadline <description> /by <time>\n" + Ui.BLANK_LINE;
+
+    public static final String DEADLINE_INVALID_NAME = "\n" + Ui.BLANK_LINE
+            + "    Deadline name description cannot be empty!\n" + Ui.BLANK_LINE;
+
+    public static final String DEADLINE_INVALID_TIME = "\n" + Ui.BLANK_LINE
+            + "    Deadline time cannot be empty!\n" + Ui.BLANK_LINE;
+
     /**
      * Process the input provided by the user.
      *
@@ -101,25 +121,19 @@ public class Parser {
     private static void handleEvent(TaskList taskList, String input) throws IOException {
         try {
             if (!input.contains("/at")) {
-                throw new InvalidInputException("\n" + Ui.BLANK_LINE
-                        + "    Please input the 'event' command in the following format:\n"
-                        + "    event <description> /at <time>\n" + Ui.BLANK_LINE);
+                throw new InvalidInputException(EVENT_INVALID_INPUT);
             }
             String[] eventString = input.substring(input.indexOf(' ')).split("/at");
             if (eventString.length < 2) {
-                throw new InvalidInputException("\n" + Ui.BLANK_LINE
-                        + "    Please input the 'event' command in the following format:\n"
-                        + "    event <description> /at <time>\n" + Ui.BLANK_LINE);
+                throw new InvalidInputException(EVENT_INVALID_INPUT);
             }
             String eventName = eventString[0];
             if (eventName.equals(" ")) {
-                throw new EmptyDescriptionException("\n" + Ui.BLANK_LINE
-                        + "    Event name description cannot be empty!\n" + Ui.BLANK_LINE);
+                throw new EmptyDescriptionException(EVENT_INVALID_NAME);
             }
             String eventTime = eventString[1];
             if (eventTime.equals(" ")) {
-                throw new EmptyDescriptionException("\n" + Ui.BLANK_LINE
-                        + "    Event time cannot be empty!\n" + Ui.BLANK_LINE);
+                throw new EmptyDescriptionException(EVENT_INVALID_TIME);
             }
             Event newEvent = new Event(eventName, eventTime);
             taskList.add(newEvent);
@@ -133,25 +147,19 @@ public class Parser {
     private static void handleDeadline(TaskList taskList, String input) throws IOException {
         try {
             if (!input.contains("/by")) {
-                throw new InvalidInputException("\n" + Ui.BLANK_LINE
-                        + "    Please input the 'deadline' command in the following format:\n"
-                        + "    deadline <description> /by <time>\n" + Ui.BLANK_LINE);
+                throw new InvalidInputException(DEADLINE_INVALID_INPUT);
             }
             String[] deadlineString = input.substring(input.indexOf(' ')).split("/by");
             if (deadlineString.length < 2) {
-                throw new InvalidInputException("\n" + Ui.BLANK_LINE
-                        + "    Please input the 'deadline' command in the following format:\n"
-                        + "    deadline <description> /by <time>\n" + Ui.BLANK_LINE);
+                throw new InvalidInputException(DEADLINE_INVALID_INPUT);
             }
             String deadlineName = deadlineString[0];
             if (deadlineName.equals(" ")) {
-                throw new EmptyDescriptionException("\n" + Ui.BLANK_LINE
-                        + "    Deadline name description cannot be empty!\n" + Ui.BLANK_LINE);
+                throw new EmptyDescriptionException(DEADLINE_INVALID_NAME);
             }
             String deadlineTime = deadlineString[1];
             if (deadlineTime.equals(" ")) {
-                throw new EmptyDescriptionException("\n" + Ui.BLANK_LINE
-                        + "    Deadline time cannot be empty!\n" + Ui.BLANK_LINE);
+                throw new EmptyDescriptionException(DEADLINE_INVALID_TIME);
             }
             Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
             taskList.add(newDeadline);

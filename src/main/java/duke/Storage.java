@@ -61,38 +61,43 @@ public class Storage {
         Scanner sc = new Scanner(new File(TASKLIST_FILE_PATH));
         while (sc.hasNext()) {
             String current = sc.nextLine();
+            boolean isDone = (current.charAt(6) == 'X');
             if (current.equals("")) {
                 break;
             }
-            String descriptionWithTime = current.substring(9);
-            int descriptionWithTimeIndex = descriptionWithTime.length() - 1;
-            Task taskToAdd;
-            String taskLetter = Character.toString(current.charAt(3));
-            boolean isDone = (current.charAt(6) == 'X');
-            DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
-            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern(" yyyy-MM-dd HHmm");
-
-            if (taskLetter.equals("E")) {
-                int eventAtIndex = descriptionWithTime.indexOf(" (at:");
-                String eventDesc = descriptionWithTime.substring(0, eventAtIndex);
-                String eventDate = descriptionWithTime.substring(eventAtIndex + 5, descriptionWithTimeIndex).trim();
-                LocalDateTime eventTime = LocalDateTime.parse(eventDate, displayFormat);
-                taskToAdd = new Event(eventDesc, eventTime.format(inputFormat));
-            } else if (taskLetter.equals("D")) {
-                int deadlineAtIndex = descriptionWithTime.indexOf(" (by: ");
-                String deadlineDesc = descriptionWithTime.substring(0, deadlineAtIndex);
-                String deadlineDate = descriptionWithTime.substring(deadlineAtIndex + 6,
-                        descriptionWithTimeIndex).trim();
-                LocalDateTime deadlineTime = LocalDateTime.parse(deadlineDate, displayFormat);
-                taskToAdd = new Deadline(deadlineDesc, deadlineTime.format(inputFormat));
-            } else {
-                taskToAdd = new Todo(descriptionWithTime);
-            }
+            Task taskToAdd = handleInput(current);
             if (isDone) {
                 taskToAdd.markAsDone();
             }
             TaskList.add(taskToAdd);
         }
+    }
+
+    private static Task handleInput(String current) {
+        String descriptionWithTime = current.substring(9);
+        int descriptionWithTimeIndex = descriptionWithTime.length() - 1;
+        Task taskToAdd;
+        String taskLetter = Character.toString(current.charAt(3));
+        DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern(" yyyy-MM-dd HHmm");
+
+        if (taskLetter.equals("E")) {
+            int eventAtIndex = descriptionWithTime.indexOf(" (at:");
+            String eventDesc = descriptionWithTime.substring(0, eventAtIndex);
+            String eventDate = descriptionWithTime.substring(eventAtIndex + 5, descriptionWithTimeIndex).trim();
+            LocalDateTime eventTime = LocalDateTime.parse(eventDate, displayFormat);
+            taskToAdd = new Event(eventDesc, eventTime.format(inputFormat));
+        } else if (taskLetter.equals("D")) {
+            int deadlineAtIndex = descriptionWithTime.indexOf(" (by: ");
+            String deadlineDesc = descriptionWithTime.substring(0, deadlineAtIndex);
+            String deadlineDate = descriptionWithTime.substring(deadlineAtIndex + 6,
+                    descriptionWithTimeIndex).trim();
+            LocalDateTime deadlineTime = LocalDateTime.parse(deadlineDate, displayFormat);
+            taskToAdd = new Deadline(deadlineDesc, deadlineTime.format(inputFormat));
+        } else {
+            taskToAdd = new Todo(descriptionWithTime);
+        }
+        return taskToAdd;
     }
 
     /**
