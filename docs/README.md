@@ -14,7 +14,7 @@ Description: Task that need to be done before a specific date/time *e.g. finish 
 Description: Task that start at a specific time and ends at a specific time *e.g. tP meeting on 19/02/2022 20:00pm*.
 
 ### Tag Todo Task
-Todo task could be tag to provide more information such as priority level *e.g. [urgent]*.
+Todo task could be tag (one word) to provide more information such as priority level *e.g. [urgent]*.
 
 ### Delete Task
 All tasks could be deleted from the disk.
@@ -88,6 +88,7 @@ Now you have X tasks in the list.
 
 Any string tag could be given to a todo task. 
 To tag, a task number needs to be specified, followed by a tag string.
+A tag string can only support one word string.
 
 Example of usage:
 
