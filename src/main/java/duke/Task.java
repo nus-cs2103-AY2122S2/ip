@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Task class contains the task's name and whether it is completed
  */
