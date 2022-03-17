@@ -171,14 +171,12 @@ public class TaskList {
      */
     public String handleDelete(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
-        boolean isValidIndex = ((number) <= 0) || ((number) > tasks.size());
-
-        try {
-            if (isValidIndex) {
-                throw new DukeException("Hey! That item does not exist!");
+        if (!isValidIndex(number)) {
+            try {
+                throw new DukeException(MESSAGE_INVALID_INDEX);
+            } catch (DukeException e) {
+                return ResponseFormatter.printDukeException(e, "Please try again:");
             }
-        } catch (DukeException e) {
-            return ResponseFormatter.printDukeException(e, "Please try again");
         }
 
         Task curr = tasks.get(number - 1);
