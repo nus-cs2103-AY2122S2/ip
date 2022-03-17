@@ -1,6 +1,7 @@
 package duke.task;
 
 import static duke.commons.core.Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
+import static duke.commons.core.Messages.MESSAGE_INVALID_INDEX;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -61,6 +62,14 @@ public class TaskList {
      */
     public String handleMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
+        if (!isValidIndex(number)) {
+            try {
+                throw new DukeException(MESSAGE_INVALID_INDEX);
+            } catch (DukeException e) {
+                return ResponseFormatter.printDukeException(e, "Please try again:");
+            }
+        }
+
         Task curr = tasks.get(number - 1);
         assert curr != null : "Invalid Task that is marked as Done!";
 
@@ -74,6 +83,13 @@ public class TaskList {
      */
     public String handleUnMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
+        if (!isValidIndex(number)) {
+            try {
+                throw new DukeException(MESSAGE_INVALID_INDEX);
+            } catch (DukeException e) {
+                return ResponseFormatter.printDukeException(e, "Please try again:");
+            }
+        }
         Task curr = tasks.get(number - 1);
         assert curr != null : "Invalid Task that is marked as Done!";
 
@@ -192,5 +208,13 @@ public class TaskList {
         } else {
             return ResponseFormatter.printFoundList(foundTasks, key);
         }
+    }
+
+    /**
+     * Function to check if the supplied key is within the bounds of no. of tasks in the tasklist
+     * @param key supplied index key to test
+     */
+    private boolean isValidIndex(int key) {
+        return (key >= 1) && (key <= tasks.size());
     }
 }
