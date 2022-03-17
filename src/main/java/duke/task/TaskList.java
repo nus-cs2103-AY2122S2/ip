@@ -114,7 +114,7 @@ public class TaskList {
             return ResponseFormatter.printDukeException(e, "Please try again:");
         }
 
-        Task curr = new Todo(originalInput.substring(4));
+        Task curr = new Todo(originalInput.substring(5));
         return processNewTask(curr);
     }
 
@@ -132,10 +132,11 @@ public class TaskList {
         }
 
         String metaInfo = originalInput.split("/by")[1];
-        String strippedCommand = originalInput.substring(8);
+        String strippedCommand = originalInput.substring(9);
         Task curr;
         try {
-            curr = new Deadline(strippedCommand.split("/")[0], metaInfo);
+            curr = new Deadline(strippedCommand.split("/")[0].substring(0,
+                    strippedCommand.split("/")[0].length() - 1), metaInfo);
         } catch (DateTimeParseException ex) {
             return ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!"
                     + "\nPlease try again:");
@@ -149,7 +150,7 @@ public class TaskList {
      */
     public String handleEvent(String[] inputArray, String originalInput) {
         try {
-            if ((inputArray.length <= 1) || (originalInput.split("/by").length == 1)) {
+            if ((inputArray.length <= 1) || (originalInput.split("/at").length == 1)) {
                 throw new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION, Event.TASK_NAME));
             }
         } catch (DukeException e) {
@@ -157,10 +158,11 @@ public class TaskList {
         }
 
         String metaInfo = originalInput.split("/at")[1];
-        String strippedCommand = originalInput.substring(5);
+        String strippedCommand = originalInput.substring(6);
         Task curr;
         try {
-            curr = new Event(strippedCommand.split("/")[0], metaInfo);
+            curr = new Event(strippedCommand.split("/")[0].substring(0,
+                    strippedCommand.split("/")[0].length() - 1), metaInfo);
         } catch (DateTimeParseException ex) {
             return ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!"
                     + "\nPlease try again:");

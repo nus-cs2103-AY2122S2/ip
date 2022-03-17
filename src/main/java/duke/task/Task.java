@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Objects;
+
 /**
  * Representation of a Task object
  */
@@ -87,5 +89,25 @@ public class Task {
      */
     public String getPrintString() {
         return taskIcon + " |" + (isDone ? "1" : "0") + "|" + description;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, isDone, taskIcon);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Task)) {
+            return false;
+        }
+        Task task = (Task) o;
+        return Objects.equals(description, task.description)
+                && Objects.equals(isDone, task.isDone)
+                && Objects.equals(taskIcon, task.taskIcon);
     }
 }

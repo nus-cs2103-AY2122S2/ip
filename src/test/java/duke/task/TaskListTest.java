@@ -3,6 +3,9 @@ package duke.task;
 import static duke.commons.core.Messages.MESSAGE_ADD_TASK;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_DONE;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_UNDONE;
+import static duke.task.util.TaskListTestUtil.MAKE_DEADLINE_INPUT_VALID;
+import static duke.task.util.TaskListTestUtil.MAKE_EVENT_INPUT_VALID;
+import static duke.task.util.TaskListTestUtil.MAKE_TODO_INPUT_VALID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -12,6 +15,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import duke.util.Parser;
 import duke.util.ResponseFormatter;
 
 class TaskListTest {
@@ -86,5 +90,38 @@ class TaskListTest {
 
         assertEquals(ResponseFormatter.printFeedbackFooter(MESSAGE_MARK_TASK_UNDONE, todoStub, tasksStub),
                 taskListSut.handleUnMark(unMarkInputArrayStub));
+    }
+
+    @Test
+    void handleTodo_todo_success() {
+        Parser parser = new Parser(MAKE_TODO_INPUT_VALID);
+        String[] inputArray = parser.getInputArray();
+
+        tasksStub.add(todoStub);
+        taskListSut.handleTodo(inputArray, MAKE_TODO_INPUT_VALID);
+
+        assertEquals(tasksStub.get(0), taskListSut.getTasks().get(0));
+    }
+
+    @Test
+    void handleDeadline_deadline_success() {
+        Parser parser = new Parser(MAKE_DEADLINE_INPUT_VALID);
+        String[] inputArray = parser.getInputArray();
+
+        tasksStub.add(deadlineStub);
+        taskListSut.handleDeadline(inputArray, MAKE_DEADLINE_INPUT_VALID);
+
+        assertEquals(tasksStub.get(0), taskListSut.getTasks().get(0));
+    }
+
+    @Test
+    void handleEvent_event_success() {
+        Parser parser = new Parser(MAKE_EVENT_INPUT_VALID);
+        String[] inputArray = parser.getInputArray();
+
+        tasksStub.add(eventStub);
+        taskListSut.handleEvent(inputArray, MAKE_EVENT_INPUT_VALID);
+
+        assertEquals(tasksStub.get(0), taskListSut.getTasks().get(0));
     }
 }
