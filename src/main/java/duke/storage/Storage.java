@@ -1,5 +1,10 @@
 package duke.storage;
 
+import static duke.commons.core.LogMessages.LOG_BLANK_FILE_CREATED;
+import static duke.commons.core.LogMessages.LOG_BLANK_FILE_CREATE_FAIL;
+import static duke.commons.core.LogMessages.LOG_FILE_NOT_FOUND;
+import static duke.commons.core.LogMessages.LOG_SAVE_FILE_FAIL;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -56,7 +61,7 @@ public class Storage {
                         StandardOpenOption.APPEND);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(LOG_SAVE_FILE_FAIL);
         }
     }
 
@@ -64,8 +69,9 @@ public class Storage {
         try {
             Files.createDirectories(dirPath);
             Files.createFile(filePath);
+            System.out.println(LOG_BLANK_FILE_CREATED);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(LOG_BLANK_FILE_CREATE_FAIL);
         }
     }
 
@@ -76,7 +82,7 @@ public class Storage {
         try {
             return Files.readAllLines(filePath);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(LOG_FILE_NOT_FOUND);
             return null;
         }
     }
