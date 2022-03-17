@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Class for handling the exceptions when no time indicated
+ */
 public class NoTimeException extends DukeException {
     private String typeOfCommand;
 

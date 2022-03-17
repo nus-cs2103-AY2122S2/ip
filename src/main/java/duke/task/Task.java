@@ -2,6 +2,9 @@ package duke.task;
 
 import java.util.Optional;
 
+/**
+ * Main class for task
+ */
 public class Task {
 
     private String task;

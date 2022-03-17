@@ -17,11 +17,20 @@ public class TaskList {
     public Storage storage;
     public List<Task> tasks;
 
+    /**
+     * Set the task and database
+     * @param db of the database
+     */
     private TaskList(Storage db) {
         this.storage = db;
         tasks = storage.readAllTasks();
     }
 
+    /**
+     * Get the current task list in the database
+     * @param database
+     * @return tasklist
+     */
     public static synchronized TaskList getCurrentList(Storage database) {
         if (taskList == null) {
             taskList = new TaskList(database);
@@ -29,6 +38,11 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     * Add the tasks into the database
+     * @param task
+     * @return the string of the task added
+     */
     public String addTasks(Task task) {
         tasks.add(task);
         int size = tasks.size();
@@ -37,6 +51,12 @@ public class TaskList {
         return msg;
     }
 
+    /**
+     * Delete the tasks inside the database
+     * @param index of the tasks to be deleted
+     * @return the task deleted
+     * @throws TaskOutOfBoundException
+     */
     public String deleteTasks(int index) throws TaskOutOfBoundException {
         try {
             String message = Ui.printDelete(tasks.get(index), tasks.size() - 1);
@@ -48,6 +68,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * List out the tasks in the format of string
+     * @return tasks list in string format
+     * @throws DukeException
+     */
     public String ListTasks() throws DukeException {
         if (tasks.size() == 0) {
             return Ui.printNoTaskReminder();

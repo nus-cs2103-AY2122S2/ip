@@ -21,6 +21,13 @@ Mark tasks as done
 
 ## Usage
 
+### Quick Start 
+To start the application, follow these steps:
+- enter build.gradle file
+- Run ip[run]
+
+or simply download the latest released Jar File
+
 ### 1, `todo` - Create a new todo task
 
 - Create a new todo task into task list

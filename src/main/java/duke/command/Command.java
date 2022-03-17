@@ -21,7 +21,7 @@ public enum Command {
         this.type = type;
     }
 
-    public boolean matchPattern(String input) {
+    public boolean isMatchPattern(String input) {
         return input.matches(type);
     }
 }

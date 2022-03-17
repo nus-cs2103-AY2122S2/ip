@@ -15,6 +15,10 @@ public class Todo extends Task {
         super(t, Objects.equals(status, "1") ? true : false);
     }
 
+    /**
+     * Get the string for todo task
+     * @return
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

@@ -23,6 +23,11 @@ public class DateParser implements Parser<LocalDateTime> {
         this.date = date;
     }
 
+    /**
+     * Parser class for time format command
+     * @return local data time
+     * @throws DukeException when date format is incorrect
+     */
     @Override
     public LocalDateTime parse() throws DukeException {
         LocalDateTime localDateTime;

@@ -2,6 +2,9 @@ package duke.exception;
 
 import duke.utils.Constants;
 
+/**
+ * Class for exception handling date format
+ */
 public class DateFormatException extends DukeException {
     public DateFormatException(String e) {
         super(e);

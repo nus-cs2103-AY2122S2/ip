@@ -6,6 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * Class for tags that help markdown
+ */
 public class Tag implements Markdown {
     public static final String START_PATTERN = "<tag>";
     public static final String END_PATTERN = "</tag>";

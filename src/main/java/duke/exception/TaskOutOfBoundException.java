@@ -1,6 +1,9 @@
 
 package duke.exception;
 
+/**
+ * Class for handling exceptions in wrong index of the task list
+ */
 public class TaskOutOfBoundException extends DukeException {
 
     private int taskIndex;

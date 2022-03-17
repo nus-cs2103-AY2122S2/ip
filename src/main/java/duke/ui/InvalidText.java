@@ -6,6 +6,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+/**
+ * Class handling invalid type of text
+ */
 public class InvalidText extends ValidText {
 
     public InvalidText(String text) {

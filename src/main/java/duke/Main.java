@@ -8,7 +8,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
+/**
+ * Main class that handles the starting point of the application
+ */
 public class Main extends Application {
 
     @Override

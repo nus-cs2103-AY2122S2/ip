@@ -2,6 +2,9 @@ package duke.exception;
 
 import duke.utils.Constants;
 
+/**
+ * Class for handling the duration format
+ */
 public class DurationFormatException extends DukeException {
     public DurationEnumFormat enumFormat;
 

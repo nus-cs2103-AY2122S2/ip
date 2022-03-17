@@ -3,6 +3,9 @@ package duke.task;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Class for deadline task
+ */
 public class Deadline extends Task {
 
     private String taskDeadline;
@@ -12,11 +15,21 @@ public class Deadline extends Task {
         this.taskDeadline = taskDeadline;
     }
 
+    /**
+     * Get the task typ of deadline task
+     * @return
+     */
     @Override
     public String getTaskType() {
         return "D";
     }
 
+    /**
+     * Constructor for deadline task class
+     * @param status
+     * @param task
+     * @param taskDeadline
+     */
     public Deadline(String status, String task, String taskDeadline) {
         super(task, Objects.equals(status, "1") ? true : false);
         this.taskDeadline = taskDeadline;

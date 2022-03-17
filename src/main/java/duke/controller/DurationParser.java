@@ -8,7 +8,9 @@ import duke.utils.Pair;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-
+/**
+ * Class for parsing the duration for event class
+ */
 public class DurationParser implements Parser<Pair<LocalDateTime, LocalDateTime>> {
     public static final String DURATION_SYMBOL = "~";
     public static final String TIME_SYMBOL = ":";
@@ -17,9 +19,21 @@ public class DurationParser implements Parser<Pair<LocalDateTime, LocalDateTime>
     public DurationParser(String duration) {
         this.duration = duration;
     }
+
+    /**
+     * Check whether the time format is correct
+     * @param strTime
+     * @return true if the time format is correct
+     */
     private boolean checkTimeFormat(String strTime) {
         return strTime.matches("^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$");
     }
+
+    /**
+     * Get the start and end time pair for command
+     * @return Pair of start and end time
+     * @throws DukeException
+     */
     @Override
     public Pair<LocalDateTime, LocalDateTime> parse() throws DukeException {
 

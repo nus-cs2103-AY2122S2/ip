@@ -2,6 +2,9 @@ package duke.exception;
 
 import java.util.Objects;
 
+/**
+ * Class for handling exceptions when no task type specified
+ */
 public class NoTaskTypeException extends DukeException {
 
     public String typeOfCommand;

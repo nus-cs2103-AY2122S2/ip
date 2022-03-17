@@ -20,7 +20,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ * Main window class for GUI
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -34,7 +36,7 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/sushi.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.jpg"));
 
-    private final ChangeListener<Boolean> inputFocusListener = this::handleFocusedInputField;
+    private final ChangeListener<Boolean> inputFocusListener = this::handleInput;
 
     @FXML
     public void initialize() {
@@ -45,8 +47,7 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
-    private void handleFocusedInputField(ObservableValue<? extends Boolean> observableValue,
-                                         Boolean oldVal, Boolean newVal) {
+    private void handleInput(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
         if (newVal) {
             userInput.setStyle("-fx-background-radius: 12");
             userPanel.setPadding(new Insets(4, 4, 4, 4));

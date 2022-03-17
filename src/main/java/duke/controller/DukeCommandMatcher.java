@@ -51,26 +51,26 @@ public class DukeCommandMatcher {
         CommandParser parser = new CommandParser(command);
         TypeCommand result = parser.parse();
         switch (result.getType()) {
-            case EXIT:
-                return handleExit();
-            case TODO:
-                return handleTodo(result);
-            case DEADLINE:
-                return handleDeadline(result);
-            case LIST:
-                return handleList();
-            case DONE:
-                return handleDone(result);
-            case EVENT:
-                return handleEvent(result);
-            case DELETE:
-                return handleDelete(result);
-            case FIND:
-                return handleFind(result);
-            case HELP:
-                return handleHelp();
-            default:
-                break;
+        case EXIT:
+            return handleExit();
+        case TODO:
+            return handleTodo(result);
+        case DEADLINE:
+            return handleDeadline(result);
+        case LIST:
+            return handleList();
+        case DONE:
+            return handleDone(result);
+        case EVENT:
+            return handleEvent(result);
+        case DELETE:
+            return handleDelete(result);
+        case FIND:
+            return handleFind(result);
+        case HELP:
+            return handleHelp();
+        default:
+            break;
         }
         throw new InvalidCommandException(command);
     }
@@ -95,6 +95,11 @@ public class DukeCommandMatcher {
         return taskList.markTask(targetTaskPos);
     }
 
+    /**
+     * Return the string from the task added in the task list
+     * @param task
+     * @return string of the task
+     */
     public String handleAdd(Task task) {
         return taskList.addTasks(task);
     }
@@ -106,6 +111,11 @@ public class DukeCommandMatcher {
         return handleAdd(todo);
     }
 
+    /**
+     * Return the string of the deadline of the task added
+     * @param command
+     * @return string of the deadline
+     */
     public String handleDeadline(TypeCommand command) {
         String description = ((DescriptionCommand) command).getDescription();
         String time = TIME_FORMATTER.format(((TimeCommand) command).getTime());

@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Class for dialog box in JAVAFX window
+ */
 public class DialogBox extends HBox {
     @FXML
     private TextFlow dialog;
@@ -32,6 +35,12 @@ public class DialogBox extends HBox {
     @FXML
     private Label timeStamp;
 
+    /**
+     * Constructor for dialog box class
+     * @param markdownList
+     * @param img
+     * @param isUser
+     */
     private DialogBox(List<Markdown> markdownList, Image img, boolean isUser) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -62,6 +71,9 @@ public class DialogBox extends HBox {
 
     }
 
+    /**
+     * Change the side of the dialog box
+     */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         ObservableList<Node> timeAndDialog = FXCollections.observableArrayList(fullInfo.getChildren());

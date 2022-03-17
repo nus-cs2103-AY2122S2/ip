@@ -3,7 +3,9 @@ package duke.ui;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 
-
+/**
+ * Class for valid text based on the markdown requirement
+ */
 public class ValidText implements Markdown {
     protected static final int DEFAULT_TEXT_SIZE = 15;
     private String text;

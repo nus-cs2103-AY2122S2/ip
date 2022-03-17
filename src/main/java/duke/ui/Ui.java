@@ -5,6 +5,9 @@ import duke.task.Task;
 
 import java.util.List;
 
+/**
+ * UI for handling the messages returning to a user
+ */
 public class Ui {
     private Ui() {}
 

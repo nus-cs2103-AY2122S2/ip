@@ -28,7 +28,7 @@ public class CommandParser implements Parser<TypeCommand> {
         String command = commandUserInput[0];
 
         for (Command commandType : Command.values()) {
-            if (commandType.matchPattern(command)) {
+            if (commandType.isMatchPattern(command)) {
                 switch (commandType) {
                     case EXIT:
                         return handleSimpleCommand(Command.EXIT);
@@ -70,8 +70,8 @@ public class CommandParser implements Parser<TypeCommand> {
      *
      * @param type type of a task
      * @param input user input command
-     * @return command
-     * @throws DukeException if command not specified
+     * @return Typecommand
+     * @throws DukeException when command not specified
      */
     private TypeCommand handleContentCommand(Command type, String[] input) throws DukeException {
         DescriptionCommand command = new DescriptionCommand();
@@ -119,6 +119,13 @@ public class CommandParser implements Parser<TypeCommand> {
         return command;
     }
 
+    /**
+     * Handle the command for time format
+     * @param command
+     * @param input
+     * @return Command in the type specified in command class
+     * @throws DukeException
+     */
     private TypeCommand handleTimeCommand(Command command, String[] input) throws DukeException {
         TimeCommand timeCommand = new TimeCommand();
         timeCommand.setType(command);
@@ -142,6 +149,13 @@ public class CommandParser implements Parser<TypeCommand> {
         return timeCommand;
     }
 
+    /**
+     * To determine the duration of a command
+     * @param command command from the user
+     * @param input input from the user
+     * @return type of a command
+     * @throws DukeException
+     */
     private TypeCommand handleDurationCommand(Command command, String[] input) throws DukeException {
         DurationCommand durationCommand = new DurationCommand();
         durationCommand.setType(command);

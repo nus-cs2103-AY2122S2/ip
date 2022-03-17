@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Class for handling exceptions in empty command
+ */
 public class EmptyCommandException extends DukeException {
 
     private String typeOfCommand;

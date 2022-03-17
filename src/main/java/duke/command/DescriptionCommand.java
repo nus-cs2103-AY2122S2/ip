@@ -14,6 +14,11 @@ public class DescriptionCommand extends TypeCommand {
         return description;
     }
 
+
+    /**
+     * Set the description of a task
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }

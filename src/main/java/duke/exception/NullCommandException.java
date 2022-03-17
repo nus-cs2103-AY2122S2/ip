@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * CLass for handling the null command input
+ */
 public class NullCommandException extends DukeException {
 
     public NullCommandException(String e) {
