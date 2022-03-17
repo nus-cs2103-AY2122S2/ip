@@ -167,7 +167,7 @@ Closes the application.
 **Format:** `bye` 
 
 **Expected outcome:** <br>
-![Image of unmark command](Bye.png)
+![Image of bye command](Bye.png)
 
 ---
 
