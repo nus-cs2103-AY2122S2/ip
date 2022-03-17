@@ -10,6 +10,9 @@ public class Task {
      * @param description
      */
     public Task(String description) {
+        if (description == null) {
+            throw new NullPointerException("The task description cannot be null value");
+        }
         this.description = description;
         this.isDone = false;
     }

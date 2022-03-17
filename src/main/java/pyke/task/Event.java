@@ -14,6 +14,9 @@ public class Event extends Task {
      */
     public Event(String description, LocalDate eventTime) {
         super(description);
+        if (eventTime == null) {
+            throw new NullPointerException("The event date cannot be null value");
+        }
         this.eventTime = eventTime;
     }
 

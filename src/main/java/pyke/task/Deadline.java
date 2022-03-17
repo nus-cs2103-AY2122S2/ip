@@ -14,6 +14,9 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate by) {
         super(description);
+        if (by == null) {
+            throw new NullPointerException("The deadline date cannot be null value");
+        }
         this.by = by;
     }
 
