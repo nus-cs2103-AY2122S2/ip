@@ -1,6 +1,8 @@
 package duke.task;
 
 import static duke.commons.core.Messages.MESSAGE_ADD_TASK;
+import static duke.commons.core.Messages.MESSAGE_MARK_TASK_DONE;
+import static duke.commons.core.Messages.MESSAGE_MARK_TASK_UNDONE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -16,14 +18,18 @@ class TaskListTest {
     private List<Task> tasksStub;
     private TaskList taskListSut;
 
-    private final Task todoStub = new Todo("homework");
-    private final Task deadlineStub = new Deadline(false, "assignment", " 05/03/2022 2359");
-    private final Task eventStub = new Event(false, "wedding", " 11/12/2022 1800");
+    private Task todoStub;
+    private Task deadlineStub;
+    private Task eventStub;
 
     @BeforeEach
     void init() {
         tasksStub = new ArrayList<>();
         taskListSut = new TaskList();
+
+        todoStub = new Todo(false, "homework");
+        deadlineStub = new Deadline(false, "assignment", " 05/03/2022 2359");
+        eventStub = new Event(false, "wedding", " 11/12/2022 1800");
     }
 
     @AfterEach
@@ -58,5 +64,27 @@ class TaskListTest {
         tasksStub.add(eventStub);
         assertEquals(ResponseFormatter.printFeedbackFooter(MESSAGE_ADD_TASK,
                 eventStub, tasksStub), taskListSut.processNewTask(eventStub));
+    }
+
+    @Test
+    void handleMark_todo_success() {
+        String[] markInputArrayStub = {"mark", "1"};
+        todoStub.setDone();
+        tasksStub.add(todoStub);
+        taskListSut.getTasks().add(todoStub);
+
+        assertEquals(ResponseFormatter.printFeedbackFooter(MESSAGE_MARK_TASK_DONE, todoStub, tasksStub),
+                taskListSut.handleMark(markInputArrayStub));
+    }
+
+    @Test
+    void handleUnMark_todo_success() {
+        String[] unMarkInputArrayStub = {"unmark", "1"};
+        todoStub.setUndone();
+        tasksStub.add(todoStub);
+        taskListSut.getTasks().add(todoStub);
+
+        assertEquals(ResponseFormatter.printFeedbackFooter(MESSAGE_MARK_TASK_UNDONE, todoStub, tasksStub),
+                taskListSut.handleUnMark(unMarkInputArrayStub));
     }
 }

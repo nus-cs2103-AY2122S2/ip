@@ -3,6 +3,8 @@ package duke.task;
 import static duke.commons.core.Messages.MESSAGE_ADD_TASK;
 import static duke.commons.core.Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
 import static duke.commons.core.Messages.MESSAGE_INVALID_INDEX;
+import static duke.commons.core.Messages.MESSAGE_MARK_TASK_DONE;
+import static duke.commons.core.Messages.MESSAGE_MARK_TASK_UNDONE;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -75,7 +77,7 @@ public class TaskList {
         assert curr != null : "Invalid Task that is marked as Done!";
 
         curr.setDone();
-        return ResponseFormatter.printFeedbackFooter("Nice! I've marked this task as done:", curr, tasks);
+        return ResponseFormatter.printFeedbackFooter(MESSAGE_MARK_TASK_DONE, curr, tasks);
     }
 
     /**
@@ -95,7 +97,7 @@ public class TaskList {
         assert curr != null : "Invalid Task that is marked as Done!";
 
         curr.setUndone();
-        return ResponseFormatter.printFeedbackFooter("OK, I've marked this task as not done yet:", curr, tasks);
+        return ResponseFormatter.printFeedbackFooter(MESSAGE_MARK_TASK_UNDONE, curr, tasks);
     }
 
     /**
