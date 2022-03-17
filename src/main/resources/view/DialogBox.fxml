@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dialog" contentDisplay="TOP" minHeight="-Infinity" style="-fx-background-color: #99FF99; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid; -fx-border-width: 2; -fx-border-color: #FF8000;" text="Label" wrapText="true">
+         <font>
+            <Font name="Lucida Sans Unicode" size="12.0" />
+         </font>
+         <HBox.margin>
+            <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+         </HBox.margin>
+         <padding>
+            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+         </padding></Label>
+        <Circle fx:id="displayPicture" pickOnBounds="true" radius="45" stroke="#12afe8" strokeWidth="3.0" />
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>
