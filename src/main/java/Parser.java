@@ -3,6 +3,9 @@ import java.util.Arrays;
 public class Parser {
 
     private final String ADD_SUCCESS = "Got it! I've added:\n\t";
+    private final String MARK_SUCCESS = "Congrats on completing:\n\t";
+    private final String UNMARK_SUCCESS = "Congrats on not completing:\n\t";
+    private final String DELETE_SUCCESS = "Removed this task:\n\t";
 
 
     private final String getDescription(String[] inputArr) {
@@ -15,19 +18,19 @@ public class Parser {
         // will reduce dateTimeArr to [yyyy, mm, dd, HHMM]
     }
 
-    private void addToStorage(Task task, Storage storage) {
-        storage.addTask(task);
+    private void addToTaskList(Task task, TaskList tasklist) {
+        tasklist.addTask(task);
     }
 
-    public String parse(String input, Storage storage) throws DukeException {
+    public String parse(String input, TaskList tasklist, Storage storage) throws DukeException {
         String[] inputArr = input.trim().split(" ", 2); // split first word from body
         switch(inputArr[0]) {
         case "todo":
             if (inputArr.length == 1) {
                 throw new DukeException("todo simi?");
             }
-            ToDos newToDo = new ToDos(getDescription(inputArr))
-            addToStorage(newToDo, storage);
+            ToDos newToDo = new ToDos(getDescription(inputArr));
+            addToTaskList(newToDo, tasklist);
             return ADD_SUCCESS + newToDo;
 
         case "event":
@@ -35,7 +38,7 @@ public class Parser {
                 throw new DukeException("event description?");
             }
             Events newEvent = new Events(getDescription(inputArr), getDateTime(inputArr));
-            addToStorage(newEvent, storage);
+            addToTaskList(newEvent, tasklist);
             return ADD_SUCCESS + newEvent;
 
         case "deadline":
@@ -45,45 +48,28 @@ public class Parser {
             Deadlines newDeadline = new Deadlines(getDescription(inputArr), getDateTime(inputArr));
             return ADD_SUCCESS + newDeadline;
 
-        default:
-            throw new DukeException(":( OOPS!!!! I'm sorry, but I don't know what that means!");
-    }
-    }
+        case "list":
+            return tasklist.list();
 
-    // parse input commands to create new To dos, Events or Deadlines
-    public Task parse(String commandType, String[] inputArr) throws DukeException {
-        switch (commandType) {
-        case "todo":
-            if (inputArr.length == 1) {
-                throw new DukeException("todo simi?");
-            }
-            return new ToDos(getDescription(inputArr));
-
-        case "event":
-            if (inputArr.length == 1) {
-                throw new DukeException("event description?");
-            }
-            return new Events(getDescription(inputArr), getDateTime(inputArr));
-
-        case "deadline":
-            if (inputArr.length == 1) {
-                throw new DukeException("deadline when end?");
-            }
-            return new Deadlines(getDescription(inputArr), getDateTime(inputArr));
-
-        default:
-            throw new DukeException(":( OOPS!!!! I'm sorry, but I don't know what that means!");
-        }
-
-    }
-
-    public String parse(String commandType, Storage storage, String[] inputArr) {
-        switch(commandType) {
         case "bye":
+            storage.saveAllTasks(tasklist);
             return "Sayonara~";
 
+        case "mark":
+            Task markedTask = tasklist.mark(Integer.parseInt(inputArr[1]) - 1);
+            return MARK_SUCCESS + markedTask;
 
+        case "unmark":
+            Task unmarkedTask = tasklist.unmark(Integer.parseInt(inputArr[1]) - 1);
+            return UNMARK_SUCCESS + unmarkedTask;
+
+        case "delete":
+            Task deletedTask = tasklist.delete(Integer.parseInt(inputArr[1]) - 1);
+            return DELETE_SUCCESS + deletedTask;
+        default:
+            throw new DukeException(":( OOPS!!!! I'm sorry, but I don't know what that means!");
         }
+
 
     }
 }
