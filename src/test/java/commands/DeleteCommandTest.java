@@ -80,7 +80,7 @@ public class DeleteCommandTest {
             cmd.execute(tasks, new Ui(), new Storage("data/tasks.txt"));
             fail();
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! The value input is not in the list", e.getMessage());
+            assertEquals("OOPS!!! The value input is not in the list", e.getMessage());
         }
     }
 }

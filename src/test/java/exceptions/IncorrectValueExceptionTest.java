@@ -16,6 +16,6 @@ public class IncorrectValueExceptionTest {
     @Test
     void correctError() {
         IncorrectValueException e = new IncorrectValueException();
-        assertEquals("☹ OOPS!!! The value input is incorrect", e.getMessage());
+        assertEquals("OOPS!!! The value input is incorrect", e.getMessage());
     }
 }

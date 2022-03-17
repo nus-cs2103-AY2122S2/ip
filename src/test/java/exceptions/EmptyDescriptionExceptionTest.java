@@ -16,6 +16,6 @@ public class EmptyDescriptionExceptionTest {
     @Test
     void correctError() {
         EmptyDescriptionException e = new EmptyDescriptionException("todo");
-        assertEquals("☹ OOPS!!! The description of a todo cannot be empty.", e.getMessage());
+        assertEquals("OOPS!!! The description of a todo cannot be empty.", e.getMessage());
     }
 }

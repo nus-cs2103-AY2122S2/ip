@@ -16,6 +16,6 @@ public class UnknownCommandExceptionTest {
     @Test
     void correctError() {
         UnknownCommandException e = new UnknownCommandException();
-        assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
+        assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
     }
 }

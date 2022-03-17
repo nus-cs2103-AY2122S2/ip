@@ -16,6 +16,6 @@ public class OutOfRangeExceptionTest {
     @Test
     void correctError() {
         OutOfRangeException e = new OutOfRangeException();
-        assertEquals("☹ OOPS!!! The value input is not in the list", e.getMessage());
+        assertEquals("OOPS!!! The value input is not in the list", e.getMessage());
     }
 }
