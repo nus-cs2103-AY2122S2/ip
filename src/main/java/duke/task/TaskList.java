@@ -1,5 +1,6 @@
 package duke.task;
 
+import static duke.commons.core.Messages.MESSAGE_ADD_TASK;
 import static duke.commons.core.Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
 import static duke.commons.core.Messages.MESSAGE_INVALID_INDEX;
 
@@ -29,7 +30,7 @@ public class TaskList {
      * Constructor with empty List
      */
     public TaskList() {
-        this.tasks = null;
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -45,7 +46,7 @@ public class TaskList {
      */
     public String processNewTask(Task curr) {
         tasks.add(curr);
-        return ResponseFormatter.printFeedbackFooter("Got it. I've added this task:", curr, tasks);
+        return ResponseFormatter.printFeedbackFooter(MESSAGE_ADD_TASK, curr, tasks);
     }
 
     public String handleBye() {

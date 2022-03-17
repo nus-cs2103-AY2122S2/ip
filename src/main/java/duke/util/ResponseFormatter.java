@@ -1,5 +1,7 @@
 package duke.util;
 
+import static duke.commons.core.CliComponents.TEXT_BAR_LINE;
+
 import java.util.List;
 
 import duke.task.Task;
@@ -9,13 +11,11 @@ import duke.task.Task;
  */
 public final class ResponseFormatter {
 
-    private static final String BAR = "-".repeat(55);
-
     private ResponseFormatter() {
     }
 
     /**
-     * Main printing method that formats the output with BAR pre and post output
+     * Main printing method that formats the output with TEXT_BAR_LINE pre and post output
      * Most pre-defined printing methods in this class ultimately calls this method
      * for the actual printing
      *
@@ -23,7 +23,7 @@ public final class ResponseFormatter {
      * @return formated response
      */
     public static String printMessage(String message) {
-        return BAR + "\n" + message + "\n" + BAR;
+        return TEXT_BAR_LINE + "\n" + message + "\n" + TEXT_BAR_LINE;
     }
 
     /**
@@ -58,7 +58,7 @@ public final class ResponseFormatter {
      */
     public static String printFeedbackFooter(String message, Task targetTask, List<Task> tasks) {
         StringBuilder sb = new StringBuilder();
-        sb.append(BAR);
+        sb.append(TEXT_BAR_LINE);
         sb.append("\n");
         sb.append(message);
         sb.append("\n");
@@ -66,7 +66,7 @@ public final class ResponseFormatter {
         sb.append("\n");
         sb.append(printNoOfTasks(tasks));
         sb.append("\n");
-        sb.append(BAR);
+        sb.append(TEXT_BAR_LINE);
 
         return sb.toString();
     }
@@ -79,10 +79,10 @@ public final class ResponseFormatter {
      */
     public static String printDukeException(Exception e, String hint) {
         StringBuilder sb = new StringBuilder();
-        sb.append(BAR).append("\n");
+        sb.append(TEXT_BAR_LINE).append("\n");
         sb.append(e.getMessage()).append("\n");
         sb.append(hint).append("\n");
-        sb.append(BAR).append("\n");
+        sb.append(TEXT_BAR_LINE).append("\n");
 
         return sb.toString();
     }
@@ -92,7 +92,7 @@ public final class ResponseFormatter {
      */
     public static String printList(List<Task> tasks) {
         StringBuilder sb = new StringBuilder();
-        sb.append(BAR).append("\n");
+        sb.append(TEXT_BAR_LINE).append("\n");
         sb.append("Here are the tasks in your list:").append("\n");
 
         return loopList(tasks, sb);
@@ -104,7 +104,7 @@ public final class ResponseFormatter {
      */
     public static String printFoundList(List<Task> tasks, String key) {
         StringBuilder sb = new StringBuilder();
-        sb.append(BAR).append("\n");
+        sb.append(TEXT_BAR_LINE).append("\n");
         sb.append("Here are the tasks I have found matching \"").append(key).append("\":").append("\n");
 
         return loopList(tasks, sb);
@@ -116,7 +116,7 @@ public final class ResponseFormatter {
             sb.append(i).append(". ");
             sb.append(printTask(curr)).append("\n");
         }
-        sb.append(BAR);
+        sb.append(TEXT_BAR_LINE);
         return sb.toString();
     }
 
@@ -128,10 +128,10 @@ public final class ResponseFormatter {
     }
 
     /**
-     * Prints tasks in custom format without bars
+     * Prints tasks in custom format without TEXT_BAR_LINEs
      * Should be called directly outside of this class as this is intended as an
      * internal helper class
-     * with no extra BAR formatting pre and post output
+     * with no extra TEXT_BAR_LINE formatting pre and post output
      *
      * @param tasks List of Task objects to be printed
      * @return custom string of number of tasks in the list
