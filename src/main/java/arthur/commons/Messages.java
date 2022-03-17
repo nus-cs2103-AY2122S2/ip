@@ -9,7 +9,7 @@ public class Messages {
     public static final String LIST_OUT_REPLY_TEMPLATE = "Here are the tasks in your list: \n";
     public static final String REMINDER_NO_TASKS_TEMPLATE = "There are no tasks due today!";
     public static final String REMINDER_TEMPLATE = "Tasks due today: \n";
-    public static final String MARK_REPLY_TEMPLATE = "Good job! Task.Task Completed \n";
+    public static final String MARK_REPLY_TEMPLATE = "Good job! Task Completed \n";
     public static final String UNMARK_REPLY_TEMPLATE = "Alright, I will unmark this \n";
     public static final String NEW_TODO_REPLY_TEMPLATE = "Added a new Task. Todo task: \n";
     public static final String NEW_DEADLINE_REPLY_TEMPLATE = "Added a new Task. Deadline task: \n";
