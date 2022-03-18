@@ -10,6 +10,12 @@ import java.util.Scanner;
 
 public class Storage {
 
+    /**
+     *
+     * @param sc The Scanner object used to scan a given file
+     * @param arrList An ArrayList used to store the stored data being loaded
+     *
+     */
     private void loadData(Scanner sc, ArrayList<Task> arrList) {
         while (sc.hasNext()) {
             Task t = Parser.stringToTask(sc.nextLine());
@@ -17,6 +23,13 @@ public class Storage {
         }
     }
 
+    
+    /**
+     *
+     * @param 
+     * @return An arrayList containing the saved tasks of the user
+     *
+     */
     public ArrayList<Task> load(){
         ArrayList<Task> arrList = new ArrayList<>(100);
         try {
@@ -29,6 +42,12 @@ public class Storage {
         }
         return arrList;
     }
+    
+    /**
+     *
+     * @param f The file to be checked for its existence
+     * @throws IOException
+     */
 
     private void checkFile(File f) throws IOException {
         File folder = new File("./data");
