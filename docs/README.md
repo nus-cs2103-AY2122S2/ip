@@ -10,7 +10,7 @@ Juke, an interactive chatbot, allows you freedom to plan and organize your tasks
 - _event_
 
 Downloading it is as easy as 1, 2, 3:
-1. click this [link](https://github.com/zxgoh/ip/releases/tag/A-Release)
+1. click this [link](https://github.com/zxgoh/ip/releases)
 2. download ip.jar
 3. you're done, voilà 
 
