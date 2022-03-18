@@ -21,20 +21,30 @@ public class Outputs {
 
     String help =
                                 "Features | Commands                                      \n" +
-                    "normal task |  todo [taskname]                                     \n" +
-                    "normal task with deadline | deadline [taskname] /by [date&time]    \n" +
-                    "event task with deadline | event [taskname] /at [date&time]        \n" +
+                    "1. normal task (without deadline) \n- todo [taskname]                                     \n" +
+                    "2. normal task (with deadline) \n- deadline [taskname] /by [date&time]    \n" +
+                    "3. special event (specified time)  \n- event [taskname] /at [date&time]        \n" +
                     "                                                                   \n" +
                     "Note for [date&time]: enter it strictly in the following format    \n" +
                     "dd/mm/yyyy [24h] | eg: 31-12-1969 1830                             \n" +
                     "\n" + 
-                    "delete a task|  delete [index]                                     \n" +
-                    "tag a task|  tag [index] [tagname]                                 \n" +
-                    "mark a task as done | mark [index]                                 \n" +
-                    "mark a task as undone | unmark [index]                             \n" +
-                    "exit Juke | bye                                                    \n"
-    String firstPrompt =                 "     Hello! I'm Juke\n" +
-            "     What can I do for you?\n";
+                    "4. delete a task\n- delete [index]                                     \n" +
+                    "5.tag a task\n- tag [index] [tagname]                                 \n" +
+                    "6.mark a task as done\n- mark [index]                                 \n" +
+                    "7.mark a task as undone\n- unmark [index]                             \n" +
+                    "8.exit Juke\n- bye                                                    \n";
+    static String firstPrompt = "\n" +
+            "                                       \n" +
+            " ,-----. ,--.  ,--.,------.            \n" +
+            "'  .-.  '|  ,'.|  ||  .---'            \n" +
+            "|  | |  ||  |' '  ||  `--,             \n" +
+            "'  '-'  '|  | `   ||  `---.            \n" +
+            " `-----' `--'  `--'`------'  ,--.      \n" +
+            " ,---. ,--.,--.,--,--,  ,---.|  ,---.  \n" +
+            "| .-. ||  ||  ||      \\| .--'|  .-.  | \n" +
+            "| '-' ''  ''  '|  ||  |\\ `--.|  | |  | \n" +
+            "|  |-'  `----' `--''--' `---'`--' `--' \n" +
+            "`--'                                   \n";
 
     String border = "\n";
 

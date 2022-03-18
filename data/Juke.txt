@@ -1,3 +1,7 @@
 [T][ ] grocery%
-[E][ ] meeting (at 12 December 2022, 12:55pm%
+[D][ ] meeting (at 12 December 2022, 12:55pm%
 [T][ ] assignment (by 13 December 2031, 12:44pm%#softdeadline
+[T][ ] hw%
+[T][ ] hw%
+[T][ ] hw%
+[T][ ] hw%
