@@ -40,12 +40,12 @@ public class ToDo extends Task {
 
     @Override
     public void updateDate(String newDate) throws DukeException {
-        System.out.println("No date value for Todo task");
+        throw new DukeException("No date value for Todo task");
     }
 
     @Override
     public void updateTime(String newTime) throws DukeException {
-        System.out.println("No time value for Todo task");
+        throw new DukeException("No time value for Todo task");
     }
 
     @Override

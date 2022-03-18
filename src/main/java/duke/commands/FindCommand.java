@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.admin.Storage;
 import duke.admin.TaskList;
+import duke.exceptions.DukeException;
 
 public class FindCommand extends Command {
     private String keyword;
@@ -11,13 +12,15 @@ public class FindCommand extends Command {
      * @param keyword
      */
     public FindCommand(String keyword) {
-        assert keyword != null;
-
         this.keyword = keyword;
     }
 
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        if (keyword == null) {
+            throw new DukeException(DukeException.INVALID_FORMAT);
+        }
+
         return tasks.find(keyword);
     }
 

@@ -11,15 +11,15 @@ import duke.tasks.Task;
  * the program.
  */
 public class DeleteCommand extends Command {
-    private int index;
+    private String description;
 
     /**
-     * Constructor for DeleteCommand that takes in the index of the task to be
-     * deleted from the program.
-     * @param index index of task to be deleted
+     * Constructor for DeleteCommand that takes in the description containing index
+     * of the task to be deleted from the program.
+     * @param description description of delete command
      */
-    public DeleteCommand(int index) {
-        this.index = index;
+    public DeleteCommand(String description) {
+        this.description = description;
     }
 
     /**
@@ -30,7 +30,11 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        assert tasks.getNumberOfTasks() >= this.index;
+        int index = Integer.parseInt(description) - 1;
+
+        if (index >= tasks.getNumberOfTasks() || index < 0) {
+            throw new DukeException(DukeException.INVALID_FORMAT);
+        }
 
         Task deletedTask = tasks.delete(index);
         storage.updateAfterDelete(index);

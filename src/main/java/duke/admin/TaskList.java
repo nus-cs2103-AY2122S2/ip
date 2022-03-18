@@ -110,8 +110,8 @@ public class TaskList {
 
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            String taskAsString = task.toString();
-            if (taskAsString.contains(keyword)) {
+            String taskAsString = task.toString().toLowerCase();
+            if (taskAsString.contains(keyword.toLowerCase())) {
                 searchResults.add(task);
             }
         }
@@ -185,7 +185,7 @@ public class TaskList {
             task.updateTime(updateValue);
             break;
         default:
-            break;
+            throw new DukeException(DukeException.INVALID_FORMAT);
         }
 
         return task;

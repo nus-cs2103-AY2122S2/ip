@@ -10,7 +10,7 @@ import duke.exceptions.DukeException;
  * Duke class is the main class of the program.
  */
 public class Duke {
-    private static final String DEFAULT_FILE_PATH = ".\\src\\main\\java\\duke\\data\\duke.txt";
+    private static final String DEFAULT_FILE_PATH = "./dukeSaveLog.txt";
     private Storage storage;
     private TaskList tasks;
 

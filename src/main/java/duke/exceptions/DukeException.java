@@ -5,11 +5,14 @@ package duke.exceptions;
  */
 public class DukeException extends Exception {
 
+    public static final String INVALID_COMMAND = "Command was invalid or does not exist!";
+    public static final String INVALID_FORMAT = "Details input are invalid or in the wrong format!";
+
     /**
      * Constructs a DukeException instance with the inputted error message
      * @param errorMessage message describing the fault
      */
     public DukeException(String errorMessage) {
-        super("☹ OOPS!!! " + errorMessage);
+        super("What went wrong: " + errorMessage);
     }
 }

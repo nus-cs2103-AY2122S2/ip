@@ -45,14 +45,13 @@ public class Deadline extends Task {
 
                     updatePrintedString();
                 } else {
-                    throw new DukeException(
-                            "Please include the time in the deadline in the following manner: yyyy-mm-dd hh:mm");
+                    throw new DukeException(DukeException.INVALID_FORMAT);
                 }
             } else {
-                throw new DukeException("Please input a deadline in the following manner: yyyy-mm-dd hh:mm");
+                throw new DukeException(DukeException.INVALID_FORMAT);
             }
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please input the deadline in the proper manner: yyyy-mm-dd hh:mm");
+            throw new DukeException(DukeException.INVALID_FORMAT);
         }
     }
 
