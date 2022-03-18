@@ -9,11 +9,20 @@ import java.util.ArrayList;
 
 public class Parser {
 
-
+    /**
+     *
+     * @param t
+     * @return A String representation of the Task t
+     */
     public static String taskToString(Task t) {
         return t.getDescription() + "%" + t.tag;
     }
-
+    
+    /**
+     *
+     * @param s 
+     * @return The Task object representation of the String s
+     */
     public static Task stringToTask(String s) {
 
         String[] splitTask = s.split("%");
@@ -38,7 +47,7 @@ public class Parser {
 
     /**
      *
-     * @param input
+     * @param input, itemList
      * @return Juke's response based on the command
      */
     public static String getResponse(String input, ArrayList<Task> itemList) {
