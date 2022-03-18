@@ -20,13 +20,19 @@ public class Outputs {
     String instructions = "";
 
     String help =
-                                "COMMANDS | FORMAT                                                  \n" +
+                                "Features | Commands                                      \n" +
                     "normal task |  todo [taskname]                                     \n" +
                     "normal task with deadline | deadline [taskname] /by [date&time]    \n" +
                     "event task with deadline | event [taskname] /at [date&time]        \n" +
-                    "                                                                         \n" +
+                    "                                                                   \n" +
                     "Note for [date&time]: enter it strictly in the following format    \n" +
-                    "dd/mm/yyyy [24h] | eg: 31-12-1969 1830                          \n";
+                    "dd/mm/yyyy [24h] | eg: 31-12-1969 1830                             \n" +
+                    "\n" + 
+                    "delete a task|  delete [index]                                     \n" +
+                    "tag a task|  tag [index] [tagname]                                 \n" +
+                    "mark a task as done | mark [index]                                 \n" +
+                    "mark a task as undone | unmark [index]                             \n" +
+                    "exit Juke | bye                                                    \n"
     String firstPrompt =                 "     Hello! I'm Juke\n" +
             "     What can I do for you?\n";
 
