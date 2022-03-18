@@ -20,7 +20,7 @@ public class DukeMissingArgumentException extends DukeException {
      */
     @Override
     public String toString() {
-        String result = "We are missing the following argument: " + this.getMessage() + "\n";
+        String result = "We are missing the following argument: " + this.getMessage();
         return result;
     }
 }

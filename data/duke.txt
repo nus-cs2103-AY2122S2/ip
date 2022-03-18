@@ -1,4 +1,5 @@
-[T][ ] Test todo! | #IMPORTANT! #HELLOWORLD
-[D][ ] Input date format is yyyy-MM-dd hhmm (by: 18:00 Sunday, 12-25-2022)
 [E][ ] Test out the program! (at: 18:30 Wednesday, 02-23-2022)
-[T][ ] hello
+[D][ ] Input date format is yyyy-MM-dd hhmm (by: 18:00 Sunday, 12-25-2022) | #christmas
+[T][ ] Test todo! | #IMPORTANT! #HELLOWORLD
+[D][ ] input input ds@!@# (by: 19:00 Monday, 12-26-2022)
+[E][ ] abc def hij (at: 12:00 Friday, 10-21-2022)

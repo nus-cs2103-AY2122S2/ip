@@ -23,7 +23,7 @@ public class DukeCommandException extends DukeException {
         if (getMessage().isEmpty()) {
             return "Please specify a command! \n";
         }
-        String result = "Unknown command: " + this.getMessage() + "\n";
+        String result = "Unknown command: " + this.getMessage();
         return result;
     }
 }

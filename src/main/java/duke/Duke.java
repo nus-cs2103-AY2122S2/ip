@@ -79,7 +79,7 @@ public class Duke {
             }
             cmd.executeCommand(tasks, ui, storage);
         } catch (DukeException e) {
-            return e.toString();
+            return ui.showUiForError(e);
         }
         return ui.getNextMessage();
     }

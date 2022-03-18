@@ -24,7 +24,6 @@ import duke.exception.DukeMissingArgumentException;
 import duke.exception.DukeNumberFormatException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
 import duke.ui.Ui;
@@ -71,6 +70,155 @@ public class Parser {
         }
     }
 
+    private static Command parseAddCommand(String inputCommand, Command.CommandType addType, Ui ui)
+            throws DukeException {
+        String[] inputArray = inputCommand.split(" ");
+        String content;
+        String dateTimeString;
+        // Represents the index of \by or \at.
+        int indexOfDateTime;
+        if (addType.equals(Command.CommandType.TODO)) {
+            content = inputCommand.substring(5);
+            return new AddCommand(new ToDo(content, ui), inputArray);
+        } else if (addType.equals(Command.CommandType.EVENT)) {
+            indexOfDateTime = inputCommand.lastIndexOf(" \\at ");
+            content = inputCommand.substring(Command.CommandType.EVENT.name().length() + 1, indexOfDateTime);
+            dateTimeString = inputCommand.substring(indexOfDateTime + 5);
+            LocalDateTime dateTime = parseDateTime(dateTimeString);
+            return new AddCommand(new Event(content, dateTime, ui), inputArray);
+        } else if (addType.equals(Command.CommandType.DEADLINE)) {
+            indexOfDateTime = inputCommand.lastIndexOf(" \\by ");
+            content = inputCommand.substring(Command.CommandType.DEADLINE.name().length() + 1, indexOfDateTime);
+            dateTimeString = inputCommand.substring(indexOfDateTime + 5);
+            LocalDateTime dateTime = parseDateTime(dateTimeString);
+            return new AddCommand(new Deadline(content, dateTime, ui), inputArray);
+        } else {
+            throw new DukeCommandException(inputCommand);
+        }
+    }
+
+    private static Command parseDeleteCommand(String inputCommand, Ui ui) throws DukeException {
+        String[] inputArray = inputCommand.split(" ");
+        if (inputArray.length > 2) {
+            throw new DukeInvalidArgumentException("Too many arguments!");
+        }
+        int deleteIndex = parseInt(inputArray[1]);
+        return new DeleteCommand(deleteIndex, inputArray);
+    }
+
+    private static Command parseMarkCommand(String inputCommand, MarkCommand.Mark markType, Ui ui)
+            throws DukeException {
+        String[] inputArray = inputCommand.split(" ");
+        if (inputArray.length > 2) {
+            throw new DukeInvalidArgumentException("Too many arguments!");
+        }
+        int markIndex = parseInt(inputArray[1]);
+        if (markType.equals(MarkCommand.Mark.MARK)) {
+            return new MarkCommand(markIndex, MarkCommand.Mark.MARK, inputArray);
+        } else if (markType.equals(MarkCommand.Mark.UNMARK)) {
+            return new MarkCommand(markIndex, MarkCommand.Mark.UNMARK, inputArray);
+        } else {
+            throw new DukeInvalidArgumentException(inputArray[0]);
+        }
+    }
+
+    private static Command parseFindCommand(String inputCommand, Ui ui) {
+        String[] inputArray = inputCommand.split(" ");
+        String target = inputCommand.substring(Command.CommandType.FIND.name().length() + 1);
+        return new FindCommand(target, inputArray);
+    }
+
+    private static Command parseSortCommand(String inputCommand, Ui ui) throws DukeException {
+        String[] inputArray = inputCommand.split(" ");
+        if (inputArray.length > 2) {
+            throw new DukeInvalidArgumentException(inputArray[2]);
+        }
+        String sortType = inputCommand.substring(Command.CommandType.SORT.name().length() + 1);
+        if (TaskList.SortType.CONTENT.equals(sortType)) {
+            return new SortCommand(TaskList.SortType.CONTENT, inputArray);
+        } else if (TaskList.SortType.DATE.equals(sortType)) {
+            return new SortCommand(TaskList.SortType.DATE, inputArray);
+        } else {
+            throw new DukeInvalidArgumentException("sort type");
+        }
+    }
+
+    private static Command parseTagCommand(String inputCommand, Command.CommandType tagType, Ui ui)
+            throws DukeException {
+        String[] inputArray = inputCommand.split(" ");
+        if (inputArray.length == 2) {
+            throw new DukeInvalidArgumentException("Too few arguments!");
+        } else if (inputArray.length > 3) {
+            throw new DukeInvalidArgumentException("Too many arguments!");
+        }
+
+        if (tagType.equals(Command.CommandType.TAG)) {
+            String stringIndex = inputArray[1];
+            String name = inputArray[2];
+            int index = parseInt(stringIndex);
+            return new TagCommand(index, TagCommand.TagType.TAG, name);
+        } else if (tagType.equals(Command.CommandType.UNTAG)) {
+            String stringIndex = inputArray[1];
+            String name = inputArray[2];
+            int index = parseInt(stringIndex);
+            return new TagCommand(index, TagCommand.TagType.UNTAG, name);
+        } else {
+            throw new DukeCommandException(inputArray[0]);
+        }
+    }
+
+    /**
+     * Parses the inputCommand into a Command object.
+     *
+     * @param inputCommand String of command.
+     * @return Command associated with the input command.
+     * @throws DukeException DukeException regarding the input command.
+     */
+    private static Command parseCommand(String inputCommand, Ui ui) throws DukeException {
+        String[] inputArray = inputCommand.split(" ");
+        String firstArg = inputArray[0];
+        if (!Command.CommandType.isCommandType(firstArg)) {
+            throw new DukeCommandException(firstArg);
+        }
+        if (inputArray.length == 1) {
+            if (Command.CommandType.BYE.equals(firstArg)) {
+                return new ByeCommand(inputArray);
+            } else if (Command.CommandType.LIST.equals(firstArg)) {
+                return new ListCommand(inputArray);
+            } else {
+                throw new DukeMissingArgumentException(firstArg);
+            }
+        } else {
+            if (Command.CommandType.BYE.equals(firstArg)) {
+                throw new DukeInvalidArgumentException("Too many arguments!");
+            } else if (Command.CommandType.LIST.equals(firstArg)) {
+                throw new DukeInvalidArgumentException("Too many arguments");
+            } else if (Command.CommandType.TODO.equals(firstArg)) {
+                return parseAddCommand(inputCommand, Command.CommandType.TODO, ui);
+            } else if (Command.CommandType.EVENT.equals(firstArg)) {
+                return parseAddCommand(inputCommand, Command.CommandType.EVENT, ui);
+            } else if (Command.CommandType.DEADLINE.equals(firstArg)) {
+                return parseAddCommand(inputCommand, Command.CommandType.DEADLINE, ui);
+            } else if (Command.CommandType.DELETE.equals(firstArg)) {
+                return parseDeleteCommand(inputCommand, ui);
+            } else if (Command.CommandType.FIND.equals(firstArg)) {
+                return parseFindCommand(inputCommand, ui);
+            } else if (Command.CommandType.MARK.equals(firstArg)) {
+                return parseMarkCommand(inputCommand, MarkCommand.Mark.MARK, ui);
+            } else if (Command.CommandType.UNMARK.equals(firstArg)) {
+                return parseMarkCommand(inputCommand, MarkCommand.Mark.UNMARK, ui);
+            } else if (Command.CommandType.SORT.equals(firstArg)) {
+                return parseSortCommand(inputCommand, ui);
+            } else if (Command.CommandType.TAG.equals(firstArg)) {
+                return parseTagCommand(inputCommand, Command.CommandType.TAG, ui);
+            } else if (Command.CommandType.UNTAG.equals(firstArg)) {
+                return parseTagCommand(inputCommand, Command.CommandType.UNTAG, ui);
+            } else {
+                return new InvalidCommand();
+            }
+        }
+    }
+
     /**
      * Parses a given inputCommand into a Command object for the ease of interpreting commands.
      *
@@ -82,107 +230,6 @@ public class Parser {
         if (inputCommand.trim().length() == 0) {
             throw new DukeCommandException("");
         }
-        String[] inputArray = inputCommand.split(" ");
-        String firstArg = inputArray[0];
-        if (inputArray.length == 1) {
-            if (Command.CommandType.BYE.equals(firstArg)) {
-                return new ByeCommand(inputArray);
-            } else if (Command.CommandType.LIST.equals(firstArg)) {
-                return new ListCommand(inputArray);
-            } else if (Command.CommandType.isCommandType(firstArg)) {
-                throw new DukeMissingArgumentException(firstArg);
-            } else {
-                throw new DukeCommandException(firstArg);
-            }
-        } else {
-            String secondArg = inputArray[1];
-            if (Command.CommandType.FIND.equals(firstArg)) {
-                String target = inputCommand.substring(5);
-                if (!target.isEmpty()) {
-                    return new FindCommand(target, inputArray);
-                } else {
-                    throw new DukeMissingArgumentException("target");
-                }
-            } else if (Command.CommandType.DELETE.equals(firstArg)) {
-                int index = parseInt(secondArg);
-                return new DeleteCommand(index, inputArray);
-            } else if (Command.CommandType.DEADLINE.equals(firstArg)) {
-                if (secondArg.equals("\\by")) {
-                    throw new DukeMissingArgumentException("task description");
-                }
-                String content = "";
-                int indexOfBy = inputCommand.lastIndexOf("\\by ");
-                if (indexOfBy == -1) {
-                    throw new DukeMissingArgumentException("\\by deadlineTime");
-                } else if (indexOfBy >= 0) {
-                    String by = inputCommand.substring(indexOfBy + 4);
-                    content = inputCommand.substring(9, indexOfBy - 1);
-                    LocalDateTime date = null;
-                    date = parseDateTime(by);
-                    Task taskObj = new Deadline(content, date, ui);
-                    return new AddCommand(taskObj, inputArray);
-                } else {
-                    throw new DukeException("unknown error occurred");
-                }
-            } else if (Command.CommandType.EVENT.equals(firstArg)) {
-                if (secondArg.equals("\\by")) {
-                    throw new DukeMissingArgumentException("task description");
-                }
-                String content = "";
-                int indexOfAt = inputCommand.lastIndexOf("\\at ");
-                if (indexOfAt == -1) {
-                    throw new DukeMissingArgumentException("\\at eventTime");
-                } else if (indexOfAt >= 0) {
-                    String by = inputCommand.substring(indexOfAt + 4);
-                    content = inputCommand.substring(6, indexOfAt - 1);
-                    LocalDateTime date = null;
-                    date = parseDateTime(by);
-                    Task taskObj = new Event(content, date, ui);
-                    return new AddCommand(taskObj, inputArray);
-                } else {
-                    throw new DukeException("unknown error occurred");
-                }
-            } else if (Command.CommandType.TODO.equals(firstArg)) {
-                String content = inputCommand.substring(5);
-                Task taskObj = new ToDo(content, ui);
-                return new AddCommand(taskObj, inputArray);
-            } else if (Command.CommandType.MARK.equals(firstArg)) {
-                int index = parseInt(secondArg);
-                return new MarkCommand(index, MarkCommand.Mark.MARK, inputArray);
-            } else if (Command.CommandType.UNMARK.equals(firstArg)) {
-                int index = parseInt(secondArg);
-                return new MarkCommand(index, MarkCommand.Mark.UNMARK, inputArray);
-            } else if (Command.CommandType.SORT.equals(firstArg)) {
-                if (TaskList.SortType.CONTENT.equals(secondArg)) {
-                    return new SortCommand(TaskList.SortType.CONTENT, inputArray);
-                } else if (TaskList.SortType.DATE.equals(secondArg)) {
-                    return new SortCommand(TaskList.SortType.DATE, inputArray);
-                } else {
-                    throw new DukeInvalidArgumentException("sort type");
-                }
-            } else if (Command.CommandType.TAG.equals(firstArg)) {
-                if (inputArray.length == 2) {
-                    throw new DukeInvalidArgumentException("Too few arguments!");
-                } else if (inputArray.length != 3) {
-                    throw new DukeInvalidArgumentException("Too many arguments!");
-                }
-                String stringIndex = inputArray[1];
-                String name = inputArray[2];
-                int index = parseInt(stringIndex);
-                return new TagCommand(index, TagCommand.TagType.TAG, name);
-            } else if (Command.CommandType.UNTAG.equals(firstArg)) {
-                if (inputArray.length == 2) {
-                    throw new DukeInvalidArgumentException("Too few arguments!");
-                } else if (inputArray.length != 3) {
-                    throw new DukeInvalidArgumentException("Too many arguments!");
-                }
-                String stringIndex = inputArray[1];
-                String name = inputArray[2];
-                int index = parseInt(stringIndex);
-                return new TagCommand(index, TagCommand.TagType.UNTAG, name);
-            } else {
-                return new InvalidCommand(inputCommand);
-            }
-        }
+        return parseCommand(inputCommand, ui);
     }
 }

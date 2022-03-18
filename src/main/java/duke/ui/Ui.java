@@ -3,6 +3,7 @@ package duke.ui;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -77,6 +78,18 @@ public class Ui {
         assert taskList != null;
         assert taskList.size() != 0;
         String result = taskList.toString();
+        nextMessage = result;
+        return result;
+    }
+
+    /**
+     * Prints out the error.
+     *
+     * @param de DukeException any errors.
+     * @return toString version of the error.
+     */
+    public String showUiForError(DukeException de) {
+        String result = "Error | " + de.toString();
         nextMessage = result;
         return result;
     }
