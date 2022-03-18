@@ -1,6 +1,5 @@
 package duke.storage;
 
-import static duke.commons.core.LogMessages.LOG_BLANK_FILE_CREATED;
 import static duke.commons.core.LogMessages.LOG_BLANK_FILE_CREATE_FAIL;
 import static duke.commons.core.LogMessages.LOG_FILE_NOT_FOUND;
 import static duke.commons.core.LogMessages.LOG_SAVE_FILE_FAIL;
