@@ -41,7 +41,7 @@ public class Parser {
      * @param input
      * @return Juke's response based on the command
      */
-    public String getResponse(String input, ArrayList<Task> itemList) {
+    public static String getResponse(String input, ArrayList<Task> itemList) {
         Outputs op = new Outputs();
         while(true) {
             String reply = input;

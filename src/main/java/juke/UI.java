@@ -34,11 +34,6 @@ public class UI {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/botak.png"));
 
     private void handleUserInput(ArrayList<Task> arrList) {
-        try {
-//            System.out.println(Parser.taskToString(arrList.get(0)));
-        } catch (Exception e) {
-//            System.out.println("nothing");
-        }
         Parser p = new Parser();
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(p.getResponse(userInput.getText(), arrList));
@@ -95,7 +90,6 @@ public class UI {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefSize(280, 50);

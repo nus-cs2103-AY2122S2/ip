@@ -1,4 +1,3 @@
-[D][ ] a (by 12 December 1222, 12:22pm)%
-[E][ ] b (at 12 December 1222, 12:22pm)%
-[E][ ] b (at 12 December 1222, 12:22pm)%
-[E][ ] b (at 12 December 1222, 12:22pm)%
+[T][ ] grocery%
+[E][ ] meeting (at 12 December 2022, 12:55pm%
+[T][ ] assignment (by 13 December 2031, 12:44pm%#softdeadline

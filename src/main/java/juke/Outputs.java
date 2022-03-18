@@ -17,7 +17,7 @@ public class Outputs {
             "                        \n" +
             "                        \n";
 
-    String instructions = " ";
+    String instructions = "";
 //            "\n" +
 //                    "     **********************************************************************\n" +
 //                    "     * COMMANDS | FORMAT                                                  *\n" +
@@ -40,7 +40,6 @@ public class Outputs {
     String firstPrompt =                 "     Hello! I'm Juke\n" +
             "     What can I do for you?\n";
 
-//    String border = "    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n";
-    String border = "\n" + "\n";
+    String border = "\n";
 
 }
