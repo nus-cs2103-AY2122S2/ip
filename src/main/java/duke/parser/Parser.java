@@ -82,13 +82,25 @@ public class Parser {
             return new AddCommand(new ToDo(content, ui), inputArray);
         } else if (addType.equals(Command.CommandType.EVENT)) {
             indexOfDateTime = inputCommand.lastIndexOf(" \\at ");
-            content = inputCommand.substring(Command.CommandType.EVENT.name().length() + 1, indexOfDateTime);
+            int prefixLength = Command.CommandType.EVENT.name().length();
+            if (indexOfDateTime == -1) {
+                throw new DukeMissingArgumentException("\\at");
+            } else if (indexOfDateTime <= prefixLength + 1) {
+                throw new DukeMissingArgumentException("content");
+            }
+            content = inputCommand.substring(prefixLength + 1, indexOfDateTime);
             dateTimeString = inputCommand.substring(indexOfDateTime + 5);
             LocalDateTime dateTime = parseDateTime(dateTimeString);
             return new AddCommand(new Event(content, dateTime, ui), inputArray);
         } else if (addType.equals(Command.CommandType.DEADLINE)) {
             indexOfDateTime = inputCommand.lastIndexOf(" \\by ");
-            content = inputCommand.substring(Command.CommandType.DEADLINE.name().length() + 1, indexOfDateTime);
+            int prefixLength = Command.CommandType.DEADLINE.name().length();
+            if (indexOfDateTime == -1) {
+                throw new DukeMissingArgumentException("\\by");
+            } else if (indexOfDateTime <= prefixLength + 1) {
+                throw new DukeMissingArgumentException("content");
+            }
+            content = inputCommand.substring(prefixLength + 1, indexOfDateTime);
             dateTimeString = inputCommand.substring(indexOfDateTime + 5);
             LocalDateTime dateTime = parseDateTime(dateTimeString);
             return new AddCommand(new Deadline(content, dateTime, ui), inputArray);
