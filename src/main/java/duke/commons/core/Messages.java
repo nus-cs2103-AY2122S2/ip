@@ -10,4 +10,5 @@ public class Messages {
     public static final String MESSAGE_MARK_TASK_DONE = "Nice! I've marked this task as done:";
     public static final String MESSAGE_MARK_TASK_UNDONE = "OK, I've marked this task as not done yet:";
     public static final String MESSAGE_EMPTY_TASK_LIST = "There are currently no tasks to display.";
+    public static final String MESSAGE_REMOVE_TASK_DONE = "Noted. I've removed this task:";
 }

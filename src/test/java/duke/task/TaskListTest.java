@@ -1,8 +1,12 @@
 package duke.task;
 
 import static duke.commons.core.Messages.MESSAGE_ADD_TASK;
+import static duke.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_DONE;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_UNDONE;
+import static duke.commons.core.Messages.MESSAGE_REMOVE_TASK_DONE;
+import static duke.task.util.TaskListTestUtil.DELETE_FARAWAY_TASK_VALID;
+import static duke.task.util.TaskListTestUtil.DELETE_FIRST_TASK_VALID;
 import static duke.task.util.TaskListTestUtil.MAKE_DEADLINE_INPUT_VALID;
 import static duke.task.util.TaskListTestUtil.MAKE_EVENT_INPUT_VALID;
 import static duke.task.util.TaskListTestUtil.MAKE_TODO_INPUT_VALID;
@@ -15,6 +19,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.ResponseFormatter;
 
@@ -123,5 +128,26 @@ class TaskListTest {
         taskListSut.handleEvent(inputArray, MAKE_EVENT_INPUT_VALID);
 
         assertEquals(tasksStub.get(0), taskListSut.getTasks().get(0));
+    }
+
+    @Test
+    void handleDelete_deleteFirstTask_success() {
+        Parser parser = new Parser(DELETE_FIRST_TASK_VALID);
+
+        taskListSut.getTasks().add(todoStub);
+
+        assertEquals(ResponseFormatter.printFeedbackFooter(MESSAGE_REMOVE_TASK_DONE, todoStub, tasksStub),
+                taskListSut.handleDelete(parser.getInputArray()));
+    }
+
+    @Test
+    void handleDelete_deleteNonExistTask_fail() {
+        Parser parser = new Parser(DELETE_FARAWAY_TASK_VALID);
+
+        taskListSut.getTasks().add(todoStub);
+
+        assertEquals(ResponseFormatter.printDukeException(
+                        new DukeException(MESSAGE_INVALID_INDEX), "Please try again:"),
+                taskListSut.handleDelete(parser.getInputArray()));
     }
 }

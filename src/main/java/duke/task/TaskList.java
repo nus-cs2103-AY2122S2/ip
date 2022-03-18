@@ -5,6 +5,7 @@ import static duke.commons.core.Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
 import static duke.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_DONE;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_UNDONE;
+import static duke.commons.core.Messages.MESSAGE_REMOVE_TASK_DONE;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -189,7 +190,7 @@ public class TaskList {
 
         tasks.remove(curr);
 
-        return ResponseFormatter.printFeedbackFooter("Noted. I've removed this task:", curr, tasks);
+        return ResponseFormatter.printFeedbackFooter(MESSAGE_REMOVE_TASK_DONE, curr, tasks);
     }
 
     /**
