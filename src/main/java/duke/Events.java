@@ -9,7 +9,6 @@ public class Events extends Task {
 
     private final DateTime duration;
 
-
     public Events(String description, DateTime duration) {
         super(description);
         this.duration = duration;

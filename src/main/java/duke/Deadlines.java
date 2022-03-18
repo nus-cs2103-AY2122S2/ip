@@ -22,6 +22,7 @@ public class Deadlines extends Task {
     public String getDateTimeForStorage() {
         return this.deadline.dateTimeForStorage();
     }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.deadline.toString() + ")";
