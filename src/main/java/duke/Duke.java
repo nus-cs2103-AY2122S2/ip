@@ -41,6 +41,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke to receive commands until command "bye" is given
+     */
     public void run() {
         this.ui.initUi();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

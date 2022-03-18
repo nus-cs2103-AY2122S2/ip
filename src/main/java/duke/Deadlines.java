@@ -14,6 +14,11 @@ public class Deadlines extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Gets date and time of this Deadlines object
+     *
+     * @return date and time in String format
+     */
     public String getDateTimeForStorage() {
         return this.deadline.dateTimeForStorage();
     }

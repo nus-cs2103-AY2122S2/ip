@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Handles the visual interaction with the user
+ */
 public class Ui {
     private final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"

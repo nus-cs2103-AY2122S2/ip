@@ -9,6 +9,9 @@ import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.util.Scanner;
 
+/**
+ * Holds the filepath to the file in which the data will be stored
+ */
 public class Storage {
     private String filePath;
     private Path path;
@@ -20,6 +23,12 @@ public class Storage {
         this.path = java.nio.file.Paths.get(home,"Desktop", "iP", "data");
     }
 
+    /**
+     * Converts String stored in the database to create tasks when booting up Duke
+     *
+     * @param description Line read from the data file
+     * @return A task which will be added to the Tasklist
+     */
     private Task convertStringToTask(String description) {
         String[] splitDescription = description.split("\\|");
         String taskType = splitDescription[0];
@@ -56,6 +65,13 @@ public class Storage {
         return tempTask;
     }
 
+    /**
+     * Read the data file and store it into an ArrayList<Task>
+     *
+     * @return An ArrayList of Tasks
+     * @throws IOException Missing file
+     * @throws DukeException Missing file
+     */
     public ArrayList<Task> load() throws IOException, DukeException {
         ArrayList<Task> masterList = new ArrayList<>();
         try {
@@ -70,13 +86,19 @@ public class Storage {
             if (!isDirectoryExists) {
                 new File("data").mkdir();
             }
-            new File(path + "/duke.txt").createNewFile();
+            new File(path + "/tasks.txt").createNewFile();
             throw new DukeException("File not found. Creating new file...");
         }
 
         return masterList;
     }
 
+    /**
+     * Save all tasks before exiting Duke
+     *
+     * @param tasklist List of tasks to be saved
+     * @throws IOException Missing file
+     */
     public void saveAllTasks(TaskList tasklist) throws IOException {
         File dukeStore = new File(this.path + this.filePath);
         FileWriter fw = new FileWriter(dukeStore);
@@ -87,6 +109,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Converts a task to String for storage purposes
+     *
+     * @param task Task to be converted to String to be stored
+     * @return String of Task
+     */
     private final String taskToString(Task task) {
         String toReturn = "";
         if (task instanceof ToDos) {

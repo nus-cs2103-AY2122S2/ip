@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Handles the current list of Tasks while Duke is running
+ */
 public class TaskList {
     private final String LIST_INIT = "Here are the task:\n";
     private ArrayList<Task> masterList;
@@ -26,6 +29,11 @@ public class TaskList {
         masterList.add(task);
     }
 
+    /**
+     * Shows the list of existing tasks
+     *
+     * @return String of list of tasks
+     */
     public String list() {
         String toPrint = LIST_INIT;
         for (int i = 0; i < masterList.size(); i++) {
@@ -35,6 +43,12 @@ public class TaskList {
         return toPrint;
     }
 
+    /**
+     * Mark a task as done
+     *
+     * @param index Index of task in masterList
+     * @return Task marked as done
+     */
     public Task mark(int index) {
         Task currTask = masterList.get(index);
         currTask.markAsDone();
@@ -42,6 +56,12 @@ public class TaskList {
         return currTask;
     }
 
+    /**
+     * Mark a task as undone
+     *
+     * @param index Index of task in masterList
+     * @return Task marked as undone
+     */
     public Task unmark(int index) {
         Task currTask = masterList.get(index);
         currTask.unmarkItem();
@@ -49,6 +69,12 @@ public class TaskList {
         return currTask;
     }
 
+    /**
+     * Delete a task
+     *
+     * @param index Index of task in masterList
+     * @return Deleted task
+     */
     public Task delete(int index) {
         Task currTask = masterList.get(index);
         masterList.remove(index);

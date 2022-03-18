@@ -15,6 +15,11 @@ public class Events extends Task {
         this.duration = duration;
     }
 
+    /**
+     * Gets date and time of this Events object
+     *
+     * @return Date and time in String format
+     */
     public String getDateTimeForStorage() {
         return this.duration.dateTimeForStorage();
     }
