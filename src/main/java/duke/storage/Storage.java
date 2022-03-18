@@ -69,7 +69,6 @@ public class Storage {
         try {
             Files.createDirectories(dirPath);
             Files.createFile(filePath);
-            System.out.println(LOG_BLANK_FILE_CREATED);
         } catch (IOException e) {
             System.out.println(LOG_BLANK_FILE_CREATE_FAIL);
         }
