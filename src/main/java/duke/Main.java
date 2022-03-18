@@ -32,7 +32,8 @@ public class Main extends Application {
             String home = System.getProperty("user.home");
             Path directory = Paths.get(home, "Documents", "duke");
             Path filePath = Paths.get(home, "Documents", "duke", "data.txt");
-            duke = new Duke(directory, filePath);
+            Path contactsPath = Paths.get(home, "Documents", "duke", "contacts.txt");
+            duke = new Duke(directory, filePath, contactsPath);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

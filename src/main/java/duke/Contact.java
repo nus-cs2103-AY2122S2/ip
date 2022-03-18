@@ -39,4 +39,12 @@ public class Contact {
         return builder.toString();
     }
 
+    /**
+     * Returns string representation of a contact.
+     * @return Contact as a string
+     */
+    public String toDataString() {
+        return String.format("%s,%s", getName(), getTelegram());
+    }
+
 }

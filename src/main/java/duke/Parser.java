@@ -11,6 +11,7 @@ import duke.command.DeleteContactCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.ListContactsCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 import duke.task.Deadline;
@@ -43,6 +44,8 @@ public class Parser {
             return parseAddTodoCommand(fullCommand);
         } else if (command.equals("list")) {
             return parseListCommand();
+        } else if (command.equals("listContacts")) {
+            return parseListContactsCommand();
         } else if (command.equals("delete")) {
             return parseDeleteCommand(fullCommand);
         } else if (command.equals("mark")) {
@@ -116,6 +119,16 @@ public class Parser {
      */
     private static Command parseListCommand() {
         return new ListCommand();
+    }
+
+    /**
+     * Parses list contacts command.
+     *
+     * @param fullCommand String to parse.
+     * @return ListContactsCommand instance.
+     */
+    private static Command parseListContactsCommand() {
+        return new ListContactsCommand();
     }
 
     /**

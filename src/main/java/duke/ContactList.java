@@ -54,4 +54,18 @@ public class ContactList {
         return builder.toString();
     }
 
+    /**
+     * Returns string representation of list for storage.
+     *
+     * @return Data of all contacts.
+     */
+    public String toDataString() {
+        String string = "";
+        for (int i = 0; i < contacts.size(); i++) {
+            Contact contact = contacts.get(i);
+            string += String.format("%s\n", contact.toDataString());
+        }
+        return string;
+    }
+
 }

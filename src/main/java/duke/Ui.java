@@ -77,6 +77,16 @@ public class Ui {
     }
 
     /**
+     * Shows list of all contacts in specified list
+     *
+     * @param contacts List of all contacts.
+     * @return String to display.
+     */
+    public String showContacts(ContactList contacts) {
+        return contacts.toString();
+    }
+
+    /**
      * Shows display when a contact is added.
      *
      * @return String to display.

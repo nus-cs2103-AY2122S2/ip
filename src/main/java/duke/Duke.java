@@ -16,15 +16,22 @@ public class Duke {
      *
      * @param filePath File path to read task data from.
      */
-    public Duke(Path directory, Path filePath) {
+    public Duke(Path directory, Path filePath, Path contactsPath) {
         ui = new Ui();
-        storage = new Storage(directory, filePath);
-        contacts = new ContactList();
+        storage = new Storage(directory, filePath, contactsPath);
+        
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             tasks = new TaskList();
+        }
+
+        try {
+            contacts = new ContactList(storage.loadContacts());
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            contacts = new ContactList();
         }
     }
 
