@@ -29,6 +29,52 @@ public class Parser {
         return isValid;
     }
 
+    ParsedAnswer parseMark(String input) {
+        try {
+            int idx = Integer.parseInt(input);
+            return new ParsedAnswer("mark", idx);
+        } catch (Exception e) {
+            return new ParsedAnswer("mark", -1);
+        }
+    }
+
+    ParsedAnswer parseUnmark(String input) {
+        try {
+            int idx = Integer.parseInt(input);
+            return new ParsedAnswer("unmark", idx);
+        } catch (Exception e) {
+            return new ParsedAnswer("unmark", -1);
+        }
+    }
+
+    ParsedAnswer parseDelete(String input) {
+        try {
+            int idx = Integer.parseInt(input);
+            return new ParsedAnswer("delete", idx);
+        } catch (Exception e) {
+            return new ParsedAnswer("delete", -1);
+        }
+    }
+
+    ParsedAnswer parseFind(String input) {
+        try {
+            ParsedAnswer pa = new ParsedAnswer("find", -1);
+            pa.setDesc(input);
+            return pa;
+        } catch (Exception e) {
+            ParsedAnswer pa = new ParsedAnswer("error", -1);
+            pa.setDesc("Please specify what you're searching for.");
+            return pa;
+        }
+    }
+
+    ParsedAnswer parseError() {
+        ParsedAnswer pa = new ParsedAnswer("error", -1);
+        pa.setDesc("Sorry, but I have no idea what you mean.");
+        return pa;
+    }
+
+
     /**
      * A string value is returned depending on what value of regex is being passed to the function.
      * This string value represents one of the three possible command types.
@@ -188,28 +234,13 @@ public class Parser {
                 return new ParsedAnswer("list", -1);
 
             case "unmark":
-                try {
-                    int idx = Integer.parseInt(parsedString[1]);
-                    return new ParsedAnswer("unmark", idx);
-                } catch (Exception e) {
-                    return new ParsedAnswer("unmark", -1);
-                }
+                return parseUnmark(parsedString[1]);
 
             case "mark":
-                try {
-                    int idx = Integer.parseInt(parsedString[1]);
-                    return new ParsedAnswer("mark", idx);
-                } catch (Exception e) {
-                    return new ParsedAnswer("mark", -1);
-                }
+                return parseMark(parsedString[1]);
 
             case "delete":
-                try {
-                    int idx = Integer.parseInt(parsedString[1]);
-                    return new ParsedAnswer("delete", idx);
-                } catch (Exception e) {
-                    return new ParsedAnswer("delete", -1);
-                }
+                return parseDelete(parsedString[1]);
 
             case "todo":
                 return parseInputWithRegex("none", parsedString);
@@ -221,23 +252,13 @@ public class Parser {
                 return parseInputWithRegex("/by", parsedString);
 
             case "find":
-                try {
-                    ParsedAnswer pa = new ParsedAnswer("find", -1);
-                    pa.setDesc(parsedString[1]);
-                    return pa;
-                } catch (Exception e) {
-                    ParsedAnswer pa = new ParsedAnswer("error", -1);
-                    pa.setDesc("Please specify what you're searching for.");
-                    return pa;
-                }
+                return parseFind(parsedString[1]);
 
             case "update":
                 return parseUpdate(input);
 
             default:
-                ParsedAnswer pa = new ParsedAnswer("error", -1);
-                pa.setDesc("Sorry, but I have no idea what you mean.");
-                return pa;
+                return parseError();
         }
     }
 }
