@@ -192,7 +192,7 @@ public class Parser {
         try {
             Parser.eventDateFormatValidator(eventDate);
         } catch (DukeException e) {
-            throw new DukeException("OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
+            throw new DukeException("OOPS!!! Event tasks can only be in the YYYY-MM-DD format.");
         }
     }
 
