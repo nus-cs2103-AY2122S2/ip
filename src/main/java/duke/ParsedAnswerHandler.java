@@ -59,7 +59,7 @@ public class ParsedAnswerHandler {
     }
 
     ArrayList<String> executeTodo() {
-        ArrayList<String> message = new ArrayList<String>();
+        var message = new ArrayList<String>();
         ToDos td = new ToDos(pa.getDesc());
         TaskList.add(td);
         message.add("T," +
@@ -70,7 +70,7 @@ public class ParsedAnswerHandler {
     }
 
     ArrayList<String> executeDeadline() {
-        ArrayList<String> message = new ArrayList<String>();
+        var message = new ArrayList<String>();
         Deadline dl = new Deadline(pa.getDesc(), pa.getDate());
         TaskList.add(dl);
         message.add("D," +
@@ -83,7 +83,7 @@ public class ParsedAnswerHandler {
     }
 
     ArrayList<String> executeEvent() {
-        ArrayList<String> message = new ArrayList<String>();
+        var message = new ArrayList<String>();
         Event ev = new Event(pa.getDesc(), pa.getDate());
         TaskList.add(ev);
         message.add("E," +
@@ -166,16 +166,13 @@ public class ParsedAnswerHandler {
                 return TaskList.list();
 
             case "todo":
-                ArrayList<String> todoResult = executeTodo();
-                return writeTaskToFile(todoResult.get(0), todoResult.get(1));
+                return writeTaskToFile(executeTodo().get(0), executeTodo().get(1));
 
             case "deadline":
-                ArrayList<String> deadlineResult = executeDeadline();
-                return writeTaskToFile(deadlineResult.get(0), deadlineResult.get(1));
+                return writeTaskToFile(executeDeadline().get(0), executeDeadline().get(1));
 
             case "event":
-                ArrayList<String> eventResult = executeEvent();
-                return writeTaskToFile(eventResult.get(0), eventResult.get(1));
+                return writeTaskToFile(executeEvent().get(0), executeEvent().get(1));
 
             case "mark":
                return changeMarkStatus("mark");
