@@ -154,7 +154,7 @@ public class MainWindow extends BorderPane {
     }
 
     /**
-     * Handle messages returned from Duke: displays messages as system messages or chat bubbles, or quits the
+     * Handles messages returned from Duke: displays messages as system messages or chat bubbles, or quits the
      * application as required.
      *
      * If a {@code QuitMessage} is present, then the application only quits 1.5s after processing the message.

@@ -35,7 +35,7 @@ public class Duke {
     private Participant dukePartipant;
     private Participant userParticipant;
 
-    private boolean init = false;
+    private boolean isInitialized = false;
 
     /**
      * Creates a new Duke instance with the given chatbot name and Task storage path.
@@ -68,7 +68,7 @@ public class Duke {
      * @return messages to be displayed
      */
     public List<Message> init() {
-        assert !init : "Attempting to init Duke more than once";
+        assert !isInitialized : "Attempting to init Duke more than once";
 
         List<Message> messages = new ArrayList<>();
         try {
@@ -87,7 +87,7 @@ public class Duke {
                 dukePartipant,
                 userParticipant));
 
-        init = true;
+        isInitialized = true;
 
         return messages;
     }
@@ -100,7 +100,7 @@ public class Duke {
      * @throws IOException if an error occurs e.g. while loading or saving tasks
      */
     public List<Message> handleInput(String input) throws IOException {
-        if (!init) {
+        if (!isInitialized) {
             throw new RuntimeException("Duke not initialized yet");
         }
 
