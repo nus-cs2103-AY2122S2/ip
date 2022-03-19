@@ -22,7 +22,7 @@ public class Parser {
         boolean isValid = true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
-            LocalDate parsedDate = LocalDate.parse(date.trim(), formatter);
+            LocalDate.parse(date.trim(), formatter);
         } catch (Exception e) {
             isValid = false;
         }
@@ -68,12 +68,46 @@ public class Parser {
         }
     }
 
-    ParsedAnswer parseError() {
+    ParsedAnswer parseError(String errorMessage) {
         ParsedAnswer pa = new ParsedAnswer("error", -1);
-        pa.setDesc("Sorry, but I have no idea what you mean.");
+        pa.setDesc(errorMessage);
         return pa;
     }
 
+    ParsedAnswer handleTodo(String command, String desc) {
+        try {
+            if (desc.trim().isEmpty()) {
+                ParsedAnswer pa = new ParsedAnswer("error", -1);
+                pa.setDesc("The description cannot be empty!");
+                return pa;
+            }
+            ParsedAnswer pa = new ParsedAnswer(command, -1);
+            pa.setDesc(desc.stripLeading());
+            return pa;
+        } catch (Exception e) {
+            ParsedAnswer pa = new ParsedAnswer("error", -1);
+            pa.setDesc("The description cannot be empty!");
+            return pa;
+        }
+    }
+
+    ParsedAnswer handleEventAndDeadline(String command, String[] eventParseBy) {
+        ParsedAnswer pa;
+        if (eventParseBy.length <= 1 || !isDateValid(eventParseBy[1])) {
+            pa = new ParsedAnswer("error", -1);
+            pa.setDesc("Please check that your input format is correct.");
+        } else {
+            pa = new ParsedAnswer(command, -1);
+            if (eventParseBy[0].trim().isEmpty()) {
+                ParsedAnswer pa_err = new ParsedAnswer("error", -1);
+                pa_err.setDesc("The description cannot be empty!");
+                return pa_err;
+            }
+            pa.setDesc(eventParseBy[0].stripLeading());
+            pa.setDate(eventParseBy[1]);
+        }
+        return pa;
+    }
 
     /**
      * A string value is returned depending on what value of regex is being passed to the function.
@@ -107,43 +141,12 @@ public class Parser {
     ParsedAnswer parseInputWithRegex(String regex, String[] inputToParse) {
         String command = getCommandThroughRegex(regex);
         if (regex.equalsIgnoreCase("none")) {
-            try {
-                String desc = inputToParse[1];
-                if (desc.trim().isEmpty()) {
-                    ParsedAnswer pa = new ParsedAnswer("error", -1);
-                    pa.setDesc("The description cannot be empty!");
-                    return pa;
-                }
-                ParsedAnswer pa = new ParsedAnswer(command, -1);
-                pa.setDesc(desc.stripLeading());
-                return pa;
-            } catch (Exception e) {
-                ParsedAnswer pa = new ParsedAnswer("error", -1);
-                pa.setDesc("The description cannot be empty!");
-                return pa;
-            }
+            return handleTodo(command, inputToParse[1]);
         } else {
             try {
-                String[] eventParseBy = inputToParse[1].split(regex);
-                ParsedAnswer pa;
-                if (eventParseBy.length <= 1 || !isDateValid(eventParseBy[1])) {
-                    pa = new ParsedAnswer("error", -1);
-                    pa.setDesc("Please check that your input format is correct.");
-                } else {
-                    pa = new ParsedAnswer(command, -1);
-                    if (eventParseBy[0].trim().isEmpty()) {
-                        ParsedAnswer pa_err = new ParsedAnswer("error", -1);
-                        pa_err.setDesc("The description cannot be empty!");
-                        return pa_err;
-                    }
-                    pa.setDesc(eventParseBy[0].stripLeading());
-                    pa.setDate(eventParseBy[1]);
-                }
-                return pa;
+                return handleEventAndDeadline(command, inputToParse[1].split(regex));
             } catch (Exception e) {
-                ParsedAnswer pa = new ParsedAnswer("error", -1);
-                pa.setDesc("The description cannot be empty!");
-                return pa;
+                return parseError("The description cannot be empty!");
             }
         }
     }
@@ -258,7 +261,7 @@ public class Parser {
                 return parseUpdate(input);
 
             default:
-                return parseError();
+                return parseError("Sorry, but I have no idea what you mean.");
         }
     }
 }
