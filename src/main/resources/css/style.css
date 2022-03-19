@@ -17,3 +17,12 @@
 .chat-bubble-fill {
     -fx-fill: #2c3957;
 }
+
+.send-button {
+    -fx-background-color: #fbe0ff;
+    -fx-text-fill: rgb(77, 0, 60);
+}
+
+.send-button:hover {
+    -fx-background-color: #f3cff8;
+}
