@@ -73,7 +73,7 @@ public class Ui {
      * @return String to display.
      */
     public String showTasks(TaskList tasks) {
-        return tasks.toString();
+        return String.format("Your todo list:\n\n%s", tasks.toString());
     }
 
     /**
@@ -83,7 +83,7 @@ public class Ui {
      * @return String to display.
      */
     public String showContacts(ContactList contacts) {
-        return contacts.toString();
+        return String.format("Your telegram contacts:\n\n%s", contacts.toString());
     }
 
     /**

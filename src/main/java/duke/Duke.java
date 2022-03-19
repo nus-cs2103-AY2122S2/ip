@@ -19,7 +19,7 @@ public class Duke {
     public Duke(Path directory, Path filePath, Path contactsPath) {
         ui = new Ui();
         storage = new Storage(directory, filePath, contactsPath);
-        
+
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -32,27 +32,6 @@ public class Duke {
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             contacts = new ContactList();
-        }
-    }
-
-    /**
-     * Runs the application.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage, contacts);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
         }
     }
 

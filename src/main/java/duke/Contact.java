@@ -32,11 +32,7 @@ public class Contact {
      */
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Telegram: ")
-                .append(getTelegram());
-        return builder.toString();
+        return String.format("%s: %s", getName(), getTelegram());
     }
 
     /**

@@ -10,7 +10,7 @@ public class ContactList {
     private ArrayList<Contact> contacts;
 
     /**
-     * Construct contact list.
+     * Constructs contact list.
     `*/
     public ContactList(ArrayList<Contact> contacts) {
         this.contacts = contacts;
@@ -24,7 +24,7 @@ public class ContactList {
     }
 
     /**
-     * Add contact to list.
+     * Adds contact to list.
      *
      * @param contact Contact to add.
      */
@@ -33,7 +33,7 @@ public class ContactList {
     }
 
     /**
-     * Delete contact with specified id.
+     * Deletes contact with specified id.
      *
      * @param contactNumber Contact id.
      */
