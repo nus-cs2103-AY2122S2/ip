@@ -1,6 +1,8 @@
 package duke.exception;
 
-/** Exception for when input is shorter than expected */
+/**
+ * Exception for when the input is shorter than expected.
+ */
 public class IncompleteInputException extends Exception {
 
     /**

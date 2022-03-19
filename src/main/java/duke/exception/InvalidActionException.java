@@ -1,6 +1,8 @@
 package duke.exception;
 
-/** Exception for when given command leads to an invalid action */
+/**
+ * Exception for when the given command leads to an invalid action.
+ */
 public class InvalidActionException extends RuntimeException {
 
     /**

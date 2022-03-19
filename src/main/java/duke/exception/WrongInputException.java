@@ -1,6 +1,8 @@
 package duke.exception;
 
-/** Exception for when input is invalid */
+/**
+ * Exception for when the input is invalid.
+ */
 public class WrongInputException extends Exception {
 
     /**
