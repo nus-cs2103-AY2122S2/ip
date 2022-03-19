@@ -4,8 +4,13 @@ import java.time.LocalDateTime;
 
 import duke.exception.InvalidActionException;
 
-/** Superclass of concrete classes that can be added to the task list */
+/**
+ * Abstract superclass of concrete classes representing Tasks that can be added to Duke.
+ */
 public abstract class Task {
+    protected static final String TASK_ALREADY_DONE_MESSAGE = "Task already done!";
+    protected static final String TASK_ALREADY_UNDONE_MESSAGE = "Task already not done!";
+
     protected String name;
     protected String label;
     protected boolean isDone;
@@ -49,7 +54,7 @@ public abstract class Task {
      */
     public void markAsDone() throws InvalidActionException {
         if (isDone) {
-            throw new InvalidActionException("Task already done!");
+            throw new InvalidActionException(TASK_ALREADY_DONE_MESSAGE);
         }
         isDone = true;
     }
@@ -61,13 +66,13 @@ public abstract class Task {
      */
     public void markUndone() throws InvalidActionException {
         if (!isDone) {
-            throw new InvalidActionException("Task already not done!");
+            throw new InvalidActionException(TASK_ALREADY_UNDONE_MESSAGE);
         }
         isDone = false;
     }
 
     /**
-     * Returns a string representation of the task to be entered in the storage file.
+     * Returns a String representation of the Task to be entered in the storage file.
      *
      * @return A String representation of the task.
      */
@@ -79,18 +84,18 @@ public abstract class Task {
     }
 
     /**
-     * Sets a reminder for the task.
+     * Sets a Reminder for the Task.
      *
-     * @param dateTime The time to remind the user of the task.
+     * @param dateTime The time to remind the user of the Task.
      */
     public void setReminder(LocalDateTime dateTime) {
         reminder = new Reminder(dateTime);
     }
 
     /**
-     * Returns the reminder attached to this task.
+     * Returns the Reminder attached to this Task.
      *
-     * @return The reminder attached to this task.
+     * @return The Reminder attached to this Task.
      */
     public Reminder getReminder() {
         return reminder;
