@@ -1,1 +1,5 @@
 todo/marked/todo add this
+event/unmarked/project meeting /  Mon 2-4pm
+deadlines/unmarked/make some cups/ the day after
+todo/unmarked/todo dwege
+deadlines/unmarked/make some cups/ the day after

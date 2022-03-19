@@ -1,6 +1,5 @@
 package duke.parser;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -17,6 +16,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import java.io.IOException;
 
 /**
  * Deals with making sense of the user command.
@@ -53,7 +53,6 @@ public class Parser {
 
     /**
      * Handles all the possible commands from the CLI.
-     * 
      * @param input from CLI
      * @return a string value of the command
      * @throws DukeException
@@ -61,7 +60,6 @@ public class Parser {
      */
     public String scanInput(String input) throws DukeException, IOException {
         String[] command = input.split(" ");
-        int counter = 0;
         String res = "";
         if (command[0].equals("bye")) {
             return byeCommand("data/duke.txt");
@@ -77,17 +75,17 @@ public class Parser {
             return unmarkCommand(command);
 
         } else if (command[0].equals("deadline")) {
-            ++counter;
-            return deadlineCommand(command, input, counter - 1);
+            // find length of tasklist
+            int numTasks = tasks.getTasks().size();
+            return deadlineCommand(command, input, numTasks + 1);
 
         } else if (command[0].equals("event")) {
-            ++counter;
-            return eventCommand(input, command, counter - 1);
+            int numTasks = tasks.getTasks().size();
+            return eventCommand(input, command, numTasks);
 
         } else if (command[0].equals("todo")) {
             // here we declare the new task to be added (todos)
             if (command.length != 1) {
-                ++counter;
             }
             return todoCommand(command, input);
 
@@ -110,7 +108,6 @@ public class Parser {
 
     /**
      * Receives bye command.
-     * 
      * @param filePath
      * @return
      * @throws IOException
@@ -118,12 +115,12 @@ public class Parser {
     private String byeCommand(String filePath) throws IOException {
         // this will update the duke.txt file
         Storage.updateDukeTxt(filePath, tasks.getTasks());
+        System.exit(0);
         return "bye";
     }
 
     /**
      * Receives mark command.
-     * 
      * @param command
      * @return
      */
@@ -137,7 +134,6 @@ public class Parser {
 
     /**
      * Receives unmark command.
-     * 
      * @param command
      * @return
      */
@@ -151,7 +147,6 @@ public class Parser {
 
     /**
      * Receives deadline command.
-     * 
      * @param command
      * @param input
      * @param counter
@@ -178,7 +173,6 @@ public class Parser {
 
     /**
      * Receives the event command and calls another method in Event.class
-     * 
      * @param input
      * @param command
      * @param counter
@@ -219,8 +213,7 @@ public class Parser {
     }
 
     /**
-     * Receives the tag command. Calls on FInd::findReleventTasks(...).
-     * 
+     * Receives the tag command. Calls on Find::findReleventTasks(...).
      * @param command
      * @return direction to Find::findRevelvantTasks(...)
      */
@@ -234,7 +227,6 @@ public class Parser {
     /**
      * Receives the tag command. Calls on Tag::handleTag(...) after
      * instantiating a Tag class.
-     * 
      * @param command Received command from user
      * @param tasks   Current tasks available
      * @return direction to another method - Tags::handleTag(...)

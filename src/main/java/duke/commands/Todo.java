@@ -14,8 +14,7 @@ public class Todo extends Commands {
     }
 
     /**
-     * Handle the todo command.
-     * 
+     * Handle todo command. 
      * @param command
      * @param tasks
      * @param input

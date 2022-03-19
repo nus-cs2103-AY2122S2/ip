@@ -26,7 +26,6 @@ public class Storage {
     /**
      * Constructor for Storage. We will determine here if the file/directory exists,
      * and whether we cop from it or not.
-     * 
      * @param filePath path of the file to write to
      */
     public Storage(String filePath) {
@@ -37,7 +36,6 @@ public class Storage {
     /**
      * By loading i believe this should return a valid ArrayList - either empty or
      * prefilled with the duke.txt file.
-     * 
      * @throws FileNotFoundException, DukeException cos thats whats declared in
      *                                Duke.java code.
      */
@@ -57,7 +55,6 @@ public class Storage {
 
     /**
      * Handles receiving todo command from duke.txt
-     * 
      * @param isMarked    to update done attribute of todo
      * @param description of todo
      */
@@ -74,7 +71,6 @@ public class Storage {
 
     /**
      * Handles receiving deadline command from duke.txt
-     * 
      * @param isMarked    to update done attribute of deadline
      * @param description of deadline
      */
@@ -90,7 +86,6 @@ public class Storage {
 
     /**
      * Handles receiving event command from duke.txt
-     * 
      * @param isMarked    to update done attribute of event
      * @param description of event
      */
@@ -106,7 +101,6 @@ public class Storage {
 
     /**
      * Method to write to the duke.txt file.
-     * 
      * @param filePath path of the file to write to
      * @param addText  text we want to add to the file
      */
@@ -118,7 +112,6 @@ public class Storage {
 
     /**
      * Method to append to the end of the present file.
-     * 
      * @param filePath path of the file to write to
      * @param addText  text we want to add to the file
      */
@@ -134,7 +127,6 @@ public class Storage {
      * Reads the contents of the file duke.txt,
      * and handles each task's generation for the
      * arrayList to be returned.
-     * 
      * @param file that we are parsing
      * @throws FileNotFoundException
      * @return ArrayList res
@@ -170,7 +162,6 @@ public class Storage {
 
     /**
      * Updates the duke.txt file. Method invokes upon receiving "bye" command.
-     * 
      * @param file
      * @param arr
      */
