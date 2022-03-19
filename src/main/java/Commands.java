@@ -1,4 +1,4 @@
-public enum Keyword {
+public enum Commands {
     LIST,
     MARK,
     UNMARK,

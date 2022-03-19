@@ -1,10 +1,15 @@
-public class Task {
+public abstract class Task {
     private final String description;
-    private boolean isDone;
+    protected boolean isDone;
 
     Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     boolean markAsDone() {
@@ -20,6 +25,8 @@ public class Task {
     String getDescription() {
         return this.description;
     }
+
+    abstract String toWrite();
 
     @Override
     public String toString() {
