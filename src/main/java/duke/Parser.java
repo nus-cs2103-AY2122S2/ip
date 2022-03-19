@@ -91,6 +91,7 @@ public class Parser {
         }
 
         String deadlineTime = byAndTime[1];
+        assert !deadlineTime.isEmpty() : "Time should not be empty";
 
         // handle error when time is not in the hh:mm 24hr clock format
         try {
