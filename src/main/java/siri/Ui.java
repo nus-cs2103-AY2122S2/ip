@@ -31,6 +31,7 @@ public class Ui {
 
     /**
      * Returns a string output of tasks currently inside the list.
+     *
      * @param tasks Tasks within the list.
      */
     public void showList(ArrayList<Task> tasks) {
@@ -44,7 +45,7 @@ public class Ui {
 
 
     /**
-     * Returns a string output of available commands and a description on how to use some of the commands
+     * Returns a string output of available commands and a description on how the usage of commands.
      */
     public void showHelpList() {
         output = "     Commands:\n"
@@ -72,8 +73,9 @@ public class Ui {
     }
 
     /**
-     * Returns a string output of the marked tasks
-     * @param task Task that was marked
+     * Returns a string output of the marked tasks.
+     *
+     * @param task Task that was marked.
      */
     public void showMarkTask(Task task) {
         output = "     This task has been marked:\n       "
@@ -81,8 +83,9 @@ public class Ui {
     }
 
     /**
-     * Returns a string output of the unmarked task
-     * @param task Task that was unmarked
+     * Returns a string output of the unmarked task.
+     *
+     * @param task Task that was unmarked.
      */
     public void showUnmarkTask(Task task) {
        output = "     This task has been unmarked:\n       "
@@ -91,6 +94,7 @@ public class Ui {
 
     /**
      * Returns a string output of the task added to your list and the number of tasks in your list.
+     *
      * @param task Task that is added to the list.
      * @param tasks Tasks that are currently in the list including the task that was just added.
      */
@@ -102,6 +106,7 @@ public class Ui {
 
     /**
      * Returns a string output of the task deleted from the list and number of tasks left in the list.
+     *
      * @param task Task that is deleted from the list.
      * @param tasks Tasks currently inside the list after deletion.
      */
@@ -113,6 +118,7 @@ public class Ui {
 
     /**
      * Returns a string output of tasks that matches the given description.
+     *
      * @param foundTasks ArrayList of tasks that matches the given description.
      */
     public void showFind(ArrayList<Task> foundTasks) {
@@ -125,23 +131,25 @@ public class Ui {
     }
 
     /**
-     * Returns a string output of the loading  error message
-     * @param message Loading error message
+     * Returns a string output of the loading  error message.
+     *
+     * @param message Initializes loading error message as output.
      */
     public void showLoadingError(String message) {
         output = message;
     }
 
     /**
-     * Returns a string output of the error message
-     * @param message Error message
+     * Returns a string output of the error message.
+     *
+     * @param message Initializes error message as output.
      */
     public void showError(String message) {
         output = message;
     }
 
     /**
-     * Returns a string output
+     * Returns a string output.
      */
     public String toString() {
         return output;

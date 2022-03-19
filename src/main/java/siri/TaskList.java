@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 //TaskList.java reused and edited from Brigette Santoso E0564307
 /**
- * Contains the tasklist, and has the operations such as adding/deleting a task to/from the list
+ * Contains the tasklist, and has the operations such as adding/deleting a task to/from the list.
  */
 public class TaskList {
     protected ArrayList<Task> tasks;
@@ -17,15 +17,17 @@ public class TaskList {
     }
 
     /**
-     * Initialises the tasks of this Tasklist to the given tasks.
-     * @param tasks Tasks inside the Tasklist.
+     * Initialises the tasks of this tasklist to the given tasks.
+     *
+     * @param tasks Tasks inside the tasklist.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
     /**
-     * Returns an Arraylist of tasks.
+     * Returns an arraylist of tasks.
+     *
      * @return Arraylist of tasks.
      */
     public ArrayList<Task> getTasks() {
@@ -34,6 +36,7 @@ public class TaskList {
 
     /**
      * Marks the task at the specified index as done.
+     *
      * @param index Target index of task to be marked.
      */
     public void markTask(int index) {
@@ -43,6 +46,7 @@ public class TaskList {
 
     /**
      * Marks the task at the specified index as not done.
+     *
      * @param index Target index of task to be unmarked.
      */
     public void unmarkTask(int index) {
@@ -52,6 +56,7 @@ public class TaskList {
 
     /**
      * Deletes the task at the specified index.
+     *
      * @param index Target index of task to be deleted.
      */
     public void deleteTask(int index) {
@@ -61,6 +66,7 @@ public class TaskList {
 
     /**
      * Adds task to the Tasklist.
+     *
      * @param task Task to be added.
      */
     public void addTask(Task task) {

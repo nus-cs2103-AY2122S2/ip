@@ -1,7 +1,7 @@
 package siri;
 
 /**
- * Represents a task object
+ * Represents a task object.
  */
 public class Task {
     String description;
@@ -9,7 +9,8 @@ public class Task {
     boolean isDone;
 
     /**
-     * Returns new Task
+     * Returns new Task.
+     *
      * @param description Description of task.
      * @param initialLetter Initial letter of the task, e.g T, D or E.
      */
@@ -21,31 +22,33 @@ public class Task {
 
     /**
      * Returns a string "X" if task has been marked or " " if not.
+     *
      * @return "X" or " ".
      */
-    public String getStatusIcon() { //will return either "X" or " " depending if task is done or not
+    public String getStatusIcon() { //will return either "X" or " " depending on if task is done or not
         return isDone
                 ? "X" //if true mark with X
                 : " "; //if false do not mark, leave as empty space
     }
 
     /**
-     * Marks a task as done
+     * Marks a task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Marks a task as not done
+     * Marks a task as not done.
      */
     public void markAsNotDone() {
         this.isDone = false;
     }
 
     /**
-     * Returns the string method of a Task
-     * @return String method of a Task
+     * Returns the string method of a Task.
+     *
+     * @return String method of a Task.
      */
     @Override
     public String toString() {
