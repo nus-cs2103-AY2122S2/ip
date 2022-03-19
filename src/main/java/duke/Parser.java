@@ -241,7 +241,7 @@ public class Parser {
     private static Command parseAddContactCommand(String fullCommand) throws DukeException {
         try {
             String dataString = fullCommand.replaceFirst("addContact ", "");
-            String[] dataArr = dataString.split(" ");
+            String[] dataArr = dataString.split(" t/");
             String name = dataArr[0];
             String telegram = dataArr[1];
             Contact contact = new Contact(name, telegram);

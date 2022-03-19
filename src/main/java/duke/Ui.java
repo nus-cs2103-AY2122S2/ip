@@ -36,7 +36,7 @@ public class Ui {
      * @return String to display.
      */
     public String showTaskAdded(Task task) {
-        return String.format("added: %s", task.toString());
+        return String.format("I've added the task: %s", task.toString());
     }
 
     /**
@@ -54,7 +54,7 @@ public class Ui {
      * @return String to display.
      */
     public String showTaskMarked() {
-        return "I've marked this task.";
+        return "I've marked this task as done.";
     }
 
     /**
@@ -63,7 +63,7 @@ public class Ui {
      * @return String to display.
      */
     public String showTaskUnmarked() {
-        return "I've unmarked this task.";
+        return "I've marked this task as not done.";
     }
 
     /**
@@ -92,7 +92,7 @@ public class Ui {
      * @return String to display.
      */
     public String showContactAdded(Contact contact) {
-        return String.format("added: %s", contact.toString());
+        return String.format("I've added the contact: %s", contact.toString());
     }
 
     /**
@@ -101,7 +101,7 @@ public class Ui {
      * @return String to display.
      */
     public String showContactDeleted() {
-        return String.format("Contact deleted sucessfully");
+        return String.format("I've deleted this contact.");
     }
 
     /**
