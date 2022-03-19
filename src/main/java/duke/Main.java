@@ -29,10 +29,10 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             scene.getStylesheets().add(Main.class.getResource("/css/style.css").toExternalForm());
-            String home = System.getProperty("user.home");
-            Path directory = Paths.get(home, "Documents", "duke");
-            Path filePath = Paths.get(home, "Documents", "duke", "data.txt");
-            Path contactsPath = Paths.get(home, "Documents", "duke", "contacts.txt");
+            String home = System.getProperty("user.dir");
+            Path directory = Paths.get(home, "duke");
+            Path filePath = Paths.get(home, "duke", "data.txt");
+            Path contactsPath = Paths.get(home, "duke", "contacts.txt");
             duke = new Duke(directory, filePath, contactsPath);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);

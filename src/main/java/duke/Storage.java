@@ -115,7 +115,7 @@ public class Storage {
      */
     public void save(ContactList contacts) throws DukeException {
         try {
-            File file = filePath.toFile();
+            File file = contactsPath.toFile();
             file.createNewFile();
             FileWriter myWriter = new FileWriter(file);
             myWriter.write(contacts.toDataString());
