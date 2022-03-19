@@ -1,3 +1,9 @@
+package pac.command;
+
+import pac.task.TaskList;
+import pac.ui.Ui;
+import pac.storage.Storage;
+
 import java.io.IOException;
 
 public class DeleteCommand extends Command {

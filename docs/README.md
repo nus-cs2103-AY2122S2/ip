@@ -12,7 +12,7 @@ Description of the feature.
 
 ## Usage
 
-### `Commands` - Describe action
+### `pac.parser.Commands` - Describe action
 
 Describe the action and its outcome.
 

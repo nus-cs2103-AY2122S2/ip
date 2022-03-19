@@ -1,3 +1,12 @@
+package pac.storage;
+
+import pac.task.Deadline;
+import pac.task.Event;
+import pac.PacException;
+import pac.task.Task;
+import pac.task.TaskList;
+import pac.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

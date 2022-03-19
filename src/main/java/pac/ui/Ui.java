@@ -1,3 +1,9 @@
+package pac.ui;
+
+import pac.PacException;
+import pac.task.Task;
+import pac.task.TaskList;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -81,5 +87,9 @@ public class Ui {
 
     public void showIOError(IOException e) {
         System.out.println(e.getMessage());
+    }
+
+    public void showIndexOutOfBoundsError(IndexOutOfBoundsException e) {
+        System.out.println("Invalid Index.");
     }
 }

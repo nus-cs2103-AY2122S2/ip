@@ -1,13 +1,15 @@
+package pac.task;
+
 public abstract class Task {
     private final String description;
     protected boolean isDone;
 
-    Task(String description) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
@@ -26,7 +28,7 @@ public abstract class Task {
         return this.description;
     }
 
-    abstract String toWrite();
+    abstract public String toWrite();
 
     @Override
     public String toString() {

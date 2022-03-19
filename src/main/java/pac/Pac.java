@@ -1,3 +1,11 @@
+package pac;
+
+import pac.command.Command;
+import pac.parser.Parser;
+import pac.storage.Storage;
+import pac.task.TaskList;
+import pac.ui.Ui;
+
 import java.io.IOException;
 
 public class Pac {
@@ -19,6 +27,7 @@ public class Pac {
     }
 
     public void run() {
+        ui.showLogo();
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -30,8 +39,10 @@ public class Pac {
                 isExit = c.isExit();
             } catch (PacException e) {
                 ui.showPacError(e);
-            }catch (IOException e) {
+            } catch (IOException e) {
                 ui.showIOError(e);
+            } catch (IndexOutOfBoundsException e) {
+                ui.showIndexOutOfBoundsError(e);
             } finally {
                 ui.showLine();
             }

@@ -1,5 +1,7 @@
+package pac;
+
 public class PacException extends Exception{
-    PacException(String message) {
+    public PacException(String message) {
         super(message);
     }
 
