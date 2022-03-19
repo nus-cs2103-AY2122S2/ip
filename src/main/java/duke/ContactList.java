@@ -10,7 +10,7 @@ public class ContactList {
     private ArrayList<Contact> contacts;
 
     /**
-     * Construct contact list.
+     * Constructs contact list.
     `*/
     public ContactList(ArrayList<Contact> contacts) {
         this.contacts = contacts;
@@ -24,7 +24,7 @@ public class ContactList {
     }
 
     /**
-     * Add contact to list.
+     * Adds contact to list.
      *
      * @param contact Contact to add.
      */
@@ -33,7 +33,7 @@ public class ContactList {
     }
 
     /**
-     * Delete contact with specified id.
+     * Deletes contact with specified id.
      *
      * @param contactNumber Contact id.
      */
@@ -52,6 +52,20 @@ public class ContactList {
             builder.append(contact.toString()).append("\n");
         }
         return builder.toString();
+    }
+
+    /**
+     * Returns string representation of list for storage.
+     *
+     * @return Data of all contacts.
+     */
+    public String toDataString() {
+        String string = "";
+        for (int i = 0; i < contacts.size(); i++) {
+            Contact contact = contacts.get(i);
+            string += String.format("%s\n", contact.toDataString());
+        }
+        return string;
     }
 
 }

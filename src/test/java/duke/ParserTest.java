@@ -22,10 +22,11 @@ public class ParserTest {
     public void setUp() {
         tasks = new TaskList();
         ui = new Ui();
-        String home = System.getProperty("user.home");
-        Path directory = Paths.get(home, "Documents", "duke");
-        Path filePath = Paths.get(home, "Documents", "duke", "data.txt");
-        storage = new Storage(directory, filePath);
+        String home = System.getProperty("user.dir");
+        Path directory = Paths.get(home, "duketest");
+        Path filePath = Paths.get(home, "duketest", "data.txt");
+        Path contactsPath = Paths.get(home, "duketest", "contacts.txt");
+        storage = new Storage(directory, filePath, contactsPath);
         contacts = new ContactList();
     }
 

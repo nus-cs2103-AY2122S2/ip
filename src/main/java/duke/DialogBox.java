@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -25,8 +24,10 @@ public class DialogBox extends HBox {
     private Text dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private HBox chatBubble;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String chatClass) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -36,8 +37,9 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        chatBubble.getStyleClass().add(chatClass);
         dialog.setText(text);
-        dialog.setWrappingWidth(260);
+        dialog.setWrappingWidth(220);
         displayPicture.setImage(img);
         this.setSpacing(10);
     }
@@ -53,11 +55,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "user");
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, null);
         db.flip();
         return db;
     }

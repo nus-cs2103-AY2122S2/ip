@@ -16,36 +16,22 @@ public class Duke {
      *
      * @param filePath File path to read task data from.
      */
-    public Duke(Path directory, Path filePath) {
+    public Duke(Path directory, Path filePath, Path contactsPath) {
         ui = new Ui();
-        storage = new Storage(directory, filePath);
-        contacts = new ContactList();
+        storage = new Storage(directory, filePath, contactsPath);
+
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             tasks = new TaskList();
         }
-    }
 
-    /**
-     * Runs the application.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage, contacts);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+        try {
+            contacts = new ContactList(storage.loadContacts());
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            contacts = new ContactList();
         }
     }
 

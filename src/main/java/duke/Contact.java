@@ -32,11 +32,15 @@ public class Contact {
      */
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Telegram: ")
-                .append(getTelegram());
-        return builder.toString();
+        return String.format("%s: %s", getName(), getTelegram());
+    }
+
+    /**
+     * Returns string representation of a contact.
+     * @return Contact as a string
+     */
+    public String toDataString() {
+        return String.format("%s,%s", getName(), getTelegram());
     }
 
 }
