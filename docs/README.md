@@ -4,7 +4,7 @@ Duke is a task manager chatbot. Chat with Duke by keying in commands and view Du
 ## Features 
 
 ### 1. Add tasks
-Duke supports three tasks types: `Todo`, `Deadline` and `Event`.
+Duke supports three task types: `Todo`, `Deadline` and `Event`.
 
 ### 2. List tasks
 List all tasks that have been added to Duke!
@@ -22,6 +22,7 @@ Find tasks containing a specific keyword!
 Can't remember your tasks? Let Duke do it for you!
 
 ## Usage
+Note: items in [square brackets] indicate compulsory user-entered parameters.
 
 ### `todo [description]` - Add a `todo` task
 Adds a `todo` task to the task manager. 
@@ -99,8 +100,8 @@ Task not done =(
   [D][ ] cs2103 iP (by: Feb 18 2022)
 ```
 
-### `find [keyword]` - Find tasks with a specific keyword
-Lists all tasks containining the specific keyword or phrase. 
+### `find [keyword]` - Find tasks containing a specific keyword
+Lists all tasks containing the specific keyword or phrase. 
 
 Example: `find iP`
 
@@ -176,3 +177,5 @@ Example: `bye`
   <tr>
     <td>bye</td>
     <td><code>bye</code></td>
+  </tr>
+</table>
