@@ -3,8 +3,9 @@ package siri;
 import java.util.ArrayList;
 
 //Ui.java reused and edited from Brigette Santoso E0564307
+
 /**
- * Ui provides String replies for the user to interact with
+ * Ui provides String replies for the user to interact with.
  */
 public class Ui {
     private String output;
@@ -13,15 +14,25 @@ public class Ui {
         this.output = "";
     }
 
+    /**
+     * Returns a string welcome message to user after the program loads the GUI window.
+     */
     public void showWelcome() {
         output = "     Hi, I'm Siri, a simple list program. \n"
                 + "     What do you wish to take note of today?";
     }
 
+    /**
+     * Returns a string output Goodbye message when user types bye.
+     */
     public void showExit() {
         output = "     Goodbye.\n";
     }
 
+    /**
+     * Returns a string output of tasks currently inside the list.
+     * @param tasks Tasks within the list.
+     */
     public void showList(ArrayList<Task> tasks) {
         output = "     Tasks to do:\n";
         int numberOftasks = tasks.size();
@@ -31,6 +42,10 @@ public class Ui {
         }
     }
 
+
+    /**
+     * Returns a string output of available commands and a description on how to use some of the commands
+     */
     public void showHelpList() {
         output = "     Commands:\n"
                 + "     1. list\n"
@@ -56,28 +71,50 @@ public class Ui {
                 + "     - find book";
     }
 
+    /**
+     * Returns a string output of the marked tasks
+     * @param task Task that was marked
+     */
     public void showMarkTask(Task task) {
         output = "     This task has been marked:\n       "
                 + task.toString() + "\n";
     }
 
+    /**
+     * Returns a string output of the unmarked task
+     * @param task Task that was unmarked
+     */
     public void showUnmarkTask(Task task) {
        output = "     This task has been unmarked:\n       "
                 + task.toString() + "\n";
     }
 
+    /**
+     * Returns a string output of the task added to your list and the number of tasks in your list.
+     * @param task Task that is added to the list.
+     * @param tasks Tasks that are currently in the list including the task that was just added.
+     */
     public void showAddTask(Task task, ArrayList<Task> tasks) {
         output = "     This task has been added to your list:\n       "
                 + task.toString() + "\n" + "\n"
                 + "     Number of task(s) in your list: " + tasks.size() + "\n";
     }
 
+    /**
+     * Returns a string output of the task deleted from the list and number of tasks left in the list.
+     * @param task Task that is deleted from the list.
+     * @param tasks Tasks currently inside the list after deletion.
+     */
     public void showDeleteTask(Task task, ArrayList<Task> tasks) {
         output = "     Sure. I've removed this task from the list:\n       "
                 + task.toString() + "\n" + "\n"
                 + "     Number of task(s) in your list: " + tasks.size() + "\n";
     }
 
+    /**
+     * Returns a string output of tasks that matches the given description.
+     * @param foundTasks ArrayList of tasks that matches the given description.
+     */
     public void showFind(ArrayList<Task> foundTasks) {
         output = "     Here are the matching tasks in your list:\n";
         int numberOfTasks = foundTasks.size();
@@ -87,14 +124,25 @@ public class Ui {
         }
     }
 
+    /**
+     * Returns a string output of the loading  error message
+     * @param message Loading error message
+     */
     public void showLoadingError(String message) {
         output = message;
     }
 
+    /**
+     * Returns a string output of the error message
+     * @param message Error message
+     */
     public void showError(String message) {
         output = message;
     }
 
+    /**
+     * Returns a string output
+     */
     public String toString() {
         return output;
     }
