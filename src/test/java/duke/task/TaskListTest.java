@@ -9,8 +9,13 @@ import static duke.commons.core.Messages.MESSAGE_REMOVE_TASK_DONE;
 import static duke.task.util.TaskListTestUtil.DELETE_FARAWAY_TASK_VALID;
 import static duke.task.util.TaskListTestUtil.DELETE_FIRST_TASK_VALID;
 import static duke.task.util.TaskListTestUtil.MAKE_DEADLINE_EMPTY_DESC_INVALID;
+import static duke.task.util.TaskListTestUtil.MAKE_DEADLINE_EMPTY_METAINFO_INVALID;
 import static duke.task.util.TaskListTestUtil.MAKE_DEADLINE_INPUT_VALID;
+import static duke.task.util.TaskListTestUtil.MAKE_DEADLINE_SPACE_DESC_INVALID;
+import static duke.task.util.TaskListTestUtil.MAKE_EVENT_EMPTY_DESC_INVALID;
+import static duke.task.util.TaskListTestUtil.MAKE_EVENT_EMPTY_METAINFO_INVALID;
 import static duke.task.util.TaskListTestUtil.MAKE_EVENT_INPUT_VALID;
+import static duke.task.util.TaskListTestUtil.MAKE_EVENT_SPACE_DESC_INVALID;
 import static duke.task.util.TaskListTestUtil.MAKE_TODO_INPUT_INVALID;
 import static duke.task.util.TaskListTestUtil.MAKE_TODO_INPUT_VALID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -130,11 +135,51 @@ class TaskListTest {
     }
 
     @Test
+    void handleDeadline_spaceDesc_fail() {
+        assertEquals(ResponseFormatter.printDukeException(
+                        new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION,
+                                Deadline.TASK_NAME)), "Please try again:"),
+                                taskListSut.handleDeadline(MAKE_DEADLINE_SPACE_DESC_INVALID));
+    }
+
+    @Test
+    void handleDeadline_emptyMetaInfo_fail() {
+        assertEquals(ResponseFormatter.printDukeException(
+                        new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION,
+                                Deadline.TASK_NAME)), "Please try again:"),
+                                taskListSut.handleDeadline(MAKE_DEADLINE_EMPTY_METAINFO_INVALID));
+    }
+
+    @Test
     void handleDeadline_deadline_success() {
         tasksStub.add(deadlineStub);
         taskListSut.handleDeadline(MAKE_DEADLINE_INPUT_VALID);
 
         assertEquals(tasksStub.get(0), taskListSut.getTasks().get(0));
+    }
+
+    @Test
+    void handleEvent_emptyDesc_fail() {
+        assertEquals(ResponseFormatter.printDukeException(
+                        new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION,
+                                Event.TASK_NAME)), "Please try again:"),
+                                taskListSut.handleEvent(MAKE_EVENT_EMPTY_DESC_INVALID));
+    }
+
+    @Test
+    void handleEvent_spaceDesc_fail() {
+        assertEquals(ResponseFormatter.printDukeException(
+                        new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION,
+                                Event.TASK_NAME)), "Please try again:"),
+                                taskListSut.handleEvent(MAKE_EVENT_SPACE_DESC_INVALID));
+    }
+
+    @Test
+    void handleEvent_emptyMetaInfo_fail() {
+        assertEquals(ResponseFormatter.printDukeException(
+                        new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION,
+                                Event.TASK_NAME)), "Please try again:"),
+                                taskListSut.handleEvent(MAKE_EVENT_EMPTY_METAINFO_INVALID));
     }
 
     @Test
