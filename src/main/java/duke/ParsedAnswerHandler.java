@@ -58,7 +58,7 @@ public class ParsedAnswerHandler {
         }
     }
 
-    ArrayList<String> executeTodo() {
+    String executeTodo() {
         var message = new ArrayList<String>();
         ToDos td = new ToDos(pa.getDesc());
         TaskList.add(td);
@@ -66,10 +66,10 @@ public class ParsedAnswerHandler {
                 "1," +
                 td.getDescription() + '\n');
         message.add("Successfully added todo task to list.");
-        return message;
+        return writeTaskToFile(message.get(0), message.get(1));
     }
 
-    ArrayList<String> executeDeadline() {
+    String executeDeadline() {
         var message = new ArrayList<String>();
         Deadline dl = new Deadline(pa.getDesc(), pa.getDate());
         TaskList.add(dl);
@@ -79,10 +79,10 @@ public class ParsedAnswerHandler {
                 "," +
                 dl.getBy() + '\n');
         message.add("Successfully added deadline to list.");
-        return message;
+        return writeTaskToFile(message.get(0), message.get(1));
     }
 
-    ArrayList<String> executeEvent() {
+    String executeEvent() {
         var message = new ArrayList<String>();
         Event ev = new Event(pa.getDesc(), pa.getDate());
         TaskList.add(ev);
@@ -92,7 +92,7 @@ public class ParsedAnswerHandler {
                 "," +
                 ev.getAt() + '\n');
         message.add("Successfully added event to list.");
-        return message;
+        return writeTaskToFile(message.get(0), message.get(1));
     }
 
     Deadline generateUpdatedTaskForDeadline(ParsedAnswer pa, Deadline currentTask) {
@@ -166,22 +166,19 @@ public class ParsedAnswerHandler {
                 return TaskList.list();
 
             case "todo":
-                ArrayList<String> todoResult = executeTodo();
-                return writeTaskToFile(todoResult.get(0), todoResult.get(1));
+                return executeTodo();
 
             case "deadline":
-                ArrayList<String> deadlineResult = executeDeadline();
-                return writeTaskToFile(deadlineResult.get(0), deadlineResult.get(1));
+                return executeDeadline();
 
             case "event":
-                ArrayList<String> eventResult = executeEvent();
-                return writeTaskToFile(eventResult.get(0), eventResult.get(1));
+                return executeEvent();
 
             case "mark":
-               return changeMarkStatus("mark");
+                return changeMarkStatus("mark");
 
             case "unmark":
-              return changeMarkStatus("unmark");
+                return changeMarkStatus("unmark");
 
             case "error":
                 return pa.getDesc();

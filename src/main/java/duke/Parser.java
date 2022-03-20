@@ -219,7 +219,12 @@ public class Parser {
     ParsedAnswer parseInputWithRegex(String regex, String[] inputToParse) {
         String command = getCommandThroughRegex(regex);
         if (regex.equalsIgnoreCase("none")) {
-            return handleTodo(command, inputToParse[1]);
+            try {
+                return handleTodo(command, inputToParse[1]);
+            } catch (Exception e) {
+                return parseError("The description cannot be empty!");
+            }
+
         } else {
             try {
                 return handleEventAndDeadline(command, inputToParse[1].split(regex));
