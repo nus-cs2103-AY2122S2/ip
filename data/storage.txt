@@ -1,7 +1,10 @@
-T,1,a
-T,1,asdfasdf
-T,1,aa        bb
-T,1,  fadasfasdf
-T,1,hello my love
-D,1,aaa   a a , 2020-02-02
-E,1,aaa,2020-01-02
+T,0,a
+T,1,yeahyeah
+T,0,hello my love
+D,0,bb, 2020-02-02
+E,1,fasdf , 2040-01-01
+T,1,abc
+T,1,abcc
+T,1,w
+E,1,asdf , 2022-03-03
+D,1,baba , 2090-01-01

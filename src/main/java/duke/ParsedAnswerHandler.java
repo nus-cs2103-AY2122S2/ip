@@ -3,6 +3,7 @@ package duke;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * This class receives a ParsedAnswer object and execute commands based on information
@@ -57,6 +58,103 @@ public class ParsedAnswerHandler {
         }
     }
 
+    String executeTodo() {
+        var message = new ArrayList<String>();
+        ToDos td = new ToDos(pa.getDesc());
+        TaskList.add(td);
+        message.add("T," +
+                "1," +
+                td.getDescription() + '\n');
+        message.add("Successfully added todo task to list.");
+        return writeTaskToFile(message.get(0), message.get(1));
+    }
+
+    String executeDeadline() {
+        var message = new ArrayList<String>();
+        Deadline dl = new Deadline(pa.getDesc(), pa.getDate());
+        TaskList.add(dl);
+        message.add("D," +
+                "1," +
+                dl.getDescription() +
+                "," +
+                dl.getBy() + '\n');
+        message.add("Successfully added deadline to list.");
+        return writeTaskToFile(message.get(0), message.get(1));
+    }
+
+    String executeEvent() {
+        var message = new ArrayList<String>();
+        Event ev = new Event(pa.getDesc(), pa.getDate());
+        TaskList.add(ev);
+        message.add("E," +
+                "1," +
+                ev.getDescription() +
+                "," +
+                ev.getAt() + '\n');
+        message.add("Successfully added event to list.");
+        return writeTaskToFile(message.get(0), message.get(1));
+    }
+
+    Deadline generateUpdatedTaskForDeadline(ParsedAnswer pa, Deadline currentTask) {
+        if (pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
+            return new Deadline(currentTask.getDescription(), pa.getDate());
+        } else if (!pa.getDesc().isEmpty() && pa.getDate().isEmpty()) {
+            return new Deadline(pa.getDesc(), currentTask.getBy());
+        } else if (!pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
+            return new Deadline(pa.getDesc(), pa.getDate());
+        }
+        else {
+            return currentTask;
+        }
+    }
+
+    Event generateUpdatedTaskForEvent(ParsedAnswer pa, Event currentTask) {
+        if (pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
+            return new Event(currentTask.getDescription(), pa.getDate());
+        } else if (!pa.getDesc().isEmpty() && pa.getDate().isEmpty()) {
+            return new Event(pa.getDesc(), currentTask.getAt());
+        } else if (!pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
+            return new Event(pa.getDesc(), pa.getDate());
+        }
+        else {
+            return currentTask;
+        }
+    }
+
+    ToDos generateUpdatedTaskForTodo(ParsedAnswer pa, ToDos currentTask) {
+        if (!pa.getDesc().isEmpty()) {
+            return new ToDos(pa.getDesc());
+        } else {
+            return currentTask;
+        }
+    }
+
+    String executeUpdate() {
+        int idx = pa.getIndex();
+        Storage s = new Storage();
+        Task updatedTask = Storage.taskList.get(idx);
+
+        if (pa.getType().equals("Deadline")) {
+            Deadline currentTask = (Deadline) Storage.taskList.get(idx);
+            updatedTask = generateUpdatedTaskForDeadline(pa, currentTask);
+        }
+
+        if (pa.getType().equals("Event")) {
+            Event currentTask = (Event) Storage.taskList.get(idx);
+            updatedTask = generateUpdatedTaskForEvent(pa, currentTask);
+        }
+
+        if (pa.getType().equals("Todo")) {
+            ToDos currentTask = (ToDos) Storage.taskList.get(idx);
+            updatedTask = generateUpdatedTaskForTodo(pa, currentTask);
+        }
+
+        Storage.taskList.remove(idx);
+        Storage.taskList.add(idx, updatedTask);
+        s.save();
+        return "Update successful";
+    }
+
     String execute() {
         assertCommandNotEmpty();
         switch (pa.getCommand()) {
@@ -68,43 +166,19 @@ public class ParsedAnswerHandler {
                 return TaskList.list();
 
             case "todo":
-                ToDos td = new ToDos(pa.getDesc());
-                TaskList.add(td);
-                String todoTask = "T," +
-                        "1," +
-                        td.getDescription() + '\n';
-                String todoResult = "Successfully added todo task to list.";
-                return writeTaskToFile(todoTask, todoResult);
+                return executeTodo();
 
             case "deadline":
-                Deadline dl = new Deadline(pa.getDesc(), pa.getDate());
-                TaskList.add(dl);
-                String deadlineTask = "D," +
-                        "1," +
-                        dl.getDescription() +
-                        "," +
-                        dl.getBy() + '\n';
-
-                String deadlineResult = "Successfully added deadline to list.";
-                return writeTaskToFile(deadlineTask, deadlineResult);
+                return executeDeadline();
 
             case "event":
-                Event ev = new Event(pa.getDesc(), pa.getDate());
-                TaskList.add(ev);
-                String eventTask = "E," +
-                        "1," +
-                        ev.getDescription() +
-                        "," +
-                        ev.getAt() + '\n';
-
-                String eventResult = "Successfully added event to list.";
-                return writeTaskToFile(eventTask, eventResult);
+                return executeEvent();
 
             case "mark":
-               return changeMarkStatus("mark");
+                return changeMarkStatus("mark");
 
             case "unmark":
-              return changeMarkStatus("unmark");
+                return changeMarkStatus("unmark");
 
             case "error":
                 return pa.getDesc();
@@ -116,42 +190,7 @@ public class ParsedAnswerHandler {
                 return TaskList.find(pa.getDesc());
 
             case "update":
-                int idx = pa.getIndex();
-                Storage s = new Storage();
-                Task updatedTask = Storage.taskList.get(idx);
-
-                if (pa.getType().equals("Deadline")) {
-                    Deadline currentTask = (Deadline) Storage.taskList.get(idx);
-                    if (pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
-                        updatedTask = new Deadline(currentTask.getDescription(), pa.getDate());
-                    } else if (!pa.getDesc().isEmpty() && pa.getDate().isEmpty()) {
-                       updatedTask = new Deadline(pa.getDesc(), currentTask.getBy());
-                    } else if (!pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
-                        updatedTask = new Deadline(pa.getDesc(), pa.getDate());
-                    }
-                }
-
-                if (pa.getType().equals("Event")) {
-                    Event currentTask = (Event) Storage.taskList.get(idx);
-                    if (pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
-                        updatedTask = new Event(currentTask.getDescription(), pa.getDate());
-                    } else if (!pa.getDesc().isEmpty() && pa.getDate().isEmpty()) {
-                        updatedTask = new Event(pa.getDesc(), currentTask.getAt());
-                    } else if (!pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
-                        updatedTask = new Event(pa.getDesc(), pa.getDate());
-                    }
-                }
-
-                if (pa.getType().equals("Todo")) {
-                    if (!pa.getDesc().isEmpty()) {
-                        updatedTask = new ToDos(pa.getDesc());
-                    }
-                }
-
-                Storage.taskList.remove(idx);
-                Storage.taskList.add(idx, updatedTask);
-                s.save();
-                return "Update successful";
+                return executeUpdate();
         }
         return "An unexpected error has occurred.";
     }

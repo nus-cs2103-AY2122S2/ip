@@ -30,8 +30,7 @@ public class TaskList {
 
     /**
      * Concat each task in the task list into a single string.
-     * This string is considered as the list of all the tasks stored by the application so far.
-     * @return String
+     * @return String which displays the list of all the tasks stored by the application so far.
      */
 
     static String list() {
@@ -44,6 +43,11 @@ public class TaskList {
         }
         return stringBuilder.toString();
     }
+
+    /**
+     * Concat each task that was found in the task list into a single string.
+     * @return String which displays the list of all the tasks found.
+     */
 
     static String find(String term){
         assertTaskListNotNull();

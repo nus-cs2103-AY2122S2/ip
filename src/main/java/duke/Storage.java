@@ -34,6 +34,65 @@ public class Storage {
         }
     }
 
+    Task generateTaskFromStorage(String[] parsedTaskFromFile) {
+        Task t = new Task("placeholder");
+        String taskType = parsedTaskFromFile[0];
+        switch (taskType) {
+            case "T":
+                t = new ToDos(parsedTaskFromFile[2]);
+                break;
+
+            case "E":
+                t = new Event(parsedTaskFromFile[2], parsedTaskFromFile[3]);
+                break;
+
+            case "D":
+                t = new Deadline(parsedTaskFromFile[2], parsedTaskFromFile[3]);
+                break;
+        }
+        if (Integer.parseInt(parsedTaskFromFile[1]) == 0) {
+            t.markAsDone();
+        }
+
+        return t;
+    }
+
+    StringBuilder generateEventStringBuilderForSave(Event t) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("E,");
+        if (t.isDone()) {
+            sb.append("0,");
+        } else {
+            sb.append("1,");
+        }
+        sb.append(t.getDescription()).append(",").append(((Event) t).getAt()).append("\n");
+        return sb;
+    }
+
+    StringBuilder generateDeadlineStringBuilderForSave(Deadline t) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("D,");
+        if (t.isDone()) {
+            sb.append("0,");
+        } else {
+            sb.append("1,");
+        }
+        sb.append(t.getDescription()).append(",").append(((Deadline) t).getBy()).append("\n");
+        return sb;
+    }
+
+    StringBuilder generateTodoStringBuilderForSave(ToDos t) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("T,");
+        if (t.isDone()) {
+            sb.append("0,");
+        } else {
+            sb.append("1,");
+        }
+        sb.append(t.getDescription()).append("\n");
+        return sb;
+    }
+
     /**
      * Loads the tasks stored in the storage file to the application.
      * If storage file not found, a new one will be created by {@code createNewStorageFile()}
@@ -49,25 +108,7 @@ public class Storage {
                 while(sc.hasNextLine()) {
                     String[] parsedTaskFromFile = sc.nextLine().split(",");
                     if (parsedTaskFromFile.length > 0) {
-                        Task t = new Task("placeholder");
-                        String taskType = parsedTaskFromFile[0];
-                        switch (taskType) {
-                            case "T":
-                                t = new ToDos(parsedTaskFromFile[2]);
-                                break;
-
-                            case "E":
-                                t = new Event(parsedTaskFromFile[2], parsedTaskFromFile[3]);
-                                break;
-
-                            case "D":
-                                t = new Deadline(parsedTaskFromFile[2], parsedTaskFromFile[3]);
-                                break;
-                        }
-                        if (Integer.parseInt(parsedTaskFromFile[1]) == 0) {
-                            t.markAsDone();
-                        }
-                        taskList.add(t);
+                        taskList.add(generateTaskFromStorage(parsedTaskFromFile));
                     }
                 }
                 sc.close();
@@ -77,7 +118,6 @@ public class Storage {
         }
     }
 
-
     /**
      * Saves the task to the storage file each time a task is entered by the user.
      */
@@ -85,36 +125,17 @@ public class Storage {
         File myObj = new File(this.homeDir + "/data/storage.txt");
         myObj.delete();
         String filePath = this.homeDir + "/data/storage.txt";
-
         try {
             File file = new File(filePath);
             file.createNewFile();
             for (Task t : Storage.taskList) {
-                StringBuilder sb = new StringBuilder();
+                StringBuilder sb;
                 if (t instanceof Event) {
-                    sb.append("E,");
-                    if (t.isDone()) {
-                        sb.append("0,");
-                    } else {
-                        sb.append("1,");
-                    }
-                    sb.append(t.getDescription()).append(",").append(((Event) t).getAt()).append("\n");
+                   sb = generateEventStringBuilderForSave((Event) t);
                 } else if (t instanceof Deadline) {
-                    sb.append("D,");
-                    if (t.isDone()) {
-                        sb.append("0,");
-                    } else {
-                        sb.append("1,");
-                    }
-                    sb.append(t.getDescription()).append(",").append(((Deadline) t).getBy()).append("\n");
+                   sb = generateDeadlineStringBuilderForSave((Deadline) t);
                 } else {
-                    sb.append("T,");
-                    if (t.isDone()) {
-                        sb.append("0,");
-                    } else {
-                        sb.append("1,");
-                    }
-                    sb.append(t.getDescription()).append("\n");
+                    sb = generateTodoStringBuilderForSave((ToDos) t);
                 }
                 BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
                 writer.write(sb.toString());
