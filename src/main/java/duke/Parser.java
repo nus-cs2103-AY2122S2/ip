@@ -74,6 +74,70 @@ public class Parser {
         return pa;
     }
 
+    /**
+     * Handle the case of the Unmark command in the {@code public ParsedAnswer parse()} method
+     * @param parsedString which is the input for the Unmark command
+     * @return a ParsedAnswer containing the Unmark command
+     */
+
+    ParsedAnswer handleUnmark (String[] parsedString) {
+        if (parsedString.length == 1) {
+            return parseError("Index cannot be empty!");
+        } else {
+            return parseUnmark(parsedString[1]);
+        }
+    }
+
+    /**
+     * Handle the case of the Mark command in the {@code public ParsedAnswer parse()} method
+     * @param parsedString which is the input for the Mark command
+     * @return a ParsedAnswer containing the Mark command
+     */
+
+    ParsedAnswer handleMark (String[] parsedString) {
+        if (parsedString.length == 1) {
+            return parseError("Index cannot be empty!");
+        } else {
+            return parseMark(parsedString[1]);
+        }
+    }
+
+    /**
+     * Handle the case of the Delete command in the {@code public ParsedAnswer parse()} method
+     * @param parsedString which is the input for the Delete command
+     * @return a ParsedAnswer containing the Delete command
+     */
+
+    ParsedAnswer handleDelete(String[] parsedString) {
+        if (parsedString.length == 1) {
+            return parseError("Index cannot be empty!");
+        } else {
+            return parseDelete(parsedString[1]);
+        }
+    }
+
+    /**
+     * Handle the case of the Find command in the {@code public ParsedAnswer parse()} method
+     * @param parsedString which is the input for the find command
+     * @return a ParsedAnswer containing the find command
+     */
+
+    ParsedAnswer handleFind(String[] parsedString) {
+        if (parsedString.length == 1) {
+            return parseError("Search term cannot be empty!");
+        } else {
+            return parseFind(parsedString[1]);
+        }
+    }
+
+    /**
+     * Handle the case of a Todo task in the
+     * method {@code ParsedAnswer parseInputWithRegex(String regex, String[] inputToParse)}
+     * @param command which is of type Todo
+     * @param desc the description of the task
+     * @return
+     */
+
     ParsedAnswer handleTodo(String command, String desc) {
         try {
             if (desc.trim().isEmpty()) {
@@ -91,6 +155,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Handle the case of an Event or Deadline task in the
+     * method {@code ParsedAnswer parseInputWithRegex(String regex, String[] inputToParse)}
+     * @param command which is either an Event or Deadline type
+     * @param eventParseBy that contains the description and/or the date
+     * @return
+     */
+
     ParsedAnswer handleEventAndDeadline(String command, String[] eventParseBy) {
         ParsedAnswer pa;
         if (eventParseBy.length <= 1 || !isDateValid(eventParseBy[1])) {
@@ -107,38 +179,6 @@ public class Parser {
             pa.setDate(eventParseBy[1]);
         }
         return pa;
-    }
-
-    ParsedAnswer handleUnmark (String[] parsedString) {
-        if (parsedString.length == 1) {
-            return parseError("Index cannot be empty!");
-        } else {
-            return parseUnmark(parsedString[1]);
-        }
-    }
-
-    ParsedAnswer handleMark (String[] parsedString) {
-        if (parsedString.length == 1) {
-            return parseError("Index cannot be empty!");
-        } else {
-            return parseMark(parsedString[1]);
-        }
-    }
-
-    ParsedAnswer handleDelete(String[] parsedString) {
-        if (parsedString.length == 1) {
-            return parseError("Index cannot be empty!");
-        } else {
-            return parseDelete(parsedString[1]);
-        }
-    }
-
-    ParsedAnswer handleFind(String[] parsedString) {
-        if (parsedString.length == 1) {
-            return parseError("Index cannot be empty!");
-        } else {
-            return parseFind(parsedString[1]);
-        }
     }
 
     ParsedAnswer updateTodo(int index, String desc) {
@@ -236,8 +276,6 @@ public class Parser {
 
     /**
      * This method is responsible for creating a ParsedAnswer corresponding to the update command.
-     * A separate method is specially created because of how different the update command is
-     * compared to the other commands.
      * @param inputToParse
      * @return ParsedAnswer
      */
