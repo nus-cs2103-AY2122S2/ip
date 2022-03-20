@@ -114,6 +114,15 @@ public class Ui {
         return response.toString();
     }
 
+    public String showReschedule(Task task) {
+        StringBuilder response = new StringBuilder();
+
+        response.append("rescheduled: ").append(task.toString())
+                .append(System.getProperty("line.separator"));
+
+        return response.toString();
+    }
+
     public String showLoadingError() {
         return "Something went wrong while reading the data file.";
     }

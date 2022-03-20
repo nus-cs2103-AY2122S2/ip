@@ -1,5 +1,7 @@
 package pac.task;
 
+import pac.PacException;
+
 public class ToDo extends Task {
     public ToDo(String description) {
         super(description);
@@ -20,6 +22,11 @@ public class ToDo extends Task {
         }
 
         return "T~" + bool + "~" + getDescription() + System.lineSeparator();
+    }
+
+    @Override
+    public void rescheduleDate(String datetimeStr) throws PacException{
+        throw new PacException("Cannot reschedule todo task.");
     }
 
     @Override

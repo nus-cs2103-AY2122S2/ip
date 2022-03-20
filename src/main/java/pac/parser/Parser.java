@@ -3,6 +3,7 @@ package pac.parser;
 import pac.command.AddCommand;
 import pac.command.Command;
 import pac.command.FindCommand;
+import pac.command.RescheduleCommand;
 import pac.task.Deadline;
 import pac.command.DeleteCommand;
 import pac.task.Event;
@@ -48,6 +49,9 @@ public class Parser {
         case "find":
             command = Commands.FIND;
             break;
+        case "reschedule":
+            command = Commands.RESCHEDULE;
+            break;
         default:
             throw new PacException("Invalid Command.");
         }
@@ -76,6 +80,9 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(commandArray[1]) - 1);
         case FIND:
             return new FindCommand(commandArray[1]);
+        case RESCHEDULE:
+            String[] rescheduleArray = commandArray[1].split(" ", 2);
+            return new RescheduleCommand(Integer.parseInt(rescheduleArray[0]) - 1, rescheduleArray[1]);
         default:
             throw new PacException("Invalid Command.");
         }

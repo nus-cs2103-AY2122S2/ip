@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
-    private final LocalDate dateTime;
-    private final String dateTimeStr;
+    private LocalDate dateTime;
+    private String dateTimeStr;
 
     LocalDate getDateTime() {
         return dateTime;
@@ -19,6 +19,12 @@ public class Deadline extends Task{
 
     public Deadline(String description, String dateTimeStr, boolean isDone) {
         super(description, isDone);
+        this.dateTimeStr = dateTimeStr;
+        this.dateTime = LocalDate.parse(dateTimeStr);
+    }
+
+    @Override
+    public void rescheduleDate(String dateTimeStr) {
         this.dateTimeStr = dateTimeStr;
         this.dateTime = LocalDate.parse(dateTimeStr);
     }

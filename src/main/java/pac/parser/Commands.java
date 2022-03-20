@@ -9,6 +9,6 @@ public enum Commands {
     EVENT,
     DELETE,
     FIND,
+    RESCHEDULE,
     BYE,
-    ERROR
 }

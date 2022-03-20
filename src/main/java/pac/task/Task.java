@@ -1,5 +1,7 @@
 package pac.task;
 
+import pac.PacException;
+
 public abstract class Task {
     private final String description;
     protected boolean isDone;
@@ -31,6 +33,8 @@ public abstract class Task {
     public boolean isMarked() {
         return this.isDone;
     }
+
+    abstract public void rescheduleDate(String dateTimeStr) throws PacException;
 
     abstract public String toWrite();
 
