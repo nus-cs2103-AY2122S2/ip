@@ -80,7 +80,7 @@ Example:
 - `find homework`
 
 ### Update task
-Can update either only the task description or both. <br/>
+Can update either only the task description or both the task description and date. <br/>
 
 Format: <br/>
 
