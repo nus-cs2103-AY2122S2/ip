@@ -2,6 +2,10 @@
 
 ## Features
 
+### Duke
+
+![UI of Duke](docs\Ui.png)
+
 ### Manage Tasks
 
 1. Todo - Allows you to note the various tasks that you have to do.
