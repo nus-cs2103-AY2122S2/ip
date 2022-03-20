@@ -1,3 +1,0 @@
-todo/unmarked/todo drink water
-event/marked/project meeting/ Mon 2-4pm
-deadline/unmarked/make some cups/ the day after
