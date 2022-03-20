@@ -8,12 +8,14 @@ your computer.
 2. Download the latest `PinkPandaBot.jar` from 
 [here](https://github.com/SimJM/ip/releases).
 3. Copy the file to a folder you want to use as the
-home folder for Arthur.
-4. Double-click on the file to start the app. 
+home folder for PinkPandaBot.
+4a. (Either) Double-click on the file to start the app.
+4b: (OR) open terminal, cd into folder with PinkPandaBot.jar and enter the following command
+java -jar PinkPandaBot.jar
 
 ## Features 
 - Listing all tasks: `list`
-- Exiting Arthur: `bye`
+- Exiting PinkPandaBot: `bye`
 - Deleting a specific task: `delete`
 - Finding a specific task: `find`
 - Marking a task as completed: `mark` 
@@ -26,21 +28,20 @@ home folder for Arthur.
 ## Usage
 
 ### `list`
-Shows a list of all the tasks in Arthur.
+Shows a list of all the tasks in PinkPandaBot.
 
 Example of **usage**:
 `list`
 
 
 ### `bye`
-Closes and exits the application Arthur.
+Closes and exits the application PinkPandaBot.
 
 Example of **usage**:
 `bye`
 
 Expected outcome:
-Arthur displays a bye message and automatically 
-closes the application.
+PinkPandaBot displays a bye message.
 
 ### `delete`
 
