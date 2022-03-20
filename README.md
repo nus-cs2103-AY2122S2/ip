@@ -1,6 +1,6 @@
 # User Guide
 
-BingChilling is a **desktop app for managing tasks. optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BingChilling can get your contact management tasks done faster than traditional GUI apps.
+BingChilling is a **desktop app for managing tasks. optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Bing Chilling can get your contact management tasks done faster than traditional GUI apps.
 
 <div align="center">
 <img src="./docs/Ui.png" alt="user using bing chilling" width=400px/>
@@ -27,8 +27,9 @@ BingChilling is a **desktop app for managing tasks. optimized for use via a Comm
 
 1. Ensure you have Java 11 or above installed in your Computer.
 2. Download the latest bingchilling.jar from [here](https://github.com/cwq2326/ip/releases).
-3. Copy the file to the folder you want to use as the home folder for your Bing Chilling bot.
+3. Copy the file to the folder you want to use as the home folder for Bing Chilling.
 4. Double-click the file to start the app.
+5. Alternatively, you can run the command `java -jar bingchilling.jar` on your terminal if Bing Chilling is displaying garbage characters.
 
 ---
 ## Features 
