@@ -30,8 +30,6 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        // String date = (date != null ? date.format(DateTimeFormatter.ofPattern("MMM d
-        // yyyy")) : by);
         return "[D]" + "[" + super.getStatusIcon() + "] " + super.getDescription() + " (by: " + by + ")";
     }
 

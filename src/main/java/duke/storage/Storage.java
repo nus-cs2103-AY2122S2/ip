@@ -90,7 +90,7 @@ public class Storage {
      * @param description of event
      */
     private static void handleEventCommand(String isMarked, String description, String at) {
-        Task t = new Deadlines(description, at);
+        Task t = new Events(description, at);
         if (isMarked.equals("marked")) {
             t.setDone(true);
         } else {
@@ -177,10 +177,10 @@ public class Storage {
                 Events e = (Events) item;
                 addText = "event/" + (item.getIsDone() ? "marked" : "unmarked") + "/" +
                         item.getDescription()
-                        + " / " + e.at + "\n";
+                        + "/" + e.at + "\n";
             } else if (task.substring(1, 2).equals("D")) {
                 Deadlines d = (Deadlines) item;
-                addText = "deadlines/" + (item.getIsDone() ? "marked" : "unmarked") + "/"
+                addText = "deadline/" + (item.getIsDone() ? "marked" : "unmarked") + "/"
                         + item.getDescription()
                         + "/" + d.by + "\n";
             }
