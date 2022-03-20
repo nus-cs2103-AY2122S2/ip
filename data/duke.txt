@@ -1,2 +1,2 @@
-event/unmarked/project meeting /  Mon 2-4pm
+deadlines/unmarked/project meeting /  Mon 2-4pm
 todo/unmarked/todo check
