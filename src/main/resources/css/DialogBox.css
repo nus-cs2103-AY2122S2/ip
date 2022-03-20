@@ -1,0 +1,18 @@
+#root {
+    -fx-border-color: #2C3531;
+    -fx-border-radius: 2px;
+    -fx-background-color: #2C3531;
+}
+
+#dialog {
+    -fx-border-color: #116466;
+    -fx-border-radius: 10px;
+    -fx-background-color: #116466;
+    -fx-background-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-padding: 4px 8px;
+}
+
+#displayPicture {
+
+}
