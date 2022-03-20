@@ -95,6 +95,32 @@ public class ParsedAnswerHandler {
         return writeTaskToFile(message.get(0), message.get(1));
     }
 
+    String executeUpdate() {
+        int idx = pa.getIndex();
+        Storage s = new Storage();
+        Task updatedTask = Storage.taskList.get(idx);
+
+        if (pa.getType().equals("Deadline")) {
+            Deadline currentTask = (Deadline) Storage.taskList.get(idx);
+            updatedTask = generateUpdatedTaskForDeadline(pa, currentTask);
+        }
+
+        if (pa.getType().equals("Event")) {
+            Event currentTask = (Event) Storage.taskList.get(idx);
+            updatedTask = generateUpdatedTaskForEvent(pa, currentTask);
+        }
+
+        if (pa.getType().equals("Todo")) {
+            ToDos currentTask = (ToDos) Storage.taskList.get(idx);
+            updatedTask = generateUpdatedTaskForTodo(pa, currentTask);
+        }
+
+        Storage.taskList.remove(idx);
+        Storage.taskList.add(idx, updatedTask);
+        s.save();
+        return "Update successful";
+    }
+
     Deadline generateUpdatedTaskForDeadline(ParsedAnswer pa, Deadline currentTask) {
         if (pa.getDesc().isEmpty() && !pa.getDate().isEmpty()) {
             return new Deadline(currentTask.getDescription(), pa.getDate());
@@ -127,32 +153,6 @@ public class ParsedAnswerHandler {
         } else {
             return currentTask;
         }
-    }
-
-    String executeUpdate() {
-        int idx = pa.getIndex();
-        Storage s = new Storage();
-        Task updatedTask = Storage.taskList.get(idx);
-
-        if (pa.getType().equals("Deadline")) {
-            Deadline currentTask = (Deadline) Storage.taskList.get(idx);
-            updatedTask = generateUpdatedTaskForDeadline(pa, currentTask);
-        }
-
-        if (pa.getType().equals("Event")) {
-            Event currentTask = (Event) Storage.taskList.get(idx);
-            updatedTask = generateUpdatedTaskForEvent(pa, currentTask);
-        }
-
-        if (pa.getType().equals("Todo")) {
-            ToDos currentTask = (ToDos) Storage.taskList.get(idx);
-            updatedTask = generateUpdatedTaskForTodo(pa, currentTask);
-        }
-
-        Storage.taskList.remove(idx);
-        Storage.taskList.add(idx, updatedTask);
-        s.save();
-        return "Update successful";
     }
 
     String execute() {
