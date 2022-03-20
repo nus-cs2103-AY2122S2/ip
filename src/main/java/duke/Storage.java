@@ -14,14 +14,17 @@ public class Storage {
     PrintWriter wf;
 
 
-
+    /**
+     * Represents a storage for duke.
+     */
     public Storage(String filePath) throws IOException {
         this.fw = new  FileWriter(filePath,true);
         this.wf = new  PrintWriter(fw);
         filePath = getPath();
         items = 0;
         file = new File(filePath);
-        file.createNewFile(); // if file already exists will do nothing
+        if(!file.exists())
+            file.createNewFile(); // if file already exists will do nothing
     }
 
     /**

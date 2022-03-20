@@ -3,17 +3,12 @@ package duke;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Arrays;
 
-import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Parser {
-    public String[] words; // user input split by spaces to get words
+    public String[] words;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
     TaskList tasks = null;
@@ -32,7 +27,7 @@ public class Parser {
             FileWriter fw = new FileWriter(storage.getPath(), true);
             PrintWriter wf = new PrintWriter(fw);
             switch (words[0]) {
-                case "list" -> {
+                case "list" :{
                 wf.flush();
                 sb = new StringBuilder();
                 sb.append("    Here are the tasks on your list:\n");
@@ -51,7 +46,7 @@ public class Parser {
                 }
                 return sb.toString();
             }
-            case "mark" -> {
+                case "mark" : {
                 wf.flush();
                 int n = Integer.parseInt(words[1]) - 1;
                 assert n <= tasks.getNumberOfTasks();
@@ -66,7 +61,7 @@ public class Parser {
 
                 return "Alright! I've marked this as done:\n      [" + temp.getDone() + "] " + temp.desc;
             }
-            case "unmark" -> {
+                case "unmark" : {
                 wf.flush();
                 int n = Integer.parseInt(words[1]) - 1;
                 assert n <= tasks.getNumberOfTasks();
@@ -82,7 +77,7 @@ public class Parser {
                 return
                         "Alright! I've marked this as not done:\n      [" + temp.getDone() + "] " + temp.desc;
             }
-            case "delete" -> {
+                case "delete" : {
                 wf.flush();
                 int n = Integer.parseInt(words[1]) - 1; // task number to be deleted
                 assert n <= tasks.getNumberOfTasks();
@@ -98,7 +93,7 @@ public class Parser {
                         + t.getDone() + "] " + t.desc + by;
 
             }
-            case "today" -> {
+                case "today" : {
                 wf.flush();
                 int noOfMatched = 0;
                 int dayOfYear = LocalDateTime.now().getDayOfYear();
@@ -125,7 +120,7 @@ public class Parser {
             }
 
 
-            case "find" -> {
+                case "find" : {
                 wf.flush();
                 String key = words[1]; // keyword to be found
                 int[] ind = new int[tasks.getNumberOfTasks()]; // indexes of task with keyword
@@ -155,7 +150,7 @@ public class Parser {
                 }
                 return sb.toString();
             }
-            case "todo" -> {
+                case "todo" : {
                 words = command.split(" ", 2);
                 if (words.length < 2) {
                     return "Oops!! Description of ToDo can't be empty!!\n ";
@@ -170,7 +165,7 @@ public class Parser {
                     return sb.toString();
                 }
             }
-            case "event" -> {
+                case "event" : {
                 sb = new StringBuilder();
                 words = findDate(command.split(" "));
                 sb.append("Okay! I've added this task into the list:\n  ");
@@ -182,7 +177,7 @@ public class Parser {
                 return sb.toString();
             }
             // user add a deadline task
-            case "deadline" -> {
+                case "deadline" : {
                 sb = new StringBuilder();
                 words = findDate(command.split(" "));
                 sb.append("    Okay! I've added this task:\n  ");
@@ -193,7 +188,7 @@ public class Parser {
                 sb.append("\nNow you have ").append(tasks.getNumberOfTasks()).append(" tasks on your list");
                 return sb.toString();
             }
-                default -> {
+                default : {
                     return "Sorry! I don't know what that means :'(";
                 }
             }
