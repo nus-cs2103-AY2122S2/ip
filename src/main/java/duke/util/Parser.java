@@ -49,12 +49,31 @@ public class Parser {
         return new String[]{removeLastChar(description), metaInfo};
     }
 
+    public String[] getEventInfo() {
+        String metaInfo = originalInput.split("/at")[1];
+        String strippedCommand = originalInput.substring(6);
+        String description = strippedCommand.split("/")[0];
+
+        return new String[]{removeLastChar(description), metaInfo};
+    }
+
     /**
-     * Validates the given command
+     * Validates the given deadline command
      * @return validity status of the given command.
      */
-    public boolean isValidCommand() {
+    public boolean isValidDeadLineCommand() {
         boolean isEmptyMetaInfo = (originalInput.split("/by").length == 1);
+        boolean isEmptyCommand = (inputArray.length <= 1);
+
+        return !(isEmptyCommand || isEmptyMetaInfo);
+    }
+
+    /**
+     * Validates the given event command
+     * @return validity status of the given command.
+     */
+    public boolean isValidEventCommand() {
+        boolean isEmptyMetaInfo = (originalInput.split("/at").length == 1);
         boolean isEmptyCommand = (inputArray.length <= 1);
 
         return !(isEmptyCommand || isEmptyMetaInfo);

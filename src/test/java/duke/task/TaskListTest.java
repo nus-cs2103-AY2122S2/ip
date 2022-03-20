@@ -110,22 +110,16 @@ class TaskListTest {
 
     @Test
     void handleDeadline_deadline_success() {
-        Parser parser = new Parser(MAKE_DEADLINE_INPUT_VALID);
-        String[] inputArray = parser.getInputArray();
-
         tasksStub.add(deadlineStub);
-        taskListSut.handleDeadline(inputArray, MAKE_DEADLINE_INPUT_VALID);
+        taskListSut.handleDeadline(MAKE_DEADLINE_INPUT_VALID);
 
         assertEquals(tasksStub.get(0), taskListSut.getTasks().get(0));
     }
 
     @Test
     void handleEvent_event_success() {
-        Parser parser = new Parser(MAKE_EVENT_INPUT_VALID);
-        String[] inputArray = parser.getInputArray();
-
         tasksStub.add(eventStub);
-        taskListSut.handleEvent(inputArray, MAKE_EVENT_INPUT_VALID);
+        taskListSut.handleEvent(MAKE_EVENT_INPUT_VALID);
 
         assertEquals(tasksStub.get(0), taskListSut.getTasks().get(0));
     }

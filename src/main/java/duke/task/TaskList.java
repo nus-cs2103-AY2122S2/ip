@@ -125,10 +125,10 @@ public class TaskList {
      * @param originalInput Original user input captured as a String
      * @return response
      */
-    public String handleDeadline(String[] inputArray, String originalInput) {
+    public String handleDeadline(String originalInput) {
         Parser parser = new Parser(originalInput);
         try {
-            if (!parser.isValidCommand() || !parser.isValidDescription(parser.getDeadlineInfo()[0])) {
+            if (!parser.isValidDeadLineCommand() || !parser.isValidDescription(parser.getDeadlineInfo()[0])) {
                 throw new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION, Deadline.TASK_NAME));
             }
         } catch (DukeException e) {
@@ -149,24 +149,22 @@ public class TaskList {
      * @param originalInput Original user input captured as a String
      * @return response
      */
-    public String handleEvent(String[] inputArray, String originalInput) {
+    public String handleEvent(String originalInput) {
+        Parser parser = new Parser(originalInput);
         try {
-            if ((inputArray.length <= 1) || (originalInput.split("/at").length == 1)) {
+            if (!parser.isValidEventCommand() || !parser.isValidDescription(parser.getEventInfo()[0])) {
                 throw new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION, Event.TASK_NAME));
             }
         } catch (DukeException e) {
             return ResponseFormatter.printDukeException(e, "Please try again:");
         }
 
-        String metaInfo = originalInput.split("/at")[1];
-        String strippedCommand = originalInput.substring(6);
         Task curr;
+        String[] eventInfo = parser.getEventInfo();
         try {
-            curr = new Event(strippedCommand.split("/")[0].substring(0,
-                    strippedCommand.split("/")[0].length() - 1), metaInfo);
+            curr = new Event(eventInfo[0], eventInfo[1]);
         } catch (DateTimeParseException ex) {
-            return ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!"
-                    + "\nPlease try again:");
+            return ResponseFormatter.printMessage(MESSAGE_INVALID_DATE);
         }
         return processNewTask(curr);
     }

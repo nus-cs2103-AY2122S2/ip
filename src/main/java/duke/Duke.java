@@ -60,10 +60,10 @@ public class Duke {
             response = tasks.handleTodo(inputArray, originalInput);
             break;
         case "deadline":
-            response = tasks.handleDeadline(inputArray, originalInput);
+            response = tasks.handleDeadline(originalInput);
             break;
         case "event":
-            response = tasks.handleEvent(inputArray, originalInput);
+            response = tasks.handleEvent(originalInput);
             break;
         case "delete":
             response = tasks.handleDelete(inputArray);
