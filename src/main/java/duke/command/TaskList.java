@@ -9,6 +9,11 @@ import duke.task.Task;
  * A list to manage the Tasks in Duke.
  */
 public class TaskList {
+    private static final String TASK_DONE_MESSAGE = "Task done! \\(n_n)/\n %1$s";
+    private static final String TASK_UNDONE_MESSAGE = "Task not done =(\n %1$s";
+    private static final String TASK_DELETED_MESSAGE = "deleted this item O_O:\n  %1$s\nNow there are "
+            + "%2$s tasks on the list x)";
+
     protected ArrayList<Task> list;
 
     /**
@@ -68,7 +73,7 @@ public class TaskList {
         assert index < size();
         Task t = getTask(index);
         t.markAsDone();
-        return "Task done! \\(n_n)/\n " + t.toString();
+        return String.format(TASK_DONE_MESSAGE, t);
     }
 
     /**
@@ -82,7 +87,7 @@ public class TaskList {
         assert index < size();
         Task t = getTask(index);
         t.markUndone();
-        return "Task not done =(\n " + t.toString();
+        return String.format(TASK_UNDONE_MESSAGE, t);
     }
 
     /**
@@ -94,7 +99,7 @@ public class TaskList {
     public String deleteItem(int index) {
         assert index < size();
         Task t = list.remove(index);
-        return "deleted this item O_O:\n  " + t + "\nNow there are " + list.size() + " tasks on the list x)";
+        return String.format(TASK_DELETED_MESSAGE, t, list.size());
     }
 
     /**

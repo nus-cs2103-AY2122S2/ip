@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Deadline task which has to be completed by a specific time.
- * */
+ */
 public class Deadline extends Task {
     protected LocalDate time;
 

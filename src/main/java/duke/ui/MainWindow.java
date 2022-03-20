@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Sets the 'duke' attribute of this to the given Duke instance.
+     * Sets the 'duke' attribute of this MainWindow to the given Duke instance.
      *
      * @param d The Duke instance to associate with this controller.
      */
@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other
+     * Creates two DialogBoxes, one echoing user input and the other
      * containing Duke's reply, and then appends them to the dialog container.
      * Clears the user input after processing.
      */
@@ -70,7 +70,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates a dialog box for Duke that reminds the user of a Task.
+     * Creates a DialogBox for Duke that reminds the user of a Task.
      *
      * @param reminderMessage The message to remind the user.
      */
@@ -81,7 +81,7 @@ public class MainWindow extends AnchorPane {
     }
 
     private void checkIfBye(String input) {
-        if (input.equals("bye")) {
+        if (input.trim().equals("bye")) {
             System.exit(0);
         }
     }

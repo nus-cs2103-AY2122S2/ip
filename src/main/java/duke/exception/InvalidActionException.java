@@ -8,7 +8,7 @@ public class InvalidActionException extends RuntimeException {
     /**
      * Creates a new instance of the exception.
      *
-     * @param message the error message to be shown.
+     * @param message The error message to be shown.
      */
     public InvalidActionException(String message) {
         super(message);

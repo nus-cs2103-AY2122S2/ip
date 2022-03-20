@@ -11,17 +11,37 @@ import duke.task.Task;
  * Contains functionality relating to generating Duke's responses.
  */
 public class ResponseGenerator {
-    private final String logo;
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String STARTUP_MESSAGE = "Hello I'm\n" + LOGO + "\nWhat can I do for you? =)";
+    private static final String BYE_MESSAGE = "Bye t_t";
+
+    private static final String FILE_ERROR_MESSAGE = "Error loading/parsing file ?.? Creating empty list!";
+    private static final String IO_ERROR_MESSAGE = "I/O error x.x";
+    private static final String DATETIME_FORMAT_ERROR_MESSAGE =
+            "Error parsing date, please enter dates in YYYY-MM-DD format!";
+    private static final String MAX_DATETIME_EXCEED_ERROR_MESSAGE =
+            "Maximum date/time exceeded D: please try again!";
+
+    private static final String ADD_TASK_MESSAGE = "added o.O:\n  %1$s\nNow there are %2$s tasks on the list x)";
+    private static final String ADD_REMINDER_MESSAGE = ":D Reminder set at %1$s for task: %2$s";
+
+    private static final String DEADLINE_REMINDER_MESSAGE = "!Reminder! %1$s by %2$s";
+    private static final String EVENT_REMINDER_MESSAGE = "!Reminder! %1$s at %2$s";
+    private static final String TODO_REMINDER_MESSAGE = "!Reminder! %1$s";
+
+    private static final String EMPTY_LIST_MESSAGE = "There are no tasks on your list :O";
+    private static final String LIST_START_MESSAGE = "Here are the tasks on your list :O\n";
+    private static final String NO_ITEMS_FOUND_MESSAGE = "No items found :O";
+    private static final String FILTERED_LIST_START_MESSAGE = "Here are the matching tasks on your list :O\n";
 
     /**
      * Creates a new Ui instance.
      */
     public ResponseGenerator() {
-        logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
     }
 
     /**
@@ -30,8 +50,7 @@ public class ResponseGenerator {
      * @return A startup message.
      */
     public String getStartupMessage() {
-        return new StringBuilder().append("Hello! I'm\n").append(logo)
-                .append("\nWhat can I do for you? =)").toString();
+        return STARTUP_MESSAGE;
     }
 
     /**
@@ -40,7 +59,7 @@ public class ResponseGenerator {
      * @return A farewell message.
      */
     public String getByeMessage() {
-        return "Bye t_t";
+        return BYE_MESSAGE;
     }
 
     /**
@@ -49,7 +68,7 @@ public class ResponseGenerator {
      * @return An error message for file loading and parsing errors.
      */
     public String getFileErrorMessage() {
-        return "Error loading/parsing file ?.? Creating empty list!";
+        return FILE_ERROR_MESSAGE;
     }
 
     /**
@@ -58,7 +77,7 @@ public class ResponseGenerator {
      * @return An error message for I/O errors.
      */
     public String getIoErrorMessage() {
-        return "I/O error x.x";
+        return IO_ERROR_MESSAGE;
     }
 
     /**
@@ -67,7 +86,7 @@ public class ResponseGenerator {
      * @return An error message for date/time format errors.
      */
     public String getDateTimeFormatErrorMessage() {
-        return "Error parsing date, please enter dates in YYYY-MM-DD format!";
+        return DATETIME_FORMAT_ERROR_MESSAGE;
     }
 
     /**
@@ -87,7 +106,7 @@ public class ResponseGenerator {
      * @return The error message that maximum date/time is exceeded.
      */
     public String getMaxDateTimeExceededErrorMessage() {
-        return "Maximum date/time exceeded D: please try again!";
+        return MAX_DATETIME_EXCEED_ERROR_MESSAGE;
     }
 
     /**
@@ -98,8 +117,7 @@ public class ResponseGenerator {
      * @return The message to be printed when a Task is added.
      */
     public String getAddTaskMessage(Task latestTask, int size) {
-        return new StringBuilder().append("added o.O:\n  ").append(latestTask.toString())
-                        .append("\nNow there are ").append(size).append(" tasks on the list x)").toString();
+        return String.format(ADD_TASK_MESSAGE, latestTask, size);
     }
 
     /**
@@ -110,7 +128,7 @@ public class ResponseGenerator {
      * @return The message to be printed when a Reminder is added.
      */
     public String getAddReminderMessage(Task task, Reminder reminderTime) {
-        return ":D Reminder set at " + reminderTime.getDateTime() + " for task: " + task.getDescription();
+        return String.format(ADD_REMINDER_MESSAGE, reminderTime.getDateTime(), task.getDescription());
     }
 
     /**
@@ -122,12 +140,12 @@ public class ResponseGenerator {
     public String getReminderMessage(Task t) {
         if (t instanceof Event) {
             Event e = (Event) t;
-            return "!Reminder! " + e.getDescription() + " at " + e.formatTime();
+            return String.format(EVENT_REMINDER_MESSAGE, e.getDescription(), e.formatTime());
         } else if (t instanceof Deadline) {
             Deadline d = (Deadline) t;
-            return "!Reminder! " + d.getDescription() + " by " + d.formatTime();
+            return String.format(DEADLINE_REMINDER_MESSAGE, d.getDescription(), d.formatTime());
         }
-        return "!Reminder! " + t.getDescription();
+        return String.format(TODO_REMINDER_MESSAGE, t.getDescription());
     }
 
     /**
@@ -138,10 +156,10 @@ public class ResponseGenerator {
      */
     public String printItems(ArrayList<Task> list) {
         if (list.size() == 0) {
-            return "There are no tasks on your list :O";
+            return EMPTY_LIST_MESSAGE;
         }
         StringBuilder message = new StringBuilder();
-        message.append("Here are the tasks on your list :O\n");
+        message.append(LIST_START_MESSAGE);
         for (int i = 1; i <= list.size(); i++) {
             message.append(i);
             message.append(". ");
@@ -162,10 +180,10 @@ public class ResponseGenerator {
      */
     public String printFoundItems(ArrayList<Task> list) {
         if (list.size() == 0) {
-            return "No items found :O";
+            return NO_ITEMS_FOUND_MESSAGE;
         }
         StringBuilder message = new StringBuilder();
-        message.append("Here are the matching tasks on your list :O\n");
+        message.append(FILTERED_LIST_START_MESSAGE);
         for (int i = 1; i <= list.size(); i++) {
             message.append(i);
             message.append(". ");

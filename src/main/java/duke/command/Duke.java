@@ -72,35 +72,35 @@ public class Duke {
      * @return Duke's response.
      */
     public String getResponse(String input) {
+        input = input.trim();
         if (input.equals("bye")) {
             return responseGenerator.getByeMessage();
         } else if (input.equals("list")) {
             return responseGenerator.printItems(taskList.getItems());
-        } else {
-            try {
-                String command = parser.parseCommand(input);
-                if (command.equals("mark") || command.equals("unmark")) {
-                    return modifyTask(input, command);
-                } else if (command.equals("delete")) {
-                    return deleteTask(input);
-                } else if (command.equals("remind")) {
-                    return setReminder(input);
-                } else if (command.equals("find")) {
-                    return findItems(input);
-                } else {
-                    return addTask(input, command);
-                }
-            } catch (WrongInputException | IncompleteInputException e) {
-                return responseGenerator.getDukeErrorMessage(e);
-            } catch (DateTimeParseException e) {
-                return responseGenerator.getDateTimeFormatErrorMessage();
-            } catch (IOException e) {
-                return responseGenerator.getIoErrorMessage();
-            } catch (ArithmeticException e) {
-                return responseGenerator.getMaxDateTimeExceededErrorMessage();
-            } catch (Exception e) {
-                return e.getMessage();
+        }
+        try {
+            String command = parser.parseCommand(input);
+            if (command.equals("mark") || command.equals("unmark")) {
+                return modifyTask(input, command);
+            } else if (command.equals("delete")) {
+                return deleteTask(input);
+            } else if (command.equals("remind")) {
+                return setReminder(input);
+            } else if (command.equals("find")) {
+                return findItems(input);
+            } else {
+                return addTask(input, command);
             }
+        } catch (WrongInputException | IncompleteInputException e) {
+            return responseGenerator.getDukeErrorMessage(e);
+        } catch (DateTimeParseException e) {
+            return responseGenerator.getDateTimeFormatErrorMessage();
+        } catch (IOException e) {
+            return responseGenerator.getIoErrorMessage();
+        } catch (ArithmeticException e) {
+            return responseGenerator.getMaxDateTimeExceededErrorMessage();
+        } catch (Exception e) {
+            return e.getMessage();
         }
     }
 
