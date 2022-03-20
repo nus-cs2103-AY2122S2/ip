@@ -11,7 +11,7 @@ your computer.
 home folder for PinkPandaBot.
 4. (Either) Double-click on the file to start the app.
 5. (OR) Open terminal, cd into folder with PinkPandaBot.jar and enter the following command
-'java -jar PinkPandaBot.jar'
+`java -jar PinkPandaBot.jar`
 
 ## Features 
 - Listing all tasks: `list`
