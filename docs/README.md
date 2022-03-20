@@ -115,7 +115,7 @@ Sets a reminder for the task with the given `index` at the specified `date` and 
 Duke must not be closed after setting the reminder in order for the reminder to be successfully sent.
 - `index` must be a **positive integer** 1, 2, 3...
 - `date` must be in `YYYY-MM-DD` format.
-- `time` must be in HH:MM format.
+- `time` must be in `HH:MM` format.
 
 Example: `remind 1 2022-02-15 13:16`
 
