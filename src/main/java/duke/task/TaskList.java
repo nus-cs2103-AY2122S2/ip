@@ -1,11 +1,13 @@
 package duke.task;
 
 import static duke.commons.core.Messages.MESSAGE_ADD_TASK;
+import static duke.commons.core.Messages.MESSAGE_EMPTY_INDEX;
 import static duke.commons.core.Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
 import static duke.commons.core.Messages.MESSAGE_INVALID_DATE;
 import static duke.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_DONE;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_UNDONE;
+import static duke.commons.core.Messages.MESSAGE_NONEXIST_INDEX;
 import static duke.commons.core.Messages.MESSAGE_REMOVE_TASK_DONE;
 
 import java.time.format.DateTimeParseException;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.exception.DukeException;
+import duke.util.NumericCheck;
 import duke.util.Parser;
 import duke.util.ResponseFormatter;
 
@@ -67,15 +70,21 @@ public class TaskList {
      * @return response
      */
     public String handleMark(String[] inputArray) {
-        int number = Integer.parseInt(inputArray[1]);
+        int number;
         try {
-            if (isInvalidIndex(number)) {
+            if (inputArray.length == 1) {
+                throw new DukeException(MESSAGE_EMPTY_INDEX);
+            }
+            if (!NumericCheck.isNumeric(inputArray[1])) {
                 throw new DukeException(MESSAGE_INVALID_INDEX);
+            }
+            number = Integer.parseInt(inputArray[1]);
+            if (isInvalidIndex(number)) {
+                throw new DukeException(MESSAGE_NONEXIST_INDEX);
             }
         } catch (DukeException e) {
             return ResponseFormatter.printDukeException(e, "Please try again:");
         }
-
         Task curr = tasks.get(number - 1);
         assert curr != null : "Invalid Task that is marked as Done!";
 
@@ -88,10 +97,17 @@ public class TaskList {
      * @return response
      */
     public String handleUnMark(String[] inputArray) {
-        int number = Integer.parseInt(inputArray[1]);
+        int number;
         try {
-            if (isInvalidIndex(number)) {
+            if (inputArray.length == 1) {
+                throw new DukeException(MESSAGE_EMPTY_INDEX);
+            }
+            if (!NumericCheck.isNumeric(inputArray[1])) {
                 throw new DukeException(MESSAGE_INVALID_INDEX);
+            }
+            number = Integer.parseInt(inputArray[1]);
+            if (isInvalidIndex(number)) {
+                throw new DukeException(MESSAGE_NONEXIST_INDEX);
             }
         } catch (DukeException e) {
             return ResponseFormatter.printDukeException(e, "Please try again:");
@@ -177,7 +193,7 @@ public class TaskList {
         int number = Integer.parseInt(inputArray[1]);
         try {
             if (isInvalidIndex(number)) {
-                throw new DukeException(MESSAGE_INVALID_INDEX);
+                throw new DukeException(MESSAGE_NONEXIST_INDEX);
             }
         } catch (DukeException e) {
             return ResponseFormatter.printDukeException(e, "Please try again:");

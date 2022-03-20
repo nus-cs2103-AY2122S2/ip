@@ -2,7 +2,7 @@ package duke.task;
 
 import static duke.commons.core.Messages.MESSAGE_ADD_TASK;
 import static duke.commons.core.Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
-import static duke.commons.core.Messages.MESSAGE_INVALID_INDEX;
+import static duke.commons.core.Messages.MESSAGE_NONEXIST_INDEX;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_DONE;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_UNDONE;
 import static duke.commons.core.Messages.MESSAGE_REMOVE_TASK_DONE;
@@ -207,7 +207,7 @@ class TaskListTest {
         taskListSut.getTasks().add(todoStub);
 
         assertEquals(ResponseFormatter.printDukeException(
-                        new DukeException(MESSAGE_INVALID_INDEX), "Please try again:"),
+                        new DukeException(MESSAGE_NONEXIST_INDEX), "Please try again:"),
                 taskListSut.handleDelete(parser.getInputArray()));
     }
 }
