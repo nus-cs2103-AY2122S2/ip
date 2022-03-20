@@ -1,5 +1,9 @@
 package duke;
 
+import java.io.IOException;
+
+import duke.exceptions.DukeExceptions;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -44,12 +49,20 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
 
         String input = userInput.getText();
-        String response = dukeLocal.getResponse(input);
+        String response = null;
+        try {
+            response = dukeLocal.getResponse(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DukeExceptions e) {
+            e.printStackTrace();
+        }
         dialogContainer.getChildren().addAll(
                 duke.DialogBox.getUserDialog(input, userImage),
                 duke.DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
     }
 
 

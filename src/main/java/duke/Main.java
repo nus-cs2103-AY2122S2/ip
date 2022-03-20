@@ -15,6 +15,9 @@ public class Main extends Application {
 
     private duke.Duke duke = new duke.Duke();
 
+    public Main() throws IOException {
+    }
+
     @Override
     public void start(Stage stage) {
         try {
@@ -29,3 +32,4 @@ public class Main extends Application {
         }
     }
 }
+
