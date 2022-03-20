@@ -2,6 +2,7 @@ package pac.parser;
 
 import pac.command.AddCommand;
 import pac.command.Command;
+import pac.command.FindCommand;
 import pac.task.Deadline;
 import pac.command.DeleteCommand;
 import pac.task.Event;
@@ -44,6 +45,9 @@ public class Parser {
         case "delete":
             command = Commands.DELETE;
             break;
+        case "find":
+            command = Commands.FIND;
+            break;
         default:
             command = Commands.ERROR;
             break;
@@ -68,6 +72,8 @@ public class Parser {
             return new AddCommand(new Event(eventArray[0], eventArray[1]));
         case DELETE:
             return new DeleteCommand(Integer.parseInt(commandArray[1]) - 1);
+        case FIND:
+            return new FindCommand(commandArray[1]);
         default:
             throw new PacException("Invalid Command.");
         }

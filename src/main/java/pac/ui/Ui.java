@@ -56,6 +56,18 @@ public class Ui {
         }
     }
 
+    public void showFind(TaskList matchingTasks){
+        int i = 1;
+
+        if(matchingTasks.isEmpty()) {
+            System.out.println("There are no tasks containing the keyword.");
+        }
+
+        for (Task task : matchingTasks.getTasks()) {
+            System.out.println(i++ +". " + task);
+        }
+    }
+
     public void showMark(Task task) {
         if (task.isMarked()) {
             System.out.println("Task is already marked as done.");
