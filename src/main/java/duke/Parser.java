@@ -138,6 +138,9 @@ public class Parser {
             } catch (Exception error) {
                 output = "Use 'help' for help\n";
             }
+            if (output.isBlank()) {
+                output = "No results found\n";
+            }
             break;
         case "update":
             int numToUpdate = Integer.valueOf(inputArr[1]) - 1;
