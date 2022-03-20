@@ -93,7 +93,8 @@ Example:
 
 Update both task description and date
 - `update TASK_INDEX TASK_DESC /date YYYY-MM-DD`
-- TASK_INDEX, TASK_DESC and YYYY-MM-DD cannot be empty.
+- TASK_INDEX and TASK_DESC cannot be empty.
+- If YYYY-MM-DD is empty, then only the description is updated.
 
 Example:
 - `update 3 study for quiz /date 2022-05-01`
