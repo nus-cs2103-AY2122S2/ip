@@ -1,3 +1,7 @@
+*.class
+/duke/
+/duketest/
+
 # IDEA files
 /.idea/
 /out/
@@ -14,4 +18,9 @@ src/main/resources/docs/
 bin/
 
 /text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+text-ui-test/EXPECTED-UNIX.txt
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build

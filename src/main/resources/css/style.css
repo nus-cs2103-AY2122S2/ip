@@ -1,0 +1,28 @@
+.root{
+    -fx-font-size: 12pt;
+    -fx-font-family: sans-serif;
+    -fx-background: #e6eeff;
+}
+
+.chat-bubble {
+    -fx-background-color: #fafbff;
+    -fx-background-radius: 10px;
+    -fx-padding: 1em;
+}
+
+.chat-bubble.user {
+    -fx-background-color: #cfdbf5;
+}
+
+.chat-bubble-fill {
+    -fx-fill: #2c3957;
+}
+
+.send-button {
+    -fx-background-color: #fbe0ff;
+    -fx-text-fill: rgb(77, 0, 60);
+}
+
+.send-button:hover {
+    -fx-background-color: #f3cff8;
+}
