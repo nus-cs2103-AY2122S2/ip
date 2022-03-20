@@ -9,8 +9,8 @@ your computer.
 [here](https://github.com/SimJM/ip/releases).
 3. Copy the file to a folder you want to use as the
 home folder for PinkPandaBot.
-4a. (Either) Double-click on the file to start the app.
-4b: (OR) open terminal, cd into folder with PinkPandaBot.jar and enter the following command
+4. (Either) Double-click on the file to start the app.
+5. (OR) open terminal, cd into folder with PinkPandaBot.jar and enter the following command
 java -jar PinkPandaBot.jar
 
 ## Features 
