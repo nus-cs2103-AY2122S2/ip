@@ -166,13 +166,16 @@ public class ParsedAnswerHandler {
                 return TaskList.list();
 
             case "todo":
-                return writeTaskToFile(executeTodo().get(0), executeTodo().get(1));
+                ArrayList<String> todoResult = executeTodo();
+                return writeTaskToFile(todoResult.get(0), todoResult.get(1));
 
             case "deadline":
-                return writeTaskToFile(executeDeadline().get(0), executeDeadline().get(1));
+                ArrayList<String> deadlineResult = executeDeadline();
+                return writeTaskToFile(deadlineResult.get(0), deadlineResult.get(1));
 
             case "event":
-                return writeTaskToFile(executeEvent().get(0), executeEvent().get(1));
+                ArrayList<String> eventResult = executeEvent();
+                return writeTaskToFile(eventResult.get(0), eventResult.get(1));
 
             case "mark":
                return changeMarkStatus("mark");

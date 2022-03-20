@@ -109,6 +109,84 @@ public class Parser {
         return pa;
     }
 
+    ParsedAnswer handleUnmark (String[] parsedString) {
+        if (parsedString.length == 1) {
+            return parseError("Index cannot be empty!");
+        } else {
+            return parseUnmark(parsedString[1]);
+        }
+    }
+
+    ParsedAnswer handleMark (String[] parsedString) {
+        if (parsedString.length == 1) {
+            return parseError("Index cannot be empty!");
+        } else {
+            return parseMark(parsedString[1]);
+        }
+    }
+
+    ParsedAnswer handleDelete(String[] parsedString) {
+        if (parsedString.length == 1) {
+            return parseError("Index cannot be empty!");
+        } else {
+            return parseDelete(parsedString[1]);
+        }
+    }
+
+    ParsedAnswer handleFind(String[] parsedString) {
+        if (parsedString.length == 1) {
+            return parseError("Index cannot be empty!");
+        } else {
+            return parseFind(parsedString[1]);
+        }
+    }
+
+    ParsedAnswer updateTodo(int index, String desc) {
+        ParsedAnswer pa = new ParsedAnswer("update", index);
+        if (!desc.trim().isEmpty()) {
+            pa.setType("Todo");
+            pa.setDesc(desc.stripLeading());
+            pa.setDate("");
+            return pa;
+        } else {
+            return parseError("Description cannot be empty!");
+        }
+    }
+
+    ParsedAnswer updateDescOnly(String type, int index, String desc) {
+        ParsedAnswer pa = new ParsedAnswer("update", index);
+        pa.setType(type);
+        if (!desc.trim().isEmpty()) {
+            pa.setDesc(desc.stripLeading());
+            pa.setDate("");
+            return pa;
+        } else {
+            return parseError("Description cannot be empty!");
+        }
+    }
+
+    ParsedAnswer updateDescAndDate(String type, int index, String[] parsedDescAndDate) {
+        ParsedAnswer pa = new ParsedAnswer("update", index);
+        pa.setType(type);
+        if (isDateValid(parsedDescAndDate[1]) && !parsedDescAndDate[0].trim().isEmpty()) {
+            pa.setDesc(parsedDescAndDate[0].stripLeading());
+            pa.setDate(parsedDescAndDate[1]);
+            return pa;
+        } else {
+            return parseError("Either your date is invalid or your description cannot be empty!");
+        }
+    }
+
+    ParsedAnswer updateTaskWithDate(String type, int index, String[] parsedDescAndDate) {
+        if (parsedDescAndDate.length == 1) {
+            return updateDescOnly(type, index, parsedDescAndDate[0]);
+        } else if (parsedDescAndDate.length > 1) {
+            return updateDescAndDate(type, index, parsedDescAndDate);
+        } else {
+            return parseError("Format error. Please try again.");
+        }
+    }
+
     /**
      * A string value is returned depending on what value of regex is being passed to the function.
      * This string value represents one of the three possible command types.
@@ -116,7 +194,7 @@ public class Parser {
      * @return either a String value of "deadline", "event", or "todo"
      */
     String getCommandThroughRegex(String regex) {
-        String command = "";
+        String command;
         if (regex.equalsIgnoreCase("/by")) {
             command = "deadline";
         } else if (regex.equalsIgnoreCase("/at")) {
@@ -160,64 +238,21 @@ public class Parser {
      */
 
     ParsedAnswer parseUpdate(String inputToParse) {
-        // this method is particularly long because of the bugs that needed to be fixed quickly
-        // it is a technical debt that should be settled someday
         try {
             String[] parsedInput = inputToParse.split(" " , 2);
             String[] parsedContent = parsedInput[1].split(" ", 2);
             int index = Integer.parseInt(parsedContent[0]) - 1;
-            ParsedAnswer pa = new ParsedAnswer("update", index);
-            if (Storage.taskList.get(index) instanceof Deadline) {
-                pa.setType("Deadline");
-            } else if (Storage.taskList.get(index) instanceof Event) {
-                pa.setType("Event");
-            } else if (Storage.taskList.get(index) instanceof ToDos) {
-                if (!parsedContent[1].trim().isEmpty()) {
-                    pa.setType("Todo");
-                    pa.setDesc(parsedContent[1].stripLeading());
-                    pa.setDate("");
-                    return pa;
-                } else {
-                    ParsedAnswer pError = new ParsedAnswer("error", -1);
-                    pError.setDesc("Description cannot be empty!");
-                    return pError;
-                }
-            }
-
             String[] parsedDescAndDate = parsedContent[1].split("/date");
-
-            if (parsedDescAndDate.length == 1) {
-                if (!parsedDescAndDate[0].trim().isEmpty()) {
-                    pa.setDesc(parsedDescAndDate[0].stripLeading());
-                    pa.setDate("");
-                    return pa;
-                } else {
-                    ParsedAnswer pError = new ParsedAnswer("error", -1);
-                    pError.setDesc("Description cannot be empty!");
-                    return pError;
-                }
-
-            } else if (parsedDescAndDate.length > 1) {
-                if (isDateValid(parsedDescAndDate[1]) && !parsedDescAndDate[0].trim().isEmpty()) {
-                    pa.setDesc(parsedDescAndDate[0].stripLeading());
-                    pa.setDate(parsedDescAndDate[1]);
-                    return pa;
-                } else {
-                    ParsedAnswer pError = new ParsedAnswer("error", -1);
-                    pError.setDesc("Either your date is wrong or your description cannot be empty!");
-                    return pError;
-                }
-
+            if (Storage.taskList.get(index) instanceof Deadline) {
+                return updateTaskWithDate("Deadline", index, parsedDescAndDate);
+            } else if (Storage.taskList.get(index) instanceof Event) {
+                return updateTaskWithDate("Event", index, parsedDescAndDate);
             } else {
-                ParsedAnswer pError = new ParsedAnswer("error", -1);
-                pError.setDesc("Format error. Please try again.");
-                return pError;
+                return updateTodo(index, parsedContent[1]);
             }
 
         } catch (Exception e) {
-            ParsedAnswer pa = new ParsedAnswer("error", -1);
-            pa.setDesc("Format error. Please try again.");
-            return pa;
+            return parseError("Format error. Please try again.");
         }
     }
 
@@ -237,13 +272,13 @@ public class Parser {
                 return new ParsedAnswer("list", -1);
 
             case "unmark":
-                return parseUnmark(parsedString[1]);
+                return handleUnmark(parsedString);
 
             case "mark":
-                return parseMark(parsedString[1]);
+                return handleMark(parsedString);
 
             case "delete":
-                return parseDelete(parsedString[1]);
+                return handleDelete(parsedString);
 
             case "todo":
                 return parseInputWithRegex("none", parsedString);
@@ -255,7 +290,7 @@ public class Parser {
                 return parseInputWithRegex("/by", parsedString);
 
             case "find":
-                return parseFind(parsedString[1]);
+                return handleFind(parsedString);
 
             case "update":
                 return parseUpdate(input);
