@@ -1,14 +1,17 @@
 package duke.task;
 
 import static duke.commons.core.Messages.MESSAGE_ADD_TASK;
+import static duke.commons.core.Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
 import static duke.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_DONE;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_UNDONE;
 import static duke.commons.core.Messages.MESSAGE_REMOVE_TASK_DONE;
 import static duke.task.util.TaskListTestUtil.DELETE_FARAWAY_TASK_VALID;
 import static duke.task.util.TaskListTestUtil.DELETE_FIRST_TASK_VALID;
+import static duke.task.util.TaskListTestUtil.MAKE_DEADLINE_EMPTY_DESC_INVALID;
 import static duke.task.util.TaskListTestUtil.MAKE_DEADLINE_INPUT_VALID;
 import static duke.task.util.TaskListTestUtil.MAKE_EVENT_INPUT_VALID;
+import static duke.task.util.TaskListTestUtil.MAKE_TODO_INPUT_INVALID;
 import static duke.task.util.TaskListTestUtil.MAKE_TODO_INPUT_VALID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -106,6 +109,24 @@ class TaskListTest {
         taskListSut.handleTodo(inputArray, MAKE_TODO_INPUT_VALID);
 
         assertEquals(tasksStub.get(0), taskListSut.getTasks().get(0));
+    }
+
+    @Test
+    void handleTodo_emptyTodo_fail() {
+        Parser parser = new Parser(MAKE_TODO_INPUT_INVALID);
+        String[] inputArray = parser.getInputArray();
+        assertEquals(ResponseFormatter.printDukeException(
+                new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION,
+                        Todo.TASK_NAME)), "Please try again:"),
+                        taskListSut.handleTodo(inputArray, MAKE_TODO_INPUT_INVALID));
+    }
+
+    @Test
+    void handleDeadline_emptyDesc_fail() {
+        assertEquals(ResponseFormatter.printDukeException(
+                new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION,
+                        Deadline.TASK_NAME)), "Please try again:"),
+                        taskListSut.handleDeadline(MAKE_DEADLINE_EMPTY_DESC_INVALID));
     }
 
     @Test

@@ -69,7 +69,7 @@ public class TaskList {
     public String handleMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
         try {
-            if (isValidIndex(number)) {
+            if (isInvalidIndex(number)) {
                 throw new DukeException(MESSAGE_INVALID_INDEX);
             }
         } catch (DukeException e) {
@@ -90,7 +90,7 @@ public class TaskList {
     public String handleUnMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
         try {
-            if (isValidIndex(number)) {
+            if (isInvalidIndex(number)) {
                 throw new DukeException(MESSAGE_INVALID_INDEX);
             }
         } catch (DukeException e) {
@@ -128,7 +128,7 @@ public class TaskList {
     public String handleDeadline(String originalInput) {
         Parser parser = new Parser(originalInput);
         try {
-            if (!parser.isValidDeadLineCommand() || !parser.isValidDescription(parser.getDeadlineInfo()[0])) {
+            if (parser.isInvalidDeadLineCommand() || parser.isInvalidDescription(parser.getDeadlineInfo()[0])) {
                 throw new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION, Deadline.TASK_NAME));
             }
         } catch (DukeException e) {
@@ -152,7 +152,7 @@ public class TaskList {
     public String handleEvent(String originalInput) {
         Parser parser = new Parser(originalInput);
         try {
-            if (!parser.isValidEventCommand() || !parser.isValidDescription(parser.getEventInfo()[0])) {
+            if (parser.isInvalidEventCommand() || parser.isInvalidDescription(parser.getEventInfo()[0])) {
                 throw new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION, Event.TASK_NAME));
             }
         } catch (DukeException e) {
@@ -176,7 +176,7 @@ public class TaskList {
     public String handleDelete(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
         try {
-            if (isValidIndex(number)) {
+            if (isInvalidIndex(number)) {
                 throw new DukeException(MESSAGE_INVALID_INDEX);
             }
         } catch (DukeException e) {
@@ -216,7 +216,7 @@ public class TaskList {
      * Function to check if the supplied key is within the bounds of no. of tasks in the tasklist
      * @param key supplied index key to test
      */
-    private boolean isValidIndex(int key) {
+    private boolean isInvalidIndex(int key) {
         return (key < 1) || (key > tasks.size());
     }
 }

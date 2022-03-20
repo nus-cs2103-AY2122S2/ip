@@ -61,22 +61,22 @@ public class Parser {
      * Validates the given deadline command
      * @return validity status of the given command.
      */
-    public boolean isValidDeadLineCommand() {
+    public boolean isInvalidDeadLineCommand() {
         boolean isEmptyMetaInfo = (originalInput.split("/by").length == 1);
         boolean isEmptyCommand = (inputArray.length <= 1);
 
-        return !(isEmptyCommand || isEmptyMetaInfo);
+        return isEmptyCommand || isEmptyMetaInfo;
     }
 
     /**
      * Validates the given event command
      * @return validity status of the given command.
      */
-    public boolean isValidEventCommand() {
+    public boolean isInvalidEventCommand() {
         boolean isEmptyMetaInfo = (originalInput.split("/at").length == 1);
         boolean isEmptyCommand = (inputArray.length <= 1);
 
-        return !(isEmptyCommand || isEmptyMetaInfo);
+        return isEmptyCommand || isEmptyMetaInfo;
     }
 
     /**
@@ -84,8 +84,11 @@ public class Parser {
      * @param description string
      * @return validity of the description string
      */
-    public boolean isValidDescription(String description) {
-        return !(description.isEmpty() || description.isBlank());
+    public boolean isInvalidDescription(String description) {
+        if (description == null) {
+            return true;
+        }
+        return description.isEmpty() || description.isBlank();
     }
 
     /**
@@ -95,7 +98,7 @@ public class Parser {
      */
     public String removeLastChar(String target) {
         return (target == null || target.length() == 0)
-                ? null
+                ? ""
                 : (target.substring(0, target.length() - 1));
     }
 }

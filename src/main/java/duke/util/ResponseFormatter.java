@@ -129,7 +129,7 @@ public final class ResponseFormatter {
      * @param curr Task object to be printed
      */
     private static String printTask(Task curr) {
-        return curr.getTaskIcon() + " [" + curr.isDone() + "]" + curr;
+        return curr.getTaskIcon() + " [" + curr.isDone() + "] " + curr;
     }
 
     /**
