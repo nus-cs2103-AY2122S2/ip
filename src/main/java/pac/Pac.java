@@ -26,31 +26,18 @@ public class Pac {
         }
     }
 
-    public void run() {
-        ui.showLogo();
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (PacException e) {
-                ui.showPacError(e);
-            } catch (IOException e) {
-                ui.showIOError(e);
-            } catch (IndexOutOfBoundsException e) {
-                ui.showIndexOutOfBoundsError(e);
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(tasks, ui, storage);
+        } catch (PacException e) {
+            return ui.showPacError(e);
+        } catch (IOException e) {
+            return ui.showIOError(e);
+        } catch (NumberFormatException e) {
+            return ui.showFormatError();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return ui.showFormatError();
         }
-        ui.closeScanner();
-    }
-
-    public static void main(String[] args) {
-        new Pac("data/Pac.txt").run();
     }
 }

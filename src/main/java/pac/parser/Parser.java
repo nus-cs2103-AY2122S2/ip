@@ -49,8 +49,7 @@ public class Parser {
             command = Commands.FIND;
             break;
         default:
-            command = Commands.ERROR;
-            break;
+            throw new PacException("Invalid Command.");
         }
 
         switch (command) {
@@ -63,6 +62,9 @@ public class Parser {
         case UNMARK:
             return new UnmarkCommand(Integer.parseInt(commandArray[1]) - 1);
         case TODO:
+            if(commandArray[1].trim().length() == 0) {
+                throw new PacException("Invalid Command Format");
+            }
             return new AddCommand(new ToDo(commandArray[1]));
         case DEADLINE:
             String[] deadlineArray = commandArray[1].split(" /by ", 2);

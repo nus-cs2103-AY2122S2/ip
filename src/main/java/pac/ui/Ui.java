@@ -22,96 +22,115 @@ public class Ui {
         sc.close();
     }
 
-    public void showLogo() {
-        String logo = " ____     ___    _____\n"
-            + "|  _ \\   / _ \\  |  ___|\n"
-            + "| |_| | | |_| | | |\n"
-            + "|  __/  | | | | | |___\n"
-            + "|_|     |_| |_| |_____|\n";
-        System.out.println(logo);
+    public String showExit(){
+        return ("Goodbye! See you soon. :)");
     }
 
-    public void showWelcome() {
-        System.out.println("Hello there! I'm Pac, your very own Personal Assistant ChatBot.");
-        System.out.println("How may I help you?");
-    }
-
-    public void showLine() {
-        System.out.println("-----------------");
-    }
-
-    public void showExit(){
-        System.out.println("Goodbye! See you soon. :)");
-    }
-
-    public void showList(TaskList tasks){
+    public String showList(TaskList tasks){
         int i = 1;
+        StringBuilder response = new StringBuilder();
 
         if(tasks.isEmpty()) {
-            System.out.println("There are no tasks left to complete");
+            response.append("There are no tasks left to complete.")
+                    .append(System.getProperty("line.separator"));
+        } else {
+            for (Task task : tasks.getTasks()) {
+                response.append(i).append(". ").append(task.toString())
+                        .append(System.getProperty("line.separator"));
+                i += 1;
+            }
         }
 
-        for (Task task : tasks.getTasks()) {
-            System.out.println(i++ +". " + task);
-        }
+        return response.toString();
     }
 
-    public void showFind(TaskList matchingTasks){
+    public String showFind(TaskList matchingTasks) {
         int i = 1;
+        StringBuilder response = new StringBuilder();
 
-        if(matchingTasks.isEmpty()) {
-            System.out.println("There are no tasks containing the keyword.");
+        if (matchingTasks.isEmpty()) {
+            response.append("here are no tasks containing the keyword.")
+                    .append(System.getProperty("line.separator"));
+        } else {
+            for (Task task : matchingTasks.getTasks()) {
+                response.append(i).append(". ").append(task.toString())
+                        .append(System.getProperty("line.separator"));
+                i += 1;
+            }
         }
 
-        for (Task task : matchingTasks.getTasks()) {
-            System.out.println(i++ +". " + task);
-        }
+        return response.toString();
     }
 
-    public void showMark(Task task) {
+    public String showMark(Task task) {
+        StringBuilder response = new StringBuilder();
+
         if (task.isMarked()) {
-            System.out.println("Task is already marked as done.");
-            System.out.println(task);
+            response.append("Task is already marked as done.")
+                    .append(System.getProperty("line.separator")).append(task.toString())
+                    .append(System.getProperty("line.separator"));
         } else {
-            System.out.println("Task is marked as done.");
-            System.out.println(task);
+            response.append("Task is marked as done.")
+                    .append(System.getProperty("line.separator")).append(task.toString())
+                    .append(System.getProperty("line.separator"));
         }
+
+        return response.toString();
     }
 
-    public void showUnmark(Task task) {
+    public String showUnmark(Task task) {
+        StringBuilder response = new StringBuilder();
+
         if (!task.isMarked()) {
-            System.out.println("Task is already marked as not done.");
-            System.out.println(task);
+            response.append("Task is already marked as not done.")
+                    .append(System.getProperty("line.separator")).append(task.toString())
+                    .append(System.getProperty("line.separator"));
         } else {
-            System.out.println("Task is marked as not done.");
-            System.out.println(task);
+            response.append("Task is marked as not done.")
+                    .append(System.getProperty("line.separator")).append(task.toString())
+                    .append(System.getProperty("line.separator"));
         }
+
+        return response.toString();
     }
 
-    public void showAddTask(Task task, TaskList tasks) {
-        System.out.println("added: " + task);
-        System.out.println("You have " + tasks.getSize() + " tasks in your list.");
+    public String showAddTask(Task task, TaskList tasks) {
+        StringBuilder response = new StringBuilder();
+
+        response.append("added: ").append(task.toString())
+                .append(System.getProperty("line.separator")).append("You have ")
+                .append(tasks.getSize()).append(" tasks in your list.")
+                .append(System.getProperty("line.separator"));
+
+        return response.toString();
     }
 
-    public void showDelete(Task task, TaskList tasks) {
-        int size = tasks.getSize() - 1;
-        System.out.println("Task has been deleted: " + task);
-        System.out.println("You have " + size + " tasks in your list.");
+    public String showDelete(Task task, TaskList tasks, int size) {
+        StringBuilder response = new StringBuilder();
+        response.append("Task has been deleted: ").append(task.toString())
+                .append(System.getProperty("line.separator"))
+                .append("You have ").append(size).append(" tasks in your list")
+                .append(System.getProperty("line.separator"));
+        return response.toString();
     }
 
-    public void showLoadingError() {
-        System.out.println("Something went wrong while reading the data file.");
+    public String showLoadingError() {
+        return "Something went wrong while reading the data file.";
     }
 
-    public void showPacError(PacException e) {
-        System.out.println(e.getMessage());
+    public String showPacError(PacException e) {
+        return e.getMessage();
     }
 
-    public void showIOError(IOException e) {
-        System.out.println(e.getMessage());
+    public String showIOError(IOException e) {
+        return e.getMessage();
     }
 
-    public void showIndexOutOfBoundsError(IndexOutOfBoundsException e) {
-        System.out.println("Invalid Index.");
+    public String showFormatError() {
+        return "Invalid Command Format";
+    }
+
+    public String showIndexOutOfBoundsError(IndexOutOfBoundsException e) {
+        return "Sorry! Invalid Index.";
     }
 }

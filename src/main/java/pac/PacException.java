@@ -7,6 +7,6 @@ public class PacException extends Exception{
 
     @Override
     public String getMessage() {
-        return "Sorry! " + super.getMessage();
+        return super.getMessage();
     }
 }

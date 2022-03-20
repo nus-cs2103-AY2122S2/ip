@@ -1,5 +1,6 @@
 package pac.command;
 
+import pac.PacException;
 import pac.task.TaskList;
 import pac.ui.Ui;
 import pac.storage.Storage;
@@ -15,9 +16,13 @@ public class MarkCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, IndexOutOfBoundsException {
-        tasks.mark(taskIndex);
-        ui.showMark(tasks.get(taskIndex));
-        storage.writeTasks(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, IndexOutOfBoundsException {
+        try {
+            tasks.mark(taskIndex);
+            storage.writeTasks(tasks);
+            return ui.showMark(tasks.get(taskIndex));
+        } catch (IndexOutOfBoundsException e) {
+            return  ui.showIndexOutOfBoundsError(e);
+        }
     }
 }

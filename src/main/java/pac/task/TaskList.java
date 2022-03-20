@@ -29,11 +29,11 @@ public class TaskList {
         return this.tasks.isEmpty();
     }
 
-    public void mark(int index) {
+    public void mark(int index) throws IndexOutOfBoundsException {
         tasks.get(index).markAsDone();
     }
 
-    public void unmark(int index) {
+    public void unmark(int index) throws IndexOutOfBoundsException{
         tasks.get(index).markAsNotDone();
     }
 

@@ -1,5 +1,6 @@
 package pac.command;
 
+import pac.PacException;
 import pac.task.TaskList;
 import pac.ui.Ui;
 import pac.storage.Storage;
@@ -14,9 +15,14 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        tasks.unmark(taskIndex);
-        ui.showUnmark(tasks.get(taskIndex));
-        storage.writeTasks(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        try {
+            tasks.unmark(taskIndex);
+            storage.writeTasks(tasks);
+            return ui.showUnmark(tasks.get(taskIndex));
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showIndexOutOfBoundsError(e);
+        }
+
     }
 }
