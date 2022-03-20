@@ -5,7 +5,7 @@ manager.
 ## Quick Start
 1. Ensure that Java `11` or above is installed 
 your computer.
-2. Download the latest `duke.jar` from 
+2. Download the latest `PinkPandaBot.jar` from 
 [here](https://github.com/SimJM/ip/releases).
 3. Copy the file to a folder you want to use as the
 home folder for Arthur.
@@ -141,7 +141,7 @@ description and occurs on 18 Feb 2020 at 6:00am.
 
 ### `update`
 
-Updates the task determined by the number from
+Updates the task description determined by the number from
 the list.
 
 Example of usage:
