@@ -13,5 +13,10 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+/text-dooke.ui-test/ACTUAL.txt
+text-dooke.ui-test/EXPECTED-UNIX.TXT
+
+# Java bytecode generated while running the code
+*.class
+
+/data/
