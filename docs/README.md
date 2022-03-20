@@ -1,29 +1,106 @@
-# User Guide
+![Ui png](https://user-images.githubusercontent.com/70706659/154679760-3c8fa8cb-f3cc-4242-9c6b-a3f9c9310ceb.PNG)
 
-## Features 
 
-### Feature-ABC
+# Duke
 
-Description of the feature.
+A desktop task management application that has the benefits of a Graphical User Interface (GUI) while being optimized for usage like a Command Line Interface (CLI). This application makes managing your task as easy as counting from 1 to 10.
 
-### Feature-XYZ
+## Setup
 
-Description of the feature.
+1. Ensure that you have installed Java 11 in your computer.
+2. Download the latest release here.
+3. Copy the .jar file into the folder you've chosen as the application's home folder.
+4. Double-click the .jar file to start the application.
 
-## Usage
+## Features
+- Add tasks
+- Delete tasks
+- View tasks
+- Mark/Unmark tasks as done
+- Find tasks
+- Update tasks
 
-### `Keyword` - Describe action
+## Usages
+Tasks are categorized as either a Todo, Event or Deadline.
 
-Describe the action and its outcome.
+### Add Todo
+Format:
+- `todo TASK_DESC`
+- TASK_DESC cannot be empty.
 
-Example of usage: 
+Example:
+- `todo study for quiz`
 
-`keyword (optional arguments)`
+### Add Event
+Format:
+- `event TASK_DESC /at YYYY-MM-DD`
+- TASK_DESC and YYYY-MM-DD cannot be empty.
 
-Expected outcome:
+Example:
+- `event engineering quiz /at 2022-03-03`
 
-Description of the outcome.
+### Add Deadline
+Format:
+- `deadline TASK_DESC /by YYYY-MM-DD`
+- TASK_DESC and YYYY-MM-DD cannot be empty.
 
-```
-expected output
-```
+Example:
+- `deadline engineering homework /by 2022-03-05`
+
+### Mark task
+Format:
+- `mark TASK_INDEX`
+- TASK_INDEX cannot be empty.
+
+Example:
+- `mark 2`
+
+### Unmark task
+Format:
+- `ummark TASK_INDEX`
+- TASK_INDEX cannot be empty.
+
+Example:
+- `ummark 2`
+
+### Delete task
+Format:
+- `delete TASK_INDEX`
+- TASK_INDEX cannot be empty.
+
+Example:
+- `delete 3`
+
+### Find task
+Format:
+- `find SEARCH_TERM`
+- SEARCH_TERM cannot be empty.
+
+Example:
+- `find homework`
+
+### Update task
+Can update either only the task description or both the task description and date. <br/>
+
+Format: <br/>
+
+Update only task description
+- `update TASK_INDEX TASK_DESC`
+- TASK_INDEX and TASK_DESC cannot be empty.
+
+Example:
+- `update 3 study for quiz`
+
+Update both task description and date
+- `update TASK_INDEX TASK_DESC /date YYYY-MM-DD`
+- TASK_INDEX and TASK_DESC cannot be empty.
+- If YYYY-MM-DD is empty, then only the description is updated.
+
+Example:
+- `update 3 study for quiz /date 2022-05-01`
+
+### Exit
+Terminates Duke <br/>
+
+Format:
+- `bye`

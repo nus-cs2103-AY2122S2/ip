@@ -1,24 +1,106 @@
-# Duke project template
+![Ui png](https://user-images.githubusercontent.com/70706659/154679760-3c8fa8cb-f3cc-4242-9c6b-a3f9c9310ceb.PNG)
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
-## Setting up in Intellij
+# Duke
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+A desktop task management application that has the benefits of a Graphical User Interface (GUI) while being optimized for usage like a Command Line Interface (CLI). This application makes managing your task as easy as counting from 1 to 10.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Setup
+
+1. Ensure that you have installed Java 11 in your computer.
+2. Download the latest release here.
+3. Copy the .jar file into the folder you've chosen as the application's home folder.
+4. Double-click the .jar file to start the application.
+
+## Features
+- Add tasks
+- Delete tasks
+- View tasks
+- Mark/Unmark tasks as done
+- Find tasks
+- Update tasks
+
+## Usages
+Tasks are categorized as either a Todo, Event or Deadline.
+
+### Add Todo
+Format:
+- `todo TASK_DESC`
+- TASK_DESC cannot be empty.
+
+Example:
+- `todo study for quiz`
+
+### Add Event
+Format:
+- `event TASK_DESC /at YYYY-MM-DD`
+- TASK_DESC and YYYY-MM-DD cannot be empty.
+
+Example:
+- `event engineering quiz /at 2022-03-03`
+
+### Add Deadline
+Format:
+- `deadline TASK_DESC /by YYYY-MM-DD`
+- TASK_DESC and YYYY-MM-DD cannot be empty.
+
+Example:
+- `deadline engineering homework /by 2022-03-05`
+
+### Mark task
+Format:
+- `mark TASK_INDEX`
+- TASK_INDEX cannot be empty.
+
+Example:
+- `mark 2`
+
+### Unmark task
+Format:
+- `ummark TASK_INDEX`
+- TASK_INDEX cannot be empty.
+
+Example:
+- `ummark 2`
+
+### Delete task
+Format:
+- `delete TASK_INDEX`
+- TASK_INDEX cannot be empty.
+
+Example:
+- `delete 3`
+
+### Find task
+Format:
+- `find SEARCH_TERM`
+- SEARCH_TERM cannot be empty.
+
+Example:
+- `find homework`
+
+### Update task
+Can update either only the task description or both the task description and date. <br/>
+
+Format: <br/>
+
+Update only task description
+- `update TASK_INDEX TASK_DESC`
+- TASK_INDEX and TASK_DESC cannot be empty.
+
+Example:
+- `update 3 study for quiz`
+
+Update both task description and date
+- `update TASK_INDEX TASK_DESC /date YYYY-MM-DD`
+- TASK_INDEX and TASK_DESC cannot be empty.
+- If YYYY-MM-DD is empty, then only the description is updated.
+
+Example:
+- `update 3 study for quiz /date 2022-05-01`
+
+### Exit
+Terminates Duke <br/>
+
+Format:
+- `bye`
