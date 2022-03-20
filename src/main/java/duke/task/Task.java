@@ -8,9 +8,6 @@ import duke.exception.InvalidActionException;
  * Abstract superclass of concrete classes representing Tasks that can be added to Duke.
  */
 public abstract class Task {
-    protected static final String TASK_ALREADY_DONE_MESSAGE = "Task already done!";
-    protected static final String TASK_ALREADY_UNDONE_MESSAGE = "Task already not done!";
-
     protected String name;
     protected String label;
     protected boolean isDone;
@@ -54,7 +51,7 @@ public abstract class Task {
      */
     public void markAsDone() throws InvalidActionException {
         if (isDone) {
-            throw new InvalidActionException(TASK_ALREADY_DONE_MESSAGE);
+            throw new InvalidActionException("Task already done!");
         }
         isDone = true;
     }
@@ -66,7 +63,7 @@ public abstract class Task {
      */
     public void markUndone() throws InvalidActionException {
         if (!isDone) {
-            throw new InvalidActionException(TASK_ALREADY_UNDONE_MESSAGE);
+            throw new InvalidActionException("Task already not done!");
         }
         isDone = false;
     }

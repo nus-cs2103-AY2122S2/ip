@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import duke.exception.InvalidActionException;
 import duke.task.Task;
 
-/** A list to manage the tasks in Duke */
+/**
+ * A list to manage the Tasks in Duke.
+ */
 public class TaskList {
     protected ArrayList<Task> list;
 
@@ -17,19 +19,19 @@ public class TaskList {
     }
 
     /**
-     * Adds a new task to the list.
+     * Adds a new Task to the list.
      *
-     * @param t The task to be added.
+     * @param t The Task to be added.
      */
     public void addTask(Task t) {
         list.add(t);
     }
 
     /**
-     * Returns the task specified by the index.
+     * Returns the Task specified by the index.
      *
      * @param index The task number to get.
-     * @return The task specified by the index.
+     * @return The Task specified by the index.
      */
     public Task getTask(int index) {
         assert list.size() > index;
@@ -37,9 +39,9 @@ public class TaskList {
     }
 
     /**
-     * Returns the task last added to the list.
+     * Returns the Task last added to the list.
      *
-     * @return The task last added to the list.
+     * @return The Task last added to the list.
      */
     public Task getLast() {
         assert list.size() > 0;
@@ -56,11 +58,11 @@ public class TaskList {
     }
 
     /**
-     * Marks the specified task as complete.
+     * Marks the specified Task as complete.
      *
-     * @param index The index of the task to be marked as complete.
-     * @return The String representation of the task marked as complete.
-     * @throws InvalidActionException If the task is already complete.
+     * @param index The index of the Task to be marked as complete.
+     * @return The String representation of the Task marked as complete.
+     * @throws InvalidActionException If the Task is already complete.
      */
     public String markItemDone(int index) throws InvalidActionException {
         assert index < size();
@@ -70,11 +72,11 @@ public class TaskList {
     }
 
     /**
-     * Marks the specified task as incomplete.
+     * Marks the specified Task as incomplete.
      *
-     * @param index The index of the task to be marked as incomplete.
-     * @return The String representation of the task marked as incomplete.
-     * @throws InvalidActionException If the task is already incomplete.
+     * @param index The index of the Task to be marked as incomplete.
+     * @return The String representation of the Task marked as incomplete.
+     * @throws InvalidActionException If the Task is already incomplete.
      */
     public String markItemUndone(int index) throws InvalidActionException {
         assert index < size();
@@ -84,10 +86,10 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the task list.
+     * Deletes a Task from the task list.
      *
-     * @param index The index of the task to be deleted from the task list.
-     * @return The String representation of the task deleted from the task list.
+     * @param index The index of the Task to be deleted from the task list.
+     * @return The String representation of the Task deleted from the task list.
      */
     public String deleteItem(int index) {
         assert index < size();
@@ -96,19 +98,19 @@ public class TaskList {
     }
 
     /**
-     * Gets the list of tasks in the list.
+     * Gets the list of Tasks in the list.
      *
-     * @return The ArrayList of tasks in the list.
+     * @return The ArrayList of Tasks in the list.
      */
     public ArrayList<Task> getItems() {
         return list;
     }
 
     /**
-     * Gets a sub-list of tasks that contain a specific keyword/phrase.
+     * Gets a sub-list of Tasks that contain a specific keyword/phrase.
      *
-     * @param query The specific keyword/phrase to search for
-     * @return A sub-list of tasks that contain a specific keyword/phrase.
+     * @param query The specific keyword/phrase to search for.
+     * @return A sub-list of Tasks that contain a specific keyword/phrase.
      */
     public ArrayList<Task> findItems(String query) {
         ArrayList<Task> newList = new ArrayList<>();

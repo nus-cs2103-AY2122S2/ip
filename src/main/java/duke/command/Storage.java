@@ -12,7 +12,9 @@ import java.util.List;
 import duke.task.Task;
 import duke.ui.Parser;
 
-/** Manages the storage of data from Duke into a file */
+/**
+ * Manages the storage of data from Duke into a file.
+ */
 public class Storage {
     private BufferedReader reader;
     private Path dukePath;
@@ -51,10 +53,10 @@ public class Storage {
     }
 
     /**
-     * Adds a task to the file.
+     * Adds a Task to the file.
      *
-     * @param t The task to be added to the file.
-     * @throws IOException If there are issues faced when writing the task into the file.
+     * @param t The Task to be added to the file.
+     * @throws IOException If there are issues faced when writing the Task into the file.
      */
     public void addTask(Task t) throws IOException {
         String newTask = t.toFileFormatString() + "\n";
@@ -62,10 +64,10 @@ public class Storage {
     }
 
     /**
-     * Deletes a task from the file.
+     * Deletes a Task from the file.
      *
-     * @param taskIndex The index of the task to be deleted.
-     * @throws IOException If there are issues faced when reading tasks from and writing tasks into the file.
+     * @param taskIndex The index of the Task to be deleted.
+     * @throws IOException If there are issues faced when reading Tasks from and writing Tasks into the file.
      */
     public void deleteTask(int taskIndex) throws IOException {
         List<String> currList = Files.readAllLines(dukePath);
@@ -83,8 +85,8 @@ public class Storage {
      * Modifies an existing entry in the file.
      * Converts the entry from done to undone or vice versa.
      *
-     * @param taskIndex The task to be modified.
-     * @throws IOException If there are issues faced when reading tasks from and writing tasks into the file.
+     * @param taskIndex The Task to be modified.
+     * @throws IOException If there are issues faced when reading Tasks from and writing Tasks into the file.
      */
     public void modifyTask(int taskIndex) throws IOException {
         List<String> currList = Files.readAllLines(dukePath);

@@ -7,7 +7,9 @@ import duke.task.Event;
 import duke.task.Reminder;
 import duke.task.Task;
 
-/** Contains functionality relating to generating Duke's responses */
+/**
+ * Contains functionality relating to generating Duke's responses.
+ */
 public class ResponseGenerator {
     private final String logo;
 
@@ -23,9 +25,9 @@ public class ResponseGenerator {
     }
 
     /**
-     * Returns a setup message.
+     * Returns a startup message.
      *
-     * @return A setup message.
+     * @return A startup message.
      */
     public String getStartupMessage() {
         return new StringBuilder().append("Hello! I'm\n").append(logo)
@@ -89,11 +91,11 @@ public class ResponseGenerator {
     }
 
     /**
-     * Returns the message to be printed when a task is added to the task list.
+     * Returns the message to be printed when a Task is added to the task list.
      *
-     * @param latestTask The task that was just added to the task list.
+     * @param latestTask The Task that was just added to the task list.
      * @param size The new size of the task list.
-     * @return The message to be printed when a task is added.
+     * @return The message to be printed when a Task is added.
      */
     public String getAddTaskMessage(Task latestTask, int size) {
         return new StringBuilder().append("added o.O:\n  ").append(latestTask.toString())
@@ -101,20 +103,20 @@ public class ResponseGenerator {
     }
 
     /**
-     * Returns the message to be printed when a reminder is added.
+     * Returns the message to be printed when a Reminder is added.
      *
-     * @param task The task to remind the user of.
+     * @param task The Task to remind the user of.
      * @param reminderTime The time to remind the user.
-     * @return The message to be printed when a reminder is added.
+     * @return The message to be printed when a Reminder is added.
      */
     public String getAddReminderMessage(Task task, Reminder reminderTime) {
         return ":D Reminder set at " + reminderTime.getDateTime() + " for task: " + task.getDescription();
     }
 
     /**
-     * Returns the message to be printed when a reminder is gotten.
+     * Returns the message to be printed with a Reminder.
      *
-     * @param t The task to remind about.
+     * @param t The Task to remind about.
      * @return The message to be printed to remind the user.
      */
     public String getReminderMessage(Task t) {
@@ -131,8 +133,8 @@ public class ResponseGenerator {
     /**
      * Prints the items in the task list.
      *
-     * @param list The list of tasks in the task list.
-     * @return A string containing all the tasks in the task list.
+     * @param list The list of Tasks in the task list.
+     * @return A String containing all the Tasks in the task list.
      */
     public String printItems(ArrayList<Task> list) {
         if (list.size() == 0) {
@@ -152,10 +154,11 @@ public class ResponseGenerator {
     }
 
     /**
-     * Prints the items in the task list found.
+     * Prints the items found in the task list.
+     * For when items are searched for using a specific criterion.
      *
-     * @param list The list of tasks in the task list.
-     * @return A string containing all the tasks in the task list.
+     * @param list The list of Tasks found in the task list.
+     * @return A String containing the Tasks found in the task list.
      */
     public String printFoundItems(ArrayList<Task> list) {
         if (list.size() == 0) {

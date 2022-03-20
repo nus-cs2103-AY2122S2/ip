@@ -18,10 +18,13 @@ import duke.ui.Parser;
 import duke.ui.ResponseGenerator;
 import javafx.application.Platform;
 
-/** An application to manage tasks */
+/**
+ * An application to manage Tasks.
+ */
 public class Duke {
     static final String DEADLINE_FORMAT = "/by";
     static final String EVENT_FORMAT = "/at";
+
     private Parser parser;
     private Storage storage;
     private TaskList taskList;

@@ -15,7 +15,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-/** Helps to make sense of user input */
+/**
+ * Helps to make sense of user input.
+ */
 public class Parser {
     private final String[] acceptableInputs = new String[]{"mark", "unmark", "todo", "deadline", "event",
         "delete", "find", "remind"};
