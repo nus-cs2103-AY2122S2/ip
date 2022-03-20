@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -60,39 +61,49 @@ public class Parser {
             String noOfTaskTodo = String.format("Now you have %d tasks in the list.\n", taskList.size());
             output = output + noOfTaskTodo;
             break;
+
         case "deadline":
-            String remainingWordsDeadline = "";
-            String deadline = "";
-            for (int i = 1; i < inputArr.length; i++) {
-                if (inputArr[i].equals("/by")) {
-                    deadline = inputArr[i + 1];
-                    break;
-                } else {
-                    remainingWordsDeadline = remainingWordsDeadline + " " + inputArr[i];
+            try {
+                String remainingWordsDeadline = "";
+                String deadline = "";
+                for (int i = 1; i < inputArr.length; i++) {
+                    if (inputArr[i].equals("/by")) {
+                        deadline = inputArr[i + 1];
+                        break;
+                    } else {
+                        remainingWordsDeadline = remainingWordsDeadline + " " + inputArr[i];
+                    }
                 }
+                Deadline dl = new Deadline(remainingWordsDeadline, deadline);
+                taskList.add(dl);
+                output = String.format("Got it. I've added this task:\n %s\n", dl);
+                String noOfTaskDeadline = String.format("Now you have %d tasks in the list.\n", taskList.size());
+                output = output + noOfTaskDeadline;
+            } catch (DateTimeParseException error) {
+                System.out.println(error);
+                output = "Please follow this format:\ndeadline <task description> /by YYYY-MM-DD\nUse 'help' for help";
             }
-            Deadline dl = new Deadline(remainingWordsDeadline, deadline);
-            taskList.add(dl);
-            output = String.format("Got it. I've added this task:\n %s\n", dl);
-            String noOfTaskDeadline = String.format("Now you have %d tasks in the list.\n", taskList.size());
-            output = output + noOfTaskDeadline;
             break;
         case "event":
-            String remainingWordsEvent = "";
-            String dayAndTime = "";
-            for (int i = 1; i < inputArr.length; i++) {
-                if (inputArr[i].equals("/at")) {
-                    dayAndTime = inputArr[i + 1];
-                    break;
-                } else {
-                    remainingWordsEvent = remainingWordsEvent + " " + inputArr[i];
+            try {
+                String remainingWordsEvent = "";
+                String dayAndTime = "";
+                for (int i = 1; i < inputArr.length; i++) {
+                    if (inputArr[i].equals("/at")) {
+                        dayAndTime = inputArr[i + 1];
+                        break;
+                    } else {
+                        remainingWordsEvent = remainingWordsEvent + " " + inputArr[i];
+                    }
                 }
+                Event e = new Event(remainingWordsEvent, dayAndTime);
+                taskList.add(e);
+                output = String.format("Got it. I've added this task:\n %s\n", e);
+                String noOfTaskEvent = String.format("Now you have %d tasks in the list.\n", taskList.size());
+                output = output + noOfTaskEvent;
+            } catch (DateTimeParseException error) {
+                output = "Please follow this format:\nevent <task description> /at YYYY-MM-DD\nUse 'help' for help";
             }
-            Event e = new Event(remainingWordsEvent, dayAndTime);
-            taskList.add(e);
-            output = String.format("Got it. I've added this task:\n %s\n", e);
-            String noOfTaskEvent = String.format("Now you have %d tasks in the list.\n", taskList.size());
-            output = output + noOfTaskEvent;
             break;
         case "delete":
             int num = Integer.valueOf(inputArr[1]) - 1;
@@ -109,19 +120,16 @@ public class Parser {
             }
             break;
         case "help":
-            output = "Here are all the commands available:\n"
-                    + "list - to list out all the task\n"
-                    + "bye - to end program\n"
-                    + "todo <input something you want to do> - to add something you want to tasks\n"
-                    + "deadline <input what is going be due> /by <input date> - to add a deadline to tasks\n"
-                    + "event <input event description> /at <input date>\n - to add an event to tasks"
-                    + "mark <input task number> - to mark task as done\n"
-                    + "unmark <input task number> - to mark task as not done\n"
-                    + "delete <input task number> - to delete task from tasks\n"
-                    + "update <input task number> <new description> - to update description of task";
+            output = "Please visit PinkPanda User Guide for help.\nhttps://simjm.github.io/ip/";
             break;
         case "find":
-            output = Action.find(inputArr[1]);
+            try {
+                output = Action.find(inputArr[1]);
+            } catch (NumberFormatException error) {
+                output = "The index you have entered is not a number.\n";
+            } catch (ArrayIndexOutOfBoundsException error) {
+                output = "The index you have entered is out of range.\n";
+            }
             break;
         case "update":
             int numToUpdate = Integer.valueOf(inputArr[1]) - 1;

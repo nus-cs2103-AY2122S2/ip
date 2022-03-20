@@ -6,14 +6,12 @@ import java.util.ArrayList;
  * Represents a bank that contains tasks
  */
 public class TaskBank {
-    private static ArrayList<Task> bank = new ArrayList<Task>();
-    // private static Storage storage;
+    private static ArrayList<Task> bank = new ArrayList<>();
 
     /**
      * Construtor for TaskBank
      */
     public TaskBank(Storage storage) {
-        // this.storage = storage;
         ArrayList<Task> memory = storage.readFile();
         for (int i = 0; i < bank.size(); i++) {
             bank.add(memory.get(i));
