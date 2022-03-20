@@ -54,7 +54,7 @@ public class Storage {
      *
      * @return a list of Tasks loaded from previous runs
      */
-    public duke.TaskList load() throws FileNotFoundException {
+    public duke.TaskList load(){
         duke.TaskList tasks = new duke.TaskList();
 
         try {
