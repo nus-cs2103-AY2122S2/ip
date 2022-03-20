@@ -2,6 +2,7 @@ package duke.task;
 
 import static duke.commons.core.Messages.MESSAGE_ADD_TASK;
 import static duke.commons.core.Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
+import static duke.commons.core.Messages.MESSAGE_INVALID_DATE;
 import static duke.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_DONE;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_UNDONE;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.exception.DukeException;
+import duke.util.Parser;
 import duke.util.ResponseFormatter;
 
 /**
@@ -67,7 +69,7 @@ public class TaskList {
     public String handleMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
         try {
-            if (!isValidIndex(number)) {
+            if (isValidIndex(number)) {
                 throw new DukeException(MESSAGE_INVALID_INDEX);
             }
         } catch (DukeException e) {
@@ -88,7 +90,7 @@ public class TaskList {
     public String handleUnMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
         try {
-            if (!isValidIndex(number)) {
+            if (isValidIndex(number)) {
                 throw new DukeException(MESSAGE_INVALID_INDEX);
             }
         } catch (DukeException e) {
@@ -124,23 +126,21 @@ public class TaskList {
      * @return response
      */
     public String handleDeadline(String[] inputArray, String originalInput) {
+        Parser parser = new Parser(originalInput);
         try {
-            if ((inputArray.length <= 1) || (originalInput.split("/by").length == 1)) {
+            if (!parser.isValidCommand() || !parser.isValidDescription(parser.getDeadlineInfo()[0])) {
                 throw new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION, Deadline.TASK_NAME));
             }
         } catch (DukeException e) {
             return ResponseFormatter.printDukeException(e, "Please try again:");
         }
 
-        String metaInfo = originalInput.split("/by")[1];
-        String strippedCommand = originalInput.substring(9);
         Task curr;
+        String[] deadlineInfo = parser.getDeadlineInfo();
         try {
-            curr = new Deadline(strippedCommand.split("/")[0].substring(0,
-                    strippedCommand.split("/")[0].length() - 1), metaInfo);
+            curr = new Deadline(deadlineInfo[0], deadlineInfo[1]);
         } catch (DateTimeParseException ex) {
-            return ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!"
-                    + "\nPlease try again:");
+            return ResponseFormatter.printMessage(MESSAGE_INVALID_DATE);
         }
         return processNewTask(curr);
     }
@@ -178,7 +178,7 @@ public class TaskList {
     public String handleDelete(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
         try {
-            if (!isValidIndex(number)) {
+            if (isValidIndex(number)) {
                 throw new DukeException(MESSAGE_INVALID_INDEX);
             }
         } catch (DukeException e) {
@@ -219,6 +219,6 @@ public class TaskList {
      * @param key supplied index key to test
      */
     private boolean isValidIndex(int key) {
-        return (key >= 1) && (key <= tasks.size());
+        return (key < 1) || (key > tasks.size());
     }
 }

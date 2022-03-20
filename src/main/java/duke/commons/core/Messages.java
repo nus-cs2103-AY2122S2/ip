@@ -11,4 +11,6 @@ public class Messages {
     public static final String MESSAGE_MARK_TASK_UNDONE = "OK, I've marked this task as not done yet:";
     public static final String MESSAGE_EMPTY_TASK_LIST = "There are currently no tasks to display.";
     public static final String MESSAGE_REMOVE_TASK_DONE = "Noted. I've removed this task:";
+    public static final String MESSAGE_INVALID_DATE = "Kindly input Date and Time in dd/mm/yyyy hhmm format!"
+                                                    + "\nPlease try again:";
 }

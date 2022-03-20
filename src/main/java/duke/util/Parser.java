@@ -4,8 +4,8 @@ package duke.util;
  * Handles the processing of user input into format this program accepts
  */
 public class Parser {
-    private String[] inputArray;
-    private String originalInput;
+    private final String[] inputArray;
+    private final String originalInput;
 
     /**
      * Takes in raw original user input and parses it to an array
@@ -39,5 +39,44 @@ public class Parser {
      */
     public String getOriginalInput() {
         return originalInput;
+    }
+
+    public String[] getDeadlineInfo() {
+        String metaInfo = originalInput.split("/by")[1];
+        String strippedCommand = originalInput.substring(9);
+        String description = strippedCommand.split("/")[0];
+
+        return new String[]{removeLastChar(description), metaInfo};
+    }
+
+    /**
+     * Validates the given command
+     * @return validity status of the given command.
+     */
+    public boolean isValidCommand() {
+        boolean isEmptyMetaInfo = (originalInput.split("/by").length == 1);
+        boolean isEmptyCommand = (inputArray.length <= 1);
+
+        return !(isEmptyCommand || isEmptyMetaInfo);
+    }
+
+    /**
+     * Validates the given description
+     * @param description string
+     * @return validity of the description string
+     */
+    public boolean isValidDescription(String description) {
+        return !(description.isEmpty() || description.isBlank());
+    }
+
+    /**
+     * Trims the last char of a string
+     * @param target string to be trimmed
+     * @return target string with the last char removed
+     */
+    public String removeLastChar(String target) {
+        return (target == null || target.length() == 0)
+                ? null
+                : (target.substring(0, target.length() - 1));
     }
 }
