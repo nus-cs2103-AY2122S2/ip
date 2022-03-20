@@ -4,7 +4,7 @@ package duke;
  * Deals with interactions with the user
  */
 public class Ui {
-    Ui() {
+    public Ui() {
     }
 
     /**

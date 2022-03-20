@@ -1,11 +1,11 @@
 package duke;
 
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 
 
 /**
@@ -54,7 +54,7 @@ public class Storage {
      *
      * @return a list of Tasks loaded from previous runs
      */
-    public duke.TaskList load() {
+    public duke.TaskList load() throws FileNotFoundException {
         duke.TaskList tasks = new duke.TaskList();
 
         try {

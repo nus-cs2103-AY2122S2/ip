@@ -51,26 +51,12 @@ public class Duke {
     }
 
     /**
-     * Runs through live user input to add, edit the tasks.
+     * Returns the appropriate response to the input.
+     * @param input
+     * @return
+     * @throws IOException
+     * @throws DukeExceptions
      */
-    void run() throws DukeExceptions, IOException {
-        ui.start();
-
-        Scanner sc = new Scanner(System.in);
-
-        while (sc.hasNextLine()) {
-            String values = sc.nextLine();
-            Pair<duke.TaskList, String> pair = parser.parse(ui, tasks, values);
-            tasks = pair.getKey();
-            String output = pair.getValue();
-            System.out.println(output);
-            if (values.equals("bye")) {
-                return;
-            }
-            storage.save(tasks);
-        }
-    }
-
     public String getResponse(String input) throws IOException, DukeExceptions {
 
         try {

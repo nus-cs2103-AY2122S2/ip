@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 /**
  * DukeDialogBox is a class that formats the Duke and User dialog box
@@ -25,6 +26,7 @@ public class DukeDialogBox extends HBox {
         displayPicture.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
+        this.setMinHeight(Region.USE_PREF_SIZE);
         boolean b = this.getChildren().addAll(text, displayPicture);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         tmp.get(0).setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10; -fx-padding: 10;");
@@ -44,6 +46,7 @@ public class DukeDialogBox extends HBox {
 
     public static DukeDialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DukeDialogBox(l, iv);
+        db.setMinHeight(Region.USE_PREF_SIZE);
         db.flip();
         return db;
     }

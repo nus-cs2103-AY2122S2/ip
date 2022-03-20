@@ -2,6 +2,8 @@ package duke.Gui;
 
 import duke.exceptions.DukeExceptions;
 import duke.Ui;
+import duke.Duke;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -31,9 +33,10 @@ public class DukeGui extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(Objects.requireNonNull(
+    private Duke duke = new Duke("data/duke.txt");
+    private Image userImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/bulbasaur.png")));
-    private Image duke = new Image(Objects.requireNonNull(
+    private Image dukeImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/pikachu.png")));
 
 
@@ -68,15 +71,15 @@ public class DukeGui extends Application {
      */
     private void handleUserInput(Stage stage) throws IOException, DukeExceptions {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label dukeText = new Label(duke.getResponse(userInput.getText()));
         if (userText.getText().equals("bye")) {
             stage.close();
         }
         dialogContainer.getChildren()
                 .addAll(DukeDialogBox.getUserDialog(userText,
-                                new ImageView(user)),
+                                new ImageView(userImage)),
                         DukeDialogBox.getDukeDialog(dukeText,
-                                new ImageView(duke)));
+                                new ImageView(dukeImage)));
         userInput.clear();
     }
 
@@ -116,6 +119,12 @@ public class DukeGui extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+
+        Ui ui = new Ui();
+        Label dukeText = new Label(ui.start());
+        dialogContainer.getChildren()
+                .addAll(DukeDialogBox.getDukeDialog(dukeText, new ImageView(dukeImage)));
+
     }
 
     /**
@@ -144,7 +153,6 @@ public class DukeGui extends Application {
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
 
         stage.setScene(scene);
         stage.show();
