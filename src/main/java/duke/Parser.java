@@ -82,6 +82,8 @@ public class Parser {
             } catch (DateTimeParseException error) {
                 System.out.println(error);
                 output = "Please follow this format:\ndeadline <task description> /by YYYY-MM-DD\nUse 'help' for help";
+            } catch (Exception error) {
+                output = "Please follow this format:\ndeadline <task description> /by YYYY-MM-DD\nUse 'help' for help";
             }
             break;
         case "event":
@@ -103,6 +105,8 @@ public class Parser {
                 output = output + noOfTaskEvent;
             } catch (DateTimeParseException error) {
                 output = "Please follow this format:\nevent <task description> /at YYYY-MM-DD\nUse 'help' for help";
+            } catch (Exception error) {
+                output = "Please follow this format:\ndeadline <task description> /by YYYY-MM-DD\nUse 'help' for help";
             }
             break;
         case "delete":
@@ -117,6 +121,8 @@ public class Parser {
                 output = "The index you have entered is not a number.\n";
             } catch (ArrayIndexOutOfBoundsException error) {
                 output = "The index you have entered is out of range.\n";
+            } catch (Exception error) {
+                output = "Use 'help' for help\n";
             }
             break;
         case "help":
@@ -129,6 +135,8 @@ public class Parser {
                 output = "The index you have entered is not a number.\n";
             } catch (ArrayIndexOutOfBoundsException error) {
                 output = "The index you have entered is out of range.\n";
+            } catch (Exception error) {
+                output = "Use 'help' for help\n";
             }
             break;
         case "update":
@@ -145,6 +153,8 @@ public class Parser {
                 output = "The index you have entered is not a number.\n";
             } catch (ArrayIndexOutOfBoundsException error) {
                 output = "The index you have entered is out of range.\n";
+            } catch (Exception error) {
+                output = "Use 'help' for help\n";
             }
             break;
         default:
