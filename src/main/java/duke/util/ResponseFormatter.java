@@ -63,7 +63,7 @@ public final class ResponseFormatter {
         sb.append("\n");
         sb.append(message);
         sb.append("\n");
-        sb.append(targetTask.getTaskIcon()).append(" [").append(targetTask.isDone()).append("]").append(targetTask);
+        sb.append(targetTask.getTaskIcon()).append(" [").append(targetTask.isDone()).append("] ").append(targetTask);
         sb.append("\n");
         sb.append(printNoOfTasks(tasks));
         sb.append("\n");
