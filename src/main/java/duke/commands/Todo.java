@@ -7,6 +7,9 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDos;
 
+/**
+ * Class that contains a method to allow for handling of the todo command.
+ */
 public class Todo extends Commands {
 
     public Todo(ArrayList<Task> tasks) {

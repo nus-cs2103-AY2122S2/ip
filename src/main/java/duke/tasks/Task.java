@@ -16,8 +16,7 @@ public class Task {
 
     /**
      * Call this method to see if we should mark X or leave blank.
-     * 
-     * @return
+     * @return status icon
      */
     public String getStatusIcon() {
         return (this.isDone ? "X" : " "); // mark done task with X

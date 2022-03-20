@@ -3,6 +3,9 @@ package duke.commands;
 import java.util.ArrayList;
 import duke.tasks.Task;
 
+/**
+ * Allows for marking the given task as done, by handling the mark command
+ */
 public class Mark extends Commands {
 
     public Mark(ArrayList<Task> tasks) {

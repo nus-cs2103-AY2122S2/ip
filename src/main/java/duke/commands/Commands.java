@@ -36,7 +36,6 @@ public abstract class Commands {
 
     /**
      * Constructor for Commands.
-     * 
      * @param tasks An arrayList of tasks.
      */
     public Commands(ArrayList<Task> tasks) {
@@ -45,7 +44,6 @@ public abstract class Commands {
 
     /**
      * Determines if input string is date or not.
-     * 
      * @param date
      * @return boolean
      */

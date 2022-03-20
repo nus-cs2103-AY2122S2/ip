@@ -19,7 +19,6 @@ public class Find extends Commands {
     /**
      * Prints out the list of tasks that have matching keywords from
      * findRelevantTasks.
-     * 
      * @param tasks
      */
     private String printResults(ArrayList<Task> tasks) {
@@ -43,7 +42,6 @@ public class Find extends Commands {
 
     /**
      * Returns tasks that contain the given keyword.
-     * 
      * @param keyword input word to search for
      * @param tasks   ArrayList that we will search through for matching keywords
      * @return

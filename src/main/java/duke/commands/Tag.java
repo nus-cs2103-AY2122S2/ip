@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+/**
+ * Class that holds a method which allows for handling the specified command.
+ */
 public class Tag extends Commands {
 
     public Tag(ArrayList<Task> tasks) {

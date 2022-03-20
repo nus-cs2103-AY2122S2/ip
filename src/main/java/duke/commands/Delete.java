@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+/**
+ * Delete class that handles the delete command. 
+ */
 public class Delete extends Commands {
 
     public Delete(ArrayList<Task> tasks) {

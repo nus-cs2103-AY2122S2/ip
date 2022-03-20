@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import duke.tasks.Task;
 
+/**
+ * List out all the tasks that we have in the list, nby handling the list command
+ */
 public class List extends Commands {
 
     public List(ArrayList<Task> tasks) {
@@ -13,7 +16,6 @@ public class List extends Commands {
     /**
      * Prints out the list of tasks that have matching keywords from
      * findRelevantTasks.
-     * 
      * @param tasks
      */
     public String printResults() {

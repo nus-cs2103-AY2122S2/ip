@@ -7,6 +7,9 @@ import duke.tasks.Events;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+/**
+ * An Event class that handles the event command.
+ */
 public class Event extends Commands {
 
     public Event(ArrayList<Task> tasks) {
@@ -15,7 +18,6 @@ public class Event extends Commands {
 
     /**
      * Handles the event command.
-     * 
      * @param deadline
      * @param counter
      * @param description

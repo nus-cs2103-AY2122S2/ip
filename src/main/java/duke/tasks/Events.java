@@ -32,6 +32,10 @@ public class Events extends Task {
         this.date = date;
     }
 
+    public String getAt(String at) {
+        return this.at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + "[" + super.getStatusIcon() + "] " + super.getDescription() + " (at: " + at + ")";
