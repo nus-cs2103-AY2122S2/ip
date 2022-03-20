@@ -2,9 +2,9 @@ package duke.task;
 
 import static duke.commons.core.Messages.MESSAGE_ADD_TASK;
 import static duke.commons.core.Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
-import static duke.commons.core.Messages.MESSAGE_NONEXIST_INDEX;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_DONE;
 import static duke.commons.core.Messages.MESSAGE_MARK_TASK_UNDONE;
+import static duke.commons.core.Messages.MESSAGE_NONEXIST_INDEX;
 import static duke.commons.core.Messages.MESSAGE_REMOVE_TASK_DONE;
 import static duke.task.util.TaskListTestUtil.DELETE_FARAWAY_TASK_VALID;
 import static duke.task.util.TaskListTestUtil.DELETE_FIRST_TASK_VALID;
