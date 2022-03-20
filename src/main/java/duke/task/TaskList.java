@@ -212,6 +212,14 @@ public class TaskList {
      * @return search results
      */
     public String handleFind(String[] inputArray) {
+        try {
+            if (inputArray.length == 1) {
+                throw new DukeException(MESSAGE_EMPTY_INDEX);
+            }
+        } catch (DukeException e) {
+            return ResponseFormatter.printDukeException(e, "Please try again:");
+        }
+
         String key = inputArray[1];
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : this.tasks) {
