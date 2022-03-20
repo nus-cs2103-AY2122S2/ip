@@ -57,13 +57,23 @@ public class Ui {
     }
 
     public void showMark(Task task) {
-        System.out.println("Task is marked as done.");
-        System.out.println(task);
+        if (task.isMarked()) {
+            System.out.println("Task is already marked as done.");
+            System.out.println(task);
+        } else {
+            System.out.println("Task is marked as done.");
+            System.out.println(task);
+        }
     }
 
     public void showUnmark(Task task) {
-        System.out.println("Task is marked as not done.");
-        System.out.println(task);
+        if (!task.isMarked()) {
+            System.out.println("Task is already marked as not done.");
+            System.out.println(task);
+        } else {
+            System.out.println("Task is marked as not done.");
+            System.out.println(task);
+        }
     }
 
     public void showAddTask(Task task, TaskList tasks) {

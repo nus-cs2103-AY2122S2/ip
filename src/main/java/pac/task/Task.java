@@ -24,8 +24,12 @@ public abstract class Task {
         return this.isDone;
     }
 
-    String getDescription() {
+    public String getDescription() {
         return this.description;
+    }
+
+    public boolean isMarked() {
+        return this.isDone;
     }
 
     abstract public String toWrite();
