@@ -4,7 +4,7 @@
 
 ### Duke
 
-![UI of Duke](docs\Ui.png)
+![UI of Duke](docs/Ui.png)
 
 ### Manage Tasks
 
