@@ -81,7 +81,7 @@ public class Parser {
         case FIND:
             return new FindCommand(commandArray[1]);
         case RESCHEDULE:
-            String[] rescheduleArray = commandArray[1].split(" ", 2);
+            String[] rescheduleArray = commandArray[1].split(" /r ", 2);
             return new RescheduleCommand(Integer.parseInt(rescheduleArray[0]) - 1, rescheduleArray[1]);
         default:
             throw new PacException("Invalid Command.");
