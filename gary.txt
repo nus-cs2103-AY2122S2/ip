@@ -1,0 +1,4 @@
+1. T[ ] groceries
+2. E[ ] birthday    on:   19 Dec 2022 23:59 pm
+3. D[ ] assignment   by:  01 Mar 2022 14:00 pm
+4. T[ ] run
