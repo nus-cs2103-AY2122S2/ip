@@ -1,0 +1,10 @@
+TODO sleep true
+DEADLINE eat false 21/12/1999-12:34
+MONEYCHANGE -5.00 false mark
+MONEYCHANGE -6.00 false don
+MONEYCHANGE 3.00 false mike
+TODO eat false
+TODO drink false
+TODO shower false
+MONEYCHANGE -5.00 false Simon
+MONEYCHANGE -5.00 false Simon
