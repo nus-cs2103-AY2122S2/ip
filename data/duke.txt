@@ -1,4 +1,0 @@
-T|0|buy apple
-T|1|sell pear
-D|0|cry |2022-12-12 1900
-E|0|party |2022-12-30 1550
