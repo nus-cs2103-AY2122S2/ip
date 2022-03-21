@@ -1,5 +1,8 @@
 package pac.parser;
 
+/**
+ * All the commands Pac recognises
+ */
 public enum Commands {
     LIST,
     MARK,

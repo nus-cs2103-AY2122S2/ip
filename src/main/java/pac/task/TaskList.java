@@ -2,6 +2,9 @@ package pac.task;
 
 import java.util.ArrayList;
 
+/**
+ * For the list of Tasks
+ */
 public class TaskList {
     public ArrayList<Task> tasks;
 
@@ -37,6 +40,11 @@ public class TaskList {
         tasks.get(index).markAsNotDone();
     }
 
+    /**
+     * returns new TaskList with list of tasks containing the keyword
+     * @param keyword
+     * @return
+     */
     public TaskList find(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task t : tasks) {

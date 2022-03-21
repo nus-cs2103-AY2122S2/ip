@@ -3,6 +3,9 @@ package pac.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * For deadline tasks
+ */
 public class Deadline extends Task{
     private LocalDate dateTime;
     private String dateTimeStr;
@@ -23,12 +26,20 @@ public class Deadline extends Task{
         this.dateTime = LocalDate.parse(dateTimeStr);
     }
 
+    /**
+     * Reschedules the date
+     * @param dateTimeStr
+     */
     @Override
     public void rescheduleDate(String dateTimeStr) {
         this.dateTimeStr = dateTimeStr;
         this.dateTime = LocalDate.parse(dateTimeStr);
     }
 
+    /**
+     * Returns the String that is written into data file
+     * @return
+     */
     @Override
     public String toWrite() {
         int bool;

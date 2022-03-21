@@ -14,8 +14,17 @@ import pac.PacException;
 import pac.task.ToDo;
 import pac.command.UnmarkCommand;
 
+/**
+ * Parser parses the user input and returns a Command
+ */
 public class Parser {
 
+    /**
+     * parses the user input and returns the corresponding command
+     * @param fullCommand
+     * @return
+     * @throws PacException
+     */
     public static Command parse(String fullCommand) throws PacException {
         String[] commandArray = fullCommand.split(" ", 2);
         String keyWord = commandArray[0].toLowerCase();

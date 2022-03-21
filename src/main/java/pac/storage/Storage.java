@@ -14,13 +14,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Responsible for storing the tasks in a data file
+ */
 public class Storage {
 
     private final File file;
 
+    /**
+     * creates a data file at filePath is it not existing already
+     * @param filePath
+     * @throws IOException
+     * @throws PacException
+     */
     public Storage(String filePath) throws IOException, PacException {
 
-        File folder = new File(filePath.split("/", 2)[0]);
+        File folder = new File(filePath.split("/")[0]);
         if (!folder.exists()) {
             if(!folder.mkdir()) {
                 throw new PacException("Something went wrong while creating data file.");
@@ -37,6 +46,11 @@ public class Storage {
         this.file = file;
     }
 
+    /**
+     * writes the tasks to the data file
+     * @param tasks
+     * @throws IOException
+     */
     public void writeTasks(TaskList tasks) throws IOException{
         String textToWrite = "";
         FileWriter fw = new FileWriter(file);
@@ -47,6 +61,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * reads the data file and returns a ArrayList of tasks
+     * @return
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> readTasks() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(file);

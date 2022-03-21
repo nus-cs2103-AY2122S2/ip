@@ -8,15 +8,31 @@ import pac.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Executes the reschedule command for tasks
+ *  returns the ui message for Pac response
+ */
 public class RescheduleCommand extends Command{
     private final int taskIndex;
     private final String dateTimeStr;
 
+    /**
+     * RescheduleCommand constructor takes in a int and String
+     * @param taskIndex
+     * @param dateTimeStr
+     */
     public RescheduleCommand(int taskIndex, String dateTimeStr) {
         this.taskIndex = taskIndex;
         this.dateTimeStr = dateTimeStr;
     }
 
+    /**
+     *
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @return
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
