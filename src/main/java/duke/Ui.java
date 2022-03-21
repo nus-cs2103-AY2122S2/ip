@@ -32,7 +32,7 @@ public class Ui {
      * Prints the error message for empty description.
      */
     public String emptyInput() {
-        return(" ☹ OOPS!!! The description of a todo cannot be empty.");
+        return(" ☹ OOPS!!! The description of a task cannot be empty.");
     }
 
     /**
