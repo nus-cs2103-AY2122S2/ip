@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# delete old data files
+rm -r ../data/
+
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then
