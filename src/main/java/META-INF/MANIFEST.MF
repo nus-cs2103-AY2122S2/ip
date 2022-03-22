@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+istjbot.Main-Class: istjbot.IstjBot
+
