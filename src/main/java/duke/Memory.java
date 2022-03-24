@@ -241,6 +241,8 @@ public class Memory {
         parser.load();
         parser.updateAll();
 
+        assert file.exists();
+
         echo.echoString("Setup Complete!");
     }
 
