@@ -45,6 +45,8 @@ public class Parser {
 
         this.memory = memory;
 
+        assert this.file.exists()
+
     }
 
     /**
