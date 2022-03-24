@@ -10,19 +10,19 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
-    private String byMmmDdYyyyFormat() {
-        return String.format("%s %s %s", by.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH),
-                by.getDayOfMonth(), by.getYear());
-    }
-
     public Deadline(String isDone, String description, String by) {
         super(isDone, description);
         this.by = LocalDate.parse(by);
     }
 
+    private String byMmmDdYyyyFormat() {
+        return String.format("%s %s %s", by.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH),
+                by.getDayOfMonth(), by.getYear());
+    }
+
     @Override
-    public String fileFormat() {
-        return String.format("D | %s | %s\n", super.fileFormat(), by);
+    public String toFileFormat() {
+        return String.format("D | %s | %s\n", super.toFileFormat(), by);
     }
 
     @Override

@@ -8,8 +8,8 @@ public class Todo extends Task {
     }
 
     @Override
-    public String fileFormat() {
-        return String.format("T | %s\n", super.fileFormat());
+    public String toFileFormat() {
+        return String.format("T | %s\n", super.toFileFormat());
     }
 
     @Override

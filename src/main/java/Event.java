@@ -1,19 +1,19 @@
 public class Event extends Task {
     private final String at;
 
-    Event(String description, String at) {
+    public Event(String description, String at) {
         super(description);
         this.at = at;
     }
 
-    Event(String isDone, String description, String at) {
+    public Event(String isDone, String description, String at) {
         super(isDone, description);
         this.at = at;
     }
 
     @Override
-    public String fileFormat() {
-        return String.format("E | %s | %s\n", super.fileFormat(), at);
+    public String toFileFormat() {
+        return String.format("E | %s | %s\n", super.toFileFormat(), at);
     }
 
     @Override
