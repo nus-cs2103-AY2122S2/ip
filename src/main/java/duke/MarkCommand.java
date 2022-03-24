@@ -1,16 +1,18 @@
+package duke;
+
 import java.io.IOException;
 
-public class UnmarkCommand extends Command {
-    UnmarkCommand(String commandArgument) {
+public class MarkCommand extends Command {
+    MarkCommand(String commandArgument) {
         super(commandArgument);
     }
 
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
         try {
-            int indexItemToBeUnmarked = Integer.parseInt(commandArgument) +
+            int indexItemToBeMarked = Integer.parseInt(commandArgument) +
                     ui.TURN_ONE_BASED_INDEXING_TO_ZERO_BASED_INDEXING;
-            taskList.getAllTask().get(indexItemToBeUnmarked).markTaskAsUndone();
+            taskList.getAllTask().get(indexItemToBeMarked).markTaskAsDone();
             storage.save(taskList);
         } catch (NumberFormatException nfe) {
             throw new NumberFormatException("something");

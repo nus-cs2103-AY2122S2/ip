@@ -1,3 +1,5 @@
+package duke;
+
 public class ErrorCommand extends Command {
     ErrorCommand() {
         super("Error");

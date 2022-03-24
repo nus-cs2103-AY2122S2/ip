@@ -1,16 +1,18 @@
+package duke;
+
 import java.io.IOException;
 
-public class MarkCommand extends Command {
-    MarkCommand(String commandArgument) {
+public class DeleteCommand extends Command {
+    DeleteCommand(String commandArgument) {
         super(commandArgument);
     }
 
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
         try {
-            int indexItemToBeMarked = Integer.parseInt(commandArgument) +
+            int indexItemToBeDeleted = Integer.parseInt(commandArgument) +
                     ui.TURN_ONE_BASED_INDEXING_TO_ZERO_BASED_INDEXING;
-            taskList.getAllTask().get(indexItemToBeMarked).markTaskAsDone();
+            taskList.deleteTaskFromTaskList(indexItemToBeDeleted);
             storage.save(taskList);
         } catch (NumberFormatException nfe) {
             throw new NumberFormatException("something");
