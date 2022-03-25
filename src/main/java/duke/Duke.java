@@ -201,9 +201,12 @@ public class Duke extends Application {
         try {
             toReturn = parser.parse(input, this.tasks, this.storage);
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+        if (toReturn == "bye") {
+            System.exit(0);
         }
         return toReturn;
     }
