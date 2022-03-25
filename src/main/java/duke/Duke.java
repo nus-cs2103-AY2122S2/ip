@@ -34,6 +34,7 @@ public class Duke extends Application {
     private static ArrayList<Task> masterList = new ArrayList<>();
     private Storage storage;
     private TaskList tasks;
+    private  Parser parser;
     private Ui ui;
     private final String END_MESSAGE = "Sayonara~";
     private ScrollPane scrollPane;
@@ -49,6 +50,7 @@ public class Duke extends Application {
     public Duke(String filePath) {
         this.ui = new Ui(LINE_BREAK);
         storage = new Storage(filePath);
+        this.parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -63,7 +65,7 @@ public class Duke extends Application {
      * Runs Duke to receive commands until command "bye" is given
      */
     public void run() {
-        this.ui.initUi();
+//        this.ui.initUi();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         Parser parser = new Parser();
@@ -184,8 +186,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText.toString(), new ImageView(user).getImage()),
+                DialogBox.getDukeDialog(dukeText.toString(), new ImageView(duke).getImage())
         );
         userInput.clear();
     }
@@ -194,7 +196,15 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String input) {
+        String toReturn = "";
+        try {
+            toReturn = parser.parse(input, this.tasks, this.storage);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return toReturn;
     }
 }
