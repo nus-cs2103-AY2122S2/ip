@@ -31,8 +31,16 @@ public class Parser {
      * @return DateTime of input only
      */
     private final DateTime getDateTime(String[] inputArr) {
-        String[] dateTimeArr = inputArr[1].split("/")[1].split("[- ]"); // [String, yyyy, mm, dd, HHMM]
-        return new DateTime(Arrays.copyOfRange(dateTimeArr, 1, dateTimeArr.length));
+        String[] dateTimeArr = new String[6];
+        dateTimeArr = inputArr[1].split("/")[1].split("[- ]"); // [String, yyyy, mm, dd, HHMM, null]
+        dateTimeArr[0] = dateTimeArr[4].substring(0, 2); // hours
+        String year = dateTimeArr[1];
+        String month = dateTimeArr[2];
+        String day = dateTimeArr[3];
+        String hour = dateTimeArr[4].substring(0, 2);
+        String minute = dateTimeArr[4].substring(2, 4);
+        String[] toFeedDateTime = { year, month, day, hour, minute};
+        return new DateTime(toFeedDateTime);
         // will reduce dateTimeArr to [yyyy, mm, dd, HHMM]
     }
 
