@@ -1,3 +1,2 @@
-T|1|eat apple
 D|0|submit iP|1111-11-11-11-11
 T|0|eat snake

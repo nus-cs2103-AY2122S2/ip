@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -36,7 +37,7 @@ public class Duke extends Application {
     private TaskList tasks;
     private  Parser parser;
     private Ui ui;
-    private final String END_MESSAGE = "Sayonara~";
+    public static final String END_MESSAGE = "Sayonara~";
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -205,9 +206,7 @@ public class Duke extends Application {
         } catch (IOException e) {
             return e.getMessage();
         }
-        if (toReturn == "bye") {
-            System.exit(0);
-        }
+
         return toReturn;
     }
 }
