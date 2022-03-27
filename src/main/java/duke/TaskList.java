@@ -85,7 +85,7 @@ public class TaskList {
         String toReturn = "Here are the matching tasks in your lists:\n";
         for (int i = 0; i < masterList.size(); i++) {
             if (masterList.get(i).toString().contains(keyword)) {
-                toReturn += (i + 1) + "." + masterList.get(i) + "\n";
+                toReturn += "\t" + (i + 1) + "." + masterList.get(i) + "\n";
             }
         }
 

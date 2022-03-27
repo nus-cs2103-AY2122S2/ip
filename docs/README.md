@@ -129,7 +129,7 @@ Example of usage:
 
 Expected outcome:
 
-Confirmation from Duke that the task has been unmarked
+A list of all existing tasks
 
 ```
 Here are the task:
@@ -139,3 +139,42 @@ Here are the task:
 <div markdown="span" class="alert alert-warning"> :bulb: **Tip**
 The number on the left of the task is their respective index, which will be used for `mark`, `unmark` and `delete`
 </div>
+
+### `find` - Find all tasks with a given keyword
+
+Find all tasks based on a given keyword given by the user
+
+Format: `find KEYWORD`
+
+Example of usage:
+
+`find apple`
+
+Expected outcome:
+
+A list of all existing tasks with the keyword "apple"
+
+```
+Here are the task:
+    1.[T][X]Bake apple cake
+    2.[T][]Eat apple
+```
+
+### `delete` - Delete a task
+
+Delete a task based on its index in the tasklist
+
+Format: `delete INDEX`
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+
+Confirmation from Duke that the task has been deleted
+
+```
+Removed this task:
+    1.[T][X]Bake apple cake
+```
