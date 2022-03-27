@@ -193,8 +193,6 @@ Expected outcome:
 
 Application closes
 
-Application closes
-
 ```
 Sayonara!~
 ```
