@@ -178,3 +178,21 @@ Confirmation from Duke that the task has been deleted
 Removed this task:
     1.[T][X]Bake apple cake
 ```
+
+### `bye` - End Duke
+
+Closes the Duke application
+
+Format: `bye`
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+Application closes
+
+```
+Sayonara!~
+```
