@@ -20,7 +20,7 @@ public class Storage {
         this.filePath = filePath;
         String home =  System.getProperty("user.home"); // base directory
         // following code should give me [HOME_DIRECTORY]/Desktop/iP/data
-        this.path = java.nio.file.Paths.get(home,"Desktop", "iP", "data");
+        this.path = java.nio.file.Paths.get(home);
     }
 
     /**

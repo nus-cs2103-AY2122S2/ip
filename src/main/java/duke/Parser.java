@@ -109,6 +109,9 @@ public class Parser {
         case "delete":
             Task deletedTask = tasklist.delete(Integer.parseInt(inputArr[1]) - 1);
             return DELETE_SUCCESS + deletedTask;
+
+        case "find":
+            return tasklist.find(inputArr[1]);
         default:
             throw new DukeException(":( OOPS!!!! I'm sorry, but I don't know what that means!");
         }

@@ -136,6 +136,6 @@ Here are the task:
     1.[D][X]Sleep (by: DEC 30 2021 23:00)
     2.[E][]Go dance party (at: DEC 31 2021 23:00)
 ```
-<div markdown="span" class="alert alert-warning">:bulb: **Tip**
+<div markdown="span" class="alert alert-warning"> :bulb: **Tip**
 The number on the left of the task is their respective index, which will be used for `mark`, `unmark` and `delete`
 </div>

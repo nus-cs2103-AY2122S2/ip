@@ -80,4 +80,15 @@ public class TaskList {
         masterList.remove(index);
         return currTask;
     }
+
+    public String find(String keyword) {
+        String toReturn = "Here are the matching tasks in your lists:\n";
+        for (int i = 0; i < masterList.size(); i++) {
+            if (masterList.get(i).toString().contains(keyword)) {
+                toReturn += (i + 1) + "." + masterList.get(i) + "\n";
+            }
+        }
+
+        return toReturn;
+    }
 }
