@@ -1,20 +1,15 @@
 package duke;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
 
 /**
  * Class {@code Storage} for storing task into TaskList
  */
 public class Storage {
     ArrayList<Task> taskList = new ArrayList<>();
+    private final FileHandler fileHandler;
 
     /**
      * Overloaded Constructor with filepath
@@ -22,6 +17,7 @@ public class Storage {
      * @param filePath filePath to File for storing
      */
     public Storage(String filePath) {
+        this.fileHandler = new FileHandler();
         loadTask(taskList, filePath);
         loadTags(taskList);
     }
@@ -35,31 +31,7 @@ public class Storage {
         String currentDirectory = System.getProperty("user.dir");
         String path = currentDirectory + "\\src\\main\\java\\duke\\data\\tagList.txt";
         path = path.replace("\\", File.separator);
-        try {
-            File taskFile = new File(path);
-            Scanner reader = new Scanner(taskFile);
-            while (reader.hasNextLine()) {
-                String data = reader.nextLine();
-                int index = Integer.parseInt(data.substring(0,1));
-                Task currentTask = taskList.get(index-1);
-                data = data.substring(3,data.length()-1);
-                if(!data.isEmpty()) {
-                    String[] tags = data.split(",");
-                    for (String tag : tags) {
-                        String tagDescription = tag.strip();
-                        currentTask.addTag(tagDescription);
-                    }
-                }
-            }
-        } catch(Exception fileInvalid) {
-            try {
-                File file = new File(path);
-                Files.createDirectories(Path.of(file.getParent()));
-                Files.createFile(Path.of(path));
-            } catch (Exception e) {
-                System.out.println("Error");
-            }
-        }
+        fileHandler.handleLoadTags(taskList,path);
     }
     /**
      * Return all task stored within File.
@@ -80,49 +52,7 @@ public class Storage {
         String currentDirectory = System.getProperty("user.dir");
         String path = currentDirectory + "\\src\\main\\java\\duke\\data\\duke.txt";
         path = path.replace("\\", File.separator);
-        try {
-            File taskFile = new File(path);
-            Scanner reader = new Scanner(taskFile);
-            while (reader.hasNextLine()) {
-                String data = reader.nextLine();
-                if (data.contains("(by:")) {
-                    data = data.substring(9);
-                    String[] taskText = data.split("\\(by:");
-                    StringBuilder sb = new StringBuilder(taskText[1].strip());
-                    sb.deleteCharAt(sb.length()-1);
-                    Deadline deadlineTask = new Deadline(taskText[0].strip(), sb.toString());
-                    if (data.contains("[X]")) {
-                        deadlineTask.setDone();
-                    }
-                    taskList.add(deadlineTask);
-                } else if (data.contains("(at: ")) {
-                    data = data.substring(9);
-                    String[] taskText = data.split("\\(at:");
-                    StringBuilder sb = new StringBuilder(taskText[1].strip());
-                    sb.deleteCharAt(sb.length()-1);
-                    Event eventTask = new Event(taskText[0].strip(),sb.toString());
-                    if (data.contains("[X]")) {
-                        eventTask.setDone();
-                    }
-                    taskList.add(eventTask);
-                } else {
-                    data = data.substring(9);
-                    Todo todoTask = new Todo(data);
-                    if (data.contains("[X]")) {
-                        todoTask.setDone();
-                    }
-                    taskList.add(todoTask);
-                }
-            }
-        } catch(Exception fileInvalid) {
-            try {
-                File file = new File(path);
-                Files.createDirectories(Path.of(file.getParent()));
-                Files.createFile(Path.of(path));
-            } catch (Exception e) {
-                System.out.println("Error");
-            }
-        }
+        fileHandler.handleLoadTask(taskList, path);
     }
 
     /**
@@ -132,40 +62,13 @@ public class Storage {
      */
     // Reusable code for writing into duke.txt task list
     public void saveToTaskList(ArrayList<Task> taskList) {
-
         String currentDir = System.getProperty("user.dir");
         String tasksPath = currentDir + "\\src\\main\\java\\duke\\data\\duke.txt";
         tasksPath = tasksPath.replace("\\", File.separator);
 
         String tagsPath = currentDir + "\\src\\main\\java\\duke\\data\\tagList.txt";
         tagsPath = tagsPath.replace("\\", File.separator);
-        try {
-            // Remove current file tasks
-            PrintWriter pw = new PrintWriter(tasksPath);
-            pw.close();
-            File taskFile = new File(tasksPath);
-            FileWriter myWriter = new FileWriter(taskFile,true);
-            for(int i = 0; i < taskList.size(); i++) {
-                myWriter.write((i + 1) + "." + taskList.get(i).toString() + "\r\n");
-            }
-            myWriter.close();
-        } catch(NullPointerException | IOException fileInvalid) {
-            System.out.println("File is Invalid!");
-        }
-
-        try {
-            PrintWriter pw = new PrintWriter(tagsPath);
-            pw.close();
-            File tagFile = new File(tagsPath);
-            FileWriter myWriter = new FileWriter(tagFile,true);
-            for(int i = 0; i < taskList.size(); i++) {
-                myWriter.write((i + 1) + "." + taskList.get(i).getTags() + "\r\n");
-            }
-            myWriter.close();
-        } catch(NullPointerException | IOException fileInvalid) {
-            System.out.println("ERROR!!");
-        }
-
+        fileHandler.handleSave(taskList, tasksPath, tagsPath);
     }
 }
 
