@@ -22,17 +22,17 @@ Format: `deadline DESCRIPTION /by yyyy-mm-dd [HHMM]`
 -  input time must be in 24-hour format (e.g `2359`  is 11:59 pm)
 
 Examples:
--  `deadline return book 2022-02-20 `
-- `deadline submit assignment 2022-02-24 2359`
+-  `deadline return book /by 2022-02-20 `
+- `deadline submit assignment /by 2022-02-24 2359`
 
 ### Adding a event task: `event`
 Creates and tracks an event task.  
-Format: `event DESCRIPTION /by yyyy-mm-dd HHMM HHMM`
+Format: `event DESCRIPTION /at yyyy-mm-dd HHMM HHMM`
 - input time must be in 24-hour format
 - both start and end times are required
 - default due time is 6:00 am
 
-Example: `event team meeting 2022-02-26 1800 1700`
+Example: `event team meeting /at 2022-02-26 1600 1700`
 
 ### Listing all tasks: `list`
 Lists out all the recorded tasks.  
