@@ -70,8 +70,8 @@ Format: `sort TASK_TYPE [ORDER]`
 - Default order is ascending
 
 Examples:
-- `sort`
-- `sort ascending`
+- `sort deadline`
+- `sort event ascending`
 	 
 
 
