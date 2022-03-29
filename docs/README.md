@@ -27,7 +27,7 @@ Examples:
 
 ### Adding a event task: `event`
 Creates and tracks an event task.  
-Format: `event DESCRIPTION /by yyyy-mm-dd HHHMM HHMM`
+Format: `event DESCRIPTION /by yyyy-mm-dd HHMM HHMM`
 - input time must be in 24-hour format
 - both start and end times are required
 - default due time is 6:00 am
@@ -63,9 +63,10 @@ Format: `mark INDEX`
 Example: `unmark 3`
 
 ### Sort list of tasks: `sort`
-Lists sorted deadlines and events either by descending or the ascending order.  
-Format: `sort [ORDER]`
-- Keywords for order: `ascending`, `descending`, `asc` and `desc`
+Lists sorted deadlines and events either by descending, or the ascending order.  
+Format: `sort TASK_TYPE [ORDER]`
+- Supported `TASK_TYPE` are: `deadline` and `event`
+- Keywords for `ORDER`: `ascending`, `descending`, `asc` and `desc`
 - Default order is ascending
 
 Examples:
