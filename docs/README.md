@@ -1,29 +1,117 @@
 # User Guide
 
-## Features 
+Duke is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-### Feature-ABC
+## Quick start
 
-Description of the feature.
+1. Ensure you have Java `11` or above installed in your Computer.
 
-### Feature-XYZ
+1. Download the latest `duke.jar` from [here](https://github.com/sibinhho99-nus/ip/releases/).
 
-Description of the feature.
+1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-## Usage
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
+   ![Ui](Ui.png)
 
-### `Keyword` - Describe action
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`list`** and pressing Enter will list all current tasks.<br>
 
-Describe the action and its outcome.
 
-Example of usage: 
+1. Refer to the [Features](#features) below for details of each command.
 
-`keyword (optional arguments)`
+## Features
 
-Expected outcome:
+### Viewing help: `help`
 
-Description of the outcome.
+Opens User Guide in default browser.
 
-```
-expected output
-```
+Format: `help`
+
+Examples:
+* `help`
+
+### Exiting the program: `bye`
+
+Closes Duke.
+
+Format: `bye`
+
+Examples:
+* `bye`
+
+### Listing all tasks: `list`
+
+Displays all current tasks.
+
+Format: `list`
+
+Examples:
+* `list`
+
+### Finding task by keyword: `find`
+
+Finds task whose name contains keyword.
+
+Format: `find KEYWORD`
+
+Examples:
+* `find home`
+* `find school`
+
+### Marking task as done: `mark`
+
+Marks specified task as done.
+
+Format: `mark INDEX`
+
+Examples:
+* `mark 1`
+
+
+### Marking task as not done: `unmark`
+
+Marks specified task as not done.
+
+Format: `unmark INDEX`
+
+Examples:
+* `unmark 1`
+
+### Adding todo task: `todo`
+
+Adds a todo task.
+
+Format: `todo NAME`
+
+Examples:
+* `todo buy book`
+
+### Adding deadline task: `deadline`
+
+Adds a deadline task.
+
+Due date must be of form YYYY-MM-DD.
+
+Format: `deadline NAME /by DUE_DATE`
+
+Examples:
+* `deadline return book /by 2021-12-03`
+
+### Adding event task: `event`
+
+Adds an event task.
+
+Date must be of form YYYY-MM-DD.
+
+Format: `event NAME /at DATE`
+
+Examples:
+* `event project meeting /at 2021-12-03`
+
+### Deleting task: `delete`
+
+Deletes a specified task.
+
+Format: `delete INDEX`
+
+Examples:
+* `delete 1`
