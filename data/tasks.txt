@@ -1,0 +1,7 @@
+T|0|run
+D|0|school work|2020-02-19
+E|0|watch movie|2022-01-01
+T|0|walk the dog
+T|0|run
+D|0|sleep|2019-01-01
+E|0|fishing|2019-01-01
