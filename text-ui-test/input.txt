@@ -1,0 +1,13 @@
+todo take down Stormterror
+list
+event windtrace festival at last week of January
+list
+deadline pull for Shenqi by 25 Jan 2022
+list
+do 1
+do 2
+do 3
+list
+undo 1
+list
+bye
