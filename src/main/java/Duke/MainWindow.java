@@ -1,11 +1,9 @@
 package Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
@@ -52,19 +50,4 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
-//    @FXML
-//    private void handleUserInput() throws DukeException {
-//        Label userText = new Label(userInput.getText());
-//////        Label dukeText = new Label(commandParser.parseCommand(userInput.getText(), taskList, uiPrinter, storage));
-//        Label dukeText = new Label(duke.getResponse(userInput.getText()));
-////        String userText = userInput.getText();
-////        String dukeText = commandParser.parseCommand(userText, taskList, uiPrinter, storage);
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, new ImageView(userImage)),
-//                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
-////                DialogBox.getUserDialog(userText, user),
-////                DialogBox.getDukeDialog(dukeText, duke)
-//        );
-//        userInput.clear();
-//    }
 }

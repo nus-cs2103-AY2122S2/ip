@@ -28,7 +28,7 @@ class TaskList {
     /**
      * Process the printing of a task.
      */
-    public String processPrintList(Ui uiPrinter){ //needs to be un-voided - return full string
+    public String processPrintList(Ui uiPrinter){ 
         System.out.println("I got here");
         String fullListMessage = "";
         fullListMessage = uiPrinter.listMsg;
@@ -47,8 +47,7 @@ class TaskList {
         if(markingIndex != -1) {
             taskList.get(markingIndex).setCompleted(isCompleted);
             returnMarkingTask = uiPrinter.getCompleteMessage(isCompleted);
-            // returnMarkingTask += processPrintList(uiPrinter);
-            processPrintList(uiPrinter); //need to get list to return string
+            processPrintList(uiPrinter);
             return returnMarkingTask;
         }
         else{
@@ -64,7 +63,7 @@ class TaskList {
         return new ToDoTask(description, false);
     }
 
-    public String processStats(String numDayStr, Ui uiPrinter)throws DukeException{ //needs to be un-voided
+    public String processStats(String numDayStr, Ui uiPrinter)throws DukeException{
         checkIfNumber(numDayStr);
         LocalDateTime pastDays = LocalDateTime.now().minusDays(Integer.parseInt(numDayStr));
         ArrayList<Task> filterList =  new ArrayList<>();
@@ -95,23 +94,6 @@ class TaskList {
             return deleteReturn;
         }
     }
-
-//    /**
-//     * Processes deletion of a task.
-//     */
-//    public boolean processDelete(String delStrIndex, Ui uiPrinter) throws DukeException{
-//        int delIndex = getExistingIndex(delStrIndex);
-//        if(delIndex != -1) {
-//            Task deleteTask = taskList.get(delIndex);
-//            taskList.remove(delIndex);
-////            uiPrinter.printMessage(Ui.getDeleteTaskInListMsg(deleteTask, taskList.size()));
-//            return true;
-//        }
-//        else{
-////            uiPrinter.printMessage("Fail to delete Task!");
-//            return false;
-//        }
-//    }
 
     /**
      * Check if in put is a valid number.
@@ -160,7 +142,7 @@ class TaskList {
     /**
      * Finds tasks containing specified keyword.
      */
-    public String processFind(String keyword, Ui uiPrinter) { //needs to be un-voided
+    public String processFind(String keyword, Ui uiPrinter) {
         String returnFind = "";
         returnFind = uiPrinter.getTaskMsg;
         for (int i = 0; i < taskList.size(); i++) {

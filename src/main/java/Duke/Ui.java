@@ -44,12 +44,10 @@ class Ui {
     /**
      * Print the tasks present in the arraylist.
      */
-    public String printTasks(ArrayList<Task> taskList){ //needs to be un-voided
-        //System.out.println(horizontalLine);
+    public String printTasks(ArrayList<Task> taskList){
         String listReturn = "";
         int  i = 1;
         for(Task t: taskList){
-            //System.out.println((i++) +". " +t);
             String temp = i++ + ". " + t + "\n";
             listReturn += temp;
         }
