@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 class TaskList {
-    private ArrayList<Task> taskList;
+    public ArrayList<Task> taskList;
 
     public TaskList(){
         this.taskList = new ArrayList<Task>();
@@ -28,26 +28,32 @@ class TaskList {
     /**
      * Process the printing of a task.
      */
-    public void processPrintList(Ui uiPrinter){
-        uiPrinter.printMessage(Ui.listMsg);
-        uiPrinter.printTasks(taskList);
+    public String processPrintList(Ui uiPrinter){ //needs to be un-voided - return full string
+        System.out.println("I got here");
+        String fullListMessage = "";
+        fullListMessage = uiPrinter.listMsg;
+        fullListMessage += uiPrinter.listMsg;
+        fullListMessage += uiPrinter.printTasks(taskList);
+        return fullListMessage;
     }
 
     /**
      * Process the marking status of a task.
      */
-    public boolean processMarkingTask(String taskIndexStr, boolean isCompleted,
+    public String processMarkingTask(String taskIndexStr, boolean isCompleted,
                                       Ui uiPrinter) throws DukeException{
         int markingIndex = getExistingIndex(taskIndexStr);
+        String returnMarkingTask = "";
         if(markingIndex != -1) {
             taskList.get(markingIndex).setCompleted(isCompleted);
-            uiPrinter.printMessage(Ui.getCompleteMessage(isCompleted));
-            processPrintList(uiPrinter);
-            return true;
+            returnMarkingTask = uiPrinter.getCompleteMessage(isCompleted);
+            // returnMarkingTask += processPrintList(uiPrinter);
+            processPrintList(uiPrinter); //need to get list to return string
+            return returnMarkingTask;
         }
         else{
-            uiPrinter.printMessage("Fail to set task complete status!");
-            return false;
+            returnMarkingTask = "Fail to set task complete status!";
+            return returnMarkingTask;
         }
     }
 
@@ -58,7 +64,7 @@ class TaskList {
         return new ToDoTask(description, false);
     }
 
-    public void processStats(String numDayStr, Ui uiPrinter)throws DukeException{
+    public String processStats(String numDayStr, Ui uiPrinter)throws DukeException{ //needs to be un-voided
         checkIfNumber(numDayStr);
         LocalDateTime pastDays = LocalDateTime.now().minusDays(Integer.parseInt(numDayStr));
         ArrayList<Task> filterList =  new ArrayList<>();
@@ -67,26 +73,45 @@ class TaskList {
             if(task.getCreatedDate().isBefore(pastDays)){ continue; }
             filterList.add(task);
         }
-
-        uiPrinter.printTasks(filterList);
+        String returnStats = "";
+        returnStats = uiPrinter.printTasks(filterList);
+        return returnStats;
     }
 
     /**
      * Processes deletion of a task.
      */
-    public boolean processDelete(String delStrIndex, Ui uiPrinter) throws DukeException{
+    public String processDelete(String delStrIndex, Ui uiPrinter) throws DukeException{
         int delIndex = getExistingIndex(delStrIndex);
+        String deleteReturn = "";
         if(delIndex != -1) {
             Task deleteTask = taskList.get(delIndex);
             taskList.remove(delIndex);
-            uiPrinter.printMessage(Ui.getDeleteTaskInListMsg(deleteTask, taskList.size()));
-            return true;
+            deleteReturn = uiPrinter.getDeleteTaskInListMsg(deleteTask, taskList.size());
+            return deleteReturn;
         }
         else{
-            uiPrinter.printMessage("Fail to delete Task!");
-            return false;
+            deleteReturn = "Fail to delete Task!";
+            return deleteReturn;
         }
     }
+
+//    /**
+//     * Processes deletion of a task.
+//     */
+//    public boolean processDelete(String delStrIndex, Ui uiPrinter) throws DukeException{
+//        int delIndex = getExistingIndex(delStrIndex);
+//        if(delIndex != -1) {
+//            Task deleteTask = taskList.get(delIndex);
+//            taskList.remove(delIndex);
+////            uiPrinter.printMessage(Ui.getDeleteTaskInListMsg(deleteTask, taskList.size()));
+//            return true;
+//        }
+//        else{
+////            uiPrinter.printMessage("Fail to delete Task!");
+//            return false;
+//        }
+//    }
 
     /**
      * Check if in put is a valid number.
@@ -135,12 +160,15 @@ class TaskList {
     /**
      * Finds tasks containing specified keyword.
      */
-    public void processFind(String keyword, Ui uiPrinter) {
-        uiPrinter.printMessage(Ui.getTaskMsg);
+    public String processFind(String keyword, Ui uiPrinter) { //needs to be un-voided
+        String returnFind = "";
+        returnFind = uiPrinter.getTaskMsg;
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).getDescription().contains(keyword)) {
-                System.out.println( (i+1) + ". " + taskList.get(i).toString());
+                String temp = (i + 1) + ". " + taskList.get(i).toString() + "\n";
+                returnFind += temp;
             }
         }
+        return returnFind;
     }
 }

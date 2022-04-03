@@ -84,7 +84,7 @@ class Storage {
             fw.close();
         }
         catch(SecurityException se){
-            uiPrinter.printMessage(se.getMessage());
+            se.getMessage();
         }
         catch(IOException e){
             uiPrinter.printMessage("Unable to save to filepath data/duke.txt");

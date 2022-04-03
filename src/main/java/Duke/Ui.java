@@ -1,6 +1,7 @@
 package Duke;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class Ui {
     public final static String welcomeMsg = "Hello! I am Duke\nWhat can I do for you?";
@@ -43,13 +44,29 @@ class Ui {
     /**
      * Print the tasks present in the arraylist.
      */
-    public void printTasks(ArrayList<Task> taskList){
-        System.out.println(horizontalLine);
+    public String printTasks(ArrayList<Task> taskList){ //needs to be un-voided
+        //System.out.println(horizontalLine);
+        String listReturn = "";
         int  i = 1;
         for(Task t: taskList){
-            System.out.println((i++) +". " +t);
+            //System.out.println((i++) +". " +t);
+            String temp = i++ + ". " + t + "\n";
+            listReturn += temp;
         }
-        System.out.println(horizontalLine);
+        return listReturn;
+    }
+
+    /**
+     * Format print messages.
+     */
+    public String showWelcomeMessage() {
+        return "Hi! My name is Duke and I will be your task manager for today :)"
+                + "checkout https://prgj.github.io/ip/ for a list of commands I can manage";
+    }
+
+    public String readUserInput() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
     }
 
     /**

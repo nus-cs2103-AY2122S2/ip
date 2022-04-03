@@ -2,11 +2,15 @@ package Duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  * Parses user input and delegates tasks accordingly.
  */
 class Parser {
+
+    private TaskList taskList;
 
     public final static String bye = "bye";
     public final static String list = "list";
@@ -32,66 +36,91 @@ class Parser {
     /**
      * Parses the input specified by the user
      */
-    public boolean parseCommand(String userinput, TaskList taskList,
+    public String parseCommand(String userinput, TaskList taskList,
                                 Ui uiPrinter, Storage storage) throws DukeException{
         Task newTask = null;
         boolean requiredSaveToFile = false;
+        String returnValue = "";
+        boolean taskSuccess = false;
+
         if (userinput.equals(bye)) {
-                uiPrinter.printMessage(Ui.byeMsg);
-                return false;
-            }
-            else if (userinput.startsWith(todo)){
-                String taskStr = userinput.substring(todo.length());
-                taskStr = taskStr.trim();
-                newTask = taskList.processTodo(taskStr);
-            }
-            else if (userinput.startsWith(deadline)){
-                newTask = processDeadlineCommand(userinput, taskList);
-            }
-            else if (userinput.startsWith(event)){
-                newTask = processEventCommand(userinput, taskList);
-            }
-            else if (userinput.equals(list)) {
-                taskList.processPrintList(uiPrinter);
-            }
-            else if (userinput.startsWith(delete)){
-                String taskStr = userinput.substring(delete.length());
-                taskStr = taskStr.trim();
-                requiredSaveToFile = taskList.processDelete(taskStr, uiPrinter);
-            }
-            else if (userinput.startsWith(mark)){
-                String taskStr = userinput.substring(mark.length());
-                taskStr = taskStr.trim();
-                requiredSaveToFile = taskList.processMarkingTask(taskStr, true, uiPrinter);
-            }
-            else if (userinput.startsWith(unmark)) {
-                String taskStr = userinput.substring(unmark.length());
-                taskStr = taskStr.trim();
-                requiredSaveToFile = taskList.processMarkingTask(taskStr, false, uiPrinter);
-            }
-            else if (userinput.startsWith(find)) {
-                String findStr = userinput.substring(find.length()).trim();
-                taskList.processFind(findStr, uiPrinter);
-            }
-            else if (userinput.startsWith(showStats)) {
-                String numDayStr = userinput.substring(showStats.length());
-                numDayStr = numDayStr.trim();
-                taskList.processStats(numDayStr, uiPrinter);
-            }
-            else {
-                throw new DukeException(Ui.invalidCommandMsg);
-            }
-
-            if(newTask != null){
-                taskList.addTask(newTask);
-                uiPrinter.printMessage(Ui.getTaskInListMsg(newTask, taskList.getNumTasks()));
+            returnValue = uiPrinter.byeMsg;
+        }
+        else if (userinput.startsWith(todo)){
+            String taskStr = userinput.substring(todo.length());
+            taskStr = taskStr.trim();
+            newTask = taskList.processTodo(taskStr);
+        }
+        else if (userinput.startsWith(deadline)){
+            newTask = processDeadlineCommand(userinput, taskList);
+        }
+        else if (userinput.startsWith(event)){
+            newTask = processEventCommand(userinput, taskList);
+        }
+        else if (userinput.equals(list)) {
+            returnValue = taskList.processPrintList(uiPrinter); //printlist
+        }
+        else if (userinput.startsWith(delete)){
+            String taskStr = userinput.substring(delete.length());
+            taskStr = taskStr.trim();
+            returnValue = taskList.processDelete(taskStr, uiPrinter);
+//            if (taskSuccess == true) {
+//                returnValue = uiPrinter.getDeleteTaskInListMsg(deleteTask, taskList.size());
+//                requiredSaveToFile = true;
+//            } else {
+//                returnValue = "Fail to delete Task!";
+//                requiredSaveToFile = false;
+//            }
+            if (!returnValue.equals("Fail to delete Task!")) {
                 requiredSaveToFile = true;
+            } else {
+                requiredSaveToFile = false;
             }
+        }
+        else if (userinput.startsWith(mark)){
+            String taskStr = userinput.substring(mark.length());
+            taskStr = taskStr.trim();
+            returnValue = taskList.processMarkingTask(taskStr, true, uiPrinter);
+            if (!returnValue.equals("Fail to set task complete status!")) {
+                requiredSaveToFile = true;
+            } else {
+                requiredSaveToFile = false;
+            }
+        }
+        else if (userinput.startsWith(unmark)) {
+            String taskStr = userinput.substring(unmark.length());
+            taskStr = taskStr.trim();
+            returnValue = taskList.processMarkingTask(taskStr, false, uiPrinter);
+            if (!returnValue.equals("Fail to set task complete status!")) {
+                requiredSaveToFile = true;
+            } else {
+                requiredSaveToFile = false;
+            }
+        }
+        else if (userinput.startsWith(find)) {
+            String findStr = userinput.substring(find.length()).trim();
+            returnValue = taskList.processFind(findStr, uiPrinter); //needs to be un-voided
+        }
+        else if (userinput.startsWith(showStats)) {
+            String numDayStr = userinput.substring(showStats.length());
+            numDayStr = numDayStr.trim();
+            returnValue = taskList.processStats(numDayStr, uiPrinter); //needs to be un-voided
+        }
+        else {
+            throw new DukeException(Ui.invalidCommandMsg);
+        }
 
-            if(requiredSaveToFile){
-                storage.saveTaskToFile(taskList.getTaskList(), uiPrinter);
-            }
-            return true;
+        if(newTask != null){
+            taskList.addTask(newTask);
+            uiPrinter.printMessage(Ui.getTaskInListMsg(newTask, taskList.getNumTasks()));
+            returnValue = uiPrinter.getTaskInListMsg(newTask, taskList.getNumTasks());
+            requiredSaveToFile = true;
+        }
+
+        if(requiredSaveToFile){
+            storage.saveTaskToFile(taskList.getTaskList(), uiPrinter);
+        }
+        return returnValue;
     }
 
     /**
