@@ -1,0 +1,11 @@
+todo homework
+list
+event /at Tuesday
+event Gym /at Tuesday
+deadline run /by 
+deadline run /by Wednesday
+list
+mark 1
+mark 3
+unmark 1
+list
