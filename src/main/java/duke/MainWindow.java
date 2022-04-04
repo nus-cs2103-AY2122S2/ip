@@ -37,7 +37,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        // @@LapisRaider punnyhuimin-reused
+        // Reused from https://github.com/LapisRaider/ip/blob/master/src/main/java/duke/ui/MainWindow.java
+        // Tried to set up the scroll pane to be transparent in the fxml but could not do so. Noticed that
+        // this user managed to do so and the code snippet that could achieve that was the following.
         scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
+        //@@LapisRaider
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcome, dukeImage)
         );

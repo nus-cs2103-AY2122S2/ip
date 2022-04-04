@@ -51,20 +51,35 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialog = new DialogBox(text, img);
+        // @@yunbinmo punnyhuimin-reused
+        // Reused from https://github.com/yunbinmo/ip/blob/master/src/main/java/spike/ui/DialogBox.java
+        // Sets the color of the dialog box based on who is talking. Minor modifications made to the color to
+        // match Ducky.
         userDialog.getChildren().get(0).setStyle("-fx-background-color: #3d341a; -fx-background-radius: 10;");
+        // @@yubinmo
         return userDialog;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        // @@yunbinmo punnyhuimin-reused
+        // Reused from https://github.com/yunbinmo/ip/blob/master/src/main/java/spike/ui/DialogBox.java
+        // Sets the color of the dialog box based on who is talking. Minor modifications made to the color to
+        // match Ducky.
         db.getChildren().get(0).setStyle("-fx-background-color: #bd8b04; -fx-background-radius: 10;");
+        // @@yunbinmo
         db.flip();
         return db;
     }
 
     public static DialogBox getWarningDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        // @@yunbinmo punnyhuimin-reused
+        // Reused from https://github.com/yunbinmo/ip/blob/master/src/main/java/spike/ui/DialogBox.java
+        // Sets the color of the dialog box based on who is talking. Minor modifications made to the color to
+        // match Ducky.
         db.getChildren().get(0).setStyle("-fx-background-color: #f56c42; -fx-background-radius: 10;");
+        // @@yunbinmo
         db.flip();
         return db;
     }
