@@ -56,7 +56,7 @@ public class DialogBox extends HBox {
         // Sets the color of the dialog box based on who is talking. Minor modifications made to the color to
         // match Ducky.
         userDialog.getChildren().get(0).setStyle("-fx-background-color: #3d341a; -fx-background-radius: 10;");
-        // @@yubinmo
+        // @@yunbinmo
         return userDialog;
     }
 
