@@ -28,7 +28,7 @@ class TaskList {
     /**
      * Process the printing of a task.
      */
-    public String processPrintList(Ui uiPrinter){ 
+    public String processPrintList(Ui uiPrinter){
         System.out.println("I got here");
         String fullListMessage = "";
         fullListMessage = uiPrinter.listMsg;
