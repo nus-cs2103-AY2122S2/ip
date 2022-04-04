@@ -9,7 +9,13 @@ your computer.
 [here](https://github.com/Vishwanth2210/ip/releases).
 3. Copy the file to a folder you want to use as the
 home folder for Arthur.
-4. Double-click on the file to start the app. 
+4. Double-click on the file to start the app. The app would be similar to the image below upon startup.
+
+![UiStartup](UiStartup.png)
+
+As you run commands, the app would look similar to the image below.
+
+![UiFull](Ui.png)
 
 ## Features 
 - Listing all tasks: `list`
