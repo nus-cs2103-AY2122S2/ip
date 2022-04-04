@@ -54,6 +54,7 @@ public class DateHelper {
      *
      * @param flexInput This is the date input provided by the user.
      */
+    // Solution to get current day of week adapted from https://coderanch.com/t/385117/java/date-Monday
     private void patternType(String flexInput) {
         DateChecker dateCheck = new DateChecker(flexInput);
         Dates inputtedDay = dateCheck.getDate(); // This gives the enum date which is like "MONDAY"
