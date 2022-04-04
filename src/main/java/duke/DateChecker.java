@@ -24,6 +24,7 @@ public class DateChecker {
      *
      * @param input Day inputted by the user. E.g. Mon, Sun, Thur
      */
+    // Solution to get current day of week adapted from https://coderanch.com/t/385117/java/date-Monday
     public DateChecker(String input) {
         dateInput = input.toLowerCase();
 
