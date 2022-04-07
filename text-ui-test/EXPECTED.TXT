@@ -1,7 +1,16 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm duke.duke
+What can I do for you?
+List is empty, please add task
+Got it. I've added this task:
+  [T][ ] fun
+Now you have 1 tasks in the list
+Got it. I've added this task:
+  [D][ ] be fun  (by: monday)
+Now you have 2 tasks in the list
+Got it. I've added this task:
+  [E][ ] fun w everyone  (at: sunday)
+Now you have 3 tasks in the list
+1.[T][ ] fun
+2.[D][ ] be fun  (by: monday)
+3.[E][ ] fun w everyone  (at: sunday)
+Bye. Hope to see you again soon!

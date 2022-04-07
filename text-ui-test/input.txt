@@ -1,0 +1,20 @@
+list
+todo
+deadline
+event
+mark 1
+deadline do something /by 11/11/2020
+deadline do that /by 12-12-2022
+event do this /at 2020-12-22
+list
+mark 1
+mark 2
+unmark 1
+unmark 2
+unmark 3
+list
+todo do this thing
+mark 3
+unmark 3
+list
+bye
