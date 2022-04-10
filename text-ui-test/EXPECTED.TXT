@@ -1,7 +1,99 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+-------------------------------------------------
+ Hello! I'm Duke
+ What can I do for you
+-------------------------------------------------
+-------------------------------------------------
+ Got it. I've added this task:
+   [T][ ] read book
+ Now you have 1 task(s) in the list.
+-------------------------------------------------
+-------------------------------------------------
+ Got it. I've added this task:
+   [D][ ] return book (by: Sunday)
+ Now you have 2 task(s) in the list.
+-------------------------------------------------
+-------------------------------------------------
+Here are the task(s) in your list:
+ 1.[T][ ] read book
+ 2.[D][ ] return book (by: Sunday)
+-------------------------------------------------
+-------------------------------------------------
+ Got it. I've added this task:
+   [E][ ] project meeting (at: Mon 2-4pm)
+ Now you have 3 task(s) in the list.
+-------------------------------------------------
+-------------------------------------------------
+ Got it. I've added this task:
+   [D][ ] do homework (by: no idea :-p)
+ Now you have 4 task(s) in the list.
+-------------------------------------------------
+-------------------------------------------------
+ Nice! I've marked this task as done:
+    [T][X] read book
+-------------------------------------------------
+-------------------------------------------------
+ Nice! I've marked this task as done:
+    [D][X] return book (by: Sunday)
+-------------------------------------------------
+-------------------------------------------------
+Here are the task(s) in your list:
+ 1.[T][X] read book
+ 2.[D][X] return book (by: Sunday)
+ 3.[E][ ] project meeting (at: Mon 2-4pm)
+ 4.[D][ ] do homework (by: no idea :-p)
+-------------------------------------------------
+-------------------------------------------------
+ Nice! I've marked this task as not done yet:
+    [D][ ] return book (by: Sunday)
+-------------------------------------------------
+-------------------------------------------------
+Here are the task(s) in your list:
+ 1.[T][X] read book
+ 2.[D][ ] return book (by: Sunday)
+ 3.[E][ ] project meeting (at: Mon 2-4pm)
+ 4.[D][ ] do homework (by: no idea :-p)
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: todo <description>
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: event <description> /at <date/time>
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: event <description> /at <date/time>
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: event <description> /at <date/time>
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: deadline <description> /by <date/time>
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: deadline <description> /by <date/time>
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: deadline <description> /by <date/time>
+-------------------------------------------------
+-------------------------------------------------
+ I'm sorry, but I don't know what that means :-(
+-------------------------------------------------
+-------------------------------------------------
+ Please enter an integer!
+-------------------------------------------------
+-------------------------------------------------
+ Please enter an integer!
+-------------------------------------------------
+-------------------------------------------------
+ Got it. I've removed this task:
+   [T][X] read book
+ Now you have 3 task(s) in the list.
+-------------------------------------------------
+-------------------------------------------------
+Here are the task(s) in your list:
+ 1.[D][ ] return book (by: Sunday)
+ 2.[E][ ] project meeting (at: Mon 2-4pm)
+ 3.[D][ ] do homework (by: no idea :-p)
+-------------------------------------------------
+-------------------------------------------------
+ Bye. Hope to see you again soon!
+-------------------------------------------------
