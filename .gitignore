@@ -1,7 +1,13 @@
+#vscode
+/.vscode/
+
 # IDEA files
 /.idea/
 /out/
 /*.iml
+
+#
+/.vscode/
 
 # Gradle build files
 /.gradle/
@@ -15,3 +21,11 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+#java class files
+*.class
+/lib/
+
+#duke
+/data/
+duke.txt

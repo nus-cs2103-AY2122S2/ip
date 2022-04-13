@@ -1,0 +1,13 @@
+test
+list
+todo foofoofoo
+mark 1
+event barbarbar /at idk when!
+list
+event !!!!!!
+mark 500
+unmark exception!!
+delete
+delete 2
+delete 500
+bye
