@@ -1,7 +1,93 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
 
+	Hello! I'm duke.Duke
+	What can I do for you?
+
+	Wrong command
+
+	Empty list
+
+	duke.DukeException: duke.Task does not exist
+
+	duke.DukeException: duke.Task does not exist
+
+	duke.DukeException: There is no index
+
+	duke.DukeException: There is no index
+
+	No task to do
+
+	duke.DukeException: /at not found
+
+	duke.DukeException: /by not found
+
+	duke.DukeException: No task in instruction
+
+	duke.DukeException: No task in instruction
+
+	duke.DukeException: Description of task not found
+
+	duke.DukeException: Description of task not found
+
+	duke.DukeException: Datetime of task not found
+
+	duke.DukeException: Datetime of task not found
+
+	Got it. I've added this task:
+		[T][ ] C
+	Now you have 1 tasks in the list.
+
+	Got it. I've added this task:
+		[E][ ] C (by: D)
+	Now you have 2 tasks in the list.
+
+	Got it. I've added this task:
+		[D][ ] C (by: D)
+	Now you have 3 tasks in the list.
+
+	duke.Task marked as done.
+		1. [T][X] C
+
+	duke.Task marked as done.
+		2. [E][X] C (by: D)
+
+	duke.Task marked as done.
+		3. [D][X] C (by: D)
+
+	duke.DukeException: duke.Task does not exist
+
+	1. [T][X] C
+	2. [E][X] C (by: D)
+	3. [D][X] C (by: D)
+
+	duke.Task marked as not done yet.
+		1. [T][ ] C
+
+	duke.Task marked as not done yet.
+		2. [E][ ] C (by: D)
+
+	duke.Task marked as not done yet.
+		3. [D][ ] C (by: D)
+
+	duke.DukeException: duke.Task does not exist
+
+	1. [T][ ] C
+	2. [E][ ] C (by: D)
+	3. [D][ ] C (by: D)
+
+	Got it. I've deleted this task:
+		[T][ ] C
+	Now you have 3 tasks in the list.
+
+	Got it. I've deleted this task:
+		[D][ ] C (by: D)
+	Now you have 2 tasks in the list.
+
+	Got it. I've deleted this task:
+		[E][ ] C (by: D)
+	Now you have 1 tasks in the list.
+
+	duke.DukeException: duke.Task does not exist
+
+	Empty list
+
+	Bye. Hope to see you again soon!

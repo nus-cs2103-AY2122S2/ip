@@ -1,29 +1,131 @@
-# User Guide
+# User Guide for Duke Bot
 
 ## Features 
 
-### Feature-ABC
+### Create tasks of different types!
 
-Description of the feature.
+ + Normal tasks
+ + Tasks with deadlines
+ + Tasks with start times
 
-### Feature-XYZ
+### Set a priority!
 
-Description of the feature.
+ + Give your tasks some sense of urgency
+ 
+### Complete your tasks!
+ 
+ + Delete a task
+ + Mark task as completed or not.
+
+### Find your tasks!
+
+ + View all
+ + Search by keyword
 
 ## Usage
 
-### `Keyword` - Describe action
+### `list` - Shows all tasks
 
-Describe the action and its outcome.
+Shows all tasks in descending priority level.
 
-Example of usage: 
-
-`keyword (optional arguments)`
+Example of usage: `list`
 
 Expected outcome:
 
-Description of the outcome.
+![alt-text](list.PNG)
 
-```
-expected output
-```
+### `mark` - Marks a task
+
+Marks task as completed.
+
+Example of usage: `mark 2`
+
+Expected outcome:
+
+![alt-text](mark.PNG)
+
+### `unmark` - Unmarks a task
+
+Marks task as *not* completed.
+
+Example of usage: `unmark 2`
+
+Expected outcome:
+
+![alt-text](unmark.PNG)
+
+### `todo` - Create a new Todo Task
+
+Adds a new Todo Task to the list and saves the updated list to the save file.
+
+Example of usage: `todo mop the floor`
+
+Expected outcome:
+
+![alt-text](todo.PNG)
+
+### `event` - Create a new Event Task
+
+Adds a new Event Task to the list and saves the updated list to the save file.
+
+Example of usage: `event mop the floor /at 20/02/2022 07:00 PM`
+
+Expected outcome:
+
+![alt-text](event.PNG)
+
+### `deadline` - Create a new Deadline Task
+
+Adds a new Deadline Task to the list and saves the updated list to the save file.
+
+Example of usage: `deadline submit assignment /by 01/02/2022 08:02 PM`
+
+Expected outcome:
+
+![alt-text](deadline.PNG)
+
+### `find` - Shows all tasks
+
+Returns all the tasks from the list.
+
+Example of usage: `find floor`
+
+Expected outcome:
+
+![alt-text](find.PNG)
+
+### `delete` - Deletes a task
+
+Deletes the task from the list and saves the list to the file.
+
+Example of usage: `delete 1`
+
+Expected outcome:
+
+![alt-text](delete.PNG)
+
+### `priority` - Sets a priority level on task
+
+Sets a priority level on task, sorts the list based on desecending priority level and saves the list to the file.
+
+Example of usage: `priority 2 2`
+
+Expected outcome:
+
+![alt-text](priority.PNG)
+
+### `bye` - Exit
+
+Pauses for 1 sec then exits the application.
+
+Example of usage: `bye`
+
+Expected outcome:
+
+![alt-text](bye.PNG)
+
+## Credits
+
+Bot Icon: [Speak icons created by Freepik - Flaticon](https://www.flaticon.com/free-icon/bilingual_4509776?related_id=4509776&origin=pack)
+
+User Icon: [Language icons created by Freepik - Flaticon](https://www.flaticon.com/free-icon/speaking_4509653?related_id=4509653&origin=pack) 
