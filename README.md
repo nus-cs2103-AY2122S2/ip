@@ -1,24 +1,28 @@
-# Duke project template
+# Daphne
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is Daphne, a friendly bot to help you keep track of your tasks! 
 
-## Setting up in Intellij
+![](src/main/resources/view/png/bot.png)
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+![](docs/Ui.png)
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Features
+| Feature   | Description                                                                      | Command (Case Sensitive)                                                  |  
+|-----------|----------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| Help      | Lists all commands.                                                              | `help`                                                                    |
+| Hello     | Greets Daphne.                                                                   | `hello`                                                                   |
+| To Do     | Add a task without any data/time attached to it.                                 | `todo <DESCRIPTION>`                                                      |
+| Deadline  | Add a task that needds to be done before a specific date/time.                   | `deadline <DESCRIPTION> /by <YYYY-MM-DD> <HH:MM>`                         |
+| Event     | Add a task that starts at a specific date/time and ends at a specific date/time. | `event <DESCRIPTION> /at <START DATE> <START TIME> <END DATE> <END TIME>` |
+| Mark      | Mark a task as complete.                                                         | `mark <INDEX>`                                                            |
+| Unmark    | Mark a task as incomplete.                                                       | `unmark <INDEX>`                                                          |
+| Delete    | Delete a task.                                                                   | `delete <INDEX> `                                                         |
+| Reset     | Delete all tasks.                                                                | `reset`                                                                   |
+| Find      | Find a task based on a keyword.                                                  | `find <KEYWORD>`                                                          |
+| List      | List all current tasks.                                                          | `list`                                                                    |
+| UwU       | (⁄˘⁄ ⁄ ω⁄ ⁄ ˘⁄)♡                                                                 | `uwu`                                                                     |
+| OwO       | (。O⁄ ⁄ω⁄ ⁄ O。)                                                                  | `owo`                                                                     |
+| Terminate | Terminate the application.                                                       | `bye`                                                                      |
+
+*Dates are required to be in the `YYYY-MM-DD` format.*  
+*Times are required to be in the `HH:MM` or `HH:MM:SS` format.*
