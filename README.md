@@ -9,7 +9,7 @@ PaggroBot pushes you to work hard and complete the tasks that you need to do. It
 
 All you need to do is,
 
-1. download it from [here](url).
+1. download it from [here](https://github.com/justinyjt/ip/releases/tag/A-Release).
 2. double-click it.
 3. add your tasks.
 4. let it manage your tasks for you 😒
