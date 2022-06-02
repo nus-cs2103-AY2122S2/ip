@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -16,7 +15,6 @@ import javafx.util.Duration;
 import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
-import lily.LilyException;
 
 /**
  * Provides the layout for the other controls. Controller for MainWindow. 
