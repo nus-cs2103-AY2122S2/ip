@@ -1,24 +1,24 @@
-# Saitama project template
+# About the app
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+SaiTasker is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). It is designed to help busy students organise their homework deadlines and co-curricular activities.
 
-## Setting up in Intellij
+--------------------------------------------------------------------------------------------------------------------
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Quick start
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Saitama.java` file, right-click it, and choose `Run Saitama.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+1. Ensure you have Java `11` or above installed in your Computer.
+
+2. Download the latest `SaiTasker.jar` from [here](https://github.com/tyanhan/ip/releases).
+
+3. Copy the file to the folder you want to use as the _home folder_ for your SaiTasker.
+
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
+   ![image](https://user-images.githubusercontent.com/68331979/153713851-ce5b7e94-7a33-4d90-95a8-f5d3f22f03c0.png)
+   
+5. Type your command in the text box and press Enter, or click the Send button to execute it. e.g. typing **`list`** and pressing Enter will open the current list of tasks.<br>
+   Some example commands you can try:
+   * **`todo`**`Learn the basics of SaiTasker` : Adds a `ToDo` type task with description `Learn the basics of SaiTasker` to the task list.
+   * **`delete`**`1` : Deletes the 1st task in your task list.
+   * **`bye`** : Says goodbye to Saitama.
+
+####Refer to the [user guide](https://github.com/tyanhan/ip/tree/master/docs) for more details!
