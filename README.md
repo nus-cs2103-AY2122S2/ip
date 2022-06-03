@@ -21,4 +21,4 @@ SaiTasker is a **desktop app for managing tasks, optimized for use via a Command
    * **`delete`**`1` : Deletes the 1st task in your task list.
    * **`bye`** : Says goodbye to Saitama.
 
-####Refer to the [user guide](https://github.com/tyanhan/ip/tree/master/docs) for more details!
+#### Refer to the [user guide](https://github.com/tyanhan/ip/tree/master/docs) for more details!
