@@ -1,0 +1,9 @@
+todo watch news
+deadline do the laundry /by tomorrow
+event attend lecture /at 2pm
+mark 1
+mark 2
+list
+unmark 1
+list
+bye
