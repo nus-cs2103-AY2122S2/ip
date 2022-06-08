@@ -1,4 +1,4 @@
-# Daphne
+# Daphne Bot
 
 This is Daphne, a friendly bot to help you keep track of your tasks! 
 
