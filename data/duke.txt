@@ -1,0 +1,5 @@
+T |   | read book
+D |   | ip week 4  | 2022-02-18 1000
+E |   | project meeting  | 2022-02-18 1400
+E |   | breakfast  | 2022-02-18 0900
+E |   | cohesion  | 2022-02-17 1700
