@@ -1,5 +1,7 @@
 # Conan
 **_Conan_** is a task manager, who can hep you manage your day easily :v:.
+Click (here)[https://github.com/Harish-coding/ip/releases/download/A-Release/Launcher.jar] to download! :arrow_down:
+
 > "The key is not spending time, but investing it." - Stephen R. Covey [(Source)](https://www.inc.com/dan-scalco/22-time-management-quotes-to-inspire-you-to-achieve-your-goals.html) </br>
 
 Conan draws inspiration from [Project Duke](https://nus-cs2103-ay2122s2.github.io/website/se-book-adapted/projectDuke/index.html), that was designed to help learn Software Engineering Techniques.
