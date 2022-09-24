@@ -1,0 +1,9 @@
+todo drink water
+list
+mark 1
+deadline return book /by Sunday
+event project meeting /at Monday, 2-4pm
+mark 3
+unmark 3
+list
+bye
