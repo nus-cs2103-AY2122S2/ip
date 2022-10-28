@@ -4,6 +4,10 @@
 > #### _"Pika pika!"_
 
 #### Pikachu helps you keep organised by recording your daily tasks and displaying them on command! :yellow_heart:
+<p float="left">
+ <img src="src/main/resources/images/sample1.png" alt="drawing" width="400"/>
+ <img src="src/main/resources/images/sample2.png" alt="drawing" width="400"/>
+</p>
 
 ## Table of Contents
   * [Setup](#setup)
