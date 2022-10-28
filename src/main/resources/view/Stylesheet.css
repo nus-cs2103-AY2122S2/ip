@@ -1,0 +1,21 @@
+.dialog-container {
+    -fx-background-color: linear-gradient(to bottom, #90e0ef, #caf0f8)
+}
+
+.dialog {
+    -fx-background-radius: 25;
+    -fx-border-radius: 25;
+    -fx-padding: 15;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.user-dialog {
+    -fx-background-color:  #577590;
+    -fx-text-alignment: right;
+}
+
+.luca-dialog {
+    -fx-background-color:  #005f73;
+    -fx-text-alignment: left;
+}

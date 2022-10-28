@@ -1,0 +1,16 @@
+todo buy book
+todo buy groceries
+deadline project-1 /by 2022-01-27
+event staff meeting /at 2022-02-02 1800 1900
+list
+mark 1
+mark 4
+unmark 1
+list
+blah
+mark two
+unmark
+todo
+deadline return book
+event Tim's Birthday
+bye
