@@ -3,7 +3,7 @@
 ![Alt Text](https://c.tenor.com/9jn_TYgvSyQAAAAC/pikachu-pokemon.gif)
 > #### _"Pika pika!"_
 
-#### Pikachu helps you keep organised by recording your daily tasks and displaying them on command! :yellow_heart:
+#### Pikachu helps you keep organised by recording your daily tasks and displaying them on command! :yellow_heart: Made with JAVA.
 <p float="left">
  <img src="src/main/resources/images/sample1.png" alt="drawing" width="400"/>
  <img src="src/main/resources/images/sample2.png" alt="drawing" width="400"/>
