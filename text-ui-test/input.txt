@@ -1,0 +1,14 @@
+event do homework /at Monday
+todo cry myself to sleep
+deadline stop crying /by monday
+event shower /at Tuesday
+list
+mark 2
+list
+unmark 2
+list
+delete 2
+list
+delete 1
+list
+bye
