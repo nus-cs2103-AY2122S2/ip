@@ -1,0 +1,26 @@
+list
+todo buy milk
+deadline do assignment 1 /by 11-25-2022 1800
+event biology class /at 11-25-2022 1800
+list
+mark 1
+list
+unmark 1
+list
+delete 1
+list
+todo
+deadline /by Friday
+deadline do assignment 1
+event /at Wednesday 1-2pm
+event biology class
+delete 5
+mark 5
+unmark 5
+mark A
+mark 1.1
+mark 1
+mark 1
+unmark 1
+unmark 1
+bye
