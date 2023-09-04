@@ -1,29 +1,123 @@
-# User Guide
+# PikaBot ⚡ ⚡
+
+> "Pikapika!" - *Pikachu*
 
 ## Features 
 
-### Feature-ABC
+- Adding tasks (todos, events, deadlines)
+- Listing tasks
+- Marking tasks as done
+- Deleting tasks
+- Searching for tasks
 
-Description of the feature.
-
-### Feature-XYZ
-
-Description of the feature.
 
 ## Usage
 
-### `Keyword` - Describe action
+### 1) `todo {task}` / `t {task}` : Creates a new Todo task
 
-Describe the action and its outcome.
+
+Examples of usage: 
+
+`todo go jogging`
+
+`t play badminton`
+
+Expected output:
+
+
+![Todo](./Todo.png)
+
+
+![TodoShortform](./TodoShortform.png)
+
+### 2) `event {event} /at {YYYY-MM-DD}` / `e {event} / at {YYYY-MM-DD}` : Creates a new Event
+
+Examples of usage:
+
+`event cca practice session /at 2022-05-09`
+
+`e reunion dinner /at 2022-02-11`
+
+Expected output:
+
+
+![Event](./Event.png)
+
+
+![EventShortform](./EventShortform.png)
+
+
+### 3) `deadline {deadline} /by {YYYY-MM-DD}` / `d {deadline} /by {YYYY-MM-DD}` : Creates a new Deadline
+
+Examples of usage:
+
+`deadline finish homework /by 2022-02-18`
+
+`d submit assignment /by 2022-03-26`
+
+Expected output: 
+
+
+![Deadline](./Deadline.png)
+
+
+![DeadlineShortform](./DeadlineShortform.png)
+
+### 4) `list` : List all current tasks
+
+Example of usage:
+`list`
+
+Expected output:
+
+
+![List](./List.png)
+
+### 5) `mark {taskNumber}` / `m {taskNumber}` : Mark a task as done
 
 Example of usage: 
+`mark 2`
 
-`keyword (optional arguments)`
+Expected output:
 
-Expected outcome:
 
-Description of the outcome.
+![Mark](./Mark.png)
 
-```
-expected output
-```
+
+### 6) `unmark {taskNumber}` / `um {taskNumber}` : Unmarks a task
+
+Example of usage:
+`unmark 2`
+
+Expected output:
+
+
+![Unmark](./Unmark.png)
+
+
+### 7) `delete {taskNumber}` / `del {taskNumber}` : Deletes a task
+
+Example of usage:
+`del 2`
+
+Expected output:
+
+
+![Del](./Del.png)
+
+### 8) `find {keyword}` : Finds a task containing a specific keyword
+
+Example of usage:
+`find assignment`
+
+Expected output: 
+
+
+![](Find.png)
+
+
+### 9) `bye` : Exits PikaBot application
+
+Example of usage:
+`bye`
+
